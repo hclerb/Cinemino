@@ -1,0 +1,74 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Gerez vos séances, vous pouvez rechercher et ajouter un film ( les informations sont récupéreés depuis allociné )
+ , ainsi que créer et attacher un évènement.
+<br> 
+
+{% endblock %}
+
+{% block titre %}Liste des séances{% endblock %}
+
+
+{% block content %}
+
+<a class="btn btn-info" href="{{ path('seance_new') }}#formulaire"><i class="icon-white icon-plus"></i> Créer une séance</a>
+<br><br>
+
+{% for cin in cinemas %}
+
+<table class="table table-bordered table-striped table-hover">
+   <h3><a href="{{ path('cinema_show', { 'id': cin.getId() }) }}">{{ cin.nomCinema}}</a></h3>
+    <thead>
+        <tr bgcolor="#F6FFA3">
+            <th>Date de la séance</th>
+            <th>Heure</th>
+            <th>Film</th>
+            <th>Version</th>
+            <th>Type</th>
+            <th>Avant premiere</th>
+            <th>Sortie nationale</th>
+            <th>Evènement</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+       {% if entity.idCinema == cin %}     
+          <tr bgcolor="white">
+            <td><a href="{{ path('seance_show', { 'id': entity.id }) }}#formulaire">{{ entity.dateSeance|date("d/m/Y") }}</a></td>
+            <td>{{ entity.heure|date("H:i") }}</td>
+            <td>{{ entity.idFilm.titreFilm }} Réalisé par {{ entity.idFilm.realisateur }}</td>           
+            <td>{{ entity.version }}</td>
+            <td>{{ entity.type }}</td>
+            <td>{% if entity.avantPremiere == 'o' %}Oui{% else %}Non{% endif %}</td>
+            <td>{% if entity.sortieNationale == 'o' %}Oui{% else %}Non{% endif %}</td>
+            <td>{% if entity.idEvenement %}{{ entity.idEvenement }}{% endif %}</td>
+            <td>    
+                <a class="btn" href="{{ path('seance_show', { 'id': entity.id }) }}#formulaire"><i class="icon icon-search"></i> Info</a>
+                <a class="btn btn-info" href="{{ path('seance_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-white icon-pencil"></i> Editer</a>
+            </td>
+          </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+     
+{% endfor %}
+
+
+<br><br><br>
+
+
+ 
+
+{% block formulaire %}
+
+{% endblock formulaire %}
+
+
+
+{% endblock content %}

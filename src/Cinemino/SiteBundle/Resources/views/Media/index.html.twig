@@ -1,0 +1,46 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Gérez les médias liés au films. Un média peut etre lié a plusieurs films.<br>
+{% endblock %}
+
+{% block titre %}Liste des médias{% endblock %}
+
+
+{% block content %}
+
+<table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Url</th>
+            <th>Apercu</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('media_show', { 'id': entity.id }) }}">{{ entity.titre }}</a></td>
+            <td>{{ entity.url }}</td>
+            <td><img class="img-polaroid" style="height:70px;" src="{{dir_url}}{{ entity.url }}" alt=""/></td>
+            <td>{% if entity.type == 'v' %}Vidéo{% else %}Photo{% endif %}</td>
+            <td width="160px">
+                
+          <a class="btn" href="{{ path('media_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+                        <a class="btn btn-info" href="{{ path('media_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+<td><a class="btn btn-info" href="{{ path('media_new') }}"><i class="icon-white icon-plus"></i> Ajouter un média</a></td>
+
+
+{% endblock content %}

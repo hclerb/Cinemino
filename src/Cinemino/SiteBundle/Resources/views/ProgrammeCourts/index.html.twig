@@ -1,0 +1,65 @@
+<h1>ProgrammeCourts list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titrefilm</th>
+            <th>Realisateur</th>
+            <th>Duree</th>
+            <th>Anneeprod</th>
+            <th>Classementartessai</th>
+            <th>Provenance</th>
+            <th>Interdiction</th>
+            <th>Ageconseille</th>
+            <th>Acteurs</th>
+            <th>Synopsys</th>
+            <th>Critique</th>
+            <th>Affiche</th>
+            <th>Couleurtexte</th>
+            <th>Couleurfondfilm</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('programmecourts_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.titreFilm }}</td>
+            <td>{{ entity.realisateur }}</td>
+            <td>{{ entity.duree }}</td>
+            <td>{{ entity.anneeProd }}</td>
+            <td>{{ entity.classementArtEssai }}</td>
+            <td>{{ entity.provenance }}</td>
+            <td>{{ entity.interdiction }}</td>
+            <td>{{ entity.ageConseille }}</td>
+            <td>{{ entity.acteurs }}</td>
+            <td>{{ entity.synopsys }}</td>
+            <td>{{ entity.critique }}</td>
+            <td>{{ entity.affiche }}</td>
+            <td>{{ entity.couleurTexte }}</td>
+            <td>{{ entity.couleurFondFilm }}</td>
+            <td>{{ entity.type }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('programmecourts_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('programmecourts_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('programmecourts_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

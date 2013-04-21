@@ -1,0 +1,247 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}filmlayout
+{{ parent() }} - Film
+{% endblock %}
+
+
+{% block titre %}Ajouter un film{% endblock titre %}
+
+
+{% block content %}
+
+
+<div class="well" style="width:auto">
+<div class="page-header"><h4>Rechercher un film via allocine</h4></div>
+<form id="form_recherche" action="{{ path('film_rechercher') }}" method="post">
+	{{ form_widget(form_recherche) }}
+	<input class="btn btn-navbar" type="reset" value="Effacer" />  
+</form>
+
+<div class="loading"></div>
+<div id="resultats_recherche"> 
+    {% include 'CineminoSiteBundle:Film:liste.html.twig' with {'listFilm' : null}  %}
+</div>
+
+<script>
+$(".loading").hide();
+
+$("#form_recherche").submit(function(){ 
+    $(".loading").show();
+    var motcle = $("#filmrecherche_motcle").val();
+    var DATA = 'motcle=' + motcle;
+    $.ajax({
+        type: "POST",
+        url: "{{ path('film_rechercher')}}",
+        data: DATA,
+        cache: false,
+        success: function(data){
+           $('#resultats_recherche').html(data);
+           $(".loading").hide();
+        }
+    });    
+    return false;
+});
+
+
+$('#filmrecherche_motcle').keyup(function(event) {
+
+
+    $(".loading").show();
+    var motcle = $("#filmrecherche_motcle").val();
+    var DATA = 'motcle=' + motcle;
+    $.ajax({
+        type: "POST",
+        url: "{{ path('film_rechercher')}}",
+        data: DATA,
+        cache: false,
+        success: function(data){
+           $('#resultats_recherche').html(data);
+           $(".loading").hide();
+        }
+    });    
+    return false;
+
+});
+
+
+</script>
+
+</div>
+<div id="formulaire_film" class="well" style="width:auto">
+<div class="page-header"><h4>Formulaire</h4></div>
+<form action="{{ path('film_create') }}" method="post" {{ form_enctype(form) }}>
+    
+{{ tinymce_init() }}      
+{{ form_errors(form) }}
+ 
+
+    <h5> Titre du film </h5>
+    {{ form_errors(form.titreFilm) }}
+    {{ form_widget(form.titreFilm, { 'attr': {'style': 'width:450px;'} }) }}
+  
+ <div style="position:absolute;margin-left:750px;margin-top:-80px;">
+    
+<h4>Affiche du film</h4>
+  {{ form_label(form.affiche) }}
+  {{ form_errors(form.affiche) }}
+  {{ form_widget(form.affiche, { 'attr': {'style': 'width:350px;'} }) }}
+<br><br>
+
+<img src="{% if affiche is defined %}{{ affiche }}{% endif %}" width="350px">
+
+</div>
+    
+    <table>
+   <tr>
+<td>
+    {{ form_label(form.realisateur) }}
+    {{ form_errors(form.realisateur) }}
+    {{ form_widget(form.realisateur) }}
+</td>
+<td>
+    {{ form_label(form.provenance) }}
+    {{ form_errors(form.provenance) }}
+    {{ form_widget(form.provenance) }}
+</td>
+<td>
+    {{ form_label(form.anneeProd) }}
+    {{ form_errors(form.anneeProd) }}
+    {{ form_widget(form.anneeProd) }}
+</td>
+
+   </tr>
+</table>
+    
+
+     <table>
+   <tr>
+       
+<td>
+    {{ form_label(form.ageConseille) }}
+    {{ form_errors(form.ageConseille) }}
+    {{ form_widget(form.ageConseille) }}
+</td>     
+       
+<td>    
+    {{ form_label(form.duree) }}
+    {{ form_errors(form.duree) }}
+    {{ form_widget(form.duree) }}
+</td>  
+
+
+   </tr>
+</table>
+     <table>
+   <tr>
+       
+<td>
+    {{ form_label(form.acteurs) }}
+    {{ form_errors(form.acteurs) }}
+    {{ form_widget(form.acteurs, { 'attr': {'style': 'width:650px;'} }) }}
+</td>     
+       
+   </tr>
+</table>
+   
+    
+    {{ form_label(form.synopsys) }}
+    {{ form_errors(form.synopsys) }}
+    {{ form_widget(form.synopsys) }}
+    
+    
+           <table>
+               
+ <td>
+    {{ form_label(form.classementArtEssai) }}
+    {{ form_errors(form.classementArtEssai) }}
+    {{ form_widget(form.classementArtEssai) }}
+</td>              
+               
+   <tr>
+       
+<td>
+    {{ form_label(form.couleurTexte) }}
+    {{ form_errors(form.couleurTexte) }}
+    {{ form_widget(form.couleurTexte, { 'attr': {'class': 'color'} }) }}
+</td>  
+<td>
+    {{ form_label(form.couleurFondFilm) }}
+    {{ form_errors(form.couleurFondFilm) }}
+    {{ form_widget(form.couleurFondFilm, { 'attr': {'class': 'color', 'value': '4164AA'}} ) }}
+</td>  
+<td>
+    {{ form_label(form.type) }}
+    {{ form_errors(form.type) }}
+    {{ form_widget(form.type) }}
+</td>  
+       
+   </tr>
+   <br>
+</table>
+    
+<table>
+   <tr>
+       
+       <td>
+
+    {{ form_errors(form.idMedia) }}
+    {{ form_widget(form.idMedia) }}
+       </td>
+
+     
+   </tr>
+       
+</table>
+    <br>
+   
+ 
+     <a class="btn btn-info" href="#add_media" id="add_media"><i class="icon-white icon-plus"></i> Ajouter un média</a>
+      <br><br>
+      <button class="btn btn-primary" type="submit">Valider l'enregistrement du film</button>
+
+    
+</form>
+
+ <a class="btn" href="{{ path('film') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+
+</div>
+
+
+
+<!-- On charge la librairie jQuery. Ici, je la prends depuis le
+site jquery.com, mais si vous l'avez en local, changez simplement
+l'adresse. -->
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+    var $container = $('#cinemino_Sitebundle_filmtype_idMedia');
+ 
+    // On définit une fonction qui va ajouter un champ.
+    function add_media() {
+        // On définit le numéro du champ (en comptant le nombre de champs déjà ajoutés).
+        index = $container.children().length;
+        // On ajoute à la fin de la balise <div> le contenu de l'attribut « data-prototype »,
+        // après avoir remplacé la variable $$name$$ qu'il contient par le numéro du champ.
+        $container.append(
+            $($container.attr('data-prototype').replace(/\__name__label__/g, '<h5>Média n°'+(index+1)+'</h5>'))
+
+        );
+              
+    }
+
+    // On ajoute un premier champ directement s'il n'en existe pas déjà un.
+ 
+ 
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $('#add_media').click(function() {
+        
+        add_media();
+             
+    });
+});
+
+</script>
+
+
+{% endblock content %}

@@ -1,0 +1,73 @@
+Seance:
+    type: entity
+    table: seance
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: ID
+            generator:
+                strategy: IDENTITY
+        dateSeance:
+            type: date
+            nullable: true
+            column: DATE_SEANCE
+        heure:
+            type: time
+            nullable: true
+            column: HEURE
+        version:
+            type: string
+            length: 6
+            fixed: false
+            nullable: true
+            column: VERSION
+        type:
+            type: string
+            length: 1
+            fixed: false
+            nullable: true
+            column: TYPE
+        avantPremiere:
+            type: string
+            length: 1
+            fixed: false
+            nullable: true
+            column: AVANT_PREMIERE
+        sortieNationale:
+            type: string
+            length: 1
+            fixed: false
+            nullable: true
+            column: SORTIE_NATIONALE
+    manyToOne:
+        idFilm:
+            targetEntity: Film
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ID_FILM:
+                    referencedColumnName: ID
+            orphanRemoval: false
+        idEvenement:
+            targetEntity: Evenement
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ID_EVENEMENT:
+                    referencedColumnName: ID
+            orphanRemoval: false
+        idCinema:
+            targetEntity: Cinema
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ID_CINEMA:
+                    referencedColumnName: ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

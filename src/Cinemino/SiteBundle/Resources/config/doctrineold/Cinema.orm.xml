@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Cinemino\SiteBundle\Entity\Cinema" table="cinema">
+    <id name="id" type="integer" column="ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomCinema" type="string" column="NOM_CINEMA" length="25" nullable="false"/>
+    <field name="photo" type="string" column="PHOTO" length="250" nullable="true"/>
+    <field name="logo" type="string" column="LOGO" length="250" nullable="true"/>
+    <field name="adresse" type="string" column="ADRESSE" length="50" nullable="true"/>
+    <field name="adresseMail" type="string" column="ADRESSE_MAIL" length="50" nullable="true"/>
+    <field name="coordonneesTel" type="string" column="COORDONNEES_TEL" length="10" nullable="true"/>
+    <field name="siteWeb" type="string" column="SITE_WEB" length="50" nullable="true"/>
+    <field name="couleurFondCinema" type="string" column="COULEUR_FOND_CINEMA" length="15" nullable="true"/>
+    <field name="type" type="string" column="TYPE" length="1" nullable="false"/>
+    <many-to-one field="idCompte" target-entity="Cinemino\SiteBundle\Entity\CineminoUser">
+      <join-columns>
+        <join-column name="ID_COMPTE" referenced-column-name="id" nullable="false"/>
+      </join-columns>
+    </many-to-one>
+   <!-- <many-to-many field="idCinema" target-entity="Cinema" mapped-by="cinCinema"/> -->
+    <one-to-many field="idSeance" target-entity="Seance" mapped-by="idCinema"/>
+  </entity>
+</doctrine-mapping>

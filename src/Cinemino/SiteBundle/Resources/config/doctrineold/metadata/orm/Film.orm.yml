@@ -1,0 +1,123 @@
+Film:
+    type: entity
+    table: film
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: ID
+            generator:
+                strategy: IDENTITY
+        titreFilm:
+            type: string
+            length: 30
+            fixed: false
+            nullable: false
+            column: TITRE_FILM
+        realisateur:
+            type: string
+            length: 25
+            fixed: false
+            nullable: true
+            column: REALISATEUR
+        duree:
+            type: time
+            nullable: true
+            column: DUREE
+        anneeProd:
+            type: date
+            nullable: true
+            column: ANNEE_PROD
+        classementArtEssai:
+            type: string
+            length: 25
+            fixed: false
+            nullable: true
+            column: CLASSEMENT_ART_ESSAI
+        provenance:
+            type: string
+            length: 25
+            fixed: false
+            nullable: true
+            column: PROVENANCE
+        interdiction:
+            type: string
+            length: 25
+            fixed: false
+            nullable: true
+            column: INTERDICTION
+        ageConseille:
+            type: string
+            length: 2
+            fixed: false
+            nullable: true
+            column: AGE_CONSEILLE
+        acteurs:
+            type: string
+            length: 60
+            fixed: false
+            nullable: true
+            column: ACTEURS
+        synopsys:
+            type: string
+            length: 150
+            fixed: false
+            nullable: true
+            column: SYNOPSYS
+        critique:
+            type: string
+            length: 15
+            fixed: false
+            nullable: true
+            column: CRITIQUE
+        affiche:
+            type: string
+            length: 15
+            fixed: false
+            nullable: true
+            column: AFFICHE
+        couleurTexte:
+            type: string
+            length: 15
+            fixed: false
+            nullable: true
+            column: COULEUR_TEXTE
+        couleurFondFilm:
+            type: string
+            length: 15
+            fixed: false
+            nullable: true
+            column: COULEUR_FOND_FILM
+        type:
+            type: string
+            length: 1
+            fixed: false
+            nullable: true
+            column: TYPE
+    manyToMany:
+        idFilm:
+            targetEntity: Film
+            cascade: {  }
+            mappedBy: filFilm
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+        idMedia:
+            targetEntity: Media
+            cascade: {  }
+            mappedBy: null
+            inversedBy: idFilm
+            joinTable:
+                name: contient_media
+                joinColumns:
+                    -
+                        name: ID_FILM
+                        referencedColumnName: ID
+                inverseJoinColumns:
+                    -
+                        name: ID_MEDIA
+                        referencedColumnName: ID
+            orderBy: null
+    lifecycleCallbacks: {  }

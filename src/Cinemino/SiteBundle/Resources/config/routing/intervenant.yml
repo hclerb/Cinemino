@@ -1,0 +1,30 @@
+intervenant:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:Intervenant:index" }
+
+intervenant_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:Intervenant:show" }
+
+intervenant_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:Intervenant:new" }
+
+intervenant_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:Intervenant:create" }
+    requirements: { _method: post }
+
+intervenant_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:Intervenant:edit" }
+
+intervenant_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:Intervenant:update" }
+    requirements: { _method: post }
+
+intervenant_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:Intervenant:delete" }
+    requirements: { _method: post }

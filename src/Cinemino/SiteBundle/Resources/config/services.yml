@@ -1,0 +1,20 @@
+parameters:
+#    cineminoSite.example.class: Cinemino\SiteBundle\Example
+
+services:
+#    cineminoSite.example:
+#        class: %cineminoSite.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+services:
+    Cinemino_Site.allocine:
+        class: Cinemino\SiteBundle\Service\AlloHelper
+        
+    Cinemino_Site.resizeimg:
+        class: Cinemino\SiteBundle\Service\ResizeImg
+        
+    form.type.cinema:
+        class: Cinemino\SiteBundle\Form\CinemaType
+        arguments: ["@security.context"]
+        tags:
+            - { name: form.type, alias: cinemino_Sitebundle_cinematype }

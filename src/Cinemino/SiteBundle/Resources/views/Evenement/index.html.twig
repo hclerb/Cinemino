@@ -1,0 +1,45 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Gérer les évènements lié aux séances.
+{% endblock alert %}
+
+{% block titre %}Liste des évènements{% endblock %}
+
+
+{% block content %}
+
+<a class="btn btn-info" href="{{ path('evenement_new') }}"><i class="icon-white icon-plus"></i> Ajouter un évenement</a>
+<br><br>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Titre de l'évènement</th>
+            <th>Description de l'évènement</th>
+            <th>Date début evenement</th>
+            <th>Date de fin</th>
+            <th>Priorite</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('evenement_show', { 'id': entity.id }) }}">{{ entity.titreEvenement }}</a></td>
+            <td>{{ entity.descriptionEvenement }}</td>
+            <td>{% if entity.dateEvenement %}{{ entity.dateEvenement|date('Y-m-d') }}{% endif %}</td>
+            <td>{% if entity.dateFin %}{{ entity.dateFin|date('Y-m-d') }}{% endif %}</td>
+            <td>{{ entity.priorite }}</td>
+            <td>
+          <a class="btn" href="{{ path('evenement_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+          <a class="btn btn-info" href="{{ path('evenement_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

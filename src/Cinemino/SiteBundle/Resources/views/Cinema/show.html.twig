@@ -1,0 +1,67 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Ici vous pouvez gérer l'ensemble des cinémas dont vous avez la charge ( modification / visualisation ).<br> 
+Seul l'Administrateur peut supprimer ou ajouter un cinéma.
+{% endblock %}
+{% block titre %}{{ entity.nomCinema }}{% endblock %}
+
+
+{% block content %}
+
+  <td> <img class="img-polaroid" width="450" src="{{ entity.photo }}" alt=""/></td>
+  <td> <img class="img-polaroid" width="250px" src="{{ entity.logo }}" alt=""/></td>
+<br><br>
+<table class="record_properties">
+    <tbody>
+    
+        <tr>
+            <th>Adresse :</th>
+            <td>{{ entity.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Adresse mail :</th>
+            <td>{{ entity.adresseMail }}</td>
+        </tr>
+        <tr>
+            <th>Coordonnees tel :</th>
+            <td>{{ entity.coordonneesTel }}</td>
+        </tr>
+        <tr>
+            <th>Site web :</th>
+            <td>{{ entity.siteWeb }}</td>
+        </tr>
+        <tr>
+            <th>Couleur de fond :</th>
+            <td style="background-color:#{{ entity.couleurFondCinema }}"></td>
+        </tr>
+        <tr>
+            <th>Type :</th>
+            <td>{% if entity.type == 'i' %}Itinérant {% else %}Normal{% endif %}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br><br>
+
+
+   
+        <a class="btn" href="{{ path('cinema') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+   
+
+        
+        <a class="btn" href="{{ path('cinema_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
+            
+<br><br>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <form action="{{ path('cinema_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer {{ entity.nomCinema }}</button>
+        </form>
+    {% endif %}
+
+
+{% endblock %}

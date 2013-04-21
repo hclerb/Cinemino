@@ -1,0 +1,7 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block alert %}Ici vous pouvez modifier votre email et changer de mdp{% endblock alert %}
+{% block titre %}Modifier Profil{% endblock titre %}
+{% block fos_user_content %}
+{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+{% endblock fos_user_content %}

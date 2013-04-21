@@ -1,0 +1,39 @@
+Media:
+    type: entity
+    table: media
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: ID
+            generator:
+                strategy: IDENTITY
+        titre:
+            type: string
+            length: 25
+            fixed: false
+            nullable: true
+            column: TITRE
+        url:
+            type: string
+            length: 100
+            fixed: false
+            nullable: true
+            column: URL
+        type:
+            type: string
+            length: 1
+            fixed: false
+            nullable: true
+            column: TYPE
+    manyToMany:
+        idFilm:
+            targetEntity: Film
+            cascade: {  }
+            mappedBy: idMedia
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

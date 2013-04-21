@@ -1,0 +1,33 @@
+
+{% extends "CineminoSiteBundle::seancelayout.html.twig" %}
+{% block title %}
+{{ parent() }} - Séances
+{% endblock %}
+
+
+{% block titre2 %}<div class="page-header"><h3>Créer un séance</h3></div>{% endblock %}
+
+
+{% block formulaire %}
+<div id="formulaire" class="well">
+<div class="page-header"><h3>Ajout nouvelle séance</h3></div>
+<form action="{{ path('seance_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+<br><br>        
+    <p>
+        <button class="btn btn-primary" type="submit">Créer la séance</button>
+         <a class="btn" href="{{ path('seance') }}"><i class="icon-ban-circle"></i> Annuler</a>
+    </p>
+</form>
+</div>
+<script type="text/javascript">
+ $(function(){
+  $("#{{ form.dateSeance.vars.id }}").datepicker({
+    language: 'fr',
+    weekStart: 3
+   });
+
+ });
+</script>
+{% endblock formulaire %}

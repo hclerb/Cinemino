@@ -1,0 +1,54 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Ici vous pouvez gérer les intervenants qui viennent dans les évènements dont vous avez la charge.<br> 
+
+{% endblock %}
+
+{% block titre %}Liste des intervenants{% endblock %}
+
+
+{% block content %}
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Nom de l'intervenant</th>
+            <th>Description de l'intervenant</th>
+            <th>Url photo</th>
+            <th>Url logo</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('intervenant_show', { 'id': entity.id }) }}">{{ entity.nomIntervenant }}</a></td>
+            <td>{{ entity.descriptionIntervenant }}</td>
+            <td>{{ entity.urlPhotoIntervenant }}</td>
+            <td>{{ entity.urlLogo }}</td>
+            <td>
+              
+                   
+          <a class="btn" href="{{ path('intervenant_show', { 'id': entity.id }) }}#show"><i class="icon icon-search"></i> Info</a>
+          <a class="btn btn-info" href="{{ path('intervenant_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-white icon-pencil"></i> Editer</a>
+      
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<a class="btn btn-info" href="{{ path('intervenant_new') }}"><i class="icon-white icon-plus"></i> Ajouter un intervenant</a>
+<br><br>
+
+{% block formulaire %}
+
+{% endblock formulaire %}
+
+
+
+{% endblock %}

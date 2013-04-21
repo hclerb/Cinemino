@@ -1,0 +1,36 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Ici vous pouvez gérer l'ensemble des cinémas dont vous avez la charge ( modification / visualisation ).<br> 
+Seul l'Administrateur peut supprimer ou ajouter un cinéma.
+{% endblock %}
+
+
+{% block titre %}{{ entity.nomCinema }}{% endblock %}
+
+{% block content %}
+
+
+
+<form action="{{ path('cinema_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    
+        <br>
+            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+            <a class="btn" href="{{ path('cinema') }}"><i class="icon-ban-circle"></i> Annuler</a>
+    
+</form>
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <form action="{{ path('cinema_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer {{ entity.nomCinema }}</button>
+        </form>
+    {% endif %}
+
+
+{% endblock content %}
+

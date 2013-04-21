@@ -1,0 +1,60 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Utilisateurs
+{% endblock %}
+
+{% block alert %}Ici vous pouvez gérer l'ensemble des utilisateurs.
+{% endblock %}
+
+{% block titre %}Liste des utilisateurs{% endblock %}
+
+
+{% block content %}
+
+
+<table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Dernière connexion</th>
+            <th>Activé</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+            <td>{{ entity.email }}</td>
+            <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td style="color:{% if entity.locked == null %}green {% else %}red{% endif %}">{% if entity.locked == null %}Oui {% else %} Non {% endif %}</td>
+            <td>{{ entity.roles[0] }}</td>
+            <td>
+                <ul>
+                    
+                <a class="btn" href="{{ path('user_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+                <a class="btn btn-info" href="{{ path('user_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+                
+                   
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if (is_granted('ROLE_SUPER_ADMIN')) %}
+   <a class="btn btn-info" href="{{ path('user_new') }}"><i class="icon-white icon-plus"></i> Ajouter un utilisateur</a>
+{% endif %}
+<br><br>
+
+   
+{% block formulaire %}
+
+{% endblock formulaire %}
+        
+
+{% endblock content %}
+

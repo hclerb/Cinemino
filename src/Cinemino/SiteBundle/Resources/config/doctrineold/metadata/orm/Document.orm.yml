@@ -1,0 +1,31 @@
+Document:
+    type: entity
+    table: document
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: ID
+            generator:
+                strategy: IDENTITY
+        nomDocument:
+            type: string
+            length: 25
+            fixed: false
+            nullable: true
+            column: NOM_DOCUMENT
+        descriptifDocument:
+            type: string
+            length: 100
+            fixed: false
+            nullable: true
+            column: DESCRIPTIF_DOCUMENT
+        urlFichier:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+            column: URL_FICHIER
+    lifecycleCallbacks: {  }

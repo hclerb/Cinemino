@@ -1,0 +1,35 @@
+
+   
+
+ <table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Information</th>
+            <th>Photo</th>
+        </tr>
+    </thead>
+
+
+{% for film in listFilm %}
+    
+
+<tr> 
+<td><b>Titre : {{ film['title'] }}</b><br><br>
+    <b>Réalisateur :</b> {{ film['castingShort']['directors'] }}<br>
+    <b>Acteurs :</b> {{ film['castingShort']['actors'] }}<br>
+    <b>Année de production :</b> {{ film['productionYear'] }}<br>
+    <b>Date de sortie :</b> {{ film['release']['releaseDate'] }}<br>
+    <br><br><br>
+    <a class="btn btn-primary" href="{{ path('film_ajoutFormulaire', { 'code': film['code'] }) }}#formulaire_film"><i class="icon-white icon-arrow-right"></i> Ajouter au formulaire</a></td>
+
+<td><img class="img-polaroid" style="height:250px;" src="{{ film['poster'] }}" alt=""/></td>
+<tr>
+ 
+
+{% else %}
+
+Aucun film n'a été trouvé.
+
+{% endfor %}
+ 
+</table>

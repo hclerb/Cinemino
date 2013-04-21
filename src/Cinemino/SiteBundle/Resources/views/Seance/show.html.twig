@@ -1,0 +1,53 @@
+{% extends "CineminoSiteBundle::seancelayout.html.twig" %}
+{% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
+{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
+
+{% block title %}
+{{ parent() }} - Séances
+{% endblock %}
+
+
+
+{% block formulaire %}
+<div id="formulaire" class="well">
+<div class="page-header"><h3>Séance du {{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }} à {{ entity.heure|date('H:i') }} </h3></div>
+<div class="row">
+    <div class = "span2">
+        <div><img class="img-polaroid" style="height:150px;" src="{{ asset('affiche/small/') }}{{ entity.idFilm.getAffiche() }}" alt=""/></div>
+    </div>
+     <div class="span4">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Film</th>
+                    <td>{{ entity.idFilm.titreFilm }} Réalisé par {{ entity.idFilm.realisateur }}</td>
+                </tr>                
+                <tr>
+                    <th>Version</th>
+                    <td> {{ entity.version }}</td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td> {{ entity.type }}</td>
+                </tr>
+                <tr>
+                    <th>Avant premiere</th>
+                    <td>{% if entity.avantPremiere == 'o' %}Oui{% else %}Non{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Sortie nationale</th>
+                    <td>{% if entity.sortieNationale == 'o' %}Oui{% else %}Non{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br><br>
+
+      <a class="btn" href="{{ path('seance') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+      <a class="btn" href="{{ path('seance_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-pencil"></i> Editer</a>
+
+ 
+
+</div>
+{% endblock %}

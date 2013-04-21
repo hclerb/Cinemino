@@ -1,0 +1,89 @@
+<h1>ProgrammeCourts</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Titrefilm</th>
+            <td>{{ entity.titreFilm }}</td>
+        </tr>
+        <tr>
+            <th>Realisateur</th>
+            <td>{{ entity.realisateur }}</td>
+        </tr>
+        <tr>
+            <th>Duree</th>
+            <td>{{ entity.duree }}</td>
+        </tr>
+        <tr>
+            <th>Anneeprod</th>
+            <td>{{ entity.anneeProd }}</td>
+        </tr>
+        <tr>
+            <th>Classementartessai</th>
+            <td>{{ entity.classementArtEssai }}</td>
+        </tr>
+        <tr>
+            <th>Provenance</th>
+            <td>{{ entity.provenance }}</td>
+        </tr>
+        <tr>
+            <th>Interdiction</th>
+            <td>{{ entity.interdiction }}</td>
+        </tr>
+        <tr>
+            <th>Ageconseille</th>
+            <td>{{ entity.ageConseille }}</td>
+        </tr>
+        <tr>
+            <th>Acteurs</th>
+            <td>{{ entity.acteurs }}</td>
+        </tr>
+        <tr>
+            <th>Synopsys</th>
+            <td>{{ entity.synopsys }}</td>
+        </tr>
+        <tr>
+            <th>Critique</th>
+            <td>{{ entity.critique }}</td>
+        </tr>
+        <tr>
+            <th>Affiche</th>
+            <td>{{ entity.affiche }}</td>
+        </tr>
+        <tr>
+            <th>Couleurtexte</th>
+            <td>{{ entity.couleurTexte }}</td>
+        </tr>
+        <tr>
+            <th>Couleurfondfilm</th>
+            <td>{{ entity.couleurFondFilm }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ entity.type }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('programmecourts') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('programmecourts_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('programmecourts_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

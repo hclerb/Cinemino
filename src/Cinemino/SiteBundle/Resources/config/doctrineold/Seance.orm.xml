@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Cinemino\SiteBundle\Entity\Seance" table="seance">
+    <id name="id" type="integer" column="ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateSeance" type="date" column="DATE_SEANCE" nullable="true"/>
+    <field name="heure" type="time" column="HEURE" nullable="true"/>
+    <field name="version" type="string" column="VERSION" length="6" nullable="true"/>
+    <field name="type" type="string" column="TYPE" length="2" nullable="true"/>
+    <field name="avantPremiere" type="string" column="AVANT_PREMIERE" length="1" nullable="true"/>
+    <field name="sortieNationale" type="string" column="SORTIE_NATIONALE" length="1" nullable="true"/>
+    <many-to-one field="idCinema" target-entity="Cinema">
+      <join-columns>
+        <join-column name="ID_CINEMA" referenced-column-name="ID"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idEvenement" target-entity="Evenement">
+      <join-columns>
+        <join-column name="ID_EVENEMENT" referenced-column-name="ID"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idFilm" target-entity="Film">
+      <join-columns>
+        <join-column name="ID_FILM" referenced-column-name="ID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

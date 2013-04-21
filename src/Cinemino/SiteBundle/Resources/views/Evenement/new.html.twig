@@ -1,0 +1,25 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Gérer les évènements lié aux séances.
+{% endblock alert %}
+
+{% block titre %}Création d'un évènement{% endblock %}
+
+
+{% block content %}
+<div class="well" style="width:800px">
+<form action="{{ path('evenement_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+ 
+        <br><br>
+        
+         <button class="btn btn-primary" type="submit">Créer l'évènement</button>
+         <a class="btn" href="{{ path('evenement') }}"><i class="icon-ban-circle"></i> Annuler</a>
+        
+</form>
+
+</div>
+{% endblock %}

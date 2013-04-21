@@ -1,0 +1,29 @@
+
+{% extends "CineminoUserBundle::userlayout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Utilisateurs
+{% endblock %}
+
+{% block alert %}Ici vous pouvez créer un nouveau utilisateur.
+{% endblock %}
+
+
+
+
+{% block formulaire %}
+<body onLoad="scrolldown();"> 
+
+<div class="well" style="width:400px">
+<div class="page-header"><h3>Ajout nouveau utilisateur</h3></div>
+ 
+<form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+        {{ form_rest(form) }}
+    <p>
+        <button class="btn btn-primary" type="submit">Valider</button>
+        <a class="btn" href="{{ path('user') }}"><i class="icon-ban-circle"></i>Annuler</a>
+    </p>
+</form>
+
+</div>
+{% endblock formulaire %}

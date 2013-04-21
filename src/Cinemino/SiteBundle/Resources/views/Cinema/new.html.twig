@@ -1,0 +1,29 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Ici vous pouvez gérer l'ensemble des cinémas dont vous avez la charge ( modification / visualisation ).<br> 
+Seul l'Administrateur peut supprimer ou ajouter un cinéma.
+{% endblock %}
+
+
+{% block titre %}Ajouter un cinéma{% endblock %}
+
+{% block content %}
+
+
+<form action="{{ path('cinema_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+  
+        <br>
+        
+       <button class="btn btn-primary" type="submit">Valider la création</button>
+       <a class="btn" href="{{ path('cinema') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+       
+</form>
+
+
+
+{% endblock content %}

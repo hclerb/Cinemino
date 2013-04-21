@@ -1,0 +1,30 @@
+programmecourts:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:ProgrammeCourts:index" }
+
+programmecourts_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:ProgrammeCourts:show" }
+
+programmecourts_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:ProgrammeCourts:new" }
+
+programmecourts_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:ProgrammeCourts:create" }
+    requirements: { _method: post }
+
+programmecourts_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:ProgrammeCourts:edit" }
+
+programmecourts_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:ProgrammeCourts:update" }
+    requirements: { _method: post }
+
+programmecourts_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:ProgrammeCourts:delete" }
+    requirements: { _method: post }

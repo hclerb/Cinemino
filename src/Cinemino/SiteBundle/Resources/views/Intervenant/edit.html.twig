@@ -1,0 +1,27 @@
+
+{% extends "CineminoSiteBundle::interlayout.html.twig" %}
+{% block title %}
+{{ parent() }} - Intervenants
+{% endblock %}
+
+
+{% block formulaire %}
+
+<div id="formulaire" class="well" style="width:800px">
+<div class="page-header"><h3>Modification intervenant : {{ entity.nomIntervenant }}</h3></div>   
+
+<form action="{{ path('intervenant_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p>
+           <button class="btn btn-primary" type="submit">Enregistrer</button>
+           <a class="btn" href="{{ path('intervenant') }}"><i class="icon-ban-circle"></i> Annuler</a>
+    </p>
+</form>
+
+<form action="{{ path('intervenant_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit">Supprimer l'intervenant {{ entity.nomIntervenant }}</button><i class="icon-remove icon-white"></i>
+</form>
+ </div>
+
+{% endblock formulaire %}

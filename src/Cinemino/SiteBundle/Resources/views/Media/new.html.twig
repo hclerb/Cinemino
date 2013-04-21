@@ -1,0 +1,25 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Gérez les médias liés au films. Un média peut etre lié a plusieurs films.<br>
+{% endblock %}
+
+{% block titre %}Créer / ajouter un média{% endblock %}
+
+
+{% block content %}
+
+<form action="{{ path('media_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+  
+        <br>
+        
+       <button class="btn btn-primary" type="submit">Valider la création</button>
+       <a class="btn" href="{{ path('media') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+       
+</form>
+
+{% endblock content %}

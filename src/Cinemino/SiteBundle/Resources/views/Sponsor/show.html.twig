@@ -1,0 +1,47 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Gérez les sponsors<br>
+{% endblock %}
+
+{% block titre %}{{ entity.nomSponsor }}{% endblock %}
+
+
+{% block content %}
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Nom sponsor : </th>
+            <td>{{ entity.nomSponsor }}</td>
+        </tr>
+        <tr>
+            <th>Logo : </th>
+            <td>{{ entity.logo }}</td>
+        </tr>
+        <tr>
+            <th>Adresse : </th>
+            <td>{{ entity.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Site web : </th>
+            <td>{{ entity.siteWeb }}</td>
+        </tr>
+        <tr>
+            <th>Actif : </th>
+            <td>{{ entity.actif }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br><img class="img-polaroid" width="450" src="{{ entity.logo }}" alt=""/>
+
+<br><br>
+
+      <a class="btn" href="{{ path('sponsor') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+      <a class="btn" href="{{ path('sponsor_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-pencil"></i> Editer</a>
+
+{% endblock %}

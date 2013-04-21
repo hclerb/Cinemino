@@ -1,0 +1,19 @@
+TypeEvenement:
+    type: entity
+    table: type_evenement
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: ID
+            generator:
+                strategy: IDENTITY
+        label:
+            type: string
+            length: 25
+            fixed: false
+            nullable: true
+            column: LABEL
+    lifecycleCallbacks: {  }

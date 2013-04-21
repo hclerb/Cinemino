@@ -1,0 +1,48 @@
+film:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:Film:index" }
+
+film_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:Film:show" }
+
+film_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:Film:new" }
+
+film_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:Film:create" }
+    requirements: { _method: post }
+
+film_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:Film:edit" }
+
+film_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:Film:update" }
+    requirements: { _method: post }
+
+film_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:Film:delete" }
+    requirements: { _method: post }
+
+film_ajax: 
+    pattern: /ajaxRea 
+    defaults: { _controller: "CineminoSiteBundle:Film:ajax" } 
+    requirements: { _method: get } 
+    
+    
+film_rechercher:
+  pattern: /rechercher
+  defaults: { _controller: CineminoSiteBundle:Film:rechercher }
+  requirements:
+    _method: POST
+    
+film_ajoutFormulaire:
+  pattern: /new/{code}
+  defaults: { _controller: CineminoSiteBundle:Film:ajoutFormulaire }
+  requirements:
+    _method: GET

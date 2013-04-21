@@ -1,0 +1,49 @@
+
+{% extends "CineminoSiteBundle::seancelayout.html.twig" %}
+{% block title %}
+{{ parent() }} - Séances
+{% endblock %}
+
+{% block formulaire %}
+
+<div id="formulaire" class="well" style="width:800px">
+<div class="page-header"><h3>Modifier séance du {{ entity.dateSeance|date('y:m:d') }}</h3>
+
+
+{% for key, flash in app.session.getFlashes() %}
+    <div class="alert alert-success">
+        {{ flash|trans }}
+    </div>
+{% endfor %}
+
+</div>    
+<form action="{{ path('seance_update', { 'id': entity.id }) }}#formulaire" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+        
+     <br><br>   
+    <p>
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
+        <a class="btn" href="{{ path('seance') }}"><i class="icon-ban-circle"></i> Annuler</a>
+    </p>
+</form>
+
+
+        <form action="{{ path('seance_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+           <button class="btn btn-danger" type="submit">Supprimer la séance</button><i class="icon-remove icon-white"></i>
+        </form>
+    </li>
+
+
+</div>    
+<script type="text/javascript">
+ $(function(){
+  $("#{{ edit_form.dateSeance.vars.id }}").datepicker({
+    language: 'fr',
+    weekStart: 3
+   });
+
+ });
+</script> 
+
+{% endblock formulaire %}

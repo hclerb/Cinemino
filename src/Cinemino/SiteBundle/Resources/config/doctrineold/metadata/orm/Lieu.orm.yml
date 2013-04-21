@@ -1,0 +1,25 @@
+Lieu:
+    type: entity
+    table: lieu
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: ID
+            generator:
+                strategy: IDENTITY
+        nom:
+            type: string
+            length: 10
+            fixed: false
+            nullable: true
+            column: NOM
+        adresse:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+            column: ADRESSE
+    lifecycleCallbacks: {  }

@@ -1,0 +1,43 @@
+Sponsor:
+    type: entity
+    table: sponsor
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: ID
+            generator:
+                strategy: IDENTITY
+        nomSponsor:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+            column: NOM_SPONSOR
+        logo:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+            column: LOGO
+        adresse:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+            column: ADRESSE
+        siteWeb:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+            column: SITE_WEB
+        actif:
+            type: string
+            length: 1
+            fixed: false
+            nullable: true
+            column: ACTIF
+    lifecycleCallbacks: {  }

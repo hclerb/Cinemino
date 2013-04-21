@@ -1,0 +1,30 @@
+sponsor:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:Sponsor:index" }
+
+sponsor_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:Sponsor:show" }
+
+sponsor_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:Sponsor:new" }
+
+sponsor_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:Sponsor:create" }
+    requirements: { _method: post }
+
+sponsor_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:Sponsor:edit" }
+
+sponsor_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:Sponsor:update" }
+    requirements: { _method: post }
+
+sponsor_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:Sponsor:delete" }
+    requirements: { _method: post }

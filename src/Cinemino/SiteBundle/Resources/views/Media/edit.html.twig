@@ -1,0 +1,36 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Gérez les médias liés au films. Un média peut etre lié a plusieurs films.<br>
+{% endblock %}
+
+{% block titre %}{{ entity.titre }}{% endblock %}
+
+
+{% block content %}
+
+
+<div style="position:absolute;left:550px;"><img class="img-polaroid" width="350px" src="http://localhost/cinemino_symfony2/web/{{ entity.url }}" alt=""/></div>
+
+
+<form action="{{ path('media_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    
+        <br>
+            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+            <a class="btn" href="{{ path('media') }}"><i class="icon-ban-circle"></i> Annuler</a>
+    
+</form>
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <form action="{{ path('media_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer {{ entity.titre }}</button>
+        </form>
+    {% endif %}
+
+
+{% endblock content %}

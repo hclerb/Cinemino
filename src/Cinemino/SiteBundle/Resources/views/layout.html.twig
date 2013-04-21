@@ -1,0 +1,19 @@
+{% extends "::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+
+    
+{% block info %}
+
+<div class="page-header">
+ <h3>{% block titre %}{% endblock %}</h3>
+ </div>
+ 
+ {# On définit un nouveau block, que les vues du bundle pourront
+étendre #}
+ {% block content %}{% endblock %}
+{% endblock %}
+
+

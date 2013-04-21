@@ -1,0 +1,41 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Gérez les médias liés au films. Un média peut etre lié a plusieurs films.<br>
+{% endblock %}
+
+{% block titre %}{{ entity.titre }}{% endblock %}
+
+
+{% block content %}
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Titre: </th>
+            <td>{{ entity.titre }}</td>
+        </tr>
+        <tr>
+            <th>Url: </th>
+            <td>{{ entity.url }}</td>
+        </tr>
+        <tr>
+            <th>Type: </th>
+            <td>{% if entity.type == 'p' %}Photo{% else %}Video{% endif %}</td>
+        </tr>
+    </tbody>
+</table>
+{% if entity.type == 'p' %}
+<br><img class="img-polaroid" width="450" src="http://localhost/cinemino_symfony2/web/{{ entity.url }}" alt=""/>
+{% endif %}
+
+<br><br>
+
+      <a class="btn" href="{{ path('media') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+      <a class="btn" href="{{ path('media_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
+
+
+{% endblock content %}

@@ -1,0 +1,61 @@
+cineminoSite_front:
+    pattern:  /
+    defaults: { _controller: CineminoSiteBundle:Front:index }
+
+
+cineminoSite_back:
+    pattern:  /backoffice
+    defaults: { _controller: CineminoSiteBundle:Test:index }
+
+
+cineminoSite_cinema:
+    resource: "routing/cinema.yml"
+    prefix:   /cinema
+    
+cineminoSite_users:
+    resource: "routing/cineminouser.yml"
+    prefix:   /utilisateurs
+    
+CineminoSite_intervenant:
+        resource: "routing/intervenant.yml"
+        prefix:   /intervenant
+        
+CineminoSite_seance:
+        resource: "routing/seance.yml"
+        prefix:   /seance
+        
+CineminoSite_film:
+        resource: "routing/film.yml"
+        prefix:   /film
+        
+CineminoSite_media:
+        resource: "routing/media.yml"
+        prefix:   /media
+        
+             
+CineminoSiteBundle_evenement:
+        resource: "routing/evenement.yml"
+        prefix:   /evenement
+        
+        
+CineminoSiteBundle_sponsor:
+        resource: "routing/sponsor.yml"
+        prefix:   /sponsor
+
+cineminoSite_voir:
+    pattern:  /Site/article/{id}.{tag}
+    defaults: { _controller: CineminoSiteBundle:Test:voir }
+
+
+cineminoSite_ajouter:
+    pattern:  /Site/ajouter
+    defaults: { _controller: CineminoSiteBundle:Test:ajouter }
+
+
+cineminoSite_template:
+    pattern:  /Site/template
+    defaults: { _controller: CineminoSiteBundle:Test:template }
+
+CineminoSiteBundle_programmecourts:
+        resource: "@CineminoSiteBundle/Resources/config/routing/programmecourts.yml"
+        prefix:   /programmecourts

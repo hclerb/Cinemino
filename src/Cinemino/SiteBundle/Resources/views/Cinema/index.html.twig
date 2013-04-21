@@ -1,0 +1,50 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Ici vous pouvez gérer l'ensemble des cinémas dont vous avez la charge ( modification / visualisation ).<br> 
+Seul l'Administrateur peut supprimer ou ajouter un cinéma.
+{% endblock %}
+
+{% block titre %}Liste des cinémas{% endblock %}
+
+
+{% block content %}
+
+ <table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Photo</th>
+            <th>Logo</th>
+            <th>Site web</th>
+            <th>Type</th>
+            <th>Programmateur</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('cinema_show', { 'id': entity.id }) }}">{{ entity.nomCinema }}</a></td>
+            <td><img class="img-polaroid" style="height:60px;" src="{{ entity.photo }}" alt=""/></td>
+            <td><img class="img-polaroid" style="height:60px;" src="{{ entity.logo }}" alt=""/></td>
+            <td><a href="{{ entity.siteWeb }}" target="_blank">{{ entity.siteWeb }}</a></td>
+            <td>  {% if entity.type == 'i' %}Itinérant {% else %}Normal{% endif %}</td>
+            <td>{{ entity.idCompte }}</td>
+            <td>
+            
+                    <a class="btn btn-info" href="{{ path('cinema_show', { 'id': entity.id }) }}"><i class="icon-white icon-info-sign"></i> Voir</a>
+                    <a class="btn btn-info" href="{{ path('cinema_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+            </td>
+        </tr>
+    {% endfor %}
+ 
+</table>
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+   <td><a class="btn btn-info" href="{{ path('cinema_new') }}"><i class="icon-white icon-plus"></i> Ajouter un cinéma</a></td>
+{% endif %}
+   
+{% endblock %}

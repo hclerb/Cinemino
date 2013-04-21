@@ -1,0 +1,91 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Ajouter ou modifier les films présent dans la base de données.
+{% endblock alert %}
+
+{% block titre %}{{ entity.titreFilm }} - (ici visualisation à faire comme sur le FrontOffice){% endblock %}
+
+
+{% block content %}
+
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Titre film</th>
+            <td>{{ entity.titreFilm }}</td>
+        </tr>
+        <tr>
+            <th>Realisateur</th>
+            <td>{{ entity.realisateur }}</td>
+        </tr>
+        <tr>
+            <th>Duree</th>
+            <td>{{ entity.duree|date('H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Annee production</th>
+            <td>{{ entity.anneeProd|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Classement art essai</th>
+            <td>{{ entity.classementArtEssai }}</td>
+        </tr>
+        <tr>
+            <th>Provenance</th>
+            <td>{{ entity.provenance }}</td>
+        </tr>
+        <tr>
+            <th>Interdiction</th>
+            <td>{{ entity.interdiction }}</td>
+        </tr>
+        <tr>
+            <th>Age conseille</th>
+            <td>{{ entity.ageConseille }}</td>
+        </tr>
+        <tr>
+            <th>Acteurs</th>
+            <td>{{ entity.acteurs }}</td>
+        </tr>
+        <tr>
+            <th>Synopsys</th>
+            <td>{{ entity.synopsys }}</td>
+        </tr>
+        <tr>
+            <th>Critique</th>
+            <td>{{ entity.critique }}</td>
+        </tr>
+        <tr>
+            <th>Affiche</th>
+            <td>{{ entity.affiche }}</td>
+        </tr>
+        <tr>
+            <th>Couleur du texte</th>
+            <td>{{ entity.couleurTexte }}</td>
+        </tr>
+        <tr>
+            <th>Couleur fond film</th>
+            <td>{{ entity.couleurFondFilm }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ entity.type }}</td>
+        </tr>
+        <tr>
+            
+        </tr>
+    </tbody>
+</table>
+
+<br><br><br>
+    
+<a class="btn btn-info" href="{{ path('film_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+<a class="btn" href="{{ path('film') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+
+
+</ul>
+
+{% endblock content %}

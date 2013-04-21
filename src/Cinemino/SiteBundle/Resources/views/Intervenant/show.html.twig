@@ -1,0 +1,47 @@
+
+{% extends "CineminoSiteBundle::interlayout.html.twig" %}
+{% block title %}
+{{ parent() }} - Intervenants
+{% endblock %}
+
+
+{% block formulaire %}
+
+<div id="show" class="well" style="width:800px">
+<div class="page-header"><h3>Intervenant : {{ entity.nomIntervenant }}</h3></div>   
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Nom intervenant :</th>
+            <td>{{ entity.nomIntervenant }}</td>
+        </tr>
+        <tr>
+            <th>Description intervenant :</th>
+            <td>{{ entity.descriptionIntervenant }}</td>
+        </tr>
+        <tr>
+            <th>Photo</th>
+            <td><img class="img-polaroid" style="height:150px;" src="{{ entity.urlPhotoIntervenant }}" alt=""/></td>
+        </tr>
+        <tr>
+            <th>Logo</th>
+            <td><img class="img-polaroid" style="height:150px;" src="{{ entity.urlLogo }}" alt=""/></td>
+        </tr>
+       
+        <tr>  
+        <th>Evènement(s) lié(s) :<th>
+        </tr>
+        
+    </tbody>
+</table>
+
+
+<br><br>
+
+   
+      <a class="btn" href="{{ path('intervenant_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
+      <a class="btn" href="{{ path('intervenant') }}"><i class="icon-ban-circle"></i>Annuler</a>
+
+</div>
+{% endblock %}

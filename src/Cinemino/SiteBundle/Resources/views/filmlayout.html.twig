@@ -1,0 +1,65 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Ajouter ou modifier vos films ( Vous ne pouvez modifier que les films que vous avez vous même ajouté , mais tous les films sont<br>
+accessibles lorsque vous créez une séance.
+{% endblock alert %}
+
+{% block titre %}Liste des films{% endblock %}
+
+
+{% block content %}
+
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Titre du film</th>
+            <th>Realisateur</th>
+            <th>Durée</th>
+            <th>Affiche</th>
+            <th>Type</th>
+            <th>Associer un film</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('film_show', { 'id': entity.id }) }}">{{ entity.titreFilm }}</a></td>
+            <td>{{ entity.realisateur }}</td>
+            <td>{{ entity.duree|date('H:i:s') }}</td>
+            <td>{{ entity.affiche }}</td>
+            <td>{{ entity.type }}</td>
+            <td>{{ entity.id }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('film_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('film_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('film_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+
+
+{% block formulaire %}
+
+{% endblock formulaire %}
+
+{% endblock content %}

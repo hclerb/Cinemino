@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Cinemino\SiteBundle\Entity\Sponsor" table="sponsor">
+    <id name="id" type="integer" column="ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomSponsor" type="string" column="NOM_SPONSOR" length="50" nullable="true"/>
+    <field name="logo" type="string" column="LOGO" length="250" nullable="true"/>
+    <field name="adresse" type="string" column="ADRESSE" length="50" nullable="true"/>
+    <field name="siteWeb" type="string" column="SITE_WEB" length="50" nullable="true"/>
+    <field name="actif" type="string" column="ACTIF" length="1" nullable="true"/>
+  </entity>
+</doctrine-mapping>

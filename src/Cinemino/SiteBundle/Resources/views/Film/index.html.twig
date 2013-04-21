@@ -1,0 +1,51 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Ajouter ou modifier les films.
+{% endblock alert %}
+
+{% block titre %}Liste des films{% endblock %}
+
+
+{% block content %}
+
+<a class="btn btn-info" href="{{ path('film_new') }}"><i class="icon-white icon-plus"></i> Ajouter un film</a>
+<br><br>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+           <tr bgcolor="#EAE8FF">
+            <th width=350>Titre du film</th>
+            <th>Durée</th>
+            <th>Realisateur</th>
+            <th>Affiche</th>
+            <th>Type</th>
+            <th width=180>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('film_show', { 'id': entity.id }) }}">{{ entity.titreFilm }}</a></td>
+            <td>{{ entity.duree|date('H:i') }}</td>
+            <td>{{ entity.realisateur }}</td>
+            <td><img class="img-polaroid" style="height:150px;" src="{{asset('affiche/small/')}}{{entity.affiche }}" alt=""/></td>
+            <!-- big/ ou small/ selon si on veut recuperer l'affiche redimensionné ou non -->
+            <td>{% if entity.type == 'n' %}Normal{% else %}Court-métrage{% endif %}</td>
+            <td>
+                      
+          <a class="btn" href="{{ path('film_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+          <a class="btn btn-info" href="{{ path('film_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+      
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% block formulaire %}
+
+{% endblock formulaire %}
+
+{% endblock content %}

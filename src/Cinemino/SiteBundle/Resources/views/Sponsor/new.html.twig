@@ -1,0 +1,26 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Gérez les sponsors{% endblock alert %}
+
+{% block content %}
+
+<div id="formulaire" class="well" style="width:800px">
+<div class="page-header"><h3>Ajouter un sponsor</h3></div>      
+<form action="{{ path('sponsor_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+        
+        <br>
+       <button class="btn btn-primary" type="submit">Valider</button>
+       <a class="btn" href="{{ path('sponsor') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>   
+       
+</form>
+    
+</div>
+
+
+
+{% endblock %}

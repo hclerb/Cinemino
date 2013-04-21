@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Cinemino\SiteBundle\Entity\Intervenant" table="intervenant">
+    <id name="id" type="integer" column="ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomIntervenant" type="string" column="NOM_INTERVENANT" length="25" nullable="true"/>
+    <field name="descriptionIntervenant" type="string" column="DESCRIPTION_INTERVENANT" length="100" nullable="true"/>
+    <field name="urlPhotoIntervenant" type="string" column="URL_PHOTO_INTERVENANT" length="50" nullable="true"/>
+    <field name="urlLogo" type="string" column="URL_LOGO" length="50" nullable="true"/>
+    <many-to-many field="idEvenement" target-entity="Evenement" inversed-by="idIntervenant">
+      <join-table name="s_occupe">
+        <join-columns>
+          <join-column name="ID_INTERVENANT" referenced-column-name="ID"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="ID_EVENEMENT" referenced-column-name="ID"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

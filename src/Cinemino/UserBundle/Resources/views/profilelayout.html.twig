@@ -1,0 +1,53 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Ici vous pouvez modifier votre email et changer de mdp{% endblock alert %}
+{% block titre %}Modifier Profil{% endblock titre %}
+
+{% block content %}
+
+
+{% for key, flash in app.session.getFlashes() %}
+    <div class="alert alert-success">
+        {{ flash|trans }}
+    </div>
+{% endfor %}
+
+
+
+
+  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+<table class="table table-bordered table-striped table-hover">
+      <div class="well">
+        <h5><a href="{{ path('fos_user_profile_edit') }}">Modifier nom d'utilisateur et Email</a></h5>
+        
+        <div>
+            {% block edit_user %}
+            {% endblock edit_user %}
+        </div>
+    
+      </div>
+
+
+      <div class="well">
+         <h5><a href="{{ path('fos_user_change_password') }}">Modifier mot de passe</a></h5>
+        
+        <div>
+            {% block edit_password %}
+            {% endblock edit_password %}
+        </div>
+    
+      </div>
+
+    </table> 
+ 
+{% else %}
+
+ {% block fos_user_content %}
+ {% endblock fos_user_content %}
+
+ {% endif %}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+user:
+    pattern:  /
+    defaults: { _controller: "CineminoUserBundle:User:index" }
+
+user_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoUserBundle:User:show" }
+
+user_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoUserBundle:User:new" }
+
+user_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoUserBundle:User:create" }
+    requirements: { _method: post }
+
+user_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoUserBundle:User:edit" }
+
+user_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoUserBundle:User:update" }
+    requirements: { _method: post }
+
+user_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoUserBundle:User:delete" }
+    requirements: { _method: post }

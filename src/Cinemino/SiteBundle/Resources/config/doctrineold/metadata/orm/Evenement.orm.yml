@@ -1,0 +1,75 @@
+Evenement:
+    type: entity
+    table: evenement
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: ID
+            generator:
+                strategy: IDENTITY
+        titreEvenement:
+            type: string
+            length: 25
+            fixed: false
+            nullable: true
+            column: TITRE_EVENEMENT
+        descriptionEvenement:
+            type: string
+            length: 100
+            fixed: false
+            nullable: true
+            column: DESCRIPTION_EVENEMENT
+        dateEvenement:
+            type: datetime
+            nullable: true
+            column: DATE_EVENEMENT
+        dateFin:
+            type: datetime
+            nullable: true
+            column: DATE_FIN
+        priorite:
+            type: string
+            length: 2
+            fixed: false
+            nullable: true
+            column: PRIORITE
+    manyToMany:
+        idIntervenant:
+            targetEntity: Intervenant
+            cascade: {  }
+            mappedBy: idEvenement
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    manyToOne:
+        idSeances:
+            targetEntity: Seance
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ID_SEANCES:
+                    referencedColumnName: ID
+            orphanRemoval: false
+        idLieu:
+            targetEntity: Lieu
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ID_LIEU:
+                    referencedColumnName: ID
+            orphanRemoval: false
+        idType:
+            targetEntity: TypeEvenement
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ID_TYPE:
+                    referencedColumnName: ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

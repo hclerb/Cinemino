@@ -1,0 +1,54 @@
+Intervenant:
+    type: entity
+    table: intervenant
+    fields:
+        id:
+            id: true
+            type: integer
+            unsigned: false
+            nullable: false
+            column: ID
+            generator:
+                strategy: IDENTITY
+        nomIntervenant:
+            type: string
+            length: 25
+            fixed: false
+            nullable: true
+            column: NOM_INTERVENANT
+        descriptionIntervenant:
+            type: string
+            length: 100
+            fixed: false
+            nullable: true
+            column: DESCRIPTION_INTERVENANT
+        urlPhotoIntervenant:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+            column: URL_PHOTO_INTERVENANT
+        urlLogo:
+            type: string
+            length: 50
+            fixed: false
+            nullable: true
+            column: URL_LOGO
+    manyToMany:
+        idEvenement:
+            targetEntity: Evenement
+            cascade: {  }
+            mappedBy: null
+            inversedBy: idIntervenant
+            joinTable:
+                name: s_occupe
+                joinColumns:
+                    -
+                        name: ID_INTERVENANT
+                        referencedColumnName: ID
+                inverseJoinColumns:
+                    -
+                        name: ID_EVENEMENT
+                        referencedColumnName: ID
+            orderBy: null
+    lifecycleCallbacks: {  }
