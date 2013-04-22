@@ -132,7 +132,7 @@ class Film
     /**
      *
      * @ORM\ManyToOne(targetEntity="Cinemino\SiteBundle\Entity\ProgrammeCourts",inversedBy="lescourts"); 													inversedBy="lesseances")
-     * @ORM\JoinColumn(name="PROG_COURTS_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="PROG_COURTS_id", referencedColumnName="ID")
      */
     protected $progCourts;
 

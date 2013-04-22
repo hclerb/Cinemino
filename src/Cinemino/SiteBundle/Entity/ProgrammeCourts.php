@@ -15,17 +15,28 @@ use Cinemino\SiteBundle\Entity\Film;
 class ProgrammeCourts extends Film
 {
      /**
+     * @var integer
+     *
+     * @ORM\Column(name="ID", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+    
+     /**
      *
      * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\Film", mappedBy="progCourts")
      */
     protected $lescourts;
   
+     
     /**
      * Constructor
      */
     public function __construct()
     {
         parent::__construct();
+        $this->lescourts = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -37,6 +48,7 @@ class ProgrammeCourts extends Film
     public function addLescourt(\Cinemino\SiteBundle\Entity\Film $lescourts)
     {
         $this->lescourts[] = $lescourts;
+        $lescourts->setProgCourts($this);
     
         return $this;
     }
@@ -61,4 +73,13 @@ class ProgrammeCourts extends Film
         return $this->lescourts;
     }
 
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }

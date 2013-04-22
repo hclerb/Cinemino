@@ -147,9 +147,12 @@ $('#filmrecherche_motcle').keyup(function(event) {
     {{ form_label(form.synopsys) }}
     {{ form_errors(form.synopsys) }}
     {{ form_widget(form.synopsys) }}
+        
+    {{ form_label(form.critique) }}
+    {{ form_errors(form.critique) }}
+    {{ form_widget(form.critique) }}
     
-    
-           <table>
+<table>
                
  <td>
     {{ form_label(form.classementArtEssai) }}
@@ -168,14 +171,15 @@ $('#filmrecherche_motcle').keyup(function(event) {
     {{ form_label(form.couleurFondFilm) }}
     {{ form_errors(form.couleurFondFilm) }}
     {{ form_widget(form.couleurFondFilm, { 'attr': {'class': 'color', 'value': '4164AA'}} ) }}
-</td>  
-<td>
+</td>     
+   </tr>
+<tr>
+   <td>
     {{ form_label(form.type) }}
     {{ form_errors(form.type) }}
     {{ form_widget(form.type) }}
-</td>  
-       
-   </tr>
+    </td>
+</tr>
    <br>
 </table>
     
@@ -186,11 +190,8 @@ $('#filmrecherche_motcle').keyup(function(event) {
 
     {{ form_errors(form.idMedia) }}
     {{ form_widget(form.idMedia) }}
-       </td>
-
-     
-   </tr>
-       
+       </td>    
+   </tr>      
 </table>
     <br>
    

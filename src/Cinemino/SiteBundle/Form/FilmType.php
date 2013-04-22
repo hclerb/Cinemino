@@ -22,16 +22,28 @@ class FilmType extends AbstractType
                     'Classé avec le label Patrimoine et répertoire' => 'Classé avec le label Patrimoine et répertoire',
                     'Classé avec le label Recherche et Découverte' => 'Classé avec le label Recherche et Découverte'),
                     'required' => true))
-
             ->add('provenance', null, array('label' => 'Provenance', 'required' => true))
             ->add('interdiction', null, array('label' => 'Interdiction'))
-            ->add('ageConseille', null, array('label' => 'Age conseillé', 'required' => true))
+            ->add('ageConseille', 'choice', array('label' => 'Age conseillé', 'required' => true,'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '4' => '4',
+                    '5' => '5',
+                    '6' => '6',
+                    '7' => '7',
+                    '8' => '8',
+                    '9' => '9'),
+                    'required' => true))
             ->add('acteurs', null, array('label' => 'Acteurs', 'required' => true))
             ->add('synopsys', 'textarea', array('label' => 'Synopsis','attr' => array(
-            'class' => 'tinymce',
-            'data-theme' => 'advanced', 
-            'required' => true))) 
-            ->add('critique', null, array('label' => 'Critique'))
+                'class' => 'tinymce',
+                'data-theme' => 'advanced', 
+                'required' => true))) 
+            ->add('critique','textarea', array('label' => 'Critique','attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced', 
+                    'required' => true)))
             ->add('affiche', 'text', array('label' => 'Url de l\'affiche :', 'required' => true))
             ->add('couleurTexte', null, array('label' => 'Couleur du texte'))
             ->add('couleurFondFilm', null, array('label' => 'Couleur de fond'))

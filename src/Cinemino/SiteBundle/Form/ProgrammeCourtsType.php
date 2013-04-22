@@ -11,22 +11,59 @@ class ProgrammeCourtsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titreFilm')
-            ->add('realisateur')
-            ->add('duree')
-            ->add('anneeProd')
-            ->add('classementArtEssai')
-            ->add('provenance')
-            ->add('interdiction')
-            ->add('ageConseille')
-            ->add('acteurs')
-            ->add('synopsys')
-            ->add('critique')
-            ->add('affiche')
-            ->add('couleurTexte')
-            ->add('couleurFondFilm')
-            ->add('type')
-            ->add('progCourts')
+            ->add('titreFilm', null, array('label' => 'Titre du Programme', 'required' => true))
+            ->add('realisateur', null, array('label' => 'Realisateur', 'required' => true))
+            ->add('duree', 'text', array('label' => 'Durée (Heure : minutes) ', 'required' => true))
+            ->add('anneeProd', null, array('label' => 'Année de production', 'required' => true))
+            ->add('classementArtEssai', 'choice', array('label' => 'Classement Art et Essai','choices' => array(
+                    'Pas de classement' => 'Pas de classement',
+                    'Classé Art et Essai' => 'Classé Art et Essai',
+                    'Classé avec le label Jeune public' => 'Classé avec le label Jeune public',
+                    'Classé avec le label Patrimoine et répertoire' => 'Classé avec le label Patrimoine et répertoire',
+                    'Classé avec le label Recherche et Découverte' => 'Classé avec le label Recherche et Découverte'),
+                    'required' => true))
+
+            ->add('provenance', null, array('label' => 'Provenance', 'required' => true))
+            ->add('interdiction', null, array('label' => 'Interdiction'))
+            ->add('ageConseille', 'choice', array('label' => 'Age conseillé', 'required' => true,'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '4' => '4',
+                    '5' => '5',
+                    '6' => '6',
+                    '7' => '7',
+                    '8' => '8',
+                    '9' => '9'),
+                    'required' => true))
+            ->add('acteurs', null, array('label' => 'Acteurs', 'required' => true))
+            ->add('synopsys', 'textarea', array('label' => 'Synopsis','attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced', 
+                    'required' => true))) 
+            ->add('critique','textarea', array('label' => 'Critique','attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced', 
+                    'required' => true)))
+            ->add('affiche', 'text', array('label' => 'Url de l\'affiche :', 'required' => true))
+            ->add('couleurTexte', null, array('label' => 'Couleur du texte'))
+            ->add('couleurFondFilm', null, array('label' => 'Couleur de fond'))
+
+           // ->add('idMedia', null, array('label' => 'Attacher un média', 'required' => false))
+            //->add('idFilm', null, array('label' => ''))
+
+            ->add('idMedia', 'collection', array('type'   => new MediaType(),
+                                              'prototype' => true,
+                                              'allow_add' => true))
+            ->add('lescourts','entity', array(
+                'label' =>  'Les courts du programme',
+                'class' => 'Cinemino\SiteBundle\Entity\Film',
+                'property'  =>  'TitreFilm',
+                'query_builder'  =>  function(\Cinemino\SiteBundle\Entity\FilmRepository $r){
+                                        return $r->getCourts();
+                },
+                'multiple'  => true)
+            )
         ;
     }
 
@@ -39,6 +76,6 @@ class ProgrammeCourtsType extends AbstractType
 
     public function getName()
     {
-        return 'cinemino_Sitebundle_programmecourtstype';
+        return 'cinemino_sitebundle_programmecourtstype';
     }
 }

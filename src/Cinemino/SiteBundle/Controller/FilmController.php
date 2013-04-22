@@ -205,6 +205,13 @@ class FilmController extends Controller
 
         if ($editForm->isValid()) {
             $em->persist($entity);
+            
+            foreach($entity->getIdMedia() as $media)  
+            {
+                $media->upload();
+                $media->setUrl($entity->getWebPath());
+                $em->persist($media);
+            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('film_edit', array('id' => $id)));

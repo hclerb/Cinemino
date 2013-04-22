@@ -78,6 +78,12 @@ class ProgrammeCourtsController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+            foreach($entity->getLescourts() as $court)  
+            {
+                $court->setProgCourts($entity);
+                $em->persist($court);
+            }
+            
             $em->flush();
 
             return $this->redirect($this->generateUrl('programmecourts_show', array('id' => $entity->getId())));

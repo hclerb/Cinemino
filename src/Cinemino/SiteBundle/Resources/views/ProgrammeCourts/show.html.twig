@@ -1,13 +1,21 @@
-<h1>ProgrammeCourts</h1>
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Ajouter ou modifier les programme de courts présent dans la base de données.
+{% endblock alert %}
+
+{% block titre %}{{ entity.titreFilm }} - (ici visualisation à faire comme sur le FrontOffice){% endblock %}
+
+
+{% block content %}
+
 
 <table class="record_properties">
     <tbody>
         <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Titrefilm</th>
+            <th>Titre du programme de courts</th>
             <td>{{ entity.titreFilm }}</td>
         </tr>
         <tr>
@@ -16,14 +24,14 @@
         </tr>
         <tr>
             <th>Duree</th>
-            <td>{{ entity.duree }}</td>
+            <td>{{ entity.duree|date('H:i:s') }}</td>
         </tr>
         <tr>
-            <th>Anneeprod</th>
-            <td>{{ entity.anneeProd }}</td>
+            <th>Annee production</th>
+            <td>{{ entity.anneeProd|date('Y-m-d H:i:s') }}</td>
         </tr>
         <tr>
-            <th>Classementartessai</th>
+            <th>Classement art essai</th>
             <td>{{ entity.classementArtEssai }}</td>
         </tr>
         <tr>
@@ -35,7 +43,7 @@
             <td>{{ entity.interdiction }}</td>
         </tr>
         <tr>
-            <th>Ageconseille</th>
+            <th>Age conseille</th>
             <td>{{ entity.ageConseille }}</td>
         </tr>
         <tr>
@@ -55,35 +63,29 @@
             <td>{{ entity.affiche }}</td>
         </tr>
         <tr>
-            <th>Couleurtexte</th>
+            <th>Couleur du texte</th>
             <td>{{ entity.couleurTexte }}</td>
         </tr>
         <tr>
-            <th>Couleurfondfilm</th>
+            <th>Couleur fond film</th>
             <td>{{ entity.couleurFondFilm }}</td>
         </tr>
         <tr>
             <th>Type</th>
             <td>{{ entity.type }}</td>
         </tr>
+        <tr>
+            
+        </tr>
     </tbody>
 </table>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('programmecourts') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('programmecourts_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('programmecourts_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
+<br><br><br>
+    
+<a class="btn btn-info" href="{{ path('programmecourts_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+<a class="btn" href="{{ path('programmecourts') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+
+
 </ul>
+
+{% endblock content %}

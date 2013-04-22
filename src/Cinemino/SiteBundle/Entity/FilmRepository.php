@@ -13,5 +13,12 @@ use Cinemino\SiteBundle\Entity\Media;
  */
 class FilmRepository extends EntityRepository
 {
- 
+  public function getCourts()
+    {
+        $qb = $this->createQueryBuilder('f')
+              ->where("f.type = 'c'");
+
+        
+        return $qb;
+    }
 }

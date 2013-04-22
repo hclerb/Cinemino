@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class ProgrammeCourtsControllerTest extends WebTestCase
 {
     /*
-    public function SiteCompleteScenario()
+    public function testCompleteScenario()
     {
         // Create a new client to browse the application
         $client = static::createClient();
@@ -19,7 +19,7 @@ class ProgrammeCourtsControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'cinemino_Sitebundle_programmecourtstype[field_name]'  => 'Test',
+            'cinemino_sitebundle_programmecourtstype[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class ProgrammeCourtsControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'cinemino_Sitebundle_programmecourtstype[field_name]'  => 'Foo',
+            'cinemino_sitebundle_programmecourtstype[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 
