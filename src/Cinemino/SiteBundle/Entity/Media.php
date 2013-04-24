@@ -4,6 +4,12 @@ namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+define("LgPhotoSmall", 319);
+define("HtPhotoSmall",213);
+define("LgPhotoBig", 720);
+define("HtPhotoBig",480);
+
 /**
  * Media
  *
@@ -44,17 +50,12 @@ class Media
 
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\ManyToOne(targetEntity="Cinemino\SiteBundle\Entity\Film", inversedBy="idMedias")
+     * @ORM\JoinColumn(name="idFilm_id", referencedColumnName="ID")
      */
     private $idFilm;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->idFilm = new \Doctrine\Common\Collections\ArrayCollection();
-    }
     
     /**
      * Set titre
@@ -136,35 +137,27 @@ class Media
     }
 
     /**
-     * Add idFilm
+     * Set idFilm
      *
      * @param \Cinemino\SiteBundle\Entity\Film $idFilm
      * @return Media
      */
-    public function addIdFilm(\Cinemino\SiteBundle\Entity\Film $idFilm)
+    public function setIdFilm(\Cinemino\SiteBundle\Entity\Film $idFilm)
     {
-        $this->idFilm[] = $idFilm;
+        $this->idFilm = $idFilm;
     
         return $this;
     }
 
-    /**
-     * Remove idFilm
-     *
-     * @param \Cinemino\SiteBundle\Entity\Film $idFilm
-     */
-    public function removeIdFilm(\Cinemino\SiteBundle\Entity\Film $idFilm)
-    {
-        $this->idFilm->removeElement($idFilm);
-    }
 
     /**
      * Get idFilm
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return integer 
      */
     public function getIdFilm()
     {
         return $this->idFilm;
     }
+
 }

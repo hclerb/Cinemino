@@ -12,13 +12,13 @@ class MediaType extends AbstractType
     {
         $builder
             ->add('titre', null, array( 'label' => 'Media', 'required' => true))
-            ->add('url', 'file', array( 'label' => 'Media', 
-            'data_class' => null,
-            'required' => true))
+            ->add('url', 'file', array( 'label' => 'Media', 'data_class' => null,
+            'required' => false))
             ->add('type', 'choice', array('label' => 'Type','required' => true,   
                 'choices' => array(
                     'p' => 'photo',
-                    'v' => 'Video'  
+                    'v' => 'Video',
+                    's' => 'Bande son'
                 )))
             //->add('idFilm', null, array( 'label' => 'Selectionnez les films que vous voulez lier au média :'))
         ;

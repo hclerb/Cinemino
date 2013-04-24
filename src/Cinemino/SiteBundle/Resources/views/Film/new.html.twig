@@ -75,19 +75,18 @@ $('#filmrecherche_motcle').keyup(function(event) {
 {{ form_errors(form) }}
  
 
-    <h5> Titre du film </h5>
+ <h5> Titre du film </h5>
     {{ form_errors(form.titreFilm) }}
-    {{ form_widget(form.titreFilm, { 'attr': {'style': 'width:450px;'} }) }}
+    {{ form_widget(form.titreFilm, { 'attr': {'style': 'width:740px;'} }) }}
   
- <div style="position:absolute;margin-left:750px;margin-top:-80px;">
+ <div style="position:absolute;margin-left:770px;margin-top:-80px;">
     
 <h4>Affiche du film</h4>
-  {{ form_label(form.affiche) }}
-  {{ form_errors(form.affiche) }}
-  {{ form_widget(form.affiche, { 'attr': {'style': 'width:350px;'} }) }}
+  {{ form_errors(form.file) }}
+  {{ form_widget(form.file, { 'attr': {'style': 'width:350px;'} }) }}
 <br><br>
 
-<img src="{% if affiche is defined %}{{ affiche }}{% endif %}" width="350px">
+ <div id='affichefilm' width="151px"></div>
 
 </div>
     
@@ -112,23 +111,20 @@ $('#filmrecherche_motcle').keyup(function(event) {
    </tr>
 </table>
     
-
-     <table>
+<table>
    <tr>
        
-<td>
-    {{ form_label(form.ageConseille) }}
-    {{ form_errors(form.ageConseille) }}
-    {{ form_widget(form.ageConseille) }}
-</td>     
-       
-<td>    
-    {{ form_label(form.duree) }}
-    {{ form_errors(form.duree) }}
-    {{ form_widget(form.duree) }}
-</td>  
-
-
+        <td>
+            {{ form_label(form.ageConseille) }}
+            {{ form_errors(form.ageConseille) }}
+            {{ form_widget(form.ageConseille) }}
+        </td>    
+   
+        <td>    
+            {{ form_label(form.duree) }}
+            {{ form_errors(form.duree) }}
+            {{ form_widget(form.duree) }}
+        </td>  
    </tr>
 </table>
      <table>
@@ -137,7 +133,7 @@ $('#filmrecherche_motcle').keyup(function(event) {
 <td>
     {{ form_label(form.acteurs) }}
     {{ form_errors(form.acteurs) }}
-    {{ form_widget(form.acteurs, { 'attr': {'style': 'width:650px;'} }) }}
+    {{ form_widget(form.acteurs, { 'attr': {'style': 'width:740px;'} }) }}
 </td>     
        
    </tr>
@@ -215,8 +211,13 @@ l'adresse. -->
 <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+      
+    /*$('input[type=file]').change(function(e){
+        var fichier = $(this).val();
+        $("#affichefilm").html('<img src='+ fichier + ' />');
+    });*/
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('#cinemino_Sitebundle_filmtype_idMedia');
+    var $container = $('#cinemino_Sitebundle_filmcreatetype_idMedia');
  
     // On définit une fonction qui va ajouter un champ.
     function add_media() {

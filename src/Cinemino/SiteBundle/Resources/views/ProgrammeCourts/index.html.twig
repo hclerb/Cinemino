@@ -16,11 +16,11 @@
 <table class="table table-bordered table-striped table-hover">
     <thead>
            <tr bgcolor="#EAE8FF">
-            <th width=350>Titre du programme de courts</th>
-            <th>Durée</th>
+            <th width=350>Titre du Programme de courts</th>
+            <th width=50>Durée</th>
             <th>Realisateur</th>
-            <th>Affiche</th>
-            <th>Type</th>
+            <th width=88>Affiche</th>
+            <th width=300>Les courts du programme</th>
             <th width=180>Actions</th>
         </tr>
     </thead>
@@ -30,13 +30,16 @@
             <td><a href="{{ path('programmecourts_show', { 'id': entity.id }) }}">{{ entity.titreFilm }}</a></td>
             <td>{{ entity.duree|date('H:i') }}</td>
             <td>{{ entity.realisateur }}</td>
-            <td><img class="img-polaroid" style="height:150px;" src="{{asset('affiche/small/')}}{{entity.affiche }}" alt=""/></td>
-            <!-- big/ ou small/ selon si on veut recuperer l'affiche redimensionné ou non -->
-            <td>{% if entity.type == 'n' %}Normal{% else %}Court-métrage{% endif %}</td>
+            <td><img class="img-polaroid" style="width:75px;" src="{{asset('medias/affiches/small/')}}{{entity.affiche }}" alt=""/></td>
             <td>
-                      
-          <a class="btn" href="{{ path('programmecourts_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
-          <a class="btn btn-info" href="{{ path('programmecourts_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+            {% for court in entity.lescourts %}
+                    {{ court.titreFilm }} - {{ court.realisateur }}
+                    <br/>
+            {% endfor %}
+            </td>
+            <td>                     
+                <a class="btn" href="{{ path('programmecourts_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+                <a class="btn btn-info" href="{{ path('programmecourts_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
       
             </td>
         </tr>

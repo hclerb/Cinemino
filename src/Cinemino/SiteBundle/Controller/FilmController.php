@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Cinemino\SiteBundle\Entity\Film;
 use Cinemino\SiteBundle\Form\FilmType;
+use Cinemino\SiteBundle\Form\FilmCreateType;
 use Cinemino\SiteBundle\Form\FilmRechercheForm;
 
 /**
@@ -67,27 +68,6 @@ class FilmController extends Controller
             'delete_form' => $deleteForm->createView(),        ));
     }
 
-    /**
-     * Displays a form to create a new Film entity.
-     *
-     */
-    public function newActionOld()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $films = $em->getRepository('CineminoSiteBundle:film')->findAll();
-        $entities = $em->getRepository('CineminoSiteBundle:Film')->findAll();
-        $entity = new Film();
-        $form   = $this->createForm(new FilmType(), $entity);
-        $form_recherche = $this->container->get('form.factory')->create(new FilmRechercheForm());
-
-        return $this->render('CineminoSiteBundle:Film:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            'form_recherche'   => $form_recherche->createView(),
-            'entities' => $entities,
-            'films' => $films,
-        ));
-    }
     
     public function newAction()
     {
@@ -95,9 +75,9 @@ class FilmController extends Controller
         
         $entities = $em->getRepository('CineminoSiteBundle:Film')->findAll();
         $entity = new Film();
-        
+        $entity->setDuree(new \DateTime("1:30"));
         $form_recherche = $this->container->get('form.factory')->create(new FilmRechercheForm());     
-        $form   = $this->createForm(new FilmType(), $entity);
+        $form   = $this->createForm(new FilmCreateType(), $entity);
 
         return $this->render('CineminoSiteBundle:Film:new.html.twig', array(
 
@@ -115,38 +95,47 @@ class FilmController extends Controller
     public function createAction(Request $request)
     {
         $entity  = new Film();
-        $form = $this->createForm(new FilmType(), $entity);
+        $form = $this->createForm(new FilmCreateType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
-         
-            $data = $form->getData();
-            $url = $data->getAffiche(); // récupère l'url de l'affiche
-
-            $dir = "affiche/big/"; // à renommer pour pouvoir marcher partout avec quelques choses comme  __DIR__.'../../web...
-            $dir2 = "affiche/small/";
-
-
-            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
-            $filename = $resize->upload_miniature($url, $dir, $dir2); // on redimensionne l'image et on upload sur le serveur
-
-
-   
+            //upload de l'affiche
+            $entity->setDuree($entity->getDuree()->format('H'). ':' . $entity->getDuree()->format('i'));
+           if($entity->getFile()!=NULL){ 
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images  
+            $url = $entity->getFile();
+            $entity->setAffiche($resize->UploadPhoto($url,"affiches/big",LgAfficheBig,HtAfficheBig)); 
+            $resize->UploadPhoto($url,"affiches/small",LgAfficheSmall,HtAfficheSmall);
+           } 
             $em = $this->getDoctrine()->getManager();
-            $entity->setAffiche($filename.'.jpg'); // par defaut, on stocke dans la bdd le chemin vers l'affiche non redimensionné
-            $em->persist($entity);                      // l'affiche redimensionné porte le meme nom mais s'enregistre dans le dossier small      
-            
+            $em->persist($entity);                           
             foreach($entity->getIdMedia() as $media)  
             {
-                $media->upload();
-                $media->setUrl($entity->getWebPath());
+              if ($media->getUrl()!=NULL)
+              { 
+                $url = $media->getUrl(); 
+                $type = $media->getType();
+                if ($type== 'p')
+                  {
+                   $media->setUrl($resize->UploadPhoto($url,"photos/big",LgPhotoBig,HtPhotoBig)); 
+                   $resize->UploadPhoto($url,"photos/small",LgPhotoSmall,HtPhotoSmall); 
+                  }
+              else
+                 {
+                  if ($type== 'v')$dest = "medias/videos";
+                    else $dest="medias/sons";
+                  $media->setUrl($url->getClientOriginalName());
+                  $url->move($dest,$url->getClientOriginalName());
+                 }
+                $media->setIdFilm($entity);
                 $em->persist($media);
+              }else $entity->removeIdMedia($media);
             }
             
             
             $em->flush();
 
-            return $this->redirect($this->generateUrl('film_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('film', array('id' => $entity->getId())));
         }
 
         return $this->render('CineminoSiteBundle:Film:new.html.twig', array(
@@ -173,6 +162,7 @@ class FilmController extends Controller
             throw $this->createNotFoundException('Unable to find Film entity.');
         }
 
+        $entity->setDuree(new \DateTime($entity->getDuree()));
         $editForm = $this->createForm(new FilmType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -199,22 +189,53 @@ class FilmController extends Controller
             throw $this->createNotFoundException('Unable to find Film entity.');
         }
 
+        $entity->setDuree(new \DateTime($entity->getDuree()));
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new FilmType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
+            $entity->setDuree($entity->getDuree()->format('H'). ':' . $entity->getDuree()->format('i'));
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images 
+            if ($entity->getFile()!=NULL) 
+            {
+              $url = $entity->getFile();               
+              $entity->setAffiche($resize->UploadPhoto($url,"affiches/big",LgAfficheBig,HtAfficheBig)); 
+              $resize->UploadPhoto($url,"affiches/small",LgAfficheSmall,HtAfficheSmall);
+            }
             
             foreach($entity->getIdMedia() as $media)  
             {
-                $media->upload();
-                $media->setUrl($entity->getWebPath());
+              if ($media->getUrl()!=NULL)
+              { 
+                $url = $media->getUrl(); 
+                $type = $media->getType();
+                if ($type== 'p')
+                  {
+                   $media->setUrl($resize->UploadPhoto($url,"photos/big",LgPhotoBig,HtPhotoBig)); 
+                   $resize->UploadPhoto($url,"photos/small",LgPhotoSmall,HtPhotoSmall); 
+                  }
+              else
+                 {
+                  if ($type== 'v')$dest = "medias/videos";
+                    else $dest="medias/sons";
+                  $media->setUrl($url->getClientOriginalName());
+                  $url->move($dest,$url->getClientOriginalName());
+                 }
+                $media->setIdFilm($entity);
+                $em->persist($media);
+              }
+            }
+            $em->persist($entity);
+            foreach($entity->getIdMedia() as $media)  
+            {
+                // upload du fichier
+                $media->setIdFilm($entity);
                 $em->persist($media);
             }
             $em->flush();
 
-            return $this->redirect($this->generateUrl('film_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('film', array('id' => $id)));
         }
 
         return $this->render('CineminoSiteBundle:Film:edit.html.twig', array(

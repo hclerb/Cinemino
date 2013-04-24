@@ -13,16 +13,7 @@ use Cinemino\SiteBundle\Entity\Film;
  * @ORM\Entity(repositoryClass="Cinemino\SiteBundle\Entity\ProgrammeCourtsRepository")
  */
 class ProgrammeCourts extends Film
-{
-     /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    protected $id;
-    
+{   
      /**
      *
      * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\Film", mappedBy="progCourts")
@@ -71,15 +62,5 @@ class ProgrammeCourts extends Film
     public function getLescourts()
     {
         return $this->lescourts;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

@@ -13,7 +13,9 @@ class ProgrammeCourtsType extends AbstractType
         $builder
             ->add('titreFilm', null, array('label' => 'Titre du Programme', 'required' => true))
             ->add('realisateur', null, array('label' => 'Realisateur', 'required' => true))
-            ->add('duree', 'text', array('label' => 'Durée (Heure : minutes) ', 'required' => true))
+            ->add('duree','time',
+                    array('widget' => 'choice',
+                          'label' => 'Durée du film'))
             ->add('anneeProd', null, array('label' => 'Année de production', 'required' => true))
             ->add('classementArtEssai', 'choice', array('label' => 'Classement Art et Essai','choices' => array(
                     'Pas de classement' => 'Pas de classement',
@@ -23,8 +25,8 @@ class ProgrammeCourtsType extends AbstractType
                     'Classé avec le label Recherche et Découverte' => 'Classé avec le label Recherche et Découverte'),
                     'required' => true))
 
-            ->add('provenance', null, array('label' => 'Provenance', 'required' => true))
-            ->add('interdiction', null, array('label' => 'Interdiction'))
+            ->add('provenance','choice', array('label' => 'Provenance','choices'=> array(0=>'France', 1=>'USA',2=>'Europe',3=>'Reste du monde'))) 
+            ->add('interdiction','choice', array('choices'=> array(0=>'Pas d\'interdiction', 1=>'-12 ans',2=>'-16 ans',3=>'-18 ans')))
             ->add('ageConseille', 'choice', array('label' => 'Age conseillé', 'required' => true,'choices' => array(
                     '1' => '1',
                     '2' => '2',
@@ -34,23 +36,22 @@ class ProgrammeCourtsType extends AbstractType
                     '6' => '6',
                     '7' => '7',
                     '8' => '8',
-                    '9' => '9'),
+                    '9' => '9',
+                    '10' => '10'),
                     'required' => true))
-            ->add('acteurs', null, array('label' => 'Acteurs', 'required' => true))
+
             ->add('synopsys', 'textarea', array('label' => 'Synopsis','attr' => array(
                     'class' => 'tinymce',
-                    'data-theme' => 'advanced', 
+                    'data-theme' => 'simple', 
                     'required' => true))) 
             ->add('critique','textarea', array('label' => 'Critique','attr' => array(
                     'class' => 'tinymce',
-                    'data-theme' => 'advanced', 
+                    'data-theme' => 'simple', 
                     'required' => true)))
-            ->add('affiche', 'text', array('label' => 'Url de l\'affiche :', 'required' => true))
+            ->add('affiche','text', array('label' => '','read_only' => true))
+            ->add('file', 'file', array('label' => 'Fichier de l\'affiche :', 'required' => false))
             ->add('couleurTexte', null, array('label' => 'Couleur du texte'))
             ->add('couleurFondFilm', null, array('label' => 'Couleur de fond'))
-
-           // ->add('idMedia', null, array('label' => 'Attacher un média', 'required' => false))
-            //->add('idFilm', null, array('label' => ''))
 
             ->add('idMedia', 'collection', array('type'   => new MediaType(),
                                               'prototype' => true,
@@ -62,7 +63,8 @@ class ProgrammeCourtsType extends AbstractType
                 'query_builder'  =>  function(\Cinemino\SiteBundle\Entity\FilmRepository $r){
                                         return $r->getCourts();
                 },
-                'multiple'  => true)
+                'multiple'  => true,
+                'required'  =>  false)
             )
         ;
     }

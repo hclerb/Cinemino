@@ -3,11 +3,11 @@
     
 
     
-    class ResizeImg{
+class ResizeImg{
         
         
         
-          public function upload_miniature($url, $directory_big, $directory_small)
+   public function upload_miniature($url, $directory_big, $directory_small)
         {
             
               
@@ -45,20 +45,34 @@
                                         {
                                                 // echo 'Le type MIME de l\'image n\'est pas bon';
                                         }
-              
-              
         }
+    public function UploadPhoto($filename,$sousrep,$width,$heightf)
+        {
+
+
+        list($width_orig, $height_orig) = getimagesize($filename);
+
         
-        
-        
-        
-          
-    
-                               
-  
-              
-              
-        }
+        $ratio_orig = $width_orig/$height_orig;
+        //calcul de la hauteur voulue
+        $height = $width/$ratio_orig;
+   
+        // Redimensionnement
+        $image_p = imagecreatetruecolor($width, $height);
+        $image_f = imagecreatetruecolor($width, $heightf);
+        $image = imagecreatefromjpeg($filename);
+        imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+        imagecopy($image_f, $image_p, 0, 0, 0, 0, $width, $heightf);
+
+        // enregistrement
+        $nom_fichier = $filename->getClientOriginalName();
+        imagejpeg($image_f, 'medias/'. $sousrep . '/' .$nom_fichier, 100);
+        imagedestroy($image);
+        imagedestroy($image_p);
+        imagedestroy($image_f);
+        return $nom_fichier;
+    }         
+ }
         
         
         

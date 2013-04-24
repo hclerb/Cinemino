@@ -3,7 +3,7 @@
 {{ parent() }}
 {% endblock %}
 
-{% block alert %}Ajouter ou modifier les programmecourtss présent dans la base de données.
+{% block alert %}Ajouter ou modifier les programmecourts présent dans la base de données.
 {% endblock alert %}
 
 {% block titre %}{% endblock %}
@@ -25,7 +25,7 @@
   
  <div style="position:absolute;margin-left:750px;margin-top:-80px;">
     
-<h4>Affiche du Programme de cCurts</h4>
+<h4>Affiche du Programme de Courts</h4>
   {{ form_label(form.affiche) }}
   {{ form_errors(form.affiche) }}
   {{ form_widget(form.affiche) }}
@@ -75,22 +75,14 @@
 
    </tr>
 </table>
-     <table>
-   <tr>
-       
-<td>
-    {{ form_label(form.acteurs) }}
-    {{ form_errors(form.acteurs) }}
-    {{ form_widget(form.acteurs, { 'attr': {'style': 'width:650px;'} }) }}
-</td>     
-       
-   </tr>
-</table>
-   
+  
     
     {{ form_label(form.synopsys) }}
     {{ form_errors(form.synopsys) }}
     {{ form_widget(form.synopsys) }}
+    {{ form_label(form.critique) }}
+    {{ form_errors(form.critique) }}
+    {{ form_widget(form.critique) }}
     
     
            <table>
@@ -114,7 +106,7 @@
     {{ form_widget(form.couleurFondFilm, { 'attr': {'class': 'color', 'value': '4164AA'}} ) }}
 </td>       
    </tr>
-   <br>
+   <br/>
 </table>
     
 <table>
@@ -130,7 +122,18 @@
    </tr>
        
 </table>
-    <br>
+   <br/>
+<table>
+   <tr>
+    <td>
+    {{ form_label(form.lescourts) }}
+    {{ form_errors(form.lescourts) }}
+    {{ form_widget(form.lescourts) }}
+    </td>
+   </tr>
+       
+</table>
+    <br/>
    
  
      <a class="btn btn-info" href="#add_media" id="add_media"><i class="icon-white icon-plus"></i> Ajouter un média</a>

@@ -4,6 +4,12 @@ namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+define("LgAfficheBig", 151);
+define("HtAfficheBig",201);
+define("LgAfficheSmall", 75);
+define("HtAfficheSmall",100);
+
+
 /**
  * Film
  *
@@ -138,15 +144,21 @@ class Film
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\Media", mappedBy="idFilm")
      */
-    protected $idMedia;
+    protected $idMedias;
+    
+    
+    private $file;              //permet de stocker temporairement le fichier
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idMedia = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idMedias = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->affiche="";
     }
     
     /**
@@ -512,7 +524,8 @@ class Film
      */
     public function addIdMedia(\Cinemino\SiteBundle\Entity\Media $idMedia)
     {
-        $this->idMedia[] = $idMedia;
+        $this->idMedias[] = $idMedia;
+        $idMedia->setIdFilm($this);
     
         return $this;
     }
@@ -524,7 +537,7 @@ class Film
      */
     public function removeIdMedia(\Cinemino\SiteBundle\Entity\Media $idMedia)
     {
-        $this->idMedia->removeElement($idMedia);
+        $this->idMedias->removeElement($idMedia);
     }
 
     /**
@@ -534,7 +547,7 @@ class Film
      */
     public function getIdMedia()
     {
-        return $this->idMedia;
+        return $this->idMedias;
     }
 
     /**
@@ -563,4 +576,15 @@ class Film
    public function __toString() {     
         return $this->titreFilm . ' - ' . $this->realisateur;
     }
+    
+// gestion fichier    
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }    
 }

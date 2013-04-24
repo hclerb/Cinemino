@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <th>Annee production</th>
-            <td>{{ entity.anneeProd|date('Y-m-d H:i:s') }}</td>
+            <td>{{ entity.anneeProd|date('Y-m-d') }}</td>
         </tr>
         <tr>
             <th>Classement art essai</th>
@@ -71,8 +71,12 @@
             <td>{{ entity.couleurFondFilm }}</td>
         </tr>
         <tr>
-            <th>Type</th>
-            <td>{{ entity.type }}</td>
+            <th>Composé des courts </th>
+            <td>{% for court in entity.lescourts %} 
+                {{ court.titreFilm }} - {{ court.realisateur }}
+                <br/>
+                {% endfor %}
+            </td>
         </tr>
         <tr>
             
