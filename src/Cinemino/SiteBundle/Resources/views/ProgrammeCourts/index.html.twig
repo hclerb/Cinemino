@@ -30,7 +30,7 @@
             <td><a href="{{ path('programmecourts_show', { 'id': entity.id }) }}">{{ entity.titreFilm }}</a></td>
             <td>{{ entity.duree|date('H:i') }}</td>
             <td>{{ entity.realisateur }}</td>
-            <td><img class="img-polaroid" style="width:75px;" src="{{asset('medias/affiches/small/')}}{{entity.affiche }}" alt=""/></td>
+            <td><img class="img-polaroid" style="width:75px;" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" alt=""/></td>
             <td>
             {% for court in entity.lescourts %}
                     {{ court.titreFilm }} - {{ court.realisateur }}

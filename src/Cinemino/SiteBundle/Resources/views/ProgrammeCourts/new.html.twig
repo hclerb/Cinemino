@@ -110,8 +110,18 @@
    </tr>
    <br>
 </table>
-    
+   <br/>
 <table>
+   <tr>
+    <td>
+    {{ form_label(form.lescourts) }}
+    {{ form_errors(form.lescourts) }}
+    {{ form_widget(form.lescourts) }}
+    </td>
+   </tr>       
+</table>
+    <br>
+ <table>
    <tr>
        
        <td>
@@ -123,18 +133,6 @@
      
    </tr>
 </table>
-   <br/>
-<table>
-   <tr>
-    <td>
-    {{ form_label(form.lescourts) }}
-    {{ form_errors(form.lescourts) }}
-    {{ form_widget(form.lescourts) }}
-    </td>
-   </tr>
-       
-</table>
-    <br>
    
  
      <a class="btn btn-info" href="#add_media" id="add_media"><i class="icon-white icon-plus"></i> Ajouter un média</a>
@@ -144,7 +142,7 @@
     
 </form>
 
- <a class="btn" href="{{ path('programmecourts') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+ <a class="btn" href="{{ path('programmecourts') }}"><i class="icon-arrow-left"></i> Revenir à la liste</a>
 
 </div>
 
@@ -157,7 +155,7 @@ l'adresse. -->
 <script type="text/javascript">
     $(document).ready(function() {
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('#cinemino_Sitebundle_programmecourtstype_idMedia');
+    var $container = $('#cinemino_sitebundle_programmecourtscreatetype_idMedia');
  
     // On définit une fonction qui va ajouter un champ.
     function add_media() {

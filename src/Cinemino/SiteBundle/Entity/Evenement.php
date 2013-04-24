@@ -83,7 +83,13 @@ class Evenement
      */
     private $idType;
 
-
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\MediaEvt", mappedBy="idFilm")
+     */
+    protected $idMedias;
+    
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -322,6 +328,40 @@ class Evenement
     public function getIdIntervenant()
     {
         return $this->idIntervenant;
+    }
+    
+    /**
+     * Add idMedia
+     *
+     * @param \Cinemino\SiteBundle\Entity\MediaEvt $idMedia
+     * @return Film
+     */
+    public function addIdMedia(\Cinemino\SiteBundle\Entity\MediaEvt $idMedia)
+    {
+        $this->idMedias[] = $idMedia;
+        $idMedia->setIdFilm($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove idMedia
+     *
+     * @param \Cinemino\SiteBundle\Entity\MediaEvt $idMedia
+     */
+    public function removeIdMedia(\Cinemino\SiteBundle\Entity\MediaEvt $idMedia)
+    {
+        $this->idMedias->removeElement($idMedia);
+    }
+
+    /**
+     * Get idMedia
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIdMedia()
+    {
+        return $this->idMedias;
     }
     
     public function __toString() {

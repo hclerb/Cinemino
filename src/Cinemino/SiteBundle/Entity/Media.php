@@ -15,6 +15,9 @@ define("HtPhotoBig",480);
  *
  * @ORM\Table(name="media")
  * @ORM\Entity
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"media" = "Media", "mediafilm"="MediaFilm", "mediaevt"="MediaEvt"})
  */
 class Media
 {
@@ -25,38 +28,29 @@ class Media
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="TITRE", type="string", length=25, nullable=true)
      */
-    private $titre;
+    protected $titre;
 
     /**
      * @var string
      *
      * @ORM\Column(name="URL", type="string", length=100, nullable=true)
      */
-    private $url;
+    protected $url;
 
     /**
      * @var string
      *
      * @ORM\Column(name="TYPE", type="string", length=1, nullable=true)
      */
-    private $type;
-
-
-    /**
-     * 
-     * @ORM\ManyToOne(targetEntity="Cinemino\SiteBundle\Entity\Film", inversedBy="idMedias")
-     * @ORM\JoinColumn(name="idFilm_id", referencedColumnName="ID")
-     */
-    private $idFilm;
-
-    
+    protected $type;
+   
     /**
      * Set titre
      *
@@ -136,28 +130,5 @@ class Media
         return $this->id;
     }
 
-    /**
-     * Set idFilm
-     *
-     * @param \Cinemino\SiteBundle\Entity\Film $idFilm
-     * @return Media
-     */
-    public function setIdFilm(\Cinemino\SiteBundle\Entity\Film $idFilm)
-    {
-        $this->idFilm = $idFilm;
-    
-        return $this;
-    }
-
-
-    /**
-     * Get idFilm
-     *
-     * @return integer 
-     */
-    public function getIdFilm()
-    {
-        return $this->idFilm;
-    }
 
 }

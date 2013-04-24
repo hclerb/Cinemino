@@ -99,16 +99,16 @@ class FilmController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             //upload de l'affiche
             $entity->setDuree($entity->getDuree()->format('H'). ':' . $entity->getDuree()->format('i'));
-           if($entity->getFile()!=NULL){ 
-            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images  
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+           if($entity->getFile()!=NULL){   
             $url = $entity->getFile();
-            $entity->setAffiche($resize->UploadPhoto($url,"affiches/big",LgAfficheBig,HtAfficheBig)); 
-            $resize->UploadPhoto($url,"affiches/small",LgAfficheSmall,HtAfficheSmall);
-           } 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);                           
+            $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheBig,HtAfficheBig)); 
+            $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
+            } 
+                          
             foreach($entity->getIdMedia() as $media)  
             {
               if ($media->getUrl()!=NULL)
@@ -117,13 +117,13 @@ class FilmController extends Controller
                 $type = $media->getType();
                 if ($type== 'p')
                   {
-                   $media->setUrl($resize->UploadPhoto($url,"photos/big",LgPhotoBig,HtPhotoBig)); 
-                   $resize->UploadPhoto($url,"photos/small",LgPhotoSmall,HtPhotoSmall); 
+                   $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
+                   $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
                   }
               else
                  {
-                  if ($type== 'v')$dest = "medias/videos";
-                    else $dest="medias/sons";
+                  if ($type== 'v')$dest = "medias/Film/videos";
+                    else $dest="medias/Film/sons";
                   $media->setUrl($url->getClientOriginalName());
                   $url->move($dest,$url->getClientOriginalName());
                  }
@@ -131,7 +131,7 @@ class FilmController extends Controller
                 $em->persist($media);
               }else $entity->removeIdMedia($media);
             }
-            
+            $em->persist($entity); 
             
             $em->flush();
 
@@ -200,8 +200,8 @@ class FilmController extends Controller
             if ($entity->getFile()!=NULL) 
             {
               $url = $entity->getFile();               
-              $entity->setAffiche($resize->UploadPhoto($url,"affiches/big",LgAfficheBig,HtAfficheBig)); 
-              $resize->UploadPhoto($url,"affiches/small",LgAfficheSmall,HtAfficheSmall);
+              $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheBig,HtAfficheBig)); 
+              $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
             }
             
             foreach($entity->getIdMedia() as $media)  
@@ -212,13 +212,13 @@ class FilmController extends Controller
                 $type = $media->getType();
                 if ($type== 'p')
                   {
-                   $media->setUrl($resize->UploadPhoto($url,"photos/big",LgPhotoBig,HtPhotoBig)); 
-                   $resize->UploadPhoto($url,"photos/small",LgPhotoSmall,HtPhotoSmall); 
+                   $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
+                   $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
                   }
               else
                  {
-                  if ($type== 'v')$dest = "medias/videos";
-                    else $dest="medias/sons";
+                  if ($type== 'v')$dest = "medias/Film/videos";
+                    else $dest="medias/Film/sons";
                   $media->setUrl($url->getClientOriginalName());
                   $url->move($dest,$url->getClientOriginalName());
                  }

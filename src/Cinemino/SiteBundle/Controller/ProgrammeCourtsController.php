@@ -79,17 +79,36 @@ class ProgrammeCourtsController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            
+           $em = $this->getDoctrine()->getManager(); 
            $entity->setDuree($entity->getDuree()->format('H'). ':' . $entity->getDuree()->format('i'));
-           if($entity->getFile()!=NULL){ 
-            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images  
+           $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images  
+           if($entity->getFile()!=NULL){      
             $url = $entity->getFile();
-            $entity->setAffiche($resize->UploadPhoto($url,"affiches/big",LgAfficheBig,HtAfficheBig)); 
-            $resize->UploadPhoto($url,"affiches/small",LgAfficheSmall,HtAfficheSmall);
-           } 
-            
-            
-            $em = $this->getDoctrine()->getManager();
+            $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheBig,HtAfficheBig)); 
+            $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
+           }
+           foreach($entity->getIdMedia() as $media)  
+            {
+              if ($media->getUrl()!=NULL)
+              { 
+                $url = $media->getUrl(); 
+                $type = $media->getType();
+                if ($type== 'p')
+                  {
+                   $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
+                   $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                  }
+              else
+                 {
+                  if ($type== 'v')$dest = "medias/Film/videos";
+                    else $dest="medias/Film/sons";
+                  $media->setUrl($url->getClientOriginalName());
+                  $url->move($dest,$url->getClientOriginalName());
+                 }
+                $media->setIdFilm($entity);
+                $em->persist($media);
+              }else $entity->removeIdMedia($media);
+            }
             $em->persist($entity);
             // On met les liens entre les courts et le programme de courts
             foreach($entity->getLescourts() as $court)  
@@ -157,12 +176,34 @@ class ProgrammeCourtsController extends Controller
 
         if ($editForm->isValid()) {
             $leprogramme->setDuree($leprogramme->getDuree()->format('H'). ':' . $leprogramme->getDuree()->format('i'));
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images  
             if ($leprogramme->getFile()!=NULL) 
             {
-                $url = $leprogramme->getFile();
-              $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images  
-              $leprogramme->setAffiche($resize->UploadPhoto($url,"affiches/big",LgAfficheBig,HtAfficheBig)); 
-              $resize->UploadPhoto($url,"affiches/small",LgAfficheSmall,HtAfficheSmall);
+              $url = $leprogramme->getFile();
+              $leprogramme->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheBig,HtAfficheBig)); 
+              $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
+            }
+                        foreach($entity->getIdMedia() as $media)  
+            {
+              if ($media->getUrl()!=NULL)
+              { 
+                $url = $media->getUrl(); 
+                $type = $media->getType();
+                if ($type== 'p')
+                  {
+                   $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
+                   $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                  }
+              else
+                 {
+                  if ($type== 'v')$dest = "medias/Film/videos";
+                    else $dest="medias/Film/sons";
+                  $media->setUrl($url->getClientOriginalName());
+                  $url->move($dest,$url->getClientOriginalName());
+                 }
+                $media->setIdFilm($entity);
+                $em->persist($media);
+              }
             }
             
             $em->persist($leprogramme);

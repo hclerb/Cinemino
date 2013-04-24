@@ -145,7 +145,7 @@ class Film
     /**
      * @var \Doctrine\Common\Collections\Collection
      * 
-     * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\Media", mappedBy="idFilm")
+     * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\MediaFilm", mappedBy="idFilm")
      */
     protected $idMedias;
     
@@ -519,10 +519,10 @@ class Film
     /**
      * Add idMedia
      *
-     * @param \Cinemino\SiteBundle\Entity\Media $idMedia
+     * @param \Cinemino\SiteBundle\Entity\MediaFilm $idMedia
      * @return Film
      */
-    public function addIdMedia(\Cinemino\SiteBundle\Entity\Media $idMedia)
+    public function addIdMedia(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
     {
         $this->idMedias[] = $idMedia;
         $idMedia->setIdFilm($this);
@@ -533,9 +533,9 @@ class Film
     /**
      * Remove idMedia
      *
-     * @param \Cinemino\SiteBundle\Entity\Media $idMedia
+     * @param \Cinemino\SiteBundle\Entity\MediaFilm $idMedia
      */
-    public function removeIdMedia(\Cinemino\SiteBundle\Entity\Media $idMedia)
+    public function removeIdMedia(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
     {
         $this->idMedias->removeElement($idMedia);
     }
