@@ -129,15 +129,11 @@
 </table>
     
 <table>
-   <tr>
-       
+   <tr> 
        <td>
-
-        {{ form_errors(form.idMedia) }}
-        {{ form_widget(form.idMedia) }}
+        {{ form_errors(form.idMedias) }}
+        {{ form_widget(form.idMedias) }}
        </td>
-
-     
    </tr>
        
 </table>
@@ -153,6 +149,7 @@
           <button class="btn btn-primary" type="submit">Enregistrer</button>
           <a class="btn" href="{{ path('film') }}"><i class="icon-ban-circle"></i> Annuler</a>
     </p>
+ {{ form_rest(form) }}
 </form>
         <form action="{{ path('film_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}

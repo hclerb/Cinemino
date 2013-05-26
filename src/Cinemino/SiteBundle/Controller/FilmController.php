@@ -111,25 +111,23 @@ class FilmController extends Controller
                           
             foreach($entity->getIdMedia() as $media)  
             {
-              if ($media->getUrl()!=NULL)
+              if ($media->getFile()!=NULL)
               { 
-                $url = $media->getUrl(); 
-                $type = $media->getType();
-                if ($type== 'p')
-                  {
-                   $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                   $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
-                  }
-              else
-                 {
-                  if ($type== 'v')$dest = "medias/Film/videos";
-                    else $dest="medias/Film/sons";
-                  $media->setUrl($url->getClientOriginalName());
-                  $url->move($dest,$url->getClientOriginalName());
+                $url = $media->getFile();
+                $dest="medias/Film/sons";           // par défaut on dit que c'est un son
+                switch ($media->getType()) {
+                    case 'p':                       // C'est une phot, on la redimension et on l'upload
+                             $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
+                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                       break;
+                    case 'v': $dest = "medias/Film/videos";
+                    default :
+                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
+                            $url->move($dest,$url->getClientOriginalName());
                  }
                 $media->setIdFilm($entity);
                 $em->persist($media);
-              }else $entity->removeIdMedia($media);
+              } else $entity->removeIdMedia ($media);
             }
             $em->persist($entity); 
             
@@ -206,21 +204,19 @@ class FilmController extends Controller
             
             foreach($entity->getIdMedia() as $media)  
             {
-              if ($media->getUrl()!=NULL)
+              if ($media->getFile()!=NULL)
               { 
-                $url = $media->getUrl(); 
-                $type = $media->getType();
-                if ($type== 'p')
-                  {
-                   $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                   $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
-                  }
-              else
-                 {
-                  if ($type== 'v')$dest = "medias/Film/videos";
-                    else $dest="medias/Film/sons";
-                  $media->setUrl($url->getClientOriginalName());
-                  $url->move($dest,$url->getClientOriginalName());
+                $url = $media->getFile();
+                $dest="medias/Film/sons";           // par défaut on dit que c'est un son
+                switch ($media->getType()) {
+                    case 'p':                       // C'est une phot, on la redimension et on l'upload
+                             $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
+                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                       break;
+                    case 'v': $dest = "medias/Film/videos";
+                    default :
+                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
+                            $url->move($dest,$url->getClientOriginalName());
                  }
                 $media->setIdFilm($entity);
                 $em->persist($media);
@@ -240,7 +236,7 @@ class FilmController extends Controller
 
         return $this->render('CineminoSiteBundle:Film:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

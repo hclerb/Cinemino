@@ -30,7 +30,7 @@
             <td><a href="{{ path('film_show', { 'id': entity.id }) }}">{{ entity.titreFilm }}</a></td>
             <td>{{ entity.duree|date('H:i') }}</td>
             <td>{{ entity.realisateur }}</td>
-            <td><img class="img-polaroid" style="width:75px;" src="{{asset('medias/affiches/small/')}}{{entity.affiche }}" alt=""/></td>
+            <td><img class="img-polaroid" style="width:75px;" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" alt=""/></td>
             <!-- big/ ou small/ selon si on veut recuperer l'affiche redimensionné ou non -->
             <td>{% if entity.type == 'n' %}Long Métrage
                 {% else %}

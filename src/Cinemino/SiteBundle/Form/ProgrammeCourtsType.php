@@ -53,7 +53,7 @@ class ProgrammeCourtsType extends AbstractType
             ->add('couleurTexte', null, array('label' => 'Couleur du texte'))
             ->add('couleurFondFilm', null, array('label' => 'Couleur de fond'))
 
-            ->add('idMedia', 'collection', array('type'   => new MediaFilmType(),
+            ->add('idMedias', 'collection', array('type'   => new MediaFilmType(),
                                               'prototype' => true,
                                               'allow_add' => true))
             ->add('lescourts','entity', array(

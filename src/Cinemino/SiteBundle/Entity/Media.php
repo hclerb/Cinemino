@@ -51,6 +51,10 @@ class Media
      */
     protected $type;
    
+    
+    protected $file;              //permet de stocker temporairement le fichier affiche
+    
+    
     /**
      * Set titre
      *
@@ -130,5 +134,14 @@ class Media
         return $this->id;
     }
 
+// gestion fichier    
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
 
+    public function getFile()
+    {
+        return $this->file;
+    } 
 }

@@ -11,9 +11,9 @@ class MediaFilmType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', null, array( 'label' => 'Media', 'required' => true))
-            ->add('url', 'file', array( 'label' => 'Media', 'data_class' => null,
-            'required' => false))
+            ->add('titre', null, array( 'label' => 'Légende', 'required' => true))
+            ->add('url', 'text', array('label' => 'Nom du fichier','read_only' => true))
+            ->add('file', 'file', array('label' => 'Fichier associé', 'required' => false))
             ->add('type', 'choice', array('label' => 'Type','required' => true,   
                 'choices' => array(
                     'p' => 'photo',
@@ -33,6 +33,7 @@ class MediaFilmType extends AbstractType
 
     public function getName()
     {
-        return 'cinemino_Sitebundle_mediatype';
+        return 'cinemino_Sitebundle_mediafilmtype';
     }
 }
+            

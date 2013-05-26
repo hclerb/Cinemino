@@ -126,8 +126,8 @@
        
        <td>
 
-            {{ form_errors(form.idMedia) }}
-            {{ form_widget(form.idMedia) }}
+            {{ form_errors(form.idMedias) }}
+            {{ form_widget(form.idMedias) }}
        </td>
 
      
@@ -139,7 +139,7 @@
       <br><br>
       <button class="btn btn-primary" type="submit">Valider l'enregistrement du programmecourts</button>
 
-    
+  {{ form_rest(form) }}   
 </form>
 
  <a class="btn" href="{{ path('programmecourts') }}"><i class="icon-arrow-left"></i> Revenir à la liste</a>
@@ -155,7 +155,7 @@ l'adresse. -->
 <script type="text/javascript">
     $(document).ready(function() {
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('#cinemino_sitebundle_programmecourtscreatetype_idMedia');
+    var $container = $('#cinemino_sitebundle_programmecourtscreatetype_idMedias');
  
     // On définit une fonction qui va ajouter un champ.
     function add_media() {

@@ -150,7 +150,7 @@ class Film
     protected $idMedias;
     
     
-    private $file;              //permet de stocker temporairement le fichier
+    private $file;              //permet de stocker temporairement le fichier affiche
 
     /**
      * Constructor
@@ -522,7 +522,7 @@ class Film
      * @param \Cinemino\SiteBundle\Entity\MediaFilm $idMedia
      * @return Film
      */
-    public function addIdMedia(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
+    public function addIdMedias(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
     {
         $this->idMedias[] = $idMedia;
         $idMedia->setIdFilm($this);
@@ -535,7 +535,7 @@ class Film
      *
      * @param \Cinemino\SiteBundle\Entity\MediaFilm $idMedia
      */
-    public function removeIdMedia(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
+    public function removeIdMedias(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
     {
         $this->idMedias->removeElement($idMedia);
     }
@@ -545,7 +545,7 @@ class Film
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getIdMedia()
+    public function getIdMedias()
     {
         return $this->idMedias;
     }
