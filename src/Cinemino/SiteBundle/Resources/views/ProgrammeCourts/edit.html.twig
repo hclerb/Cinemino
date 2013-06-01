@@ -18,140 +18,179 @@
 {{ tinymce_init() }}      
 {{ form_errors(form) }}
  
-
-    <h5> Titre du Programme de Courts </h5>
-    {{ form_errors(form.titreFilm) }}
-    {{ form_widget(form.titreFilm, { 'attr': {'style': 'width:740px;'} }) }}
-  
- <div style="position:absolute;margin-left:760px;margin-top:-80px;">
-    
-<h4>Affiche du Programme de Courts</h4>
-  {{ form_errors(form.affiche) }}
-  {{ form_widget(form.affiche, { 'attr': {'style': 'width:355px;'} }) }}
-<br/>
-  {{ form_errors(form.file) }}
-  {{ form_widget(form.file) }}
-<br><br>
-
-<img src="{{asset('medias/Film/affiches/big/')}}{{entity.affiche }}" width="151px"/>
+ 
+<div class="row">
+  <div class="span8">  
+   <div class="row"> 
+      <div class="span8">    
+        <h5> Titre du Programme de courts </h5>
+        {{ form_errors(form.titreFilm) }}
+        {{ form_widget(form.titreFilm, { 'attr': {'style': 'width:740px;'} }) }}
+      </div>
+      <div class="span8"> <br/> </div>
+      <div class="span3">
+        {{ form_label(form.realisateur) }}
+        {{ form_errors(form.realisateur) }}
+        {{ form_widget(form.realisateur, { 'attr': {'style': 'width:250px;'} }) }}
+      </div>
+      <div class="span8"> <br/> </div>
+      <div class="span3">
+        {{ form_label(form.ageConseille) }}
+        {{ form_errors(form.ageConseille) }}
+        {{ form_widget(form.ageConseille, { 'attr': {'style': 'width:60px;'} }) }}
+      </div>
+      <div class="span5">
+        {{ form_label(form.duree) }}
+        {{ form_errors(form.duree) }}
+        {{ form_widget(form.duree.hour, { 'attr': {'style': 'width:60px;'} }) }} : {{ form_widget(form.duree.minute, { 'attr': {'style': 'width:60px;'} }) }}
+      </div>
+      <div class="span8"> <br/> </div>
+      <div class="span3">
+        {{ form_label(form.provenance) }}
+        {{ form_errors(form.provenance) }}
+        {{ form_widget(form.provenance, { 'attr': {'style': 'width:200px;'} }) }}
+      </div>
+      <div class="span5">
+        {{ form_label(form.anneeProd) }}
+        {{ form_errors(form.anneeProd) }}
+        {{ form_widget(form.anneeProd, { 'attr': {'style': 'width:200px;'} }) }}
+      </div>
+      <div class="span8"> <br/> </div>
+    </div>
+  </div> 
+  <div class="span3">
+    <h5>Affiche du film</h5>
+     {{ form_errors(form.affiche) }}
+     {{ form_widget(form.affiche, { 'attr': {'style': 'width:300px;'} }) }}
+     {{ form_errors(form.file) }}
+     {{ form_widget(form.file, { 'attr': {'style': 'padding:10px;'} }) }}
+    <img src="{{asset('medias/Film/affiches/big/')}}{{entity.affiche }}" width="151px"/>
+  </div>
+   
+</div>
+     
+<div class="row">     
 
 </div>
     
-    <table>
-   <tr>
-<td>
-    {{ form_label(form.realisateur) }}
-    {{ form_errors(form.realisateur) }}
-    {{ form_widget(form.realisateur) }}
-</td>
-<td>
-    {{ form_label(form.provenance) }}
-    {{ form_errors(form.provenance) }}
-    {{ form_widget(form.provenance) }}
-</td>
-<td>
-    {{ form_label(form.anneeProd) }}
-    {{ form_errors(form.anneeProd) }}
-    {{ form_widget(form.anneeProd) }}
-</td>
-
-   </tr>
-</table>
-    
-
-     <table>
-   <tr>
-       
-<td>
-    {{ form_label(form.ageConseille) }}
-    {{ form_errors(form.ageConseille) }}
-    {{ form_widget(form.ageConseille) }}
-</td>     
-       
-<td>    
-    {{ form_label(form.duree) }}
-    {{ form_errors(form.duree) }}
-    {{ form_widget(form.duree) }}
-</td>  
-
-
-   </tr>
-</table>
-  
-    
+<div class="row">
+  <div class="span12">     
     {{ form_label(form.synopsys) }}
     {{ form_errors(form.synopsys) }}
-    {{ form_widget(form.synopsys) }}
+    {{ form_widget(form.synopsys, { 'attr': {'style': 'width:1120px;height:300px;'} }) }}
+  </div> 
+ </div>
+<br/>    
+ <div class="row">
+  <div class="span12"> 
     {{ form_label(form.critique) }}
     {{ form_errors(form.critique) }}
-    {{ form_widget(form.critique) }}
-    
-    
-           <table>
-               
- <td>
+    {{ form_widget(form.critique, { 'attr': {'style': 'width:1120px;height:300px'} }) }}
+  </div>
+</div>
+<br/>     
+<div class="row">
+  <div class="span7">
+   <div class="span3">
     {{ form_label(form.classementArtEssai) }}
     {{ form_errors(form.classementArtEssai) }}
     {{ form_widget(form.classementArtEssai) }}
-</td>              
-               
-   <tr>
-       
-<td>
+   </div>              
+   <div class="span3">
+    {{ form_label(form.interdiction) }}
+    {{ form_errors(form.interdiction) }}
+    {{ form_widget(form.interdiction) }}
+   </div>
+   <div class="span3">
     {{ form_label(form.couleurTexte) }}
     {{ form_errors(form.couleurTexte) }}
     {{ form_widget(form.couleurTexte, { 'attr': {'class': 'color'} }) }}
-</td>  
-<td>
+   </div>
+   <div class="span3">
     {{ form_label(form.couleurFondFilm) }}
     {{ form_errors(form.couleurFondFilm) }}
     {{ form_widget(form.couleurFondFilm, { 'attr': {'class': 'color', 'value': '4164AA'}} ) }}
-</td>       
-   </tr>
-   <br/>
-</table>
-    
-
-   <br/>
-<table>
-   <tr>
-    <td>
+   </div>
+  </div>
+  <div class="span4">
     {{ form_label(form.lescourts) }}
     {{ form_errors(form.lescourts) }}
-    {{ form_widget(form.lescourts) }}
-    </td>
-   </tr>
-       
-</table>
-    <br/>
-<table>
-   <tr>     
-       <td>
-    {{ form_errors(form.idMedia) }}
-    {{ form_widget(form.idMedia) }}
-       </td>
-   </tr>
-</table>
-   
- 
-     <a class="btn btn-info" href="#add_media" id="add_media"><i class="icon-white icon-plus"></i> Ajouter un média</a>
-      
-     <br><br><br>
-        
-        
-    <p>
-          <button class="btn btn-primary" type="submit">Enregistrer</button>
-          <a class="btn" href="{{ path('programmecourts') }}"><i class="icon-ban-circle"></i> Annuler</a>
-    </p>
-    
- {{ form_rest(form) }}
-</form>
-        <form action="{{ path('programmecourts_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit">Supprimer {{ entity.titreFilm }}</button><i class="icon-remove icon-white"></i>
-        </form>
-   
+    {{ form_widget(form.lescourts, { 'attr': {'style': 'width:420px;'} }) }}
+  </div> 
+</div>
 
+<br/>
+
+  
+<div id="ajout_media">
+  <h5>Médias associés</h5>
+  <div id="list_medias"> 
+      {% for key, item in form.idMedias %}
+          {{ _self.prototype(item) }}
+      {% endfor %}
+      {% macro prototype(item) %}
+        <div class="themedia">
+           <div class="row inthemedia">
+            <div class="span6">
+             {{ form_label(item.titre) }}
+             {{ form_errors(item.titre) }}
+             {{ form_widget(item.titre, { 'attr': {'style': 'width:570px;'} }) }}
+            </div>
+            <div class="span2">
+             {{ form_label(item.type) }}
+             {{ form_errors(item.type) }}
+             {{ form_widget(item.type, { 'attr': {'style': 'width:110px;'} }) }}
+            </div> 
+
+           </div>
+           <div class="row inthemedia">           
+            <div class="span4">
+             {{ form_label(item.url) }}
+             {{ form_errors(item.url) }}
+             {{ form_widget(item.url, { 'attr': {'style': 'width:370px;'} }) }}
+            </div>
+            <div class="span4">
+             {{ form_label(item.file) }}
+             {{ form_errors(item.file) }}
+             {{ form_widget(item.file, { 'attr': {'style': 'marging-left:30px;'} }) }}
+            </div>
+            <div class="offset1 span1">
+              <br/>
+              <a  class="btn btn-danger" href="#supp_media" rel="parametre">Supprimer</a>
+            </div>
+           </div>
+       </div>
+       <br/>
+     {% endmacro %}
+     <script type="text/html">
+       {{ _self.prototype(form.idMedias.get('prototype')) }} 
+     </script>
+ </div>
+ <div class="row">  
+  <div class="span12">
+    <a class="btn btn-info" href="#add_media" id="add_media"><i class="icon-white icon-plus"></i> Ajouter un média</a>
+  </div>
+ </div>
+ <br/>
+</div>
+<div class="row">
+  <div class="span12">
+      <button class="btn btn-primary" type="submit">Valider l'enregistrement du film</button>
+  </div>
+</div>
+    
+
+{{ form_rest(form) }} 
+</form>
+
+ <a class="btn" href="{{ path('film') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+
+</div>
+
+<form action="{{ path('film_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+           <button class="btn btn-danger" type="submit">Supprimer le film</button><i class="icon-remove icon-white"></i>
+</form>
 
 <!-- On charge la librairie jQuery. Ici, je la prends depuis le
 site jquery.com, mais si vous l'avez en local, changez simplement
@@ -159,19 +198,20 @@ l'adresse. -->
 <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+    /*$('input[type=file]').change(function(e){
+        var fichier = $(this).val();
+        $("#affichefilm").html('<img src='+ fichier + ' />');
+    });*/
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('#cinemino_sitebundle_programmecourtstype_idMedia');
+    var $container = $('#cinemino_Sitebundle_filmcreatetype_idMedias');
  
     // On définit une fonction qui va ajouter un champ.
     function add_media() {
-        // On définit le numéro du champ (en comptant le nombre de champs déjà ajoutés).
         index = $container.children().length;
-        // On ajoute à la fin de la balise <div> le contenu de l'attribut « data-prototype »,
-        // après avoir remplacé la variable $$name$$ qu'il contient par le numéro du champ.
-        $container.append(
-            $($container.attr('data-prototype').replace(/\__name__label__/g, '<h5>Média n°'+(index+1)+'</h5>'))
+	var newForm = $('script[type="text/html"]').text().replace(/\$\$name\$\$/g, index);
 
-        );
+	$("div#list_medias").append(newForm);
+
               
     }
 
@@ -180,13 +220,18 @@ l'adresse. -->
  
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
     $('#add_media').click(function() {
-        
         add_media();
-             
     });
+    
+        $("div#list_medias").on("click","a[rel='parametre']", function(){ 
+          if (confirm('Voulez vous réellement supprimer ce média ?')) {
+            $(this).parents("div.themedia").remove();
+          }
+        	
+        });
 });
 
 </script>
 
-</div>
+
 {% endblock content %}

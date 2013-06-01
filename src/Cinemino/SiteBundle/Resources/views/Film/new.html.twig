@@ -120,7 +120,7 @@
           {{ _self.prototype(item) }}
       {% endfor %}
       {% macro prototype(item) %}
-        <div class="row" style="margin-left: 3px;">
+        <div class="row" style="padding-left: 5px;">
            <div class="span5">
              {{ form_label(item.titre) }}
              {{ form_errors(item.titre) }}
@@ -138,7 +138,7 @@
            </div> 
            <div class="span1">
              <br/>
-             <button  class="btn btn-danger" id="supp_media">Supprimer</button>
+             <a  class="btn btn-danger" href="#supp_media" rel="parametre">Supprimer</a>
           </div>
        </div>
        <br/>
@@ -159,7 +159,6 @@
       <button class="btn btn-primary" type="submit">Valider l'enregistrement du film</button>
   </div>
 </div>
-    
 
 {{ form_rest(form) }} 
 </form>
@@ -185,13 +184,6 @@ l'adresse. -->
  
     // On définit une fonction qui va ajouter un champ.
     function add_media() {
-        // On définit le numéro du champ (en comptant le nombre de champs déjà ajoutés).
-/*        index = $container.children().length;
-        // On ajoute à la fin de la balise <div> le contenu de l'attribut « data-prototype »,
-        // après avoir remplacé la variable $$name$$ qu'il contient par le numéro du champ.
-        $container.append(
-            $($container.attr('data-prototype').replace(/\__name__label__/g, '<h5>Média n°'+(index+1)+'</h5>'))        );
-*/
         index = $container.children().length;
 	var newForm = $('script[type="text/html"]').text().replace(/\$\$name\$\$/g, index);
 
@@ -205,14 +197,15 @@ l'adresse. -->
  
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
     $('#add_media').click(function() {
-        
         add_media();
-             
     });
     
-    $('#supp_media').click(function() {
-        alert("mdlgkfqjml");        	
-      }); 
+        $("div#list_medias").on("click","a[rel='parametre']", function(){ 
+          if (confirm('Voulez vous réellement supprimer ce média ?')) {
+            $(this).parents("div.row").remove();
+          }
+        	
+        });
 });
 
 </script>

@@ -6,36 +6,37 @@
 {% block alert %}Ajouter ou modifier les films.
 {% endblock alert %}
 
-{% block titre %}Liste des films{% endblock %}
+{% block titre %}Liste des films ou Courts-Métrages{% endblock %}
 
 
 {% block content %}
 
-<a class="btn btn-info" href="{{ path('film_new') }}"><i class="icon-white icon-plus"></i> Ajouter un film</a>
+<a class="btn btn-info" href="{{ path('film_new') }}"><i class="icon-white icon-plus"></i> Ajouter un film ou un court-métrage</a>
 <br><br>
 <table class="table table-bordered table-striped table-hover">
     <thead>
            <tr bgcolor="#EAE8FF">
-            <th width=350>Titre du film</th>
-            <th width=50>Durée</th>
-            <th>Realisateur</th>
+            <th width=305>Titre du film</th>
+            <th width=45>Durée</th>
+            <th width=200>Realisateur</th>
             <th width=88>Affiche</th>
-            <th width=150>Type ou Programme</th>
+            <th width=250>Type ou Programme</th>
             <th width=160>Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
+      {% if entity.lescourts is not defined %}
         <tr>
             <td><a href="{{ path('film_show', { 'id': entity.id }) }}">{{ entity.titreFilm }}</a></td>
             <td>{{ entity.duree|date('H:i') }}</td>
             <td>{{ entity.realisateur }}</td>
             <td><img class="img-polaroid" style="width:75px;" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" alt=""/></td>
-            <!-- big/ ou small/ selon si on veut recuperer l'affiche redimensionné ou non -->
+            <!-- big/ ou small/ selon si on veut recuperer l'affiche redimensionnée ou non -->
             <td>{% if entity.type == 'n' %}Long Métrage
                 {% else %}
                      {% if entity.progCourts is null %}Court-métrage
-                     {% else %}{{ entity.progCourts.titreFilm }}      
+                     {% else %}<i>Fait partie de : </i><br/><br/>{{ entity.progCourts.titreFilm }}      
                      {% endif %}
                 {% endif %}
             </td>
@@ -46,6 +47,7 @@
       
             </td>
         </tr>
+      {% endif %}
     {% endfor %}
     </tbody>
 </table>

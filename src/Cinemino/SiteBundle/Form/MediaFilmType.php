@@ -20,7 +20,7 @@ class MediaFilmType extends AbstractType
                     'v' => 'Video',
                     's' => 'Bande son'
                 )))
-            //->add('idFilm', null, array( 'label' => 'Selectionnez les films que vous voulez lier au média :'))
+            ->add('idFilm', null, array( 'label' => 'Selectionnez les films que vous voulez lier au média :'))
         ;
     }
 

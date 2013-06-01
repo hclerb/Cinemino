@@ -10,7 +10,7 @@ use Cinemino\SiteBundle\Entity\Media;
  * Media pour les Evenement
  *
  * @ORM\Table(name="mediaevt")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cinemino\SiteBundle\Entity\MediaEvtRepository")
  */
 class MediaEvt extends Media
 {

@@ -109,7 +109,7 @@ class FilmController extends Controller
             $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
             } 
                           
-            foreach($entity->getIdMedia() as $media)  
+            foreach($entity->getIdMedias() as $media)  
             {
               if ($media->getFile()!=NULL)
               { 
@@ -187,6 +187,9 @@ class FilmController extends Controller
             throw $this->createNotFoundException('Unable to find Film entity.');
         }
 
+        $originalMedias = array();
+    	
+    	foreach ($entity->getIdMedias() as $oldmedia) $originalMedias[] = $oldmedia;
         $entity->setDuree(new \DateTime($entity->getDuree()));
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new FilmType(), $entity);
@@ -201,9 +204,14 @@ class FilmController extends Controller
               $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheBig,HtAfficheBig)); 
               $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
             }
+  
             
-            foreach($entity->getIdMedia() as $media)  
+            foreach($entity->getIdMedias() as $media)  
             {
+              // Si le médias est toujours actifs on le supprime du tableau de nettoyage  
+              foreach ($originalMedias as $key => $toDel) {
+    		if ($toDel->getId() === $media->getId()) unset($originalMedias[$key]);
+              }
               if ($media->getFile()!=NULL)
               { 
                 $url = $media->getFile();
@@ -218,17 +226,18 @@ class FilmController extends Controller
                             $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
                             $url->move($dest,$url->getClientOriginalName());
                  }
-                $media->setIdFilm($entity);
-                $em->persist($media);
               }
+              $media->setIdFilm($entity);
+              $em->persist($media);
             }
+            
+            // Supprime les médias qui ont été enlevés dans la mise oà jour
+    	    foreach ($originalMedias as $media) {
+              $em->remove($media);
+    	    }
+            
+            
             $em->persist($entity);
-            foreach($entity->getIdMedia() as $media)  
-            {
-                // upload du fichier
-                $media->setIdFilm($entity);
-                $em->persist($media);
-            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('film', array('id' => $id)));

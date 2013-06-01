@@ -5,8 +5,9 @@ namespace Cinemino\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Cinemino\SiteBundle\Entity\Media;
-use Cinemino\SiteBundle\Form\MediaType;
+use Cinemino\SiteBundle\Entity\MediaFilm;
+use Cinemino\SiteBundle\Form\MediaFilmCreateType;
+use Cinemino\SiteBundle\Form\MediaFilmType;
 
 /**
  * Media controller.
@@ -22,22 +23,19 @@ class MediaController extends Controller
       
     public function __construct()
     {
-        global $dir_url;
-        $dir_url = 'http://localhost/Cinemino_Symfony2/web/';
-        // URL vers le dossier web pour l'affichage des medias  
     }
 
     
     public function indexAction()
     {
-        global $dir_url;
          
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('CineminoSiteBundle:Media')->findAll();
+        $entities = $em->getRepository('CineminoSiteBundle:MediaFilm')->findAlltrie();
+        $entitiesEvt = $em->getRepository('CineminoSiteBundle:MediaEvt')->findAlltrie();
      
         return $this->render('CineminoSiteBundle:Media:index.html.twig', array(
             'entities' => $entities,
-            'dir_url' => $dir_url
+            'entitiesEvt' => $entitiesEvt
         ));
     }
 
@@ -47,7 +45,6 @@ class MediaController extends Controller
      */
     public function showAction($id)
     {
-         global $dir_url;
                    
         $em = $this->getDoctrine()->getManager();
 
@@ -61,8 +58,7 @@ class MediaController extends Controller
 
         return $this->render('CineminoSiteBundle:Media:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-            'dir_url' => $dir_url
+            'delete_form' => $deleteForm->createView()
             ));
     }
 
@@ -70,10 +66,10 @@ class MediaController extends Controller
      * Displays a form to create a new Media entity.
      *
      */
-    public function newAction()
+    public function newfilmAction()
     {
-        $entity = new Media();
-        $form   = $this->createForm(new MediaType(), $entity);
+        $entity = new MediaFilm();
+        $form   = $this->createForm(new MediaFilmCreateType(), $entity);
 
         return $this->render('CineminoSiteBundle:Media:new.html.twig', array(
             'entity' => $entity,
@@ -85,17 +81,29 @@ class MediaController extends Controller
      * Creates a new Media entity.
      *
      */
-    public function createAction(Request $request)
+    public function createfilmAction(Request $request)
     {
-        $entity  = new Media();
-        $form = $this->createForm(new MediaType(), $entity);
+        $entity  = new MediaFilm();
+        $form = $this->createForm(new MediaFilmCreateType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             
-            $entity->upload();
-            
-            $entity->setUrl($entity->getWebPath());
+           $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+           if($entity->getFile()!=NULL){   
+            $url = $entity->getFile();
+            $dest="medias/Film/sons";           // par défaut on dit que c'est un son
+            switch ($entity->getType()) {
+                    case 'p':                       // C'est une phot, on la redimension et on l'upload
+                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
+                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                       break;
+                    case 'v': $dest = "medias/Film/videos";
+                    default :
+                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
+                            $url->move($dest,$url->getClientOriginalName());
+                 }
+            } 
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -114,26 +122,25 @@ class MediaController extends Controller
      * Displays a form to edit an existing Media entity.
      *
      */
-    public function editAction($id)
+    public function editfilmAction($id)
     {
         global $dir_url;
         
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CineminoSiteBundle:Media')->find($id);
+        $entity = $em->getRepository('CineminoSiteBundle:MediaFilm')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Media entity.');
         }
 
-        $editForm = $this->createForm(new MediaType(), $entity);
+        $editForm = $this->createForm(new MediaFilmType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CineminoSiteBundle:Media:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-            'dir_url' => $dir_url
+            'delete_form' => $deleteForm->createView()
         ));
     }
 
@@ -141,31 +148,43 @@ class MediaController extends Controller
      * Edits an existing Media entity.
      *
      */
-    public function updateAction(Request $request, $id)
+    public function updatefilmAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CineminoSiteBundle:Media')->find($id);
+        $entity = $em->getRepository('CineminoSiteBundle:MediaFilm')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Media entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new MediaType(), $entity);
+        $editForm = $this->createForm(new MediaFilmType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            
-            $entity->upload();
-            
-            $entity->setUrl($entity->getWebPath());
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+            if ($entity->getFile()!=NULL)
+              { 
+                $url = $entity->getFile();
+                $dest="medias/Film/sons";           // par défaut on dit que c'est un son
+                switch ($entity->getType()) {
+                    case 'p':                       // C'est une phot, on la redimension et on l'upload
+                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
+                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                       break;
+                    case 'v': $dest = "medias/Film/videos";
+                    default :
+                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
+                            $url->move($dest,$url->getClientOriginalName());
+                 }
+              }
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('media_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('media', array('id' => $id)));
         }
 
         return $this->render('CineminoSiteBundle:Media:edit.html.twig', array(

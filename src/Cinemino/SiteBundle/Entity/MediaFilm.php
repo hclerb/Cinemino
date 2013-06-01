@@ -10,7 +10,7 @@ use Cinemino\SiteBundle\Entity\Media;
  * Media pour les films
  *
  * @ORM\Table(name="mediafilm")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cinemino\SiteBundle\Entity\MediaFilmRepository")
  */
 class MediaFilm extends Media
 {

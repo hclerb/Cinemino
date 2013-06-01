@@ -87,7 +87,7 @@ class ProgrammeCourtsController extends Controller
             $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheBig,HtAfficheBig)); 
             $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
            }
-           foreach($entity->getIdMedia() as $media)  
+           foreach($entity->getIdMedias() as $media)  
             {
               if ($media->getUrl()!=NULL)
               { 
@@ -155,6 +155,8 @@ class ProgrammeCourtsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $originalMedias = array();
+    	foreach ($leprogramme->getIdMedias() as $oldmedia) $originalMedias[] = $oldmedia;
         $lescourts = $entities = $em->getRepository('CineminoSiteBundle:Film')->findByprogCourts($leprogramme->getId());
         $leprogramme->setDuree(new \DateTime($leprogramme->getDuree()));
         $deleteForm = $this->createDeleteForm($leprogramme->getId());
@@ -170,9 +172,12 @@ class ProgrammeCourtsController extends Controller
               $leprogramme->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheBig,HtAfficheBig)); 
               $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
             }
-            foreach($leprogramme->getIdMedia() as $media)  
+            foreach($leprogramme->getIdMedias() as $media)  
             {
-
+              // Si le médias est toujours actifs on le supprime du tableau de nettoyage  
+              foreach ($originalMedias as $key => $toDel) {
+    		if ($toDel->getId() === $media->getId()) unset($originalMedias[$key]);
+              }
               if ($media->getFile()!=NULL)
               { 
                 $url = $media->getFile();
@@ -187,10 +192,14 @@ class ProgrammeCourtsController extends Controller
                             $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
                             $url->move($dest,$url->getClientOriginalName());
                  }
-                $media->setIdFilm($leprogramme);
-                $em->persist($media);
               }
+              $media->setIdFilm($leprogramme);
+              $em->persist($media);
             }
+            // Supprime les médias qui ont été enlevés dans la mise oà jour
+    	    foreach ($originalMedias as $media) {
+              $em->remove($media);
+    	    }
             
             $em->persist($leprogramme);
             // on enlève le lien des films avant la mise à jour

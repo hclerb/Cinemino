@@ -522,7 +522,7 @@ class Film
      * @param \Cinemino\SiteBundle\Entity\MediaFilm $idMedia
      * @return Film
      */
-    public function addIdMedias(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
+    public function addIdMedia(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
     {
         $this->idMedias[] = $idMedia;
         $idMedia->setIdFilm($this);
@@ -535,13 +535,13 @@ class Film
      *
      * @param \Cinemino\SiteBundle\Entity\MediaFilm $idMedia
      */
-    public function removeIdMedias(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
+    public function removeIdMedia(\Cinemino\SiteBundle\Entity\MediaFilm $idMedia)
     {
         $this->idMedias->removeElement($idMedia);
     }
 
     /**
-     * Get idMedia
+     * Get idMedias
      *
      * @return \Doctrine\Common\Collections\Collection 
      */

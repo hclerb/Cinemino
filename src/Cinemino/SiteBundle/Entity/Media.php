@@ -52,7 +52,7 @@ class Media
     protected $type;
    
     
-    protected $file;              //permet de stocker temporairement le fichier affiche
+    protected $file;              //permet de stocker temporairement le fichier url
     
     
     /**

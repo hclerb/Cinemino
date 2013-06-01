@@ -12,7 +12,13 @@ class ProgrammeCourtsCreateType extends ProgrammeCourtsType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->remove('affiche');
+        $builder->remove('affiche')
+                ->remove('idMedias')
+                ->add('idMedias', 'collection', array('type'   => new MediaFilmCreateType(),
+                                                 'label'    => ' ',               
+						 'allow_add' => true,
+						 'allow_delete' => true,
+						 'by_reference' => false,));
     }
 
 
