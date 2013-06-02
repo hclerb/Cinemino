@@ -1,0 +1,30 @@
+<a class="btn btn-info" href="{{ path('mediaFilm_new') }}"><i class="icon-white icon-plus"></i> Ajouter un média à un film</a>
+<br/><br/>
+
+{% set idfilm = 0 %}
+{% for entity in entities %}
+  {% if entity.idFilm.id != idfilm %} 
+    {% set idfilm = entity.idFilm.id %}
+    {% if loop.first == false %}</tbody></table> {% endif %}
+    <table class="table table-bordered table-striped" style="border-collapse: collapse;">
+       <h4>Film Associé : {{ entity.idFilm.titreFilm }}</h4>
+       <tbody>
+  {% endif %}   
+  <tr>
+      <td width=400><a href="{{ path('mediaFilm_show', { 'id': entity.id }) }}">{{ entity.titre }}</a></td>
+      <td width=300>{{ entity.url }}</td>
+      <td>
+          {% if entity.type == 'p' %} <img class="img-polaroid" style="height:70px;" src="{{asset('medias/Film/photos/small/')}}{{ entity.url }}" alt=""/>
+          {% elseif entity.type == 'v' %} Video
+          {% else %} Son
+          {% endif %}
+      </td>
+      <td width="160px">    
+          <a class="btn" href="{{ path('mediaFilm_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+          <a class="btn btn-info" href="{{ path('mediaFilm_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+      </td>
+   </tr>
+    
+{% endfor %}
+</tbody>    
+</table>

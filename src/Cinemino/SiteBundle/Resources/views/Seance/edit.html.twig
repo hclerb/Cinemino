@@ -1,5 +1,7 @@
 
 {% extends "CineminoSiteBundle::seancelayout.html.twig" %}
+{% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
+{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
 {% block title %}
 {{ parent() }} - Séances
 {% endblock %}
@@ -7,7 +9,7 @@
 {% block formulaire %}
 
 <div id="formulaire" class="well" style="width:800px">
-<div class="page-header"><h3>Modifier séance du {{ entity.dateSeance|date('y:m:d') }}</h3>
+<div class="page-header"><h3>Modifier séance du {{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }} à {{ entity.dateSeance|date('H:i') }}</h3>
 
 
 {% for key, flash in app.session.getFlashes() %}
@@ -18,6 +20,14 @@
 
 </div>    
 <form action="{{ path('seance_update', { 'id': entity.id }) }}#formulaire" method="post" {{ form_enctype(edit_form) }}>
+  <div id="datetimepicker1" class="input-append date">
+      {{ form_label(edit_form.dateSeance) }}
+      {{ form_errors(edit_form.dateSeance) }}
+      {{ form_widget(edit_form.dateSeance) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+  </div>
     {{ form_widget(edit_form) }}
         
      <br><br>   
@@ -37,13 +47,12 @@
 
 </div>    
 <script type="text/javascript">
- $(function(){
-  $("#{{ edit_form.dateSeance.vars.id }}").datepicker({
-    language: 'fr',
-    weekStart: 3
-   });
-
- });
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      format :'dd/MM/yyyy hh:mm',
+      language: 'fr'
+    });
+  });
 </script> 
 
 {% endblock formulaire %}

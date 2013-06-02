@@ -66,7 +66,7 @@ class MediaController extends Controller
      * Displays a form to create a new Media entity.
      *
      */
-    public function newfilmAction()
+    public function newAction()
     {
         $entity = new MediaFilm();
         $form   = $this->createForm(new MediaFilmCreateType(), $entity);
@@ -81,7 +81,7 @@ class MediaController extends Controller
      * Creates a new Media entity.
      *
      */
-    public function createfilmAction(Request $request)
+    public function createAction(Request $request)
     {
         $entity  = new MediaFilm();
         $form = $this->createForm(new MediaFilmCreateType(), $entity);
@@ -122,7 +122,7 @@ class MediaController extends Controller
      * Displays a form to edit an existing Media entity.
      *
      */
-    public function editfilmAction($id)
+    public function editAction($id)
     {
         global $dir_url;
         
@@ -148,7 +148,7 @@ class MediaController extends Controller
      * Edits an existing Media entity.
      *
      */
-    public function updatefilmAction(Request $request, $id)
+    public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 

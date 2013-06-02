@@ -1,0 +1,78 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block alert %}Gérez les médias liés au films. Un média peut etre lié a plusieurs films.<br>
+{% endblock %}
+
+{% block titre %}Liste des médias{% endblock %}
+
+
+{% block content %}
+
+<a class="btn btn-info" href="{{ path('mediafilm_new') }}"><i class="icon-white icon-plus"></i> Ajouter un média à un film</a>
+<br/><br/>
+
+<table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
+    <caption><h4>Les médias associés aux films</h4></caption>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Url</th>
+            <th>Film Associé</th>
+            <th>Apercu</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('media_show', { 'id': entity.id }) }}">{{ entity.titre }}</a></td>
+            <td>{{ entity.url }}</td>
+            <td>{{ entity.idFilm.titreFilm }}</td>
+            <td><img class="img-polaroid" style="height:70px;" src="{{asset('medias/Film/photos/small/')}}{{ entity.url }}" alt=""/></td>
+            <td>{% if entity.type == 'v' %}Vidéo{% else %}Photo{% endif %}</td>
+            <td width="160px">
+                
+          <a class="btn" href="{{ path('media_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+                        <a class="btn btn-info" href="{{ path('mediafilm_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<a class="btn btn-info" href="{{ path('mediaevt_new') }}"><i class="icon-white icon-plus"></i> Ajouter un média à un évènement</a>
+<br/><br/>
+<table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
+    <caption><h4>Les médias associés aux Evènements</h4></caption>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Url</th>
+            <th>Apercu</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entitiesEvt %}
+        <tr>
+            <td><a href="{{ path('media_show', { 'id': entity.id }) }}">{{ entity.titre }}</a></td>
+            <td>{{ entity.url }}</td>
+            <td><img class="img-polaroid" style="height:70px;" src="{{asset('medias/Evt/photos/small/')}}{{ entity.url }}" alt=""/></td>
+            <td>{% if entity.type == 'v' %}Vidéo{% else %}Photo{% endif %}</td>
+            <td width="160px">
+                
+          <a class="btn" href="{{ path('media_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+                        <a class="btn btn-info" href="{{ path('mediaevt_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

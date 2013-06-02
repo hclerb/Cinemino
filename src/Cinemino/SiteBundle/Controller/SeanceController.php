@@ -130,7 +130,8 @@ class SeanceController extends Controller
     public function createAction(Request $request)
     {
         $entity  = new Seance();
-  
+        
+        $em = $this->getDoctrine()->getManager();  
         $form = $this->createForm(new SeanceType($this->getUser()), $entity);
         $form->bind($request);
 
@@ -141,6 +142,7 @@ class SeanceController extends Controller
 
             return $this->redirect($this->generateUrl('seance_show', array('id' => $entity->getId())));
         }
+        
         $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
 
         return $this->render('CineminoSiteBundle:Seance:new.html.twig', array(

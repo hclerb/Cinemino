@@ -19,11 +19,10 @@ class SeanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateSeance', 'date',
+            ->add('dateSeance', 'datetime',
                     array('widget' => 'single_text',                     
-                          'label' => 'Jour de la séance',
-                          'format' => 'dd/MM/yyyy'))
-            ->add('heure', null, array('label' => 'Heure de la séance', 'required' => true))
+                          'label' => 'Jour et Heure de la séance',
+                          'format' => 'dd/MM/yyyy hh:mm'))
             ->add('version',  'choice', array('label' => 'Version (VO, VOSTFR, VOST pour Malentendants, etc..)','choices' => array(
                     'VF' => 'VF',
                     'VOST' => 'VOST',

@@ -6,21 +6,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class MediaFilmType extends AbstractType
+class MediaFilmType extends MediaType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('titre', null, array( 'label' => 'Légende', 'required' => true))
-            ->add('url', 'text', array('label' => 'Nom du fichier','read_only' => true))
-            ->add('file', 'file', array('label' => 'Fichier associé', 'required' => false))
-            ->add('type', 'choice', array('label' => 'Type','required' => true,   
-                'choices' => array(
-                    'p' => 'photo',
-                    'v' => 'Video',
-                    's' => 'Bande son'
-                )))
-            ->add('idFilm', null, array( 'label' => 'Selectionnez les films que vous voulez lier au média :'))
+        parent::buildForm($builder, $options);
+        $builder->add('idFilm', null, array( 'label' => 'Selectionnez les films que vous voulez lier au média :'))
         ;
     }
 

@@ -31,16 +31,9 @@ class Seance
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="DATE_SEANCE", type="date", nullable=true)
+     * @ORM\Column(name="DATE_SEANCE", type="datetime", nullable=true)
      */
     private $dateSeance;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="HEURE", type="time", nullable=true)
-     */
-    private $heure;
 
     /**
      * @var string
@@ -115,28 +108,6 @@ class Seance
         return $this->dateSeance;
     }
 
-    /**
-     * Set heure
-     *
-     * @param \DateTime $heure
-     * @return Seance
-     */
-    public function setHeure($heure)
-    {
-        $this->heure = $heure;
-    
-        return $this;
-    }
-
-    /**
-     * Get heure
-     *
-     * @return \DateTime 
-     */
-    public function getHeure()
-    {
-        return $this->heure;
-    }
 
     /**
      * Set version

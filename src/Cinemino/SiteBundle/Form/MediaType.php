@@ -20,14 +20,13 @@ class MediaType extends AbstractType
                     'v' => 'Video',
                     's' => 'Bande son'
                 )))
-            //->add('idFilm', null, array( 'label' => 'Selectionnez les films que vous voulez lier au média :'))
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Cinemino\SiteBundle\Entity\MediaFilm'
+            'data_class' => 'Cinemino\SiteBundle\Entity\Media'
         ));
     }
 

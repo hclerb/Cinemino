@@ -40,7 +40,7 @@
        {% if entity.idCinema == cin %}     
           <tr bgcolor="white">
             <td><a href="{{ path('seance_show', { 'id': entity.id }) }}#formulaire">{{ entity.dateSeance|date("d/m/Y") }}</a></td>
-            <td>{{ entity.heure|date("H:i") }}</td>
+            <td>{{ entity.dateSeance|date("H:i") }}</td>
             <td>{{ entity.idFilm.titreFilm }} Réalisé par {{ entity.idFilm.realisateur }}</td>           
             <td>{{ entity.version }}</td>
             <td>{{ entity.type }}</td>

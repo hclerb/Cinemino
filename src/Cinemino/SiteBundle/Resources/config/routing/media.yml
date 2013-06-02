@@ -2,47 +2,57 @@ media:
     pattern:  /
     defaults: { _controller: "CineminoSiteBundle:Media:index" }
 
-media_show:
+mediaFilm_show:
     pattern:  /{id}/show
-    defaults: { _controller: "CineminoSiteBundle:Media:show" }
+    defaults: { _controller: "CineminoSiteBundle:MediaFilm:show" }
+mediaEvt_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:MediaEvt:show" }
+mediaFilm_new:
+    pattern:  /film
+    defaults: { _controller: "CineminoSiteBundle:MediaFilm:new" }
 
-mediafilm_new:
-    pattern:  /newmfilm
-    defaults: { _controller: "CineminoSiteBundle:Media:newfilm" }
-
-mediaevt_new:
-    pattern:  /newmevt
-    defaults: { _controller: "CineminoSiteBundle:Media:newevt" }
+mediaEvt_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:MediaEvt:new" }
     
-mediafilm_create:
+mediaFilm_create:
     pattern:  /create
-    defaults: { _controller: "CineminoSiteBundle:Media:createfilm" }
+    defaults: { _controller: "CineminoSiteBundle:MediaFilm:create" }
     requirements: { _method: post }
     
-mediaevt_create:
+mediaEvt_create:
     pattern:  /create
-    defaults: { _controller: "CineminoSiteBundle:Media:createevt" }
+    defaults: { _controller: "CineminoSiteBundle:MediaEvt:create" }
     requirements: { _method: post }
 
-mediafilm_edit:
-    pattern:  /{id}/editmfilm
-    defaults: { _controller: "CineminoSiteBundle:Media:editfilm" }
+mediaFilm_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:MediaFilm:edit" }
     
-mediaevt_edit:
-    pattern:  /{id}/editmevt
-    defaults: { _controller: "CineminoSiteBundle:Media:editevt" }
+mediaEvt_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:MediaEvt:edit" }
 
-mediafilm_update:
+mediaFilm_update:
     pattern:  /{id}/update
-    defaults: { _controller: "CineminoSiteBundle:Media:updatefilm" }
+    defaults: { _controller: "CineminoSiteBundle:MediaFilm:update" }
     requirements: { _method: post }
 
-mediaevt_update:
+mediaEvt_update:
     pattern:  /{id}/update
-    defaults: { _controller: "CineminoSiteBundle:Media:updateevt" }
+    defaults: { _controller: "CineminoSiteBundle:MediaEvt:update" }
     requirements: { _method: post }
     
 media_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "CineminoSiteBundle:Media:delete" }
+    requirements: { _method: post }
+mediaFilm_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:MediaFilm:delete" }
+    requirements: { _method: post }
+mediaEvt_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:MediaEvt:delete" }
     requirements: { _method: post }

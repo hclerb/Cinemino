@@ -10,12 +10,12 @@
 
 {% block formulaire %}
 <div id="formulaire" class="well">
-<div class="page-header"><h3>Séance du {{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }} à {{ entity.heure|date('H:i') }} </h3></div>
+<div class="page-header"><h3>Séance du {{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }} à {{ entity.dateSeance|date('H:i') }} </h3></div>
 <div class="row">
     <div class = "span2">
-        <div><img class="img-polaroid" style="height:150px;" src="{{ asset('affiche/small/') }}{{ entity.idFilm.getAffiche() }}" alt=""/></div>
+        <div><img class="img-polaroid" style="height:150px;" src="{{ asset('medias/Film/affiches/big/') }}{{ entity.idFilm.Affiche }}" alt=""/></div>
     </div>
-     <div class="span4">
+     <div class="span7">
         <table class="table">
             <tbody>
                 <tr>

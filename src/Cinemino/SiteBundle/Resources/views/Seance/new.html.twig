@@ -10,8 +10,16 @@
 
 {% block formulaire %}
 <div id="formulaire" class="well">
-<div class="page-header"><h3>Ajout nouvelle séance</h3></div>
 <form action="{{ path('seance_create') }}" method="post" {{ form_enctype(form) }}>
+    
+  <div id="datetimepicker1" class="input-append date">
+      {{ form_label(form.dateSeance) }}
+      {{ form_errors(form.dateSeance) }}
+      {{ form_widget(form.dateSeance) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+  </div>
     {{ form_errors(form) }}
     {{ form_widget(form) }}
 <br><br>        
@@ -22,12 +30,11 @@
 </form>
 </div>
 <script type="text/javascript">
- $(function(){
-  $("#{{ form.dateSeance.vars.id }}").datepicker({
-    language: 'fr',
-    weekStart: 3
-   });
-
- });
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      format :'dd/MM/yyyy hh:mm',
+      language: 'fr'
+    });
+  });
 </script>
 {% endblock formulaire %}
