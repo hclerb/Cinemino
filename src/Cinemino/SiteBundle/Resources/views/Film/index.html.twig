@@ -35,8 +35,8 @@
             <!-- big/ ou small/ selon si on veut recuperer l'affiche redimensionnée ou non -->
             <td>{% if entity.type == 'n' %}Long Métrage
                 {% else %}
-                     {% if entity.progCourts is null %}Court-métrage
-                     {% else %}<i>Fait partie de : </i><br/><br/>{{ entity.progCourts.titreFilm }}      
+                    Court-métrage
+                     {% if entity.progCourts is not null %}<br/><br/><i>Fait partie de : </i><br/><p style="text-align:right;">{{ entity.progCourts.titreFilm }}</p>      
                      {% endif %}
                 {% endif %}
             </td>

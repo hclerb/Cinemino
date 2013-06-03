@@ -12,24 +12,25 @@
 
 
 {% block content %}
-
+<a class="btn btn-info" href="{{ path('intervenant_new') }}"><i class="icon-white icon-plus"></i> Ajouter un intervenant</a>
+<br><br>
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th>Nom de l'intervenant</th>
-            <th>Description de l'intervenant</th>
-            <th>Url photo</th>
-            <th>Url logo</th>
-            <th>Actions</th>
+            <th width="150px">Nom de l'intervenant</th>
+            <th width="300px">Description de l'intervenant</th>
+            <th width="90px">Url photo</th>
+            <th width="85px">Url logo</th>
+            <th width="160px">Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
             <td><a href="{{ path('intervenant_show', { 'id': entity.id }) }}">{{ entity.nomIntervenant }}</a></td>
-            <td>{{ entity.descriptionIntervenant }}</td>
-            <td>{{ entity.urlPhotoIntervenant }}</td>
-            <td>{{ entity.urlLogo }}</td>
+            <td>{{ entity.descriptionIntervenant|raw }}</td>
+            <td>{% if entity.urlPhotoIntervenant is not null %}<img class="img-polaroid" src="{{asset('medias/Intervenant/photos/small/')}}{{ entity.urlPhotoIntervenant }}" alt=""/>{% endif %}</td>
+            <td>{% if entity.urlLogo is not null %}<img class="img-polaroid" src="{{asset('medias/Intervenant/logo/small/')}}{{ entity.urlLogo }}" alt=""/>{% endif %}</td>
             <td>
               
                    
@@ -42,8 +43,7 @@
     </tbody>
 </table>
 
-<a class="btn btn-info" href="{{ path('intervenant_new') }}"><i class="icon-white icon-plus"></i> Ajouter un intervenant</a>
-<br><br>
+
 
 {% block formulaire %}
 

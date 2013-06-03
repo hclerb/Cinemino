@@ -57,6 +57,8 @@ class ResizeImg{
         //calcul de la hauteur voulue
         $height = $width/$ratio_orig;
    
+        if ($heightf > $height) $heightf = $height; 
+        
         // Redimensionnement
         $image_p = imagecreatetruecolor($width, $height);
         $image_f = imagecreatetruecolor($width, $heightf);
@@ -66,7 +68,7 @@ class ResizeImg{
 
         // enregistrement
         $nom_fichier = $filename->getClientOriginalName();
-        imagejpeg($image_f, 'medias/'. $sousrep . '/' .$nom_fichier, 100);
+        imagejpeg($image_f, 'medias/'. $sousrep . '/' .$nom_fichier, 200);
         imagedestroy($image);
         imagedestroy($image_p);
         imagedestroy($image_f);

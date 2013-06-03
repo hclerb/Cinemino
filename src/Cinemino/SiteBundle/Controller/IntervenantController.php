@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Cinemino\SiteBundle\Entity\Intervenant;
 use Cinemino\SiteBundle\Form\IntervenantType;
+use Cinemino\SiteBundle\Form\IntervenantCreateType;
 
 /**
  * Intervenant controller.
@@ -67,7 +68,7 @@ class IntervenantController extends Controller
         $entity = new Intervenant();
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('CineminoSiteBundle:Intervenant')->findAll();
-        $form   = $this->createForm(new IntervenantType(), $entity);
+        $form   = $this->createForm(new IntervenantCreateType(), $entity);
 
         return $this->render('CineminoSiteBundle:Intervenant:new.html.twig', array(
             'entity' => $entity,
@@ -83,11 +84,22 @@ class IntervenantController extends Controller
     public function createAction(Request $request)
     {
         $entity  = new Intervenant();
-        $form = $this->createForm(new IntervenantType(), $entity);
+        $form = $this->createForm(new IntervenantCreateType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+            if($entity->getFilelogo()!=NULL){   
+              $url = $entity->getFilelogo();
+              $entity->setUrlLogo($resize->UploadPhoto($url,"Intervenant/logo/big",LgLogoBig,HtLogoBig)); 
+              $resize->UploadPhoto($url,"Intervenant/logo/small",LgLogoSmall,HtLogoSmall);
+            }
+            if($entity->getFilephoto()!=NULL){   
+              $url = $entity->getFilephoto();
+              $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoBig,HtPhotoBig)); 
+              $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoSmall,HtPhotoSmall);
+            }
             $em->persist($entity);
             $em->flush();
 
@@ -144,6 +156,17 @@ class IntervenantController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+            if($entity->getFilelogo()!=NULL){   
+              $url = $entity->getFilelogo();
+              $entity->setUrlLogo($resize->UploadPhoto($url,"Intervenant/logo/big",LgPhotoBig,HtPhotoBig)); 
+              $resize->UploadPhoto($url,"Intervenant/logo/small",LgPhotoSmall,HtPhotoSmall);
+            }
+            if($entity->getFilephoto()!=NULL){   
+              $url = $entity->getFilephoto();
+              $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoBig,HtPhotoBig)); 
+              $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoSmall,HtPhotoSmall);
+            }
             $em->persist($entity);
             $em->flush();
 

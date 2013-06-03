@@ -4,6 +4,16 @@ namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+define("LgPhotoBig", 151);
+define("HtPhotoBig",201);
+define("LgPhotoSmall", 75);
+define("HtPhotoSmall",100);
+
+define("LgLogoBig", 151);
+define("HtLogoBig",201);
+define("LgLogoSmall", 75);
+define("HtLogoSmall",100);
+
 /**
  * Intervenant
  *
@@ -55,6 +65,10 @@ class Intervenant
      */
     private $idEvenement;
 
+    private $filephoto;              //permet de stocker temporairement le fichier affiche
+    
+    private $filelogo;              //permet de stocker temporairement le fichier affiche
+    
     /**
      * Constructor
      */
@@ -200,5 +214,25 @@ class Intervenant
     
     public function __toString() {
         return $this->nomIntervenant;   
+    } 
+    // gestion fichier logo   
+    public function setFilelogo($file)
+    {
+        $this->filelogo = $file;
+    }
+
+    public function getFilelogo()
+    {
+        return $this->filelogo;
+    } 
+    // gestion fichier    
+    public function setFilephoto($file)
+    {
+        $this->filephoto = $file;
+    }
+
+    public function getFilephoto()
+    {
+        return $this->filephoto;
     } 
 }

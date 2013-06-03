@@ -12,10 +12,15 @@ class IntervenantType extends AbstractType
     {
         $builder
             ->add('nomIntervenant', null, array('label' => 'Nom de l\'intervenant'))
-            ->add('descriptionIntervenant', 'textarea', array('label' => 'Description intervenant'))
+            ->add('descriptionIntervenant', 'textarea', array('label' => 'Description intervenant','attr' => array(
+                'class' => 'tinymce',
+                'data-theme' => 'simple', 
+                'required' => true)))
             ->add('urlPhotoIntervenant', null, array('label' => 'Photo'))
+            ->add('filephoto', 'file', array('label' => 'Fichier de la photo :', 'required' => false))
             ->add('urlLogo', null, array('label' => 'Logo'))
-            ->add('idEvenement', null, array('label' => 'Evènement(s) rataché(s)','multiple' => true, 'required' => false))
+            ->add('filelogo', 'file', array('label' => 'Fichier de la photo :', 'required' => false))
+           // ->add('idEvenement', null, array('label' => 'Evènement(s) rataché(s)','multiple' => true, 'required' => false))
         ;
     }
 

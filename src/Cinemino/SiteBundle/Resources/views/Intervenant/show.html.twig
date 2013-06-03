@@ -18,15 +18,15 @@
         </tr>
         <tr>
             <th>Description intervenant :</th>
-            <td>{{ entity.descriptionIntervenant }}</td>
+            <td>{{ entity.descriptionIntervenant|raw }}</td>
         </tr>
         <tr>
             <th>Photo</th>
-            <td><img class="img-polaroid" style="height:150px;" src="{{ entity.urlPhotoIntervenant }}" alt=""/></td>
+            <td>{% if entity.urlPhotoIntervenant is not null %}<img class="img-polaroid" src="{{asset('medias/Intervenant/photos/big/')}}{{ entity.urlPhotoIntervenant }}" alt=""/>{% endif %}</td>
         </tr>
         <tr>
             <th>Logo</th>
-            <td><img class="img-polaroid" style="height:150px;" src="{{ entity.urlLogo }}" alt=""/></td>
+            <td>{% if entity.urlLogo is not null %}<img class="img-polaroid" src="{{asset('medias/Intervenant/logo/big/')}}{{ entity.urlLogo }}" alt=""/>{% endif %}</td>
         </tr>
        
         <tr>  
