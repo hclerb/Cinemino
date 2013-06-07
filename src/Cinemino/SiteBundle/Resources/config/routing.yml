@@ -37,7 +37,10 @@ CineminoSiteBundle_evenement:
         resource: "routing/evenement.yml"
         prefix:   /evenement
         
-        
+CineminoSiteBundle_evenementassocie:
+        resource: "routing/evenementassocie.yml"
+        prefix:   /evenementassocie        
+
 CineminoSiteBundle_sponsor:
         resource: "routing/sponsor.yml"
         prefix:   /sponsor

@@ -1,17 +1,5 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }}
-{% endblock %}
-
-{% block alert %}Gerez vos séances, vous pouvez rechercher et ajouter un film ( les informations sont récupéreés depuis allociné )
- , ainsi que créer et attacher un évènement.
-<br> 
-
-{% endblock %}
-
-{% block titre %}Liste des séances{% endblock %}
-
 
 {% block content %}
 
@@ -31,7 +19,7 @@
             <th width='30px'>Type</th>
             <th width='30px'>Avant premiere</th>
             <th width='30px'>Sortie nationale</th>
-            <th width='100px'>Evènement</th>
+            <th width='100px'>Evènements</th>
             <th width='160px'>Actions</th>
         </tr>
     </thead>
@@ -39,17 +27,29 @@
     {% for entity in entities %}
        {% if entity.idCinema == cin %}     
           <tr bgcolor="white">
-            <td><a href="{{ path('seance_show', { 'id': entity.id }) }}#formulaire">{{ entity.dateSeance|date("d/m/Y") }}</a></td>
+            <td><a href="{{ path('seance_show', { 'id': entity.id }) }}">{{ entity.dateSeance|date("d/m/Y") }}</a></td>
             <td>{{ entity.dateSeance|date("H:i") }}</td>
             <td>{{ entity.idFilm.titreFilm }} Réalisé par {{ entity.idFilm.realisateur }}</td>           
             <td>{{ entity.version }}</td>
             <td>{{ entity.type }}</td>
             <td>{% if entity.avantPremiere == 'o' %}Oui{% else %}Non{% endif %}</td>
             <td>{% if entity.sortieNationale == 'o' %}Oui{% else %}Non{% endif %}</td>
-            <td>{% if entity.idEvenement %}{{ entity.idEvenement }}{% endif %}</td>
+            <td>{% if entity.idEvenements[0] is defined %}
+                  {% for evt in entity.idEvenements %}
+                   <a href="{{ path('evenement_show', { 'id': evt.id }) }}">{{ evt.titreEvenement }}</a>
+                  {% endfor %}
+                {% endif %}
+                {% if entity.idEvenementAssocies[0] is defined %}
+                  Associés :<br/>  
+                  {% for evt in entity.idEvenementAssocies %}
+                    <a href="{{ path('evenementassocie_show', { 'id': evt.id }) }}"><p style="text-align:right;">{{ evt.titreEvenement }}</p></a>
+                  {% endfor %}
+                {% endif %} 
+                    
+            </td>
             <td>    
-                <a class="btn" href="{{ path('seance_show', { 'id': entity.id }) }}#formulaire"><i class="icon icon-search"></i> Info</a>
-                <a class="btn btn-info" href="{{ path('seance_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-white icon-pencil"></i> Editer</a>
+                <a class="btn" href="{{ path('seance_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+                <a class="btn btn-info" href="{{ path('seance_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
             </td>
           </tr>
         {% endif %}

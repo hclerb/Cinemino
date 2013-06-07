@@ -1,0 +1,62 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="well" style="width:800px">
+<form action="{{ path('evenementassocie_create') }}" method="post" {{ form_enctype(form) }}>
+     {{ tinymce_init() }}
+      {{ form_label(form.titreEvenement) }}
+      {{ form_errors(form.titreEvenement) }}
+      {{ form_widget(form.titreEvenement) }}   
+    
+      {{ form_label(form.descriptionEvenement) }}
+      {{ form_errors(form.descriptionEvenement) }}
+      {{ form_widget(form.descriptionEvenement) }}   
+  <br/>  
+  <div class="row">
+    <div class="span4">
+     <div id="datetimepicker1" class="input-append date">
+      {{ form_label(form.dateEvenement) }}
+      {{ form_errors(form.dateEvenement) }}
+      {{ form_widget(form.dateEvenement) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+   <div class="span4">       
+     <div id="datetimepicker2" class="input-append date">
+      {{ form_label(form.dateFin) }}
+      {{ form_errors(form.dateFin) }}
+      {{ form_widget(form.dateFin) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+ </div>     
+ <br/>
+    {{ form_widget(form) }}
+ 
+        <br><br>
+        
+         <button class="btn btn-primary" type="submit">Créer l'évènement associé</button>
+         <a class="btn" href="{{ path('evenementassocie') }}"><i class="icon-ban-circle"></i> Annuler</a>
+        
+</form>
+
+</div>
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false,
+    });
+    $('#datetimepicker2').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false
+    });
+  });
+</script>
+{% endblock %}

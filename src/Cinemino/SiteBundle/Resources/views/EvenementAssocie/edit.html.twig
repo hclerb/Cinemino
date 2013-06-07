@@ -1,0 +1,79 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Gérer les évènements lié aux séances.
+{% endblock alert %}
+
+{% block titre %}Modification : {{ entity}} {% endblock %}
+
+
+{% block content %}
+<div class="well" style="width:800px">
+<form action="{{ path('evenementassocie_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+     {{ tinymce_init() }}
+      {{ form_label(edit_form.titreEvenement) }}
+      {{ form_errors(edit_form.titreEvenement) }}
+      {{ form_widget(edit_form.titreEvenement) }}   
+    
+      {{ form_label(edit_form.descriptionEvenement) }}
+      {{ form_errors(edit_form.descriptionEvenement) }}
+      {{ form_widget(edit_form.descriptionEvenement) }}   
+  <br/>
+  <div class="row">
+    <div class="span4">
+     <div id="datetimepicker1" class="input-append date">
+      {{ form_label(edit_form.dateEvenement) }}
+      {{ form_errors(edit_form.dateEvenement) }}
+      {{ form_widget(edit_form.dateEvenement) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+   <div class="span4">       
+     <div id="datetimepicker2" class="input-append date">
+      {{ form_label(edit_form.dateFin) }}
+      {{ form_errors(edit_form.dateFin) }}
+      {{ form_widget(edit_form.dateFin) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+ </div>
+    {{ form_widget(edit_form) }}
+ 
+        <br><br>
+        
+      <button class="btn btn-primary" type="submit">Enregistrer</button>
+      <a class="btn" href="{{ path('evenementassocie') }}"><i class="icon-ban-circle"></i> Annuler</a>
+
+</form>
+
+        <form action="{{ path('evenementassocie_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+          <button class="btn btn-danger" type="submit">Supprimer {{ entity }}</button><i class="icon-remove icon-white"></i>
+        </form>
+</div>
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false,
+    });
+    $('#datetimepicker2').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false
+    });
+  });
+</script>
+
+{% endblock %}
+
+  
+        
+      

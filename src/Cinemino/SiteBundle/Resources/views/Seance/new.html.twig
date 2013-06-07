@@ -1,26 +1,76 @@
 
-{% extends "CineminoSiteBundle::seancelayout.html.twig" %}
+{% extends "CineminoSiteBundle::layout.html.twig" %}
 {% block title %}
 {{ parent() }} - Séances
 {% endblock %}
 
 
-{% block titre2 %}<div class="page-header"><h3>Créer un séance</h3></div>{% endblock %}
-
-
-{% block formulaire %}
-<div id="formulaire" class="well">
+{% block content %}
+<div id="formulaire_seance" class="well">
 <form action="{{ path('seance_create') }}" method="post" {{ form_enctype(form) }}>
-    
-  <div id="datetimepicker1" class="input-append date">
+  <div class="row">  
+   <div id="datetimepicker1" class="input-append date offset2">
       {{ form_label(form.dateSeance) }}
       {{ form_errors(form.dateSeance) }}
       {{ form_widget(form.dateSeance) }}
       <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
       </span>
+   </div>
   </div>
-    {{ form_errors(form) }}
+ <br/>   
+ <div class="row">
+    <div class="span4">
+      {{ form_label(form.version) }}
+      {{ form_errors(form.version) }}
+      {{ form_widget(form.version) }}
+    </div>    
+    <div class="span4">
+      {{ form_label(form.type) }}
+      {{ form_errors(form.type) }}
+      {{ form_widget(form.type) }}
+    </div> 
+  </div>
+ <br/>
+ <div class="row">
+    <div class="span4">
+      {{ form_label(form.avantPremiere) }}
+      {{ form_errors(form.avantPremiere) }}
+      {{ form_widget(form.avantPremiere) }}
+    </div>    
+    <div class="span4">
+      {{ form_label(form.sortieNationale) }}
+      {{ form_errors(form.sortieNationale) }}
+      {{ form_widget(form.sortieNationale) }}
+    </div> 
+  </div>
+<br/> 
+ <div class="row">
+    <div class="span4">
+      {{ form_label(form.idEvenements) }}
+      {{ form_errors(form.idEvenements) }}
+      {{ form_widget(form.idEvenements) }}
+    </div>    
+    <div class="span4">
+      {{ form_label(form.idEvenementAssocies) }}
+      {{ form_errors(form.idEvenementAssocies) }}
+      {{ form_widget(form.idEvenementAssocies) }}
+    </div> 
+  </div>
+<br/>
+<div class="row">
+    <div class="span4">
+      {{ form_label(form.idCinema) }}
+      {{ form_errors(form.idCinema) }}
+      {{ form_widget(form.idCinema) }}
+    </div>    
+    <div class="span4">
+      {{ form_label(form.idFilm) }}
+      {{ form_errors(form.idFilm) }}
+      {{ form_widget(form.idFilm) }}
+    </div> 
+  </div>
+     {{ form_errors(form) }}
     {{ form_widget(form) }}
 <br><br>        
     <p>
@@ -33,8 +83,8 @@
   $(function() {
     $('#datetimepicker1').datetimepicker({
       format :'dd/MM/yyyy hh:mm',
-      language: 'fr'
+      language: 'FR'
     });
   });
 </script>
-{% endblock formulaire %}
+{% endblock content %}

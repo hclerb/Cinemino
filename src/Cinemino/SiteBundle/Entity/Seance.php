@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Seance
  *
  * @ORM\Table(name="seance")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cinemino\SiteBundle\Entity\SeanceRepository")
  */
 class Seance
 {
@@ -20,13 +20,6 @@ class Seance
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_EVENEMENT", type="integer", nullable=true)
-     */
-    private $idEvenement;
 
     /**
      * @var \DateTime
@@ -83,7 +76,26 @@ class Seance
      */
     private $idCinema;
 
-
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Evenement", cascade={"persist"})
+     * @ORM\JoinTable(name="seance_evenement",
+     *      joinColumns={@ORM\JoinColumn(name="seance_id", referencedColumnName="ID")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="evenement_id", referencedColumnName="ID")}
+     *      )
+     */
+    private $idEvenements;
+    
+     /**
+     *
+     * @ORM\ManyToMany(targetEntity="EvenementAssocie", cascade={"persist"})
+     * @ORM\JoinTable(name="seance_evenementassocie",
+     *      joinColumns={@ORM\JoinColumn(name="seance_id", referencedColumnName="ID")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="evenementassocie_id", referencedColumnName="ID")}
+     *      ) 
+     */
+    private $idEvenementAssocies;
+    
 
     /**
      * Set dateSeance
@@ -235,29 +247,6 @@ class Seance
     }
 
     /**
-     * Set idEvenement
-     *
-     * @param \Cinemino\SiteBundle\Entity\Evenement $idEvenement
-     * @return Seance
-     */
-    public function setIdEvenement(\Cinemino\SiteBundle\Entity\Evenement $idEvenement = null)
-    {
-        $this->idEvenement = $idEvenement;
-    
-        return $this;
-    }
-
-    /**
-     * Get idEvenement
-     *
-     * @return \Cinemino\SiteBundle\Entity\Evenement 
-     */
-    public function getIdEvenement()
-    {
-        return $this->idEvenement;
-    }
-
-    /**
      * Set idFilm
      *
      * @param \Cinemino\SiteBundle\Entity\Film $idFilm
@@ -278,5 +267,79 @@ class Seance
     public function getIdFilm()
     {
         return $this->idFilm;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idEvenements = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idEvenementAssocies = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add idEvenements
+     *
+     * @param \Cinemino\SiteBundle\Entity\Evenement $idEvenements
+     * @return Seance
+     */
+    public function addIdEvenement(\Cinemino\SiteBundle\Entity\Evenement $idEvenements)
+    {
+        $this->idEvenements[] = $idEvenements;
+    
+        return $this;
+    }
+
+    /**
+     * Remove idEvenements
+     *
+     * @param \Cinemino\SiteBundle\Entity\Evenement $idEvenements
+     */
+    public function removeIdEvenement(\Cinemino\SiteBundle\Entity\Evenement $idEvenements)
+    {
+        $this->idEvenements->removeElement($idEvenements);
+    }
+
+    /**
+     * Get idEvenements
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIdEvenements()
+    {
+        return $this->idEvenements;
+    }
+
+    /**
+     * Add idEvenementAssocies
+     *
+     * @param \Cinemino\SiteBundle\Entity\EvenementAssocie $idEvenementAssocies
+     * @return Seance
+     */
+    public function addIdEvenementAssocie(\Cinemino\SiteBundle\Entity\EvenementAssocie $idEvenementAssocies)
+    {
+        $this->idEvenementAssocies[] = $idEvenementAssocies;
+    
+        return $this;
+    }
+
+    /**
+     * Remove idEvenementAssocies
+     *
+     * @param \Cinemino\SiteBundle\Entity\EvenementAssocie $idEvenementAssocies
+     */
+    public function removeIdEvenementAssocie(\Cinemino\SiteBundle\Entity\EvenementAssocie $idEvenementAssocies)
+    {
+        $this->idEvenementAssocies->removeElement($idEvenementAssocies);
+    }
+
+    /**
+     * Get idEvenementAssocies
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIdEvenementAssocies()
+    {
+        return $this->idEvenementAssocies;
     }
 }

@@ -92,18 +92,18 @@ class IntervenantController extends Controller
             $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
             if($entity->getFilelogo()!=NULL){   
               $url = $entity->getFilelogo();
-              $entity->setUrlLogo($resize->UploadPhoto($url,"Intervenant/logo/big",LgLogoBig,HtLogoBig)); 
-              $resize->UploadPhoto($url,"Intervenant/logo/small",LgLogoSmall,HtLogoSmall);
+              $entity->setUrlLogo($resize->UploadPhoto($url,"Intervenant/logo/big",LgLogoIBig,HtLogoIBig)); 
+              $resize->UploadPhoto($url,"Intervenant/logo/small",LgLogoISmall,HtLogoISmall);
             }
             if($entity->getFilephoto()!=NULL){   
               $url = $entity->getFilephoto();
-              $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoBig,HtPhotoBig)); 
-              $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoSmall,HtPhotoSmall);
+              $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoIBig,HtPhotoIBig)); 
+              $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoISmall,HtPhotoISmall);
             }
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('intervenant_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('intervenant', array('id' => $entity->getId())));
         }
 
         return $this->render('CineminoSiteBundle:Intervenant:new.html.twig', array(
@@ -159,18 +159,18 @@ class IntervenantController extends Controller
             $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
             if($entity->getFilelogo()!=NULL){   
               $url = $entity->getFilelogo();
-              $entity->setUrlLogo($resize->UploadPhoto($url,"Intervenant/logo/big",LgPhotoBig,HtPhotoBig)); 
-              $resize->UploadPhoto($url,"Intervenant/logo/small",LgPhotoSmall,HtPhotoSmall);
+              $entity->setUrlLogo($resize->UploadPhoto($url,"Intervenant/logo/big",LgPhotoIBig,HtPhotoIBig)); 
+              $resize->UploadPhoto($url,"Intervenant/logo/small",LgPhotoISmall,HtPhotoISmall);
             }
             if($entity->getFilephoto()!=NULL){   
               $url = $entity->getFilephoto();
-              $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoBig,HtPhotoBig)); 
-              $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoSmall,HtPhotoSmall);
+              $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoIBig,HtPhotoIBig)); 
+              $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoISmall,HtPhotoISmall);
             }
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('intervenant_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('intervenant', array('id' => $id)));
         }
 
         return $this->render('CineminoSiteBundle:Intervenant:edit.html.twig', array(

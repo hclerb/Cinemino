@@ -10,7 +10,7 @@
 
 {% block formulaire %}
 <div id="formulaire" class="well">
-<div class="page-header"><h3>Séance du {{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }} à {{ entity.dateSeance|date('H:i') }} </h3></div>
+<div class="page-header"><h3>Séance du {{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }} à {{ entity.dateSeance|date('H:i') }}  - {{ entity.idCinema.nomCinema }}</h3></div>
 <div class="row">
     <div class = "span2">
         <div><img class="img-polaroid" style="height:150px;" src="{{ asset('medias/Film/affiches/big/') }}{{ entity.idFilm.Affiche }}" alt=""/></div>
@@ -38,16 +38,40 @@
                     <th>Sortie nationale</th>
                     <td>{% if entity.sortieNationale == 'o' %}Oui{% else %}Non{% endif %}</td>
                 </tr>
+                <tr>
+                    <th>Evènements</th>
+                    <td>
+                        {% if entity.idEvenements[0] is defined %}
+                            {% for evt in entity.idEvenements %}
+                                <a href="{{ path('evenement_show', { 'id': evt.id }) }}">{{ evt.titreEvenement }}</a>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Evènements Associés</th>
+                    <td>
+                        {% if entity.idEvenementAssocies[0] is defined %}
+                          {% for evt in entity.idEvenementAssocies %}
+                            <a href="{{ path('evenementassocie_show', { 'id': evt.id }) }}">{{ evt.titreEvenement }}</a>
+                          {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 </div>
-<br><br>
-
-      <a class="btn" href="{{ path('seance') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+<div class="row">
+    <div class = "span2">
       <a class="btn" href="{{ path('seance_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-pencil"></i> Editer</a>
-
- 
-
+    </div>
+    <div class = "span2">
+      <form action="{{ path('seance_delete', { 'id': entity.id }) }}" method="post">
+        {{ form_widget(delete_form) }}
+        <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer</button>
+      </form>
+    </div>
+</div>
 </div>
 {% endblock %}

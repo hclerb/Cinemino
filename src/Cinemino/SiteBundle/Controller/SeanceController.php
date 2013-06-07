@@ -47,8 +47,7 @@ class SeanceController extends Controller
         return $this->render('CineminoSiteBundle::seancelayout.html.twig', array(
             'entities' => $entities,
             'dir_url' => $dir_url,
-            'cinemas' => $cinemas 
-            
+            'cinemas' => $cinemas             
         ));
     }
 
@@ -67,9 +66,9 @@ class SeanceController extends Controller
         $user = $this->container->get('security.context')->getToken()->getUser();
         
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')){ 
-        $cinemas = $em->getRepository('CineminoSiteBundle:Cinema')->findAll();}
+            $cinemas = $em->getRepository('CineminoSiteBundle:Cinema')->findAll();}
         else{
-        $cinemas = $em->getRepository('CineminoSiteBundle:Cinema')->findByidCompte($user->getId());}
+           $cinemas = $em->getRepository('CineminoSiteBundle:Cinema')->findByidCompte($user->getId());}
 
         $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
         if (!$entity) {

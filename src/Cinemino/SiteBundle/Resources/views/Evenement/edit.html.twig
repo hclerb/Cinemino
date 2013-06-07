@@ -12,11 +12,12 @@
 {% block content %}
 <div class="well" style="width:800px">
 <form action="{{ path('evenement_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+     {{ tinymce_init() }}
     {{ form_widget(edit_form) }}
  
         <br><br>
         
-      <button class="btn btn-primary" type="submit">Editer</button>
+      <button class="btn btn-primary" type="submit">Enregistrer</button>
       <a class="btn" href="{{ path('evenement') }}"><i class="icon-ban-circle"></i> Annuler</a>
 
 </form>
@@ -26,7 +27,20 @@
           <button class="btn btn-danger" type="submit">Supprimer {{ entity }}</button><i class="icon-remove icon-white"></i>
         </form>
 </div>
-
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false,
+    });
+    $('#datetimepicker2').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false
+    });
+  });
+</script>
 
 {% endblock %}
 

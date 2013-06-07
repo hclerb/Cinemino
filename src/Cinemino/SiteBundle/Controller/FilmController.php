@@ -105,8 +105,8 @@ class FilmController extends Controller
             $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
            if($entity->getFile()!=NULL){   
             $url = $entity->getFile();
-            $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheBig,HtAfficheBig)); 
-            $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
+            $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
+            $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
             } 
                           
             foreach($entity->getIdMedias() as $media)  
@@ -117,8 +117,8 @@ class FilmController extends Controller
                 $dest="medias/Film/sons";           // par défaut on dit que c'est un son
                 switch ($media->getType()) {
                     case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                             $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoFBig,HtPhotoFBig)); 
+                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoFSmall,HtPhotoFSmall); 
                        break;
                     case 'v': $dest = "medias/Film/videos";
                     default :
@@ -201,8 +201,8 @@ class FilmController extends Controller
             if ($entity->getFile()!=NULL) 
             {
               $url = $entity->getFile();               
-              $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheBig,HtAfficheBig)); 
-              $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheSmall,HtAfficheSmall);
+              $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
+              $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
             }
   
             
@@ -218,8 +218,8 @@ class FilmController extends Controller
                 $dest="medias/Film/sons";           // par défaut on dit que c'est un son
                 switch ($media->getType()) {
                     case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                             $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoFBig,HtPhotoFBig)); 
+                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoFSmall,HtPhotoFSmall); 
                        break;
                     case 'v': $dest = "medias/Film/videos";
                     default :

@@ -24,11 +24,16 @@ class TypeEvenement
     /**
      * @var string
      *
-     * @ORM\Column(name="LABEL", type="string", length=25, nullable=true)
+     * @ORM\Column(name="LABEL", type="string", length=25, nullable=false)
      */
     private $label;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PICTO", type="string", length=25, nullable=true)
+     */
+    private $picto;
 
     /**
      * Set label
@@ -65,5 +70,28 @@ class TypeEvenement
     
     public function __toString() {    
         return $this->label;
+    }
+
+    /**
+     * Set picto
+     *
+     * @param string $picto
+     * @return TypeEvenement
+     */
+    public function setPicto($picto)
+    {
+        $this->picto = $picto;
+    
+        return $this;
+    }
+
+    /**
+     * Get picto
+     *
+     * @return string 
+     */
+    public function getPicto()
+    {
+        return $this->picto;
     }
 }

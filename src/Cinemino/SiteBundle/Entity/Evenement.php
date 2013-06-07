@@ -8,7 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * Evenement
  *
  * @ORM\Table(name="evenement")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cinemino\SiteBundle\Entity\EvenementRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"evenement" = "Evenement", "evenenementassocie"="EvenementAssocie"})
  */
 class Evenement
 {
@@ -19,59 +22,21 @@ class Evenement
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID_SEANCES", type="integer", nullable=true)
-     */
-    private $idSeances;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="TITRE_EVENEMENT", type="string", length=25, nullable=true)
      */
-    private $titreEvenement;
+    protected $titreEvenement;
 
     /**
      * @var string
      *
      * @ORM\Column(name="DESCRIPTION_EVENEMENT", type="string", length=100, nullable=true)
      */
-    private $descriptionEvenement;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="DATE_EVENEMENT", type="datetime", nullable=true)
-     */
-    private $dateEvenement;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="DATE_FIN", type="datetime", nullable=true)
-     */
-    private $dateFin;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="PRIORITE", type="string", length=2, nullable=true)
-     */
-    private $priorite;
-
-    /**
-     * @var \Lieu
-     *
-     * @ORM\ManyToOne(targetEntity="Lieu")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ID_LIEU", referencedColumnName="ID")
-     * })
-     */
-    private $idLieu;
+    protected $descriptionEvenement;
 
     /**
      * @var \TypeEvenement
@@ -86,21 +51,23 @@ class Evenement
     /**
      * @var \Doctrine\Common\Collections\Collection
      * 
-     * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\MediaEvt", mappedBy="idFilm")
+     * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\MediaEvt", mappedBy="idEvt")
      */
     protected $idMedias;
     
     /**
      * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\ManyToMany(targetEntity="Cinemino\SiteBundle\Entity\Intervenant", mappedBy="idEvenements", cascade={"persist"})
      */
-    private $idIntervenant;
+    private $idIntervenants;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idIntervenant = new \Doctrine\Common\Collections\ArrayCollection();
+      $this->idIntervenants = new \Doctrine\Common\Collections\ArrayCollection();  
     }
     
     /**
@@ -150,75 +117,6 @@ class Evenement
     }
 
     /**
-     * Set dateEvenement
-     *
-     * @param \DateTime $dateEvenement
-     * @return Evenement
-     */
-    public function setDateEvenement($dateEvenement)
-    {
-        $this->dateEvenement = $dateEvenement;
-    
-        return $this;
-    }
-
-    /**
-     * Get dateEvenement
-     *
-     * @return \DateTime 
-     */
-    public function getDateEvenement()
-    {
-        return $this->dateEvenement;
-    }
-
-    /**
-     * Set dateFin
-     *
-     * @param \DateTime $dateFin
-     * @return Evenement
-     */
-    public function setDateFin($dateFin)
-    {
-        $this->dateFin = $dateFin;
-    
-        return $this;
-    }
-
-    /**
-     * Get dateFin
-     *
-     * @return \DateTime 
-     */
-    public function getDateFin()
-    {
-        return $this->dateFin;
-    }
-
-    /**
-     * Set priorite
-     *
-     * @param string $priorite
-     * @return Evenement
-     */
-    public function setPriorite($priorite)
-    {
-        $this->priorite = $priorite;
-    
-        return $this;
-    }
-
-    /**
-     * Get priorite
-     *
-     * @return string 
-     */
-    public function getPriorite()
-    {
-        return $this->priorite;
-    }
-
-    /**
      * Get id
      *
      * @return integer 
@@ -251,84 +149,6 @@ class Evenement
         return $this->idType;
     }
 
-    /**
-     * Set idLieu
-     *
-     * @param \Cinemino\SiteBundle\Entity\Lieu $idLieu
-     * @return Evenement
-     */
-    public function setIdLieu(\Cinemino\SiteBundle\Entity\Lieu $idLieu = null)
-    {
-        $this->idLieu = $idLieu;
-    
-        return $this;
-    }
-
-    /**
-     * Get idLieu
-     *
-     * @return \Cinemino\SiteBundle\Entity\Lieu 
-     */
-    public function getIdLieu()
-    {
-        return $this->idLieu;
-    }
-
-    /**
-     * Set idSeances
-     *
-     * @param \Cinemino\SiteBundle\Entity\Seance $idSeances
-     * @return Evenement
-     */
-    public function setIdSeances(\Cinemino\SiteBundle\Entity\Seance $idSeances = null)
-    {
-        $this->idSeances = $idSeances;
-    
-        return $this;
-    }
-
-    /**
-     * Get idSeances
-     *
-     * @return \Cinemino\SiteBundle\Entity\Seance 
-     */
-    public function getIdSeances()
-    {
-        return $this->idSeances;
-    }
-
-    /**
-     * Add idIntervenant
-     *
-     * @param \Cinemino\SiteBundle\Entity\Intervenant $idIntervenant
-     * @return Evenement
-     */
-    public function addIdIntervenant(\Cinemino\SiteBundle\Entity\Intervenant $idIntervenant)
-    {
-        $this->idIntervenant[] = $idIntervenant;
-    
-        return $this;
-    }
-
-    /**
-     * Remove idIntervenant
-     *
-     * @param \Cinemino\SiteBundle\Entity\Intervenant $idIntervenant
-     */
-    public function removeIdIntervenant(\Cinemino\SiteBundle\Entity\Intervenant $idIntervenant)
-    {
-        $this->idIntervenant->removeElement($idIntervenant);
-    }
-
-    /**
-     * Get idIntervenant
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdIntervenant()
-    {
-        return $this->idIntervenant;
-    }
     
     /**
      * Add idMedia
@@ -367,5 +187,50 @@ class Evenement
     public function __toString() {
         
         return $this->titreEvenement;
+    }
+
+    /**
+     * Get idMedias
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIdMedias()
+    {
+        return $this->idMedias;
+    }
+
+    /**
+     * Add idIntervenants
+     *
+     * @param \Cinemino\SiteBundle\Entity\Intervenant $idIntervenants
+     * @return Evenement
+     */
+    public function addIdIntervenant(\Cinemino\SiteBundle\Entity\Intervenant $idIntervenants)
+    {
+        $this->idIntervenants[] = $idIntervenants;
+        $idIntervenants->addIdEvenement($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove idIntervenants
+     *
+     * @param \Cinemino\SiteBundle\Entity\Intervenant $idIntervenants
+     */
+    public function removeIdIntervenant(\Cinemino\SiteBundle\Entity\Intervenant $idIntervenants)
+    {
+        $this->idIntervenants->removeElement($idIntervenants);
+        $idIntervenants->removeIdEvenement($this);
+    }
+
+    /**
+     * Get idIntervenants
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIdIntervenants()
+    {
+        return $this->idIntervenants;
     }
 }

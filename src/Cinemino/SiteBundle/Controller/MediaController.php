@@ -95,8 +95,8 @@ class MediaController extends Controller
             $dest="medias/Film/sons";           // par défaut on dit que c'est un son
             switch ($entity->getType()) {
                     case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoMBig,HtPhotoMBig)); 
+                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
                        break;
                     case 'v': $dest = "medias/Film/videos";
                     default :
@@ -170,8 +170,8 @@ class MediaController extends Controller
                 $dest="medias/Film/sons";           // par défaut on dit que c'est un son
                 switch ($entity->getType()) {
                     case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoMBig,HtPhotoMBig)); 
+                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
                        break;
                     case 'v': $dest = "medias/Film/videos";
                     default :

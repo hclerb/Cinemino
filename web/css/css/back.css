@@ -15,3 +15,16 @@
 .inthemedia{
     margin: 11px 10px 0px 2px;
 }
+
+#formulaire_seance{
+   width:800px;
+   margin:auto;
+}
+
+#formulaire_seance .row{
+    padding-left: 30px;
+}
+
+label {
+    margin-top: 10px;
+}

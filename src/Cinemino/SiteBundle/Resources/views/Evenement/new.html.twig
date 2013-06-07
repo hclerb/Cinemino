@@ -12,6 +12,7 @@
 {% block content %}
 <div class="well" style="width:800px">
 <form action="{{ path('evenement_create') }}" method="post" {{ form_enctype(form) }}>
+     {{ tinymce_init() }}
     {{ form_widget(form) }}
  
         <br><br>
@@ -22,4 +23,18 @@
 </form>
 
 </div>
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false,
+    });
+    $('#datetimepicker2').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false
+    });
+  });
+</script>
 {% endblock %}

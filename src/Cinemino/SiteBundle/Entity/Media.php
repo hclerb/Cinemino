@@ -5,10 +5,10 @@ namespace Cinemino\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 
-define("LgPhotoSmall", 319);
-define("HtPhotoSmall",213);
-define("LgPhotoBig", 720);
-define("HtPhotoBig",480);
+define("LgPhotoMSmall", 319);
+define("HtPhotoMSmall",213);
+define("LgPhotoMBig", 720);
+define("HtPhotoMBig",480);
 
 /**
  * Media

@@ -4,15 +4,15 @@ namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-define("LgPhotoBig", 151);
-define("HtPhotoBig",201);
-define("LgPhotoSmall", 75);
-define("HtPhotoSmall",100);
+define("LgPhotoIBig", 151);
+define("HtPhotoIBig",201);
+define("LgPhotoISmall", 75);
+define("HtPhotoISmall",100);
 
-define("LgLogoBig", 151);
-define("HtLogoBig",201);
-define("LgLogoSmall", 75);
-define("HtLogoSmall",100);
+define("LgLogoIBig", 151);
+define("HtLogoIBig",201);
+define("LgLogoISmall", 75);
+define("HtLogoISmall",100);
 
 /**
  * Intervenant
@@ -62,8 +62,15 @@ class Intervenant
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\ManyToMany(targetEntity="Cinemino\SiteBundle\Entity\Evenement", inversedBy="idIntervenants", cascade={"persist"})
+     * @ORM\JoinTable(name="intervenant_evenement",
+     *      joinColumns={@ORM\JoinColumn(name="intervenant_id", referencedColumnName="ID")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="evenement_id", referencedColumnName="ID")}
+     *      ) 
+     * 
      */
-    private $idEvenement;
+    private $idEvenements;
 
     private $filephoto;              //permet de stocker temporairement le fichier affiche
     
@@ -74,7 +81,7 @@ class Intervenant
      */
     public function __construct()
     {
-        $this->idEvenement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idEvenements = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -178,40 +185,7 @@ class Intervenant
     {
         return $this->id;
     }
-
-    /**
-     * Add idEvenement
-     *
-     * @param \Cinemino\SiteBundle\Entity\Evenement $idEvenement
-     * @return Intervenant
-     */
-    public function addIdEvenement(\Cinemino\SiteBundle\Entity\Evenement $idEvenement)
-    {
-        $this->idEvenement[] = $idEvenement;
-    
-        return $this;
-    }
-
-    /**
-     * Remove idEvenement
-     *
-     * @param \Cinemino\SiteBundle\Entity\Evenement $idEvenement
-     */
-    public function removeIdEvenement(\Cinemino\SiteBundle\Entity\Evenement $idEvenement)
-    {
-        $this->idEvenement->removeElement($idEvenement);
-    }
-
-    /**
-     * Get idEvenement
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdEvenement()
-    {
-        return $this->idEvenement;
-    }
-    
+   
     public function __toString() {
         return $this->nomIntervenant;   
     } 
@@ -235,4 +209,36 @@ class Intervenant
     {
         return $this->filephoto;
     } 
+
+     /**
+     * Get idEvt
+     *
+     * @return \Cinemino\SiteBundle\Entity\Evenement 
+     */
+    public function getIdEvenements()
+    {
+        return $this->idEvenements;
+    }
+
+    /**
+     * Add idEvt
+     *
+     * @param \Cinemino\SiteBundle\Entity\Evenement $idEvt
+     * @return Intervenant
+     */
+    public function addIdEvenement(\Cinemino\SiteBundle\Entity\Evenement $idEvt)
+    {
+        $this->idEvenements[] = $idEvt;
+        return $this;
+    }
+
+    /**
+     * Remove idEvt
+     *
+     * @param \Cinemino\SiteBundle\Entity\Evenement $idEvt
+     */
+    public function removeIdEvenement(\Cinemino\SiteBundle\Entity\Evenement $idEvt)
+    {
+        $this->idEvenements->removeElement($idEvt);
+    }
 }

@@ -1,15 +1,5 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }}
-{% endblock %}
-
-{% block alert %}Ici vous pouvez gérer les intervenants qui viennent dans les évènements dont vous avez la charge.<br> 
-
-{% endblock %}
-
-{% block titre %}Liste des intervenants{% endblock %}
-
 
 {% block content %}
 <a class="btn btn-info" href="{{ path('intervenant_new') }}"><i class="icon-white icon-plus"></i> Ajouter un intervenant</a>

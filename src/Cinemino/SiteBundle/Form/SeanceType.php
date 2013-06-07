@@ -23,7 +23,7 @@ class SeanceType extends AbstractType
                     array('widget' => 'single_text',                     
                           'label' => 'Jour et Heure de la séance',
                           'format' => 'dd/MM/yyyy hh:mm'))
-            ->add('version',  'choice', array('label' => 'Version (VO, VOSTFR, VOST pour Malentendants, etc..)','choices' => array(
+            ->add('version',  'choice', array('label' => 'Version (VO, VOSTFR etc..)','choices' => array(
                     'VF' => 'VF',
                     'VOST' => 'VOST',
                     'VOSTM' => 'VOST pour Malentendants',
@@ -44,6 +44,8 @@ class SeanceType extends AbstractType
                     'o' => 'Oui',
                     ),
                 'required' => true))
+            ->add('idEvenements', null, array('label' => 'Attacher un ou plusieurs évènements', 'required' => false))
+            ->add('idEvenementAssocies', null, array('label' => 'Attacher un ou plusieurs évènements associés', 'required' => false))                
             ->add('idCinema', 'entity', array(
                 'label' => 'Cinéma',
                 'class' => 'CineminoSiteBundle:Cinema',
@@ -52,7 +54,6 @@ class SeanceType extends AbstractType
                                     return $r->getCineAutorise($this->iduser);
                                   }  
                 ))
-            ->add('idEvenement', null, array('label' => 'Attacher un évènement'))
             ->add('idFilm', null, array('label' => 'Choisir le film pour cette séance', 'required' => true))
         ;
     }

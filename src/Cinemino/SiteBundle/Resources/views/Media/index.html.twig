@@ -1,15 +1,5 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }} -  Accueil
-{% endblock %}
-
-{% block alert %}Gérez les médias liés au films. Un média peut etre lié a plusieurs films.<br>
-{% endblock %}
-
-{% block titre %}Liste des médias{% endblock %}
-
-
 {% block content %}
 
 {% include 'CineminoSiteBundle:MediaFilm:index.html.twig' %}

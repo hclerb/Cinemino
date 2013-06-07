@@ -30,7 +30,18 @@
         </tr>
        
         <tr>  
-        <th>Evènement(s) lié(s) :<th>
+            <th>Participe à :<th>
+            <td>
+                {% if entity.idEvenements[0] is defined %}
+                  {% for evt in entity.idEvenements %}
+                    {% if evt.priorite is defined %} <a href="{{ path('evenementassocie_show', { 'id': evt.id }) }}"> 
+                     {% else %} <a href="{{ path('evenement_show', { 'id': evt.id }) }}">
+                    {% endif %}
+                    {{ evt.titreEvenement }}</a>
+                   <br/>
+                  {% endfor %}
+                {% endif %}
+            </td>
         </tr>
         
     </tbody>

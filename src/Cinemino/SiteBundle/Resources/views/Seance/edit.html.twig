@@ -1,48 +1,91 @@
 
-{% extends "CineminoSiteBundle::seancelayout.html.twig" %}
+{% extends "CineminoSiteBundle::layout.html.twig" %}
 {% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
 {% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
-{% block title %}
-{{ parent() }} - Séances
-{% endblock %}
 
-{% block formulaire %}
+{% block content %}
 
-<div id="formulaire" class="well" style="width:800px">
-<div class="page-header"><h3>Modifier séance du {{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }} à {{ entity.dateSeance|date('H:i') }}</h3>
+<div id="formulaire_seance" class="well">
+<div class="page-header"><h3>Modifier séance du {{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }} à {{ entity.dateSeance|date('H:i') }} - {{ entity.idCinema.nomCinema }}</h3>
 
+</div>  
 
-{% for key, flash in app.session.getFlashes() %}
-    <div class="alert alert-success">
-        {{ flash|trans }}
-    </div>
-{% endfor %}
-
-</div>    
 <form action="{{ path('seance_update', { 'id': entity.id }) }}#formulaire" method="post" {{ form_enctype(edit_form) }}>
-  <div id="datetimepicker1" class="input-append date">
+  <div class="row">  
+   <div id="datetimepicker1" class="input-append date offset2">
       {{ form_label(edit_form.dateSeance) }}
       {{ form_errors(edit_form.dateSeance) }}
       {{ form_widget(edit_form.dateSeance) }}
       <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
       </span>
+   </div>
+  </div>
+ <div class="row">
+    <div class="span4">
+      {{ form_label(edit_form.version) }}
+      {{ form_errors(edit_form.version) }}
+      {{ form_widget(edit_form.version) }}
+    </div>    
+    <div class="span4">
+      {{ form_label(edit_form.type) }}
+      {{ form_errors(edit_form.type) }}
+      {{ form_widget(edit_form.type) }}
+    </div> 
+  </div>
+ <div class="row">
+    <div class="span4">
+      {{ form_label(edit_form.avantPremiere) }}
+      {{ form_errors(edit_form.avantPremiere) }}
+      {{ form_widget(edit_form.avantPremiere) }}
+    </div>    
+    <div class="span4">
+      {{ form_label(edit_form.sortieNationale) }}
+      {{ form_errors(edit_form.sortieNationale) }}
+      {{ form_widget(edit_form.sortieNationale) }}
+    </div> 
+  </div>
+ <div class="row">
+    <div class="span4">
+      {{ form_label(edit_form.idEvenements) }}
+      {{ form_errors(edit_form.idEvenements) }}
+      {{ form_widget(edit_form.idEvenements) }}
+    </div>    
+    <div class="span4">
+      {{ form_label(edit_form.idEvenementAssocies) }}
+      {{ form_errors(edit_form.idEvenementAssocies) }}
+      {{ form_widget(edit_form.idEvenementAssocies) }}
+    </div> 
+  </div>
+<div class="row">
+    <div class="span4">
+      {{ form_label(edit_form.idCinema) }}
+      {{ form_errors(edit_form.idCinema) }}
+      {{ form_widget(edit_form.idCinema) }}
+    </div>    
+    <div class="span4">
+      {{ form_label(edit_form.idFilm) }}
+      {{ form_errors(edit_form.idFilm) }}
+      {{ form_widget(edit_form.idFilm) }}
+    </div> 
   </div>
     {{ form_widget(edit_form) }}
-        
-     <br><br>   
-    <p>
+ <br/><br/>       
+ <div class="row">
+      <div class="span2">   
         <button class="btn btn-primary" type="submit">Enregistrer</button>
+      </div>
+      <div class="span2"> 
         <a class="btn" href="{{ path('seance') }}"><i class="icon-ban-circle"></i> Annuler</a>
-    </p>
-</form>
-
-
+      </div>
+      <div class="span2"> 
         <form action="{{ path('seance_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-           <button class="btn btn-danger" type="submit">Supprimer la séance</button><i class="icon-remove icon-white"></i>
+           <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer</button>
         </form>
-    </li>
+      </div>
+</form>
+
 
 
 </div>    
@@ -55,4 +98,4 @@
   });
 </script> 
 
-{% endblock formulaire %}
+{% endblock content %}

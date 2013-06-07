@@ -4,10 +4,10 @@ namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-define("LgAfficheBig", 151);
-define("HtAfficheBig",201);
-define("LgAfficheSmall", 75);
-define("HtAfficheSmall",100);
+define("LgAfficheFBig", 151);
+define("HtAfficheFBig",201);
+define("LgAfficheFSmall", 75);
+define("HtAfficheFSmall",100);
 
 
 /**

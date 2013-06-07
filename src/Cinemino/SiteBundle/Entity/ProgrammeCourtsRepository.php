@@ -3,7 +3,7 @@
 namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Site\ParnalBundle\Entity\Seance;
+use Cinemino\SiteBundle\Entity\ProgrammeCourts;
 
 /**
  * DebatRepository

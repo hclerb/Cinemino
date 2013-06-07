@@ -1,17 +1,12 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }} -  Utilisateurs
-{% endblock %}
-
-{% block alert %}Ici vous pouvez gérer l'ensemble des utilisateurs.
-{% endblock %}
-
-{% block titre %}Liste des utilisateurs{% endblock %}
-
 
 {% block content %}
 
+{% if (is_granted('ROLE_SUPER_ADMIN')) %}
+   <a class="btn btn-info" href="{{ path('user_new') }}"><i class="icon-white icon-plus"></i> Ajouter un utilisateur</a>
+{% endif %}
+<br/><br/>
 
 <table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
     <thead>
@@ -45,10 +40,7 @@
     {% endfor %}
     </tbody>
 </table>
-{% if (is_granted('ROLE_SUPER_ADMIN')) %}
-   <a class="btn btn-info" href="{{ path('user_new') }}"><i class="icon-white icon-plus"></i> Ajouter un utilisateur</a>
-{% endif %}
-<br><br>
+
 
    
 {% block formulaire %}

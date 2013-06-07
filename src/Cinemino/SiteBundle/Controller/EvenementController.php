@@ -23,9 +23,12 @@ class EvenementController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('CineminoSiteBundle:Evenement')->findAll();
-// faire une jointure pour récupérer que les évènements lié aux programmateur
-        return $this->render('CineminoSiteBundle:Evenement:index.html.twig', array(
+
+        $entitiesAss = $em->getRepository('CineminoSiteBundle:Evenementassocie')->findAll();
+        
+        return $this->render('CineminoSiteBundle:AllEvenement:index.html.twig', array(
             'entities' => $entities,
+            'entitiesAss' => $entitiesAss,
         ));
     }
 
@@ -78,9 +81,14 @@ class EvenementController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+            foreach($entity->getIdIntervenants() as $ent)  
+            {               
+               $entity->addIdIntervenant($ent);  
+               $em->persist($ent);
+            }
             $em->flush();
 
-            return $this->redirect($this->generateUrl('evenement_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('evenement', array('id' => $entity->getId())));
         }
 
         return $this->render('CineminoSiteBundle:Evenement:new.html.twig', array(
@@ -126,16 +134,39 @@ class EvenementController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Evenement entity.');
         }
-
+        $lesoldintervenants = array();  	
+    	foreach ($entity->getIdIntervenants() as $oldinter) $lesoldintervenants[] = $oldinter;
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new EvenementType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+          foreach($entity->getIdIntervenants() as $ent)  
+            {
+              // Si le médias est toujours actifs on le supprime du tableau de nettoyage  
+              $pasla=true;
+              foreach ($lesoldintervenants as $key => $toDel) {
+    		if ($toDel->getId() === $ent->getId()) 
+                {  
+                  unset($lesoldintervenants[$key]);
+                  $pasla=false;
+                }
+              }
+              if ($pasla)           // intervenant nouveau ajouté
+              {   
+               $entity->addIdIntervenant($ent);  
+               $em->persist($ent);
+              }
+            }
+                        // Supprime les médias qui ont été enlevés dans la mise oà jour
+    	    foreach ($lesoldintervenants as $ent) {
+              $entity->removeIdIntervenant($ent);
+              $em->persist($ent);
+    	    }
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('evenement_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('evenement', array('id' => $id)));
         }
 
         return $this->render('CineminoSiteBundle:Evenement:edit.html.twig', array(

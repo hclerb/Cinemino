@@ -20,19 +20,7 @@
         </tr>
         <tr>
             <th>Description évènement :</th>
-            <td>{{ entity.descriptionEvenement }}</td>
-        </tr>
-        <tr>
-            <th>Date évenement :</th>
-            <td>{{ entity.dateEvenement|date('Y-m-d') }}</td>
-        </tr>
-        <tr>
-            <th>Date fin :</th>
-            <td>{{ entity.dateFin|date('Y-m-d') }}</td>
-        </tr>
-        <tr>
-            <th>Priorite :</th>
-            <td>{{ entity.priorite }}</td>
+            <td>{{ entity.descriptionEvenement|raw }}</td>
         </tr>
     </tbody>
 </table>

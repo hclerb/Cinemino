@@ -1,0 +1,48 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }}
+{% endblock %}
+
+{% block alert %}Gérer les évènements lié aux séances.
+{% endblock alert %}
+
+{% block titre %}{{ entity }}{% endblock %}
+
+
+{% block content %}
+
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Titre évenement Associé : </th>
+            <td>{{ entity.titreEvenement }}</td>
+        </tr>
+        <tr>
+            <th>Description : </th>
+            <td>{{ entity.descriptionEvenement|raw }}</td>
+        </tr>
+        <tr>
+            <th>Date début : </th>
+            <td>{{ entity.dateEvenement|date('Y-m-d') }}</td>
+        </tr>
+        <tr>
+            <th>Date fin : </th>
+            <td>{{ entity.dateFin|date('Y-m-d') }}</td>
+        </tr>
+        <tr>
+            <th>Priorite : </th>
+            <td>{{ entity.priorite }}</td>
+        </tr>
+    </tbody>
+</table>
+<br><br>
+<h5>A ajouter : info sur la ou les séances en relations, intervenants en relation ....</h5>
+<br><br><br>
+    
+<a class="btn btn-info" href="{{ path('evenementassocie_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+<a class="btn" href="{{ path('evenementassocie') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+
+<br><br>
+
+{% endblock %}

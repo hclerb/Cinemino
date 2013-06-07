@@ -20,7 +20,7 @@ class IntervenantType extends AbstractType
             ->add('filephoto', 'file', array('label' => 'Fichier de la photo :', 'required' => false))
             ->add('urlLogo', null, array('label' => 'Logo'))
             ->add('filelogo', 'file', array('label' => 'Fichier de la photo :', 'required' => false))
-           // ->add('idEvenement', null, array('label' => 'Evènement(s) rataché(s)','multiple' => true, 'required' => false))
+            ->add('idEvenements', null, array('label' => 'Evènement(s) rataché(s)', 'required' => false))
         ;
     }
 
