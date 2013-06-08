@@ -159,7 +159,7 @@ class Evenement
     public function addIdMedia(\Cinemino\SiteBundle\Entity\MediaEvt $idMedia)
     {
         $this->idMedias[] = $idMedia;
-        $idMedia->setIdFilm($this);
+        $idMedia->setIdEvt($this);
     
         return $this;
     }

@@ -1,0 +1,39 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block titre %}{{ entity.nomDocument }}{% endblock %}
+
+
+{% block content %}
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th width="250px">Nom du document</th>
+            <td>{{ entity.nomDocument }}</td>
+        </tr>
+        <tr>
+            <th width="250px">Descriptif du document</th>
+            <td>{{ entity.descriptifDocument|raw }}</td>
+        </tr>
+        <tr>
+            <th width="250px">Urlfichier</th>
+            <td>{{ entity.urlFichier }}</td>
+        </tr>
+    </tbody>
+</table>
+<br><br><br>
+    
+   <div class="row"> 
+       <div class="span3">
+            <a class="btn btn-info" href="{{ path('document_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+            <a class="btn" href="{{ path('document') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+        </div>
+        <div class="span4">
+           <form action="{{ path('document_delete', { 'id': entity.id }) }}" method="post">
+                   {{ form_widget(delete_form) }}
+                 <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i>Supprimer {{ entity.nomDocument }}</button>
+           </form>
+        </div>
+   </div>
+
+{% endblock %}

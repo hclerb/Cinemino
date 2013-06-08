@@ -74,18 +74,34 @@ class EvenementassocieController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity  = new Evenementassocie();
-        $form = $this->createForm(new EvenementassocieType(), $entity);
+        $entity  = new EvenementAssocie();
+        $form = $this->createForm(new EvenementAssocieType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
             $em->persist($entity);
-     /*       foreach($entity->getIdIntervenants() as $ent)  
-            {               
-               $entity->addIdIntervenant($ent);  
-               $em->persist($ent);
-            }*/
+            foreach($entity->getIdMedias() as $media)  
+            {
+              if ($media->getFile()!=NULL)
+              { 
+                $url = $media->getFile();
+                $dest="medias/Evt/sons";           // par défaut on dit que c'est un son
+                switch ($media->getType()) {
+                    case 'p':                       // C'est une phot, on la redimension et on l'upload
+                             $media->setUrl($resize->UploadPhoto($url,"Evt/photos/big",LgPhotoMBig,HtPhotoMBig)); 
+                             $resize->UploadPhoto($url,"Evt/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
+                       break;
+                    case 'v': $dest = "medias/Evt/videos";
+                    default :
+                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
+                            $url->move($dest,$url->getClientOriginalName());
+                 }
+                $media->setIdEvt($entity);
+                $em->persist($media);
+              } else $entity->removeIdMedia ($media);
+            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('evenementassocie', array('id' => $entity->getId())));
@@ -111,7 +127,7 @@ class EvenementassocieController extends Controller
             throw $this->createNotFoundException('Unable to find Evenementassocie entity.');
         }
 
-        $editForm = $this->createForm(new EvenementassocieType(), $entity);
+        $editForm = $this->createForm(new EvenementAssocieType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CineminoSiteBundle:Evenementassocie:edit.html.twig', array(
@@ -136,11 +152,18 @@ class EvenementassocieController extends Controller
         }
         $lesoldintervenants = array();  	
     	foreach ($entity->getIdIntervenants() as $oldinter) $lesoldintervenants[] = $oldinter;
+        
+        $originalMedias = array();
+    	foreach ($entity->getIdMedias() as $oldmedia) $originalMedias[] = $oldmedia;
+
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new EvenementassocieType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+         $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+         
+         // On s'occupe des intervenants
          foreach($entity->getIdIntervenants() as $ent)  
             {
               // Si le médias est toujours actifs on le supprime du tableau de nettoyage  
@@ -162,6 +185,37 @@ class EvenementassocieController extends Controller
     	    foreach ($lesoldintervenants as $ent) {
               $entity->removeIdIntervenant($ent);
               $em->persist($ent);
+    	    }
+            
+            // On s'occupe des médias
+            foreach($entity->getIdMedias() as $media)  
+            {
+              // Si le médias est toujours actifs on le supprime du tableau de nettoyage  
+              foreach ($originalMedias as $key => $toDel) {
+    		if ($toDel->getId() === $media->getId()) unset($originalMedias[$key]);
+              }
+              if ($media->getFile()!=NULL)
+              { 
+                $url = $media->getFile();
+                $dest="medias/Evt/sons";           // par défaut on dit que c'est un son
+                switch ($media->getType()) {
+                    case 'p':                       // C'est une phot, on la redimension et on l'upload
+                             $media->setUrl($resize->UploadPhoto($url,"Evt/photos/big",LgPhotoMBig,HtPhotoMBig)); 
+                             $resize->UploadPhoto($url,"Evt/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
+                       break;
+                    case 'v': $dest = "medias/Evt/videos";
+                    default :
+                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
+                            $url->move($dest,$url->getClientOriginalName());
+                 }
+              }
+              $media->setIdEvt($entity);
+              $em->persist($media);
+            }
+            
+            // Supprime les médias qui ont été enlevés dans la mise oà jour
+    	    foreach ($originalMedias as $media) {
+              $em->remove($media);
     	    }
             $em->persist($entity);
             $em->flush();

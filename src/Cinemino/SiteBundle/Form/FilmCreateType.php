@@ -13,7 +13,7 @@ class FilmCreateType extends FilmType
         parent::buildForm($builder, $options);
         $builder->remove('affiche')
                 ->remove('idMedias')
-                ->add('idMedias', 'collection', array('type'   => new MediaFilmCreateType(),
+                ->add('idMedias', 'collection', array('type'   => new MediaFilmCreateType('MediaFilm','mediacreatefilm'),
                                                  'label'    => ' ',
 						 'allow_add' => true,
 						 'allow_delete' => true,

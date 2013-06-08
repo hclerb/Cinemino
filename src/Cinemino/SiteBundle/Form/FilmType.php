@@ -56,7 +56,7 @@ class FilmType extends AbstractType
                     'n' => 'Long Métrage',
                     'c' => 'Court-Métrage'
                 )))
-            ->add('idMedias', 'collection', array('type'   => new MediaFilmssIdType(),
+            ->add('idMedias', 'collection', array('type'   => new MediaType('MediaFilm','mediafilmssid'),
                                                  'label'    => ' ',
 						 'allow_add' => true,
 						 'allow_delete' => true,

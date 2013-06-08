@@ -60,11 +60,12 @@
     </tbody>
 </table>
 
-
+{% if entity.id != 1 %}
         <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit">Supprimer le compte {{ entity.username }}</button><i class="icon-remove icon-white"></i>
+            <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer le compte {{ entity.username }}</button>
         </form>
+{% endif %}
  
 </div>
 {% endblock formulaire %}

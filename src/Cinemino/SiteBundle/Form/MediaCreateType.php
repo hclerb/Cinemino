@@ -13,17 +13,5 @@ class MediaCreateType extends MediaType
         parent::buildForm($builder, $options);
         $builder->remove('url');
     }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'Cinemino\SiteBundle\Entity\Media'
-        ));
-    }
-
-    public function getName()
-    {
-        return 'cinemino_Sitebundle_mediacreatetype';
-    }
 }
             

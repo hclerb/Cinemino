@@ -27,11 +27,18 @@ CineminoSite_seance:
 CineminoSite_film:
         resource: "routing/film.yml"
         prefix:   /film
-        
+
 CineminoSite_media:
         resource: "routing/media.yml"
         prefix:   /media
         
+CineminoSite_mediafilm:
+        resource: "routing/mediafilm.yml"
+        prefix:   /mediafilm
+        
+CineminoSite_mediaevt:
+        resource: "routing/mediaevt.yml"
+        prefix:   /mediaevt
              
 CineminoSiteBundle_evenement:
         resource: "routing/evenement.yml"
@@ -48,6 +55,10 @@ CineminoSiteBundle_sponsor:
 cineminoSite_voir:
     pattern:  /Site/article/{id}.{tag}
     defaults: { _controller: CineminoSiteBundle:Test:voir }
+
+CineminoSiteBundle_document:
+        resource: "@CineminoSiteBundle/Resources/config/routing/document.yml"
+        prefix:   /document
 
 
 cineminoSite_ajouter:

@@ -17,9 +17,8 @@
     <link href="{{ asset('css/css/bootstrap-datetimepicker.min') }}" rel="stylesheet">
     <link href="{{ asset('css/css/back.css') }}" rel="stylesheet">
     
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
-    <script src="{{ asset('css/js/jscolor/jscolor.js') }}" type="text/javascript"></script>
-    
+ <script src="{{ asset('css/js/jquery-1.8.3.min.js')}}"></script> 
+ <script src="{{ asset('css/js/jscolor/jscolor.js') }}" type="text/javascript"></script>   
 <script type="text/javascript">
 function scrolldown() {
  var h=0;
@@ -87,7 +86,7 @@ this.scroll(1,h);
                 <li><a href="#">Cinémino</a></li>
                 <li class="divider"></li>
                 <li><a href="{{ path('sponsor') }}">Sponsor</a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}">Documents</a></li>
+                <li><a href="{{ path('document') }}">Documents</a></li>
               </ul>
             </li>
           </ul>
@@ -145,7 +144,6 @@ this.scroll(1,h);
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{ asset('css/js/jquery-1.8.3.min.js')}}"></script>
      <!--<script src="{{ asset('css/js/application.js') }}"></script>
      <script src="{{ asset('css/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('css/js/bootswatch.js') }}"></script>-->

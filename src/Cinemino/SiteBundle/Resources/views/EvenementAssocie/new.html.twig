@@ -1,19 +1,51 @@
 {% extends "CineminoSiteBundle::layout.html.twig" %}
 
 {% block content %}
-<div class="well" style="width:800px">
+<div class="well">
 <form action="{{ path('evenementassocie_create') }}" method="post" {{ form_enctype(form) }}>
      {{ tinymce_init() }}
+ <div class="row">
+     <div class="span6">
       {{ form_label(form.titreEvenement) }}
       {{ form_errors(form.titreEvenement) }}
-      {{ form_widget(form.titreEvenement) }}   
-    
+      {{ form_widget(form.titreEvenement, { 'attr': {'style': 'width:570px;'} }) }}
+     </div>
+ </div>
+ <div class="row"> 
+      <div class="span11">    
       {{ form_label(form.descriptionEvenement) }}
       {{ form_errors(form.descriptionEvenement) }}
-      {{ form_widget(form.descriptionEvenement) }}   
-  <br/>  
+      {{ form_widget(form.descriptionEvenement, { 'attr': {'style': 'width:1130px;'} }) }}
+      </div>
+  <br/>
+</div>
+ <div class="row">
+    <div class="offset1 span5">
+      {{ form_label(form.idType) }}
+      {{ form_errors(form.idType) }}
+      {{ form_widget(form.idType) }} 
+    </div>
+    <div class="span5">       
+       {{ form_label(form.idLieu) }}
+      {{ form_errors(form.idLieu) }}
+      {{ form_widget(form.idLieu) }} 
+    </div>
+ </div>
+ <div class="row">
+    <div class="offset1 span5">
+
+      {{ form_label(form.priorite) }}
+      {{ form_errors(form.priorite) }}
+      {{ form_widget(form.priorite) }} 
+     </div> 
+    <div class="span5">       
+       {{ form_label(form.idIntervenants) }}
+      {{ form_errors(form.idIntervenants) }}
+      {{ form_widget(form.idIntervenants) }} 
+    </div>
+ </div> 
   <div class="row">
-    <div class="span4">
+    <div class="offset1 span5">
      <div id="datetimepicker1" class="input-append date">
       {{ form_label(form.dateEvenement) }}
       {{ form_errors(form.dateEvenement) }}
@@ -35,9 +67,50 @@
    </div>
  </div>     
  <br/>
+ <div id="ajout_media">
+  <h5>Médias associés</h5>
+  <div id="list_medias"> 
+      {% for key, item in form.idMedias %}
+          {{ _self.prototype(item) }}
+      {% endfor %}
+      {% macro prototype(item) %}
+        <div class="row" style="padding-left: 5px;">
+           <div class="span5">
+             {{ form_label(item.titre) }}
+             {{ form_errors(item.titre) }}
+             {{ form_widget(item.titre, { 'attr': {'style': 'width:470px;'} }) }}
+           </div>
+           <div class="span2">
+             {{ form_label(item.type) }}
+             {{ form_errors(item.type) }}
+             {{ form_widget(item.type, { 'attr': {'style': 'width:110px;'} }) }}
+           </div> 
+           <div class="span3">
+             {{ form_label(item.file) }}
+             {{ form_errors(item.file) }}
+             {{ form_widget(item.file) }}
+           </div> 
+           <div class="span1">
+             <br/>
+             <a  class="btn btn-danger" href="#supp_media" rel="parametre">Supprimer</a>
+          </div>
+       </div>
+       <br/>
+     {% endmacro %}
+     <script type="text/html">
+       {{ _self.prototype(form.idMedias.get('prototype')) }} 
+     </script>
+ </div>
+ <div class="row">  
+  <div class="span12">
+    <a class="btn btn-info" href="#add_media" id="add_media"><i class="icon-white icon-plus"></i> Ajouter un média</a>
+  </div>
+ </div>
+ <br/>
+</div>
     {{ form_widget(form) }}
  
-        <br><br>
+        <br/>
         
          <button class="btn btn-primary" type="submit">Créer l'évènement associé</button>
          <a class="btn" href="{{ path('evenementassocie') }}"><i class="icon-ban-circle"></i> Annuler</a>
@@ -57,6 +130,38 @@
       format :'dd/MM/yyyy',
       pickTime: false
     });
-  });
+
+    /*$('input[type=file]').change(function(e){
+        var fichier = $(this).val();
+        $("#affichefilm").html('<img src='+ fichier + ' />');
+    });*/
+    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+    var $container = $('#cinemino_Sitebundle_filmcreatetype_idMedias');
+ 
+    // On définit une fonction qui va ajouter un champ.
+    function add_media() {
+        index = $container.children().length;
+	var newForm = $('script[type="text/html"]').text().replace(/\$\$name\$\$/g, index);
+
+	$("div#list_medias").append(newForm);
+
+              
+    }
+
+    // On ajoute un premier champ directement s'il n'en existe pas déjà un.
+ 
+ 
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $('#add_media').click(function() {
+        add_media();
+    });
+    
+        $("div#list_medias").on("click","a[rel='parametre']", function(){ 
+          if (confirm('Voulez vous réellement supprimer ce média ?')) {
+            $(this).parents("div.row").remove();
+          }
+        	
+        });
+});
 </script>
 {% endblock %}

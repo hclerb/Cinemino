@@ -6,8 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Cinemino\SiteBundle\Controller\MediaController;
 use Cinemino\SiteBundle\Entity\MediaEvt;
-use Cinemino\SiteBundle\Form\MediaFilmCreateType;
-use Cinemino\SiteBundle\Form\MediaFilmType;
+use Cinemino\SiteBundle\Form\MediaEvtCreateType;
+use Cinemino\SiteBundle\Form\MediaEvtType;
 
 /**
  * Media controller.
@@ -48,7 +48,7 @@ class MediaEvtController extends MediaController
                    
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CineminoSiteBundle:Media')->find($id);
+        $entity = $em->getRepository('CineminoSiteBundle:MediaEvt')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Media entity.');
@@ -56,7 +56,7 @@ class MediaEvtController extends MediaController
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('CineminoSiteBundle:Media:show.html.twig', array(
+        return $this->render('CineminoSiteBundle:MediaEvt:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView()
             ));
@@ -68,10 +68,10 @@ class MediaEvtController extends MediaController
      */
     public function newAction()
     {
-        $entity = new MediaFilm();
-        $form   = $this->createForm(new MediaFilmCreateType(), $entity);
+        $entity = new MediaEvt();
+        $form   = $this->createForm(new MediaEvtCreateType('MediaEvt','mediacreateevt'), $entity);
 
-        return $this->render('CineminoSiteBundle:Media:new.html.twig', array(
+        return $this->render('CineminoSiteBundle:MediaEvt:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -84,7 +84,7 @@ class MediaEvtController extends MediaController
     public function createAction(Request $request)
     {
         $entity  = new MediaFilm();
-        $form = $this->createForm(new MediaFilmCreateType(), $entity);
+        $form = $this->createForm(new MediaEvtCreateType('MediaEvt','mediacreateevt'), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -112,7 +112,7 @@ class MediaEvtController extends MediaController
             return $this->redirect($this->generateUrl('media_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('CineminoSiteBundle:Media:new.html.twig', array(
+        return $this->render('CineminoSiteBundle:MediaEvt:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -128,16 +128,16 @@ class MediaEvtController extends MediaController
         
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CineminoSiteBundle:MediaFilm')->find($id);
+        $entity = $em->getRepository('CineminoSiteBundle:MediaEvt')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Media entity.');
         }
 
-        $editForm = $this->createForm(new MediaFilmType(), $entity);
+        $editForm = $this->createForm(new MediaEvtType('MediaEvt','mediaevt'), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('CineminoSiteBundle:Media:edit.html.twig', array(
+        return $this->render('CineminoSiteBundle:MediaEvt:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView()
@@ -152,14 +152,14 @@ class MediaEvtController extends MediaController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CineminoSiteBundle:MediaFilm')->find($id);
+        $entity = $em->getRepository('CineminoSiteBundle:MediaEvt')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Media entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new MediaFilmType(), $entity);
+        $editForm = $this->createForm(new MediaEvtType('MediaEvt','mediaevt'), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -187,7 +187,7 @@ class MediaEvtController extends MediaController
             return $this->redirect($this->generateUrl('media', array('id' => $id)));
         }
 
-        return $this->render('CineminoSiteBundle:Media:edit.html.twig', array(
+        return $this->render('CineminoSiteBundle:MediaEvt:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -205,7 +205,7 @@ class MediaEvtController extends MediaController
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CineminoSiteBundle:Media')->find($id);
+            $entity = $em->getRepository('CineminoSiteBundle:MediaEvt')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Media entity.');

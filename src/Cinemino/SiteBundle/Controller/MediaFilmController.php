@@ -69,7 +69,7 @@ class MediaFilmController extends MediaController
     public function newAction()
     {
         $entity = new MediaFilm();
-        $form   = $this->createForm(new MediaFilmCreateType(), $entity);
+        $form   = $this->createForm(new MediaFilmCreateType('MediaFilm','mediacreatefilm'), $entity);
 
         return $this->render('CineminoSiteBundle:MediaFilm:new.html.twig', array(
             'entity' => $entity,
@@ -84,7 +84,7 @@ class MediaFilmController extends MediaController
     public function createAction(Request $request)
     {
         $entity  = new MediaFilm();
-        $form = $this->createForm(new MediaFilmCreateType(), $entity);
+        $form = $this->createForm(new MediaFilmCreateType('MediaFilm','mediacreatefilm'), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -134,7 +134,7 @@ class MediaFilmController extends MediaController
             throw $this->createNotFoundException('Unable to find Media entity.');
         }
 
-        $editForm = $this->createForm(new MediaFilmType(), $entity);
+        $editForm = $this->createForm(new MediaFilmType('MediaFilm','mediafilm'), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CineminoSiteBundle:MediaFilm:edit.html.twig', array(
@@ -159,7 +159,7 @@ class MediaFilmController extends MediaController
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new MediaFilmType(), $entity);
+        $editForm = $this->createForm(new MediaFilmType('MediaFilm','mediafilm'), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {

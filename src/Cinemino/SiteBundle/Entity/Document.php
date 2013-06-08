@@ -31,9 +31,23 @@ class Document
     /**
      * @var string
      *
-     * @ORM\Column(name="DESCRIPTIF_DOCUMENT", type="string", length=100, nullable=true)
+     * @ORM\Column(name="DESCRIPTIF_DOCUMENT", type="string", length=1000, nullable=true)
      */
     private $descriptifDocument;
+    
+     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DATE_EVENEMENT", type="datetime", nullable=true)
+     */
+    private $debutaffichage;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DATE_FIN", type="datetime", nullable=true)
+     */
+    private $finaffichage;
 
     /**
      * @var string
@@ -42,7 +56,7 @@ class Document
      */
     private $urlFichier;
 
-
+    private $filefichier;              //permet de stocker temporairement le fichier affiche
 
     /**
      * Set nomDocument
@@ -121,5 +135,62 @@ class Document
     public function getId()
     {
         return $this->id;
+    }
+    
+        // gestion fichier logo   
+    public function setFilefichier($file)
+    {
+        $this->filefichier = $file;
+    }
+
+    public function getFilefichier()
+    {
+        return $this->filefichier;
+    } 
+
+    /**
+     * Set debutaffichage
+     *
+     * @param \DateTime $debutaffichage
+     * @return Document
+     */
+    public function setDebutaffichage($debutaffichage)
+    {
+        $this->debutaffichage = $debutaffichage;
+    
+        return $this;
+    }
+
+    /**
+     * Get debutaffichage
+     *
+     * @return \DateTime 
+     */
+    public function getDebutaffichage()
+    {
+        return $this->debutaffichage;
+    }
+
+    /**
+     * Set finaffichage
+     *
+     * @param \DateTime $finaffichage
+     * @return Document
+     */
+    public function setFinaffichage($finaffichage)
+    {
+        $this->finaffichage = $finaffichage;
+    
+        return $this;
+    }
+
+    /**
+     * Get finaffichage
+     *
+     * @return \DateTime 
+     */
+    public function getFinaffichage()
+    {
+        return $this->finaffichage;
     }
 }

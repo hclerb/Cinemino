@@ -1,10 +1,4 @@
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }}
-{% endblock %}
-
-{% block alert %}Gérer les évènements lié aux séances.
-{% endblock alert %}
 
 {% block titre %}{{ entity }}{% endblock %}
 
@@ -22,10 +16,20 @@
             <th>Description évènement :</th>
             <td>{{ entity.descriptionEvenement|raw }}</td>
         </tr>
+        <tr>
+            <th>Les intervenants</th>
+            <td>
+               {% if entity.idIntervenants[0] is defined %}
+                  {% for evt in entity.idIntervenants %}
+                   <a href="{{ path('intervenant_show', { 'id': evt.id }) }}">{{ evt.nomIntervenant }}</a>
+                   <br/>
+                  {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
     </tbody>
 </table>
 <br><br>
-<h5>A ajouter : info sur la ou les séances en relations, intervenants en relation ....</h5>
 <br><br><br>
     
 <a class="btn btn-info" href="{{ path('evenement_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>

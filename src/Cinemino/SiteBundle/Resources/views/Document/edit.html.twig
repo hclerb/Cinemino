@@ -1,0 +1,23 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+
+<form action="{{ path('document_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+   {{ tinymce_init() }}   
+   {{ form_widget(edit_form) }}
+        <br/>
+   <div class="row"> 
+       <div class="span3">
+         <button class="btn btn-primary" type="submit">Modifier le document</button>
+         <a class="btn" href="{{ path('document') }}"><i class="icon-ban-circle"></i> Annuler</a>
+        </div>
+        <div class="span4">
+           <form action="{{ path('document_delete', { 'id': entity.id }) }}" method="post">
+                   {{ form_widget(delete_form) }}
+                 <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i>Supprimer {{ entity.nomDocument }}</button>
+           </form>
+        </div>
+   </div>
+</form>
+
+{% endblock %}

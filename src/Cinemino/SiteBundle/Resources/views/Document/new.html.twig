@@ -1,0 +1,66 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="well" style="width:750px;">
+<form action="{{ path('document_create') }}" method="post" {{ form_enctype(form) }}>
+   {{ tinymce_init() }}
+ <div class="row">
+     <div class="span6">
+      {{ form_label(form.nomDocument) }}
+      {{ form_errors(form.nomDocument) }}
+      {{ form_widget(form.nomDocument, { 'attr': {'style': 'width:570px;'} }) }}
+     </div>
+ </div>
+ <div class="row"> 
+      <div class="span8">    
+      {{ form_label(form.descriptifDocument) }}
+      {{ form_errors(form.descriptifDocument) }}
+      {{ form_widget(form.descriptifDocument) }}
+      </div>
+  <br/>
+</div> 
+ <div class="row">
+    <div class="span2">
+     <div id="datetimepicker1" class="input-append date">
+      {{ form_label(form.debutaffichage) }}
+      {{ form_errors(form.debutaffichage) }}
+      {{ form_widget(form.debutaffichage) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+   <div class="offset3 span2">       
+     <div id="datetimepicker2" class="input-append date">
+      {{ form_label(form.finaffichage) }}
+      {{ form_errors(form.finaffichage) }}
+      {{ form_widget(form.finaffichage) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+ </div>  
+   <br/> 
+   {{ form_widget(form) }}
+        <br/>
+        
+         <button class="btn btn-primary" type="submit">Créer le document</button>
+         <a class="btn" href="{{ path('document') }}"><i class="icon-ban-circle"></i> Annuler</a>
+</form>
+</div>
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false,
+    });
+    $('#datetimepicker2').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false
+    });
+  });
+</script>
+{% endblock content %}
