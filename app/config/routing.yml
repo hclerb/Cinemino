@@ -11,7 +11,7 @@ fos_user_profile:
   
 fos_user_utilisateur:
   resource: "@CineminoUserBundle/Resources/config/routing/user.yml"
-  prefix: /users
+  prefix: /backoffice/users
   
 fos_user_register:
   resource: "@FOSUserBundle/Resources/config/routing/registration.xml"

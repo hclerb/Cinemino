@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Bienvenue dans le monde de Cinémino!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="{{ asset('css/css/front2.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        {% if entity.id is defined %} <h1>Vous êtes déjà inscrit !</h1>
+        {% else %} <h1>Voilà vous êtes inscrit, vous recevrez régulièrement de nos nouvelles !</h1>
+        {% endif %}
+    </body>
+</html>

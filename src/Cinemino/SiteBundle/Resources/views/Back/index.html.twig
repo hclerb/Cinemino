@@ -1,0 +1,31 @@
+{# src/Sdz/BlogBundle/Resources/views/Blog/index.html.twig #}
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block title %}
+{{ parent() }} -  Accueil
+{% endblock %}
+
+{% block content %}
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Nom cinéma</th>
+        <th>Autorisation</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+  {% for cinema in listCinema %}
+       <tr>
+        <td>{{ cinema.nomCinema }}</td>
+        <td>{% if (app.user.username == cinema.getIdCompte() or (is_granted('ROLE_ADMIN'))) %}<div style="color:green">Oui</div>{% else %}<div style="color:red">Non</div>{% endif %}</td>
+      </tr>
+      
+  {% endfor %}
+
+    </tbody>
+  </table>
+
+
+
+{% endblock %}

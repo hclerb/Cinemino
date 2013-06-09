@@ -1,0 +1,30 @@
+newsletter:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:NewsLetter:index" }
+
+newsletter_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:NewsLetter:show" }
+
+newsletter_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:NewsLetter:new" }
+
+newsletter_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:NewsLetter:create" }
+    requirements: { _method: post }
+
+newsletter_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:NewsLetter:edit" }
+
+newsletter_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:NewsLetter:update" }
+    requirements: { _method: post }
+
+newsletter_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:NewsLetter:delete" }
+    requirements: { _method: post }

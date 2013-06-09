@@ -1,0 +1,112 @@
+
+body {
+    background-image: url("../../css/img/toupin1.jpg");
+    background-repeat: no-repeat;
+}
+form.registration {
+    font-family: "Trebuchet MS";
+    margin: 750px 0 0 -4px;
+    padding: 10px;
+    width: 600px;
+}
+form.registration fieldset {
+    background-color: #707070;
+    border: medium none;
+    margin: 0 30px 0 0;
+    padding: 6px;
+}
+form.registration legend {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 21px;
+    padding: 0 3px 23px;
+    text-align: left;
+}
+form.registration label {
+    clear: none;
+    color: #FFFFFF;
+    float: none;
+    font-size: 26px;
+    margin: 0 0px 0px 2px;
+    padding: 0;
+    text-align: right;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+    width: 200px;
+}
+form.registration input {
+    border: 1px solid #CCCCCC;
+    color: #00ABDF;
+    float: none;
+    font-family: "Trebuchet MS";
+    font-size: 18px;
+    height: 28px;
+    margin: 2px 0 4px 2px;
+    padding: 3px;
+    width: 392px;
+}
+form.registration input:focus, form.registration select:focus {
+    background-color: #E0E6FF;
+}
+form.registration select {
+    border: 1px solid #CCCCCC;
+    color: #00ABDF;
+    float: left;
+    font-family: "Trebuchet MS";
+    font-size: 20px;
+    height: 48px;
+    margin: 2px 0 2px 2px;
+}
+.button, .button:visited {
+    background: url("../../css/img/overlay.png") repeat-x scroll 0 0 #2DAEBF;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    font-weight: bold;
+    margin-right: 441px;
+    margin-top: 26px;
+    padding: 5px 10px 6px;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+}
+.button:hover {
+    background-color: #007D9A;
+}
+#sortable {
+    list-style-type: none;
+    margin: 5px 0 0 16px;
+    padding: 0;
+}
+#sortable li {
+    background: url("../../css/img/overlay.png") repeat-x scroll 50% 50% #2DAEBF;
+    color: #FFFFFF;
+    cursor: pointer;
+    float: left;
+    font-size: 20px;
+    font-weight: normal;
+    height: 35px;
+    line-height: 35px;
+    margin: 3px 3px 3px 0;
+    padding: 1px;
+    text-align: center;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+    width: 35px;
+}
+.captcha_wrap {
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    float: left;
+    height: 83px;
+    margin: 0 0 0 109px;
+    overflow: hidden;
+    width: 348px;
+}
+.captcha {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #CCCCCC;
+    color: #BBBBBB;
+    font-size: 12px;
+    text-align: center;
+}

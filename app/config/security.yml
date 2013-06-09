@@ -27,17 +27,18 @@ security:
         
         main:
           pattern: ^/
+          anonymous: true
           form_login:
              provider: fos_userbundle
              remember_me: true
           remember_me:
              key: %secret%
-          anonymous: false
           logout: true
 
 
 
     access_control:
+        - {path: ^/backoffice , roles: ROLE_PROGRAMMATEUR}
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #
         # You must uncomment the two following rules to restrict access to paths

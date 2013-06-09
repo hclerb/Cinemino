@@ -2,74 +2,68 @@ cineminoSite_front:
     pattern:  /
     defaults: { _controller: CineminoSiteBundle:Front:index }
 
+frontnewsletter_create:
+    pattern:  /newsletter
+    defaults: { _controller: CineminoSiteBundle:Front:createnewsletter }  
+    requirements: { _method: post }
 
 cineminoSite_back:
     pattern:  /backoffice
-    defaults: { _controller: CineminoSiteBundle:Test:index }
+    defaults: { _controller: CineminoSiteBundle:Back:index }
 
 
 cineminoSite_cinema:
     resource: "routing/cinema.yml"
-    prefix:   /cinema
+    prefix:   /backoffice/cinema
     
 cineminoSite_users:
     resource: "routing/cineminouser.yml"
-    prefix:   /utilisateurs
+    prefix:   /backoffice/utilisateurs
     
 CineminoSite_intervenant:
         resource: "routing/intervenant.yml"
-        prefix:   /intervenant
+        prefix:   /backoffice/intervenant
         
 CineminoSite_seance:
         resource: "routing/seance.yml"
-        prefix:   /seance
+        prefix:   /backoffice/seance
         
 CineminoSite_film:
         resource: "routing/film.yml"
-        prefix:   /film
+        prefix:   /backoffice/film
 
 CineminoSite_media:
         resource: "routing/media.yml"
-        prefix:   /media
+        prefix:   /backoffice/media
         
 CineminoSite_mediafilm:
         resource: "routing/mediafilm.yml"
-        prefix:   /mediafilm
+        prefix:   /backoffice/mediafilm
         
 CineminoSite_mediaevt:
         resource: "routing/mediaevt.yml"
-        prefix:   /mediaevt
+        prefix:   /backoffice/mediaevt
              
 CineminoSiteBundle_evenement:
         resource: "routing/evenement.yml"
-        prefix:   /evenement
+        prefix:   /backoffice/evenement
         
 CineminoSiteBundle_evenementassocie:
         resource: "routing/evenementassocie.yml"
-        prefix:   /evenementassocie        
+        prefix:   /backoffice/evenementassocie        
 
 CineminoSiteBundle_sponsor:
         resource: "routing/sponsor.yml"
-        prefix:   /sponsor
-
-cineminoSite_voir:
-    pattern:  /Site/article/{id}.{tag}
-    defaults: { _controller: CineminoSiteBundle:Test:voir }
+        prefix:   /backoffice/sponsor
 
 CineminoSiteBundle_document:
         resource: "@CineminoSiteBundle/Resources/config/routing/document.yml"
-        prefix:   /document
-
-
-cineminoSite_ajouter:
-    pattern:  /Site/ajouter
-    defaults: { _controller: CineminoSiteBundle:Test:ajouter }
-
-
-cineminoSite_template:
-    pattern:  /Site/template
-    defaults: { _controller: CineminoSiteBundle:Test:template }
+        prefix:   /backoffice/document
 
 CineminoSiteBundle_programmecourts:
         resource: "@CineminoSiteBundle/Resources/config/routing/programmecourts.yml"
-        prefix:   /programmecourts
+        prefix:   /backoffice/programmecourts
+
+CineminoSiteBundle_newsletter:
+        resource: "@CineminoSiteBundle/Resources/config/routing/newsletter.yml"
+        prefix:   /backoffice/newsletter
