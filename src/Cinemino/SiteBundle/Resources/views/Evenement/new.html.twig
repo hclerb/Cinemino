@@ -39,7 +39,8 @@
           {{ _self.prototype(item) }}
       {% endfor %}
       {% macro prototype(item) %}
-        <div class="row" style="padding-left: 5px;">
+        <div class="themedia">
+          <div class="row" style="padding-left: 5px;">
            <div class="span5">
              {{ form_label(item.titre) }}
              {{ form_errors(item.titre) }}
@@ -59,6 +60,7 @@
              <br/>
              <a  class="btn btn-danger" href="#supp_media" rel="parametre">Supprimer</a>
           </div>
+        </div>
        </div>
        <br/>
      {% endmacro %}
@@ -83,7 +85,6 @@
 </form>
 
 </div>
-<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
     /*$('input[type=file]').change(function(e){
@@ -91,12 +92,13 @@
         $("#affichefilm").html('<img src='+ fichier + ' />');
     });*/
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('#cinemino_Sitebundle_filmcreatetype_idMedias');
+ 
  
     // On définit une fonction qui va ajouter un champ.
     function add_media() {
-        index = $container.children().length;
-	var newForm = $('script[type="text/html"]').text().replace(/\$\$name\$\$/g, index);
+        var $container = $('.themedia');
+        var index = $container.length;
+	var newForm = $('script[type="text/html"]').text().replace(/__name__/g, index);
 
 	$("div#list_medias").append(newForm);
 
@@ -117,6 +119,8 @@
           }
         	
         });
+        
+ $("#idevt").addClass("active");
 });
 
 </script>

@@ -1,0 +1,53 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block titre %}{{ entity.titre }}{% endblock %}
+
+
+{% block content %}
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Titre: </th>
+            <td>{{ entity.titre }}</td>
+        </tr>
+        <tr>
+            <th>Url: </th>
+            <td>{{ entity.url }}</td>
+        </tr>
+        <tr>
+            <th>Datedebut</th>
+            <td>{{ entity.dateDebut|date('Y-m-d') }}</td>
+        </tr>
+        <tr>
+            <th>Datefin</th>
+            <td>{{ entity.dateFin|date('Y-m-d') }}</td>
+        </tr>
+        <tr>
+            <th>Type: </th>
+            <td>{% if entity.type == 'p' %}Photo{% else %}Video{% endif %}</td>
+        </tr>
+    </tbody>
+</table>
+{% if entity.type == 'p' %}
+<br><img class="img-polaroid" width="450" src="{{asset('medias/In/photos/big/')}}{{ entity.url }}" alt=""/>
+{% endif %}
+
+<br><br>
+
+  <div class="row"> 
+      <div class="span3">
+        <a class="btn btn-info" href="{{ path('mediain_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+        <a class="btn" href="{{ path('mediain') }}"><i class="icon-ban-circle"></i> Annuler</a>
+      </div>
+        <div class="span5">        
+      <form action="{{ path('mediain_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+          <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer {{ entity.titre }}</button>
+        </form>
+       </div>
+  </div>
+<script>
+ $("#idmedias").addClass("active");
+ </script>
+{% endblock content %}

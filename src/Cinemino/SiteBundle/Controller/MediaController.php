@@ -32,10 +32,14 @@ class MediaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('CineminoSiteBundle:MediaFilm')->findAlltrie();
         $entitiesEvt = $em->getRepository('CineminoSiteBundle:MediaEvt')->findAlltrie();
+        $entitiesIn = $em->getRepository('CineminoSiteBundle:MediaIn')->findAll();
+        $entitiesInter = $em->getRepository('CineminoSiteBundle:MediaIntervenant')->findAll();
      
         return $this->render('CineminoSiteBundle:Media:index.html.twig', array(
             'entities' => $entities,
-            'entitiesEvt' => $entitiesEvt
+            'entitiesEvt' => $entitiesEvt,
+            'entitiesIn' => $entitiesIn,
+            'entitiesInter' => $entitiesInter
         ));
     }
 
@@ -89,21 +93,7 @@ class MediaController extends Controller
 
         if ($form->isValid()) {
             
-           $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
-           if($entity->getFile()!=NULL){   
-            $url = $entity->getFile();
-            $dest="medias/Film/sons";           // par défaut on dit que c'est un son
-            switch ($entity->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoMBig,HtPhotoMBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
-                       break;
-                    case 'v': $dest = "medias/Film/videos";
-                    default :
-                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-            } 
+           $this->EnregistrementMedia($entity, "Film"); 
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -163,22 +153,7 @@ class MediaController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
-            if ($entity->getFile()!=NULL)
-              { 
-                $url = $entity->getFile();
-                $dest="medias/Film/sons";           // par défaut on dit que c'est un son
-                switch ($entity->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoMBig,HtPhotoMBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
-                       break;
-                    case 'v': $dest = "medias/Film/videos";
-                    default :
-                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-              }
+            $this->EnregistrementMedia($entity, "Film");
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -224,5 +199,24 @@ class MediaController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+    
+    public function EnregistrementMedia($entity, $typemedia) {
+           $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+           if($entity->getFile()!=NULL){   
+            $url = $entity->getFile();
+            $dest="medias/". $typemedia . "/sons";           // par défaut on dit que c'est un son
+            switch ($entity->getType()) {
+                    case 'p':                       // C'est une phot, on la redimension et on l'upload
+                             $entity->setUrl($resize->UploadPhoto($url,$typemedia."/photos/big",LgPhotoMBig,HtPhotoMBig)); 
+                             $resize->UploadPhoto($url,$typemedia."/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
+                       break;
+                    case 'v': $dest="medias/". $typemedia . "/videos";
+                    default :
+                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
+                            $url->move($dest,$url->getClientOriginalName());
+                 }
+            }
+        
     }
 }

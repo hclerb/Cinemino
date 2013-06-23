@@ -1,0 +1,35 @@
+
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block titre %}{{ entity.label }}{% endblock %}
+{% block content %}
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Label  : </th>
+            <td>{{ entity.label }}</td>
+        </tr>
+        <tr>
+            <th>Picto  : </th>
+            <td><img class="img-polaroid" src="{{asset('medias/picto/')}}{{ entity.picto }}" alt=""/></td>
+        </tr>
+    </tbody>
+</table>
+<br/><br/>
+<br/>
+<div class="row">
+  <div class="span3">
+      <a class="btn btn-primary" href="{{ path('typeevenement_edit', { 'id': entity.id }) }}">Editer</a>
+      <a class="btn" href="{{ path('typeevenement') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+  </div>
+  <div class="span4">  
+      <form action="{{ path('typeevenement_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+           <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer le Type d'évènement</button>
+      </form>
+  </div>
+</div>
+<script>
+$("#idautres").addClass("active");
+</script>
+{% endblock %}

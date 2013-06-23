@@ -1,0 +1,30 @@
+typeevenement:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:TypeEvenement:index" }
+
+typeevenement_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:TypeEvenement:show" }
+
+typeevenement_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:TypeEvenement:new" }
+
+typeevenement_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:TypeEvenement:create" }
+    requirements: { _method: post }
+
+typeevenement_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:TypeEvenement:edit" }
+
+typeevenement_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:TypeEvenement:update" }
+    requirements: { _method: post }
+
+typeevenement_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:TypeEvenement:delete" }
+    requirements: { _method: post }

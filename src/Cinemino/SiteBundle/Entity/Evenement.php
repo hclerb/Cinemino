@@ -68,6 +68,7 @@ class Evenement
     public function __construct()
     {
       $this->idIntervenants = new \Doctrine\Common\Collections\ArrayCollection();  
+      $this->idMedias = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -174,15 +175,6 @@ class Evenement
         $this->idMedias->removeElement($idMedia);
     }
 
-    /**
-     * Get idMedia
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getIdMedia()
-    {
-        return $this->idMedias;
-    }
     
     public function __toString() {
         

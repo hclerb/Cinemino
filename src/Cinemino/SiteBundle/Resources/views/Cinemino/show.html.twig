@@ -1,0 +1,53 @@
+<h1>Cinemino</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Datedebut</th>
+            <td>{{ entity.dateDebut|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Datefin</th>
+            <td>{{ entity.dateFin|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Affiche</th>
+            <td>{{ entity.affiche }}</td>
+        </tr>
+        <tr>
+            <th>Logo</th>
+            <td>{{ entity.logo }}</td>
+        </tr>
+        <tr>
+            <th>Couleurfond</th>
+            <td>{{ entity.couleurFond }}</td>
+        </tr>
+        <tr>
+            <th>Couleurtypo</th>
+            <td>{{ entity.couleurTypo }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('cinemino') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('cinemino_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('cinemino_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

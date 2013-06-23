@@ -1,29 +1,37 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block content %}
+
 <a class="btn btn-info" href="{{ path('mediaEvt_new') }}"><i class="icon-white icon-plus"></i> Ajouter un média à un évènement</a>
-<br/><br/>
-<table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
-    <caption><h4>Les médias associés aux Evènements</h4></caption>
-    <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Url</th>
-            <th>Apercu</th>
-            <th>Type</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entitiesEvt %}
-        <tr>
-            <td><a href="{{ path('mediaEvt_show', { 'id': entity.id }) }}">{{ entity.titre }}</a></td>
-            <td>{{ entity.url }}</td>
-            <td><img class="img-polaroid" style="height:70px;" src="{{asset('medias/Evt/photos/small/')}}{{ entity.url }}" alt=""/></td>
-            <td>{% if entity.type == 'v' %}Vidéo{% else %}Photo{% endif %}</td>
-            <td width="160px">
-                
+<br/>
+
+{% set idEvt = 0 %}
+{% for entity in entitiesEvt %}
+  {% if entity.idEvt.id != idEvt %} 
+    {% set idEvt = entity.idEvt.id %}
+    {% if loop.first == false %}</tbody></table> {% endif %}
+    <table class="table table-bordered table-striped" style="border-collapse: collapse;">
+       <h4>Evènement Associé : {{ entity.idEvt.titreEvenement }}</h4>
+       <tbody>
+  {% endif %}   
+  <tr>
+      <td width=400><a href="{{ path('mediaEvt_show', { 'id': entity.id }) }}">{{ entity.titre }}</a></td>
+      <td width=300>{{ entity.url }}</td>
+      <td>
+          {% if entity.type == 'p' %} <img class="img-polaroid" style="height:70px;" src="{{asset('medias/Evt/photos/small/')}}{{ entity.url }}" alt=""/>
+          {% elseif entity.type == 'v' %} Video
+          {% else %} Son
+          {% endif %}
+      </td>
+      <td width="160px">    
           <a class="btn" href="{{ path('mediaEvt_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
-                        <a class="btn btn-info" href="{{ path('mediaEvt_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
+          <a class="btn btn-info" href="{{ path('mediaEvt_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+      </td>
+   </tr>
+    
+{% endfor %}
+</tbody>    
 </table>
+<script>
+ $("#idmedias").addClass("active");
+ </script>
+{% endblock content %}

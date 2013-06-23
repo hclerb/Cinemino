@@ -15,30 +15,17 @@ use Cinemino\SiteBundle\Form\MediaEvtType;
  */
 class MediaEvtController extends MediaController
 {
-    /**
-     * Lists all Media entities.
-     *
-     */
-    
-      
-    public function __construct()
-    {
-    }
-
-    
     public function indexAction()
     {
          
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('CineminoSiteBundle:MediaFilm')->findAlltrie();
         $entitiesEvt = $em->getRepository('CineminoSiteBundle:MediaEvt')->findAlltrie();
      
-        return $this->render('CineminoSiteBundle:Media:index.html.twig', array(
-            'entities' => $entities,
+        return $this->render('CineminoSiteBundle:MediaEvt:index.html.twig', array(
             'entitiesEvt' => $entitiesEvt
         ));
     }
-
+    
     /**
      * Finds and displays a Media entity.
      *
@@ -69,7 +56,7 @@ class MediaEvtController extends MediaController
     public function newAction()
     {
         $entity = new MediaEvt();
-        $form   = $this->createForm(new MediaEvtCreateType('MediaEvt','mediacreateevt'), $entity);
+        $form   = $this->createForm(new MediaEvtType('MediaEvt','mediacreateevt'), $entity);
 
         return $this->render('CineminoSiteBundle:MediaEvt:new.html.twig', array(
             'entity' => $entity,
@@ -83,8 +70,8 @@ class MediaEvtController extends MediaController
      */
     public function createAction(Request $request)
     {
-        $entity  = new MediaFilm();
-        $form = $this->createForm(new MediaEvtCreateType('MediaEvt','mediacreateevt'), $entity);
+        $entity  = new MediaEvt();
+        $form = $this->createForm(new MediaEvtType('MediaEvt','mediacreateevt'), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -92,13 +79,13 @@ class MediaEvtController extends MediaController
            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
            if($entity->getFile()!=NULL){   
             $url = $entity->getFile();
-            $dest="medias/Film/sons";           // par défaut on dit que c'est un son
+            $dest="medias/Evt/sons";           // par défaut on dit que c'est un son
             switch ($entity->getType()) {
                     case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                             $entity->setUrl($resize->UploadPhoto($url,"Evt/photos/big",LgPhotoMBig,HtPhotoMBig)); 
+                             $resize->UploadPhoto($url,"Evt/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
                        break;
-                    case 'v': $dest = "medias/Film/videos";
+                    case 'v': $dest = "medias/Evt/videos";
                     default :
                             $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
                             $url->move($dest,$url->getClientOriginalName());
@@ -109,7 +96,7 @@ class MediaEvtController extends MediaController
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('media_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('mediaEvt'));
         }
 
         return $this->render('CineminoSiteBundle:MediaEvt:new.html.twig', array(
@@ -167,13 +154,13 @@ class MediaEvtController extends MediaController
             if ($entity->getFile()!=NULL)
               { 
                 $url = $entity->getFile();
-                $dest="medias/Film/sons";           // par défaut on dit que c'est un son
+                $dest="medias/Evt/sons";           // par défaut on dit que c'est un son
                 switch ($entity->getType()) {
                     case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                             $entity->setUrl($resize->UploadPhoto($url,"Evt/photos/big",LgPhotoMBig,HtPhotoMBig)); 
+                             $resize->UploadPhoto($url,"Evt/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
                        break;
-                    case 'v': $dest = "medias/Film/videos";
+                    case 'v': $dest = "medias/Evt/videos";
                     default :
                             $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
                             $url->move($dest,$url->getClientOriginalName());
@@ -184,7 +171,7 @@ class MediaEvtController extends MediaController
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('media', array('id' => $id)));
+            return $this->redirect($this->generateUrl('mediaEvt'));
         }
 
         return $this->render('CineminoSiteBundle:MediaEvt:edit.html.twig', array(
@@ -215,7 +202,7 @@ class MediaEvtController extends MediaController
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('media'));
+        return $this->redirect($this->generateUrl('mediaEvt'));
     }
 
     private function createDeleteForm($id)

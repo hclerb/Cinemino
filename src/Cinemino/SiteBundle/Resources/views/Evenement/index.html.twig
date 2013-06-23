@@ -1,4 +1,8 @@
-<a class="btn btn-info" href="{{ path('evenement_new') }}"><i class="icon-white icon-plus"></i> Ajouter un évenement</a>
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+
+<a class="btn btn-info" href="{{ path('evenement_new') }}"><i class="icon-white icon-plus"></i> Ajouter un évenement dans la salle</a>
 <br><br>
 <table class="table table-bordered table-striped table-hover">
     <thead>
@@ -34,3 +38,7 @@
     {% endfor %}
     </tbody>
 </table>
+<script>
+ $("#idevt").addClass("active");
+</script>
+{% endblock content %}

@@ -17,7 +17,7 @@ define("HtPhotoMBig",480);
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"media" = "Media", "mediafilm"="MediaFilm", "mediaevt"="MediaEvt"})
+ * @ORM\DiscriminatorMap({"media" = "Media", "mediafilm"="MediaFilm", "mediaevt"="MediaEvt", "mediain"="MediaIn", "mediaintervenant"="MediaIntervenant"})
  */
 class Media
 {

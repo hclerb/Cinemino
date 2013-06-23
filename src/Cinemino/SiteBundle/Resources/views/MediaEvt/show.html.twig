@@ -30,6 +30,7 @@
 
       <a class="btn" href="{{ path('mediaEvt') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
       <a class="btn" href="{{ path('mediaEvt_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
-
-
+<script>
+ $("#idmedias").addClass("active");
+ </script>
 {% endblock content %}

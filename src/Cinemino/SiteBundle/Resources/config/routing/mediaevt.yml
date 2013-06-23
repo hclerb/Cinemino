@@ -1,6 +1,6 @@
 mediaEvt:
     pattern:  /
-    defaults: { _controller: "CineminoSiteBundle:Media:index" }
+    defaults: { _controller: "CineminoSiteBundle:MediaEvt:index" }
 
 mediaEvt_show:
     pattern:  /{id}/show

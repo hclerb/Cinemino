@@ -1,10 +1,4 @@
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}programmecourtslayout
-{{ parent() }} - Film
-{% endblock %}
-
-
-{% block titre %}Ajouter un programme de courts{% endblock titre %}
 
 
 {% block content %}
@@ -38,7 +32,11 @@
       {{ form_errors(form.realisateur) }}
       {{ form_widget(form.realisateur, { 'attr': {'style': 'width:320px;'} }) }}
   </div>    
-
+  <div class="span3">
+    {{ form_label(form.stocke) }}
+    {{ form_errors(form.stocke) }}
+    {{ form_widget(form.stocke) }}
+  </div>
 </div>
     
 <div class="row">     
@@ -166,12 +164,6 @@
 
 </div>
 
-
-
-<!-- On charge la librairie jQuery. Ici, je la prends depuis le
-site jquery.com, mais si vous l'avez en local, changez simplement
-l'adresse. -->
-<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
     /*$('input[type=file]').change(function(e){
@@ -205,6 +197,10 @@ l'adresse. -->
           }
         	
         });
+        
+
+ $("#idprogcourt").addClass("active");
+
 });
 
 </script>

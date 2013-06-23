@@ -1,29 +1,138 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }}
-{% endblock %}
 
-{% block alert %}Ici vous pouvez gérer l'ensemble des cinémas dont vous avez la charge ( modification / visualisation ).<br> 
-Seul l'Administrateur peut supprimer ou ajouter un cinéma.
-{% endblock %}
-
-
-{% block titre %}Ajouter un cinéma{% endblock %}
 
 {% block content %}
 
-
+<div class="well" style="width:1250px">
 <form action="{{ path('cinema_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ tinymce_init() }}      
+    {{ form_errors(form) }}
+ 
+  <div class="row">
+  <div class="span12">     
+    {{ form_label(form.nomCinema) }}
+    {{ form_errors(form.nomCinema) }}
+    {{ form_widget(form.nomCinema, { 'attr': {'style': 'width:400px'} }) }}
+  </div> 
+ </div>
+ <div class="row">
+  <div class="span10">     
+    {{ form_label(form.adresse) }}
+    {{ form_errors(form.adresse) }}
+    {{ form_widget(form.adresse, { 'attr': {'style': 'width:1000px'} }) }}
+  </div> 
+    <div class="offset1 span1">     
+    {{ form_label(form.coordonneesTel) }}
+    {{ form_errors(form.coordonneesTel) }}
+    {{ form_widget(form.coordonneesTel, { 'attr': {'style': 'width:100px'} }) }}
+  </div>
+ </div>
+<br/>
+ <div class="row">
+  <div class="offset1 span4">
+     {{ form_label(form.filePhoto) }}
+     {{ form_errors(form.filePhoto) }}
+     {{ form_widget(form.filePhoto) }}
+  </div>
+  <div class="offset3 span3">
+     {{ form_label(form.fileLogo) }}
+     {{ form_errors(form.fileLogo) }}
+     {{ form_widget(form.fileLogo) }}
+  </div>
+ </div> 
+  <div class="row">
+    <div class="offset1 span6">     
+    {{ form_label(form.siteWeb) }}
+    {{ form_errors(form.siteWeb) }}
+    {{ form_widget(form.siteWeb, { 'attr': {'style': 'width:530px'} }) }}
+    </div> 
+    <div class="offset1 span2">     
+    {{ form_label(form.adresseMail) }}
+    {{ form_errors(form.adresseMail) }}
+    {{ form_widget(form.adresseMail) }}
+  </div>
+ </div>
+ <div class="row"> 
+   <div class="offset1 span2">     
+    {{ form_label(form.latitude) }}
+    {{ form_errors(form.latitude) }}
+    {{ form_widget(form.latitude, { 'attr': {'style': 'width:100px'} }) }}
+  </div>
+  <div class="span2">     
+    {{ form_label(form.longitude) }}
+    {{ form_errors(form.longitude) }}
+    {{ form_widget(form.longitude, { 'attr': {'style': 'width:100px'} }) }}
+  </div>
+  <div class="span3">  
+      <label> Un petit clic...</label>  
+    <button class="btn btn-primary" id="getcoord" type="button">Get Coordonnées</button>
+  </div>
+  <div class="span2">
+    {{ form_label(form.couleurFondCinema) }}
+    {{ form_errors(form.couleurFondCinema) }}
+    {{ form_widget(form.couleurFondCinema, { 'attr': {'class': 'color', 'value': '4164AA'}} ) }}
+  </div>
+ </div>
+ <div class="row"> 
+   <div class="offset1 span4">     
+    {{ form_label(form.zone) }}
+    {{ form_errors(form.zone) }}
+    {{ form_widget(form.zone, { 'attr': {'style': 'width:140px'} }) }}
+  </div>
+  <div class="span3">     
+    {{ form_label(form.type) }}
+    {{ form_errors(form.type) }}
+    {{ form_widget(form.type, { 'attr': {'style': 'width:140px'} }) }}
+  </div>
+  <div class="span3">
+    {{ form_label(form.cdpc) }}
+    {{ form_errors(form.cdpc) }}
+    {{ form_widget(form.cdpc) }}
+  </div>
+ </div>
+ <div class="row">
+  <div class="span12" id="specif">     
+    {{ form_label(form.specificite) }}
+    {{ form_errors(form.specificite) }}
+    {{ form_widget(form.specificite, { 'attr': {'style': 'width:1120px;height:300px;'} }) }}
+  </div> 
+ </div>
+ <br/><br/>
     {{ form_widget(form) }}
   
         <br>
         
        <button class="btn btn-primary" type="submit">Valider la création</button>
-       <a class="btn" href="{{ path('cinema') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+       <a class="btn" href="{{ path('cinema') }}"><i class="icon-arrow-left"></i> Revenir à la liste des cinémas</a>
        
 </form>
+</div>
+<script>
+  $(document).ready(function() {
+    if ($("#{{ form.cdpc.vars.id }}").is(':checked')) $("#specif").show();
+       else $("#specif").hide();
+    
+    $("#{{ form.cdpc.vars.id }}").click(function(){
+      if ($("#{{ form.cdpc.vars.id }}").is(':checked')) $("#specif").show();
+       else $("#specif").hide();
+    });
+    
+    $("#getcoord").click(function(){
+      if (navigator.geolocation) navigator.geolocation.getCurrentPosition(initlocalisation);
+      else  alert("Désolé votre navigateur ne supporte pas la géolocalisation");
+    });
+    
+    function initlocalisation(position){
+     $("#{{ form.latitude.vars.id }}").val(position.coords.latitude);
+     $("#{{ form.longitude.vars.id }}").val(position.coords.longitude);
+    }
+    
+  });
 
+ $("#idcinemas").addClass("active");
+
+</script>
 
 
 {% endblock content %}

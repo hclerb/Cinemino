@@ -52,6 +52,7 @@ class ProgrammeCourtsType extends AbstractType
             ->add('file', 'file', array('label' => 'Fichier de l\'affiche :', 'required' => false))
             ->add('couleurTexte', null, array('label' => 'Couleur du texte'))
             ->add('couleurFondFilm', null, array('label' => 'Couleur de fond'))
+            ->add('stocke','checkbox',array('label' => 'Rangé en base','required' => false) )
             ->add('lescourts','entity', array(
                 'label' =>  'Les courts du programme',
                 'class' => 'Cinemino\SiteBundle\Entity\Film',
@@ -62,7 +63,7 @@ class ProgrammeCourtsType extends AbstractType
                 'multiple'  => true,
                 'required'  =>  false)
             )
-           ->add('idMedias', 'collection', array('type'   => new MediaFilmType(),
+           ->add('idMedias', 'collection', array('type'   => new MediaFilmType('MediaFilm','mediafilmssid'),
                                                  'label'    => ' ',               
 						 'allow_add' => true,
 						 'allow_delete' => true,

@@ -1,97 +1,36 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Bienvenue dans le monde de Cinémino!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link href="{{ asset('css/css/front.css') }}" rel="stylesheet">
-        <script src="{{ asset('css/js/jquery-1.3.2.js')}}"></script>
-        <script type="text/javascript" src="{{ asset('css/js/ui.core.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('css/js/ui.sortable.js') }}"></script>
-        <script type="text/javascript">
-            (
-            function($){
-
-                $.fn.shuffle = function() {
-                    return this.each(function(){
-                        var items = $(this).children();
-
-                        return (items.length)
-                            ? $(this).html($.shuffle(items,$(this)))
-                        : this;
-                    });
-                }
-
-                $.fn.validate = function() {
-                    var res = false;
-                    this.each(function(){
-                        var arr = $(this).children();
-                        res =    ((arr[0].innerHTML=="C")&&
-                            (arr[1].innerHTML=="i")&&
-                            (arr[2].innerHTML=="n")&&
-                            (arr[3].innerHTML=="é")&&
-                            (arr[4].innerHTML=="m")&&
-                            (arr[5].innerHTML=="i")&&
-                            (arr[6].innerHTML=="n")&&
-                            (arr[7].innerHTML=="o"));
-                    });
-                    return res;
-                }
-
-                $.shuffle = function(arr,obj) {
-                    for(
-                    var j, x, i = arr.length; i;
-                    j = parseInt(Math.random() * i),
-                    x = arr[--i], arr[i] = arr[j], arr[j] = x
-                );
-                    if(arr[0].innerHTML=="1") obj.html($.shuffle(arr,obj))
-                    else return arr;
-                }
-
-            })(jQuery);
-
-            $(function() {
-                $("#sortable").sortable();
-                $("#sortable").disableSelection();
-                $('ul').shuffle();
-
-                $("#formsubmit").click(function(){
-                    ($('ul').validate()) ? $(".registration").submit() : alert("Vous devez reconstituer le mot Cinémino en déplaçant les lettres!");
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <form class="registration" action="{{ path('frontnewsletter_create') }}" method="post" {{ form_enctype(form) }}>
-            <fieldset>
-                <legend>Reconstituez le mot Cinémino</legend>
-                <div class="captcha_wrap">
-                    <div class="captcha">
-			Cliquez et déplacez
-                    </div>
-                    <ul id="sortable">
-                        <li class="captchaItem">C</li>
-                        <li class="captchaItem">i</li>
-                        <li class="captchaItem">n</li>
-                        <li class="captchaItem">é</li>
-                        <li class="captchaItem">m</li>
-                        <li class="captchaItem">i</li>   
-                        <li class="captchaItem">n</li>
-                        <li class="captchaItem">o</li>
-                    </ul>
-                </div>
-            </fieldset>
-            <fieldset>
-                {{ form_label(form.email) }}
-                {{ form_errors(form.email) }}
-                {{ form_widget(form.email) }}
-                <p>{{ erreur }}</p>
-                {{ form_errors(form) }}
-                {{ form_widget(form) }}
-           </fieldset>
-                <a id="formsubmit" class="button">Enregistrez moi !</a>
-
-        </form>
-    </body>
 </html>
+
+  <head>
+    <title>Cinémino se prépare</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Cinemino">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- Style-->
+    <style>
+      html, body {
+       height:100%;
+       padding: 0px;
+       margin: 0px;
+      }
+    </style>
+    <!-- HTML5 shim, for IE6-8 support of HTML elements--><!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+</html>
+<body>
+  <!-- BEGIN Timeline Embed -->
+  <div id="timeline-embed"></div>
+  <script type="text/javascript">
+    var timeline_config = {
+     width: "100%",
+     height: "100%",
+     source: '../timecinemino.json',
+     embed_id:'timeline-embed'
+    }
+  </script>
+  <script type="text/javascript" src="../compiled/js/storyjs-embed.js"></script>
+  <!-- END Timeline Embed-->
+</body>

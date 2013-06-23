@@ -15,30 +15,17 @@ use Cinemino\SiteBundle\Form\MediaFilmType;
  */
 class MediaFilmController extends MediaController
 {
-    /**
-     * Lists all Media entities.
-     *
-     */
-    
-      
-    public function __construct()
-    {
-    }
-
-    
     public function indexAction()
     {
          
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('CineminoSiteBundle:MediaFilm')->findAlltrie();
-        $entitiesEvt = $em->getRepository('CineminoSiteBundle:MediaEvt')->findAlltrie();
      
-        return $this->render('CineminoSiteBundle:Media:index.html.twig', array(
-            'entities' => $entities,
-            'entitiesEvt' => $entitiesEvt
+        return $this->render('CineminoSiteBundle:MediaFilm:index.html.twig', array(
+            'entities' => $entities
         ));
     }
-
+    
     /**
      * Finds and displays a Media entity.
      *
@@ -215,7 +202,7 @@ class MediaFilmController extends MediaController
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('media'));
+        return $this->redirect($this->generateUrl('mediaFilm'));
     }
 
     private function createDeleteForm($id)

@@ -23,12 +23,9 @@ class EvenementController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('CineminoSiteBundle:Evenement')->findAll();
-
-        $entitiesAss = $em->getRepository('CineminoSiteBundle:Evenementassocie')->findAll();
-        
-        return $this->render('CineminoSiteBundle:AllEvenement:index.html.twig', array(
+      
+        return $this->render('CineminoSiteBundle:Evenement:index.html.twig', array(
             'entities' => $entities,
-            'entitiesAss' => $entitiesAss,
         ));
     }
 
@@ -110,7 +107,7 @@ class EvenementController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('evenement', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('evenement'));
         }
 
         return $this->render('CineminoSiteBundle:Evenement:new.html.twig', array(
@@ -161,6 +158,7 @@ class EvenementController extends Controller
         
         $originalMedias = array();
     	foreach ($entity->getIdMedias() as $oldmedia) $originalMedias[] = $oldmedia;
+
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new EvenementType(), $entity);
         $editForm->bind($request);
@@ -215,10 +213,11 @@ class EvenementController extends Controller
               $em->persist($media);
             }
             
-            // Supprime les médias qui ont été enlevés dans la mise oà jour
+            // Supprime les médias qui ont été enlevés dans la mise à jour
     	    foreach ($originalMedias as $media) {
               $em->remove($media);
     	    }
+            
             $em->persist($entity);
             $em->flush();
 

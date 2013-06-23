@@ -39,6 +39,10 @@ CineminoSite_media:
 CineminoSite_mediafilm:
         resource: "routing/mediafilm.yml"
         prefix:   /backoffice/mediafilm
+
+CineminoSite_mediaintervenant:
+        resource: "routing/mediaintervenant.yml"
+        prefix:   /backoffice/mediaintervenant
         
 CineminoSite_mediaevt:
         resource: "routing/mediaevt.yml"
@@ -67,3 +71,15 @@ CineminoSiteBundle_programmecourts:
 CineminoSiteBundle_newsletter:
         resource: "@CineminoSiteBundle/Resources/config/routing/newsletter.yml"
         prefix:   /backoffice/newsletter
+        
+CineminoSiteBundle_typeevenement:
+        resource: "@CineminoSiteBundle/Resources/config/routing/typeevenement.yml"
+        prefix:   /backoffice/typeevenement
+        
+CineminoSiteBundle_mediain:
+        resource: "@CineminoSiteBundle/Resources/config/routing/mediain.yml"
+        prefix:   /backoffice/mediain
+        
+CineminoSiteBundle_cinemino:
+        resource: "@CineminoSiteBundle/Resources/config/routing/cinemino.yml"
+        prefix:   /backoffice/cinemino

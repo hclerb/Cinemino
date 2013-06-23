@@ -1,5 +1,34 @@
 
+h1 {
+    position: absolute;
+}
+#b1 {
+    margin: 74px 10px 0 167px;
+}
+#b2 {
+    margin: 450px 0 0 550px;
+    width: 286px;
+}
+#b4 {
+    border: 1px double black;
+    color: red;
+    font-style: oblique;
+    margin: 824px 0 0 200px;
+    padding: 10px;
+    text-align: center;
+}
+#b5 {
+    border: 1px double black;
+    color: green;
+    font-style: oblique;
+    margin: 824px 0 0 200px;
+    padding: 10px;
+    text-align: center;
+}
+img {
+    float: left;
+}
 body {
-    background-image: url("../../css/img/toupin1.jpg");
-    background-repeat: no-repeat;
+    margin-top: 31px;
+    margin-left: 10px;
 }

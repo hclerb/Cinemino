@@ -1,11 +1,5 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }} -  Accueil
-{% endblock %}
-
-{% block alert %}Gérez les médias liés au films. Un média peut etre lié a plusieurs films.<br>
-{% endblock %}
 
 {% block titre %}{{ entity.titre }}{% endblock %}
 
@@ -17,7 +11,7 @@
     <img class="img-polaroid" width="350px" src="{{asset('medias/Film/photos/big/')}}{{ entity.url }}" alt=""/>
         <br>
             <button type="submit" class="btn btn-primary">Sauvegarder</button>
-            <a class="btn" href="{{ path('media') }}"><i class="icon-ban-circle"></i> Annuler</a>
+            <a class="btn" href="{{ path('mediaFilm') }}"><i class="icon-ban-circle"></i> Annuler</a>
     
 </form>
 
@@ -27,6 +21,8 @@
             <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer {{ entity.titre }}</button>
         </form>
     {% endif %}
-
+<script>
+ $("#idmedias").addClass("active");
+ </script>
 
 {% endblock content %}

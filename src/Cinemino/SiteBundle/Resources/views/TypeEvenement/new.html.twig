@@ -1,0 +1,17 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="well">
+
+<form action="{{ path('typeevenement_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <br/>
+    <button class="btn btn-primary" type="submit">Créer le type d'évènement</button>
+    <a class="btn" href="{{ path('typeevenement') }}"><i class="icon-ban-circle"></i> Annuler</a>
+</form>
+</div>
+<script>
+$("#idautres").addClass("active");
+</script>
+{% endblock %}

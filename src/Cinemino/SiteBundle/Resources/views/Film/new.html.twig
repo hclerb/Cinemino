@@ -92,6 +92,11 @@
     {{ form_errors(form.interdiction) }}
     {{ form_widget(form.interdiction) }}
   </div>
+  <div class="span2">
+    {{ form_label(form.stocke) }}
+    {{ form_errors(form.stocke) }}
+    {{ form_widget(form.stocke) }}
+  </div>
 </div>
 
 <div class="row">
@@ -113,7 +118,7 @@
           {{ _self.prototype(item) }}
       {% endfor %}
       {% macro prototype(item) %}
-        <div class="row" style="padding-left: 5px;">
+        <div class="row medias" style="padding-left: 5px;">
            <div class="span5">
              {{ form_label(item.titre) }}
              {{ form_errors(item.titre) }}
@@ -160,12 +165,6 @@
 
 </div>
 
-
-
-<!-- On charge la librairie jQuery. Ici, je la prends depuis le
-site jquery.com, mais si vous l'avez en local, changez simplement
-l'adresse. -->
-<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
     /*$('input[type=file]').change(function(e){
@@ -173,12 +172,14 @@ l'adresse. -->
         $("#affichefilm").html('<img src='+ fichier + ' />');
     });*/
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('#cinemino_Sitebundle_filmcreatetype_idMedias');
+    
  
     // On définit une fonction qui va ajouter un champ.
     function add_media() {
-        index = $container.children().length;
-	var newForm = $('script[type="text/html"]').text().replace(/\$\$name\$\$/g, index);
+        //var collectionHolder = $('div.medias');
+        var $container = $('.medias');
+        var index = $container.length;
+	var newForm = $('script[type="text/html"]').text().replace(/__name__/g, index);
 
 	$("div#list_medias").append(newForm);
 
@@ -199,6 +200,10 @@ l'adresse. -->
           }
         	
         });
+        
+
+ $("#idfilms").addClass("active");
+
 });
 
 </script>

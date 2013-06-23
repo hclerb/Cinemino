@@ -78,14 +78,13 @@
       <div class="span2"> 
         <a class="btn" href="{{ path('seance') }}"><i class="icon-ban-circle"></i> Annuler</a>
       </div>
-      <div class="span2"> 
-        <form action="{{ path('seance_delete', { 'id': entity.id }) }}" method="post">
+ </div>
+</form>
+</br>
+  <form action="{{ path('seance_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
            <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer</button>
-        </form>
-      </div>
-</form>
-
+  </form>
 
 
 </div>    
@@ -95,6 +94,7 @@
       format :'dd/MM/yyyy hh:mm',
       language: 'fr'
     });
+     $("#idseances").addClass("active");
   });
 </script> 
 

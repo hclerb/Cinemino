@@ -18,12 +18,11 @@ class FilmType extends AbstractType
                           'label' => 'Durée du film')) 
             ->add('anneeProd', null, array('label' => 'Année de production', 'required' => true))
             ->add('classementArtEssai', 'choice', array('label' => 'Classement Art et Essai','choices' => array(
-                    'Pas de classement' => 'Pas de classement',
-                    'Classé Art et Essai' => 'Classé Art et Essai',
-                    'Classé avec le label Jeune public' => 'Classé avec le label Jeune public',
-                    'Classé avec le label Patrimoine et répertoire' => 'Classé avec le label Patrimoine et répertoire',
-                    'Classé avec le label Recherche et Découverte' => 'Classé avec le label Recherche et Découverte'),
-                    'required' => true))
+                    0 => 'Pas de classement',
+                    1 => 'Classé Art et Essai',
+                    2 => 'Classé avec le label Jeune public',
+                    3 => 'Classé avec le label Patrimoine et répertoire',
+                    4 => 'Classé avec le label Recherche et Découverte')))
             ->add('provenance','choice', array('label' => 'Provenance','choices'=> array(0=>'France', 1=>'USA',2=>'Europe',3=>'Reste du monde'))) 
             ->add('interdiction','choice', array('choices'=> array(0=>'Pas d\'interdiction', 1=>'-12 ans',2=>'-16 ans',3=>'-18 ans')))
             ->add('ageConseille', 'choice', array('label' => 'Age conseillé', 'required' => true,'choices' => array(
@@ -56,6 +55,7 @@ class FilmType extends AbstractType
                     'n' => 'Long Métrage',
                     'c' => 'Court-Métrage'
                 )))
+            ->add('stocke','checkbox',array('label' => 'Rangé en base','required' => false) )
             ->add('idMedias', 'collection', array('type'   => new MediaType('MediaFilm','mediafilmssid'),
                                                  'label'    => ' ',
 						 'allow_add' => true,

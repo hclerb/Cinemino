@@ -4,6 +4,13 @@ namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+
+define("LgLogoSBig", 500);
+define("HtLogoSBig",282);
+define("LgLogoSSmall", 100);
+define("HtLogoSSmall",60);
+
 /**
  * Sponsor
  *
@@ -50,14 +57,22 @@ class Sponsor
     private $siteWeb;
 
     /**
-     * @var string
+     * @var actif
      *
-     * @ORM\Column(name="ACTIF", type="string", length=1, nullable=true)
+     * @ORM\Column(name="ACTIF", type="boolean", nullable=true)
      */
     private $actif;
 
+    /**
+     * @var institution
+     *
+     * @ORM\Column(name="INSTITUTION", type="boolean", nullable=true)
+     */
+    private $institution;
 
-
+    
+    private $fileLogo;              //permet de stocker temporairement le fichier logo
+    
     /**
      * Set nomSponsor
      *
@@ -182,4 +197,42 @@ class Sponsor
     {
         return $this->id;
     }
+
+    /**
+     * Set institution
+     *
+     * @param boolean $institution
+     * @return Sponsor
+     */
+    public function setInstitution($institution)
+    {
+        $this->institution = $institution;
+    
+        return $this;
+    }
+
+    /**
+     * Get institution
+     *
+     * @return boolean 
+     */
+    public function getInstitution()
+    {
+        return $this->institution;
+    }
+    
+       public function __toString() {     
+        return $this->nomSponsor;
+    }
+    
+        // gestion fichier    
+    public function setFileLogo($file)
+    {
+        $this->fileLogo = $file;
+    }
+
+    public function getFileLogo()
+    {
+        return $this->fileLogo;
+    } 
 }

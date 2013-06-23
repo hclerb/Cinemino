@@ -64,29 +64,43 @@ this.scroll(1,h);
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">Panel Admin</a>
+        <span class="brand" >Panel Admin</span>
         <div class="nav-collapse">
           <ul class="nav">
-            <li class="active"><a href="{{ path('cineminoSite_back') }}">Accueil</a></li>
-            <li><a href="{{ path('user') }}">Utilisateurs</a></li>        
-            <li><a href="{{ path('cinema') }}">Cinémas</a></li>
+            <li id="idaccueil"><a href="{{ path('cineminoSite_back') }}">Accueil</a></li>
+            <li id="idusers"><a href="{{ path('user') }}">Utilisateurs</a></li>        
+            <li id="idcinemas"><a href="{{ path('cinema') }}">Cinémas</a></li>
             <li class="divider-vertical"></li>
-            <li><a href="{{ path('film') }}">Films</a></li>
-            <li><a href="{{ path('programmecourts') }}">Programme de Courts</a></li>
+            <li id="idfilms"><a href="{{ path('film') }}">Films</a></li>
+            <li id="idprogcourt"><a href="{{ path('programmecourts') }}">Programme de Courts</a></li>
             <li class="divider-vertical"></li>
-            <li><a href="{{ path('evenement') }}">Evènements</a></li>
-            <li><a href="{{ path('intervenant') }}">Intervenants</a></li>
+            <li id="idevt" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Evènements <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ path('evenement') }}">Evènement dans la salle</a></li>
+                <li><a href="{{ path('evenementassocie') }}">Evènement associé</a></li>
+              </ul>
+            </li> 
+            <li id="idinterv"><a href="{{ path('intervenant') }}">Intervenants</a></li>
             <li class="divider-vertical"></li>
-            <li id="test"><a href="{{ path('seance') }}">Séances</a></li>
-            <li><a href="{{ path('media') }}">Média</a></li>
-
-            <li class="dropdown">
+            <li id="idseances""><a href="{{ path('seance') }}">Séances</a></li>
+            <li id="idmedias" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Médias <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ path('mediaFilm') }}">Associés à un Film</a></li>
+                <li><a href="{{ path('mediaEvt') }}">Associés à un Evènement</a></li>
+                <li><a href="{{ path('mediaIntervenant') }}">Associés à un Intervenant</a></li>
+                <li><a href="{{ path('mediain') }}">Réalisés durant Cinémino</a></li>
+              </ul>
+            </li> 
+            <li id="idautres" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Autres <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Cinémino</a></li>
+                <li><a href="{{ path('cinemino') }}">Cinémino</a></li>
                 <li class="divider"></li>
                 <li><a href="{{ path('sponsor') }}">Sponsor</a></li>
                 <li><a href="{{ path('document') }}">Documents</a></li>
+                <li><a href="{{ path('typeevenement') }}">Type d'Evènement</a></li>
               </ul>
             </li>
           </ul>

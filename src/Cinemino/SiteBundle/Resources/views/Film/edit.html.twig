@@ -101,18 +101,22 @@
     {{ form_errors(form.interdiction) }}
     {{ form_widget(form.interdiction) }}
   </div>
+  <div class="span2">
+    {{ form_label(form.stocke) }}
+    {{ form_errors(form.stocke) }}
+    {{ form_widget(form.stocke) }}
+  </div>
 </div>
-
 <div class="row">
   <div class="span3">
     {{ form_label(form.couleurTexte) }}
     {{ form_errors(form.couleurTexte) }}
-    {{ form_widget(form.couleurTexte, { 'attr': {'class': 'color'} }) }}
+    {{ form_widget(form.couleurTexte, { 'attr': {'class': 'color', 'value': entity.couleurTexte} }) }}
   </div>
   <div class="span3">
     {{ form_label(form.couleurFondFilm) }}
     {{ form_errors(form.couleurFondFilm) }}
-    {{ form_widget(form.couleurFondFilm, { 'attr': {'class': 'color', 'value': '4164AA'}} ) }}
+    {{ form_widget(form.couleurFondFilm, { 'attr': {'class': 'color', 'value': entity.couleurFondFilm}} ) }}
   </div>
  </div>   
 <div id="ajout_media">
@@ -167,42 +171,29 @@
  <br/>
 </div>
 <br/>
+{{ form_rest(form) }}
 <div class="row">
   <div class="span5">
       <button class="btn btn-primary" type="submit">Valider l'enregistrement du film</button>
-      <a class="btn" href="{{ path('film') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+      <a class="btn" href="{{ path('film') }}"><i class="icon-arrow-left"></i> Revenir à la liste des films</a>
   </div>
-  <div class="span4">  
-      <form action="{{ path('film_delete', { 'id': entity.id }) }}" method="post">
+</div>
+</form>
+ <br/>     
+ <form action="{{ path('film_delete', { 'id': entity.id }) }}" method="post" >
             {{ form_widget(delete_form) }}
            <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer le film</button>
-      </form>
-  </div>
-</div>
-    
-{{ form_rest(form) }} 
-</form>
+ </form>
 </div>
 
-
-
-<!-- On charge la librairie jQuery. Ici, je la prends depuis le
-site jquery.com, mais si vous l'avez en local, changez simplement
-l'adresse. -->
-<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-    /*$('input[type=file]').change(function(e){
-        var fichier = $(this).val();
-        $("#affichefilm").html('<img src='+ fichier + ' />');
-    });*/
-    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('#cinemino_Sitebundle_filmcreatetype_idMedias');
  
     // On définit une fonction qui va ajouter un champ.
     function add_media() {
-        index = $container.children().length;
-	var newForm = $('script[type="text/html"]').text().replace(/\$\$name\$\$/g, index);
+        var $container = $('.themedia');
+        var index = $container.length;
+	var newForm = $('script[type="text/html"]').text().replace(/__name__/g, index);
 
 	$("div#list_medias").append(newForm);
 
@@ -223,6 +214,9 @@ l'adresse. -->
           }
         	
         });
+
+ $("#idfilms").addClass("active");
+
 });
 
 </script>

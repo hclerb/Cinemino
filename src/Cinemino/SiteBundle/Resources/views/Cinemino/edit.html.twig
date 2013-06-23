@@ -1,0 +1,93 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
+{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
+
+{% block content %}
+<div class="well">
+
+<form action="{{ path('cinemino_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row">
+    <div class="span5">
+     <div id="datetimepicker1" class="input-append date">
+      {{ form_label(form.dateDebut) }}
+      {{ form_errors(form.dateDebut) }}
+      {{ form_widget(form.dateDebut) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+   <div class="span4">       
+     <div id="datetimepicker2" class="input-append date">
+      {{ form_label(form.dateFin) }}
+      {{ form_errors(form.dateFin) }}
+      {{ form_widget(form.dateFin) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+ </div>     
+ <br/>    
+<div class="row">
+  <div class="span5">
+    {{ form_label(form.couleurTypo) }}
+    {{ form_errors(form.couleurTypo) }}
+    {{ form_widget(form.couleurTypo, { 'attr': {'class': 'color', 'value': entity.couleurTypo} }) }}
+  </div>
+  <div class="span3">
+    {{ form_label(form.couleurFond) }}
+    {{ form_errors(form.couleurFond) }}
+    {{ form_widget(form.couleurFond, { 'attr': {'class': 'color', 'value': entity.couleurFond} }) }}
+  </div>
+ </div> 
+  <div class="row">
+   <div class="span3">
+     {{ form_label(form.affiche) }}
+     {{ form_errors(form.affiche) }}
+     {{ form_widget(form.affiche, { 'attr': {'style': 'width:175px'} }) }}
+  </div>
+  <div class="span4">
+     {{ form_label(form.fileAffiche) }}
+     {{ form_errors(form.fileAffiche) }}
+     {{ form_widget(form.fileAffiche) }}
+  </div>
+ </div>
+   <div class="row">
+  <div class="span3">
+     {{ form_label(form.logo) }}
+     {{ form_errors(form.logo) }}
+     {{ form_widget(form.logo, { 'attr': {'style': 'width:175px'} }) }}
+  </div>
+  <div class="span4">
+     {{ form_label(form.fileLogo) }}
+     {{ form_errors(form.fileLogo) }}
+     {{ form_widget(form.fileLogo) }}
+  </div>
+ </div>
+ {{ form_widget(form) }}
+        <br/>
+        
+         <button class="btn btn-primary" type="submit">Enregistrer les modifications</button>
+         <a class="btn" href="{{ path('cinemino') }}"><i class="icon-ban-circle"></i> Annuler</a>
+</form>
+</div>
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false,
+    });
+    $('#datetimepicker2').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false
+    });
+
+
+ $("#idautres").addClass("active");
+
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
+{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
+
+{% block content %}
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th width=160px>Date de debut</th>
+            <th width=160px>Date de fin</th>
+            <th>Affiche</th>
+            <th>Logo</th>
+            <th width=100px>Couleur fond</th>
+            <th width=100px>Couleur typo</th>
+            <th width=100px>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ lejour[entity.dateDebut|date('w')] }} {{ entity.dateDebut|date('d') }} {{ mois[entity.dateDebut|date('n')] }} {{ entity.dateDebut|date('Y') }}</td>
+            <td>{{ lejour[entity.dateFin|date('w')] }} {{ entity.dateFin|date('d') }} {{ mois[entity.dateFin|date('n')] }} {{ entity.dateFin|date('Y') }}</td>
+            <td><img class="img-polaroid" src="{{asset('medias/Cinemino/small/')}}{{entity.affiche }}" alt=""/></td>
+            <td ><img class="img-polaroid" src="{{asset('medias/Cinemino/small/')}}{{entity.logo }}" alt=""/></td>
+            <td style= "background-color:#{{ entity.couleurFond }}">{{ entity.couleurFond }}</td>
+            <td style= "background-color:#{{ entity.couleurTypo }}">{{ entity.couleurTypo }}</td>
+            <td>
+             <a class="btn btn-info" href="{{ path('cinemino_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+      
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script>
+ $("#idautres").addClass("active");
+    
+    
+</script>
+{% endblock content %}

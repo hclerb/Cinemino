@@ -1,10 +1,4 @@
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }}
-{% endblock %}
-
-{% block alert %}Ajouter ou modifier les programme de courts présent dans la base de données.
-{% endblock alert %}
 
 {% block titre %}{{ entity.titreFilm }} - (ici visualisation à faire comme sur le FrontOffice){% endblock %}
 
@@ -87,9 +81,9 @@
 <br><br><br>
     
 <a class="btn btn-info" href="{{ path('programmecourts_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
-<a class="btn" href="{{ path('programmecourts') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
-
-
-</ul>
+<a class="btn" href="{{ path('programmecourts') }}"><i class="icon-arrow-left"></i> Revenir à la liste des programmes</a>
+<script>
+ $("#idprogcourt").addClass("active");
+</script>
 
 {% endblock content %}

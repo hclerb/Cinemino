@@ -1,0 +1,43 @@
+
+{
+    "timeline":
+    {
+        "headline":"Cinémino 2013 est fini ....... vive Cinémino 2014!",
+        "type":"default",
+	"text":"19h15 La projection de Pinocchio à la MJC Novel se termine, Cinémino 2013 est terminé ",
+	"startDate":"2013,3,19",
+        "endDate":"2013,11,21",
+        "asset":
+                {
+                    "media":"../medias/old/affiche2013.jpg",
+                    "credit":"",
+                    "caption":""
+                },
+        "date": [
+            {
+                "startDate":"2013,3,20",
+		"endDate":"2013,3,21",
+                "headline":"Réunion Bilan",
+                "text":"<p>Le bilan est à faire....</p>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2013,6,26",
+                "endDate":"2013,6,26",
+                "headline":"Déjeuner sur .... toîle",
+                "text":"<p>La recette de toujours : convivialité, amitié, envie de cinéma</p>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            }        
+        ]
+    }
+}

@@ -24,9 +24,9 @@
 <br><br><br>
     
    <div class="row"> 
-       <div class="span3">
+       <div class="span5">
             <a class="btn btn-info" href="{{ path('document_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
-            <a class="btn" href="{{ path('document') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+            <a class="btn" href="{{ path('document') }}"><i class="icon-arrow-left"></i> Revenir à la liste des documents</a>
         </div>
         <div class="span4">
            <form action="{{ path('document_delete', { 'id': entity.id }) }}" method="post">
@@ -35,5 +35,7 @@
            </form>
         </div>
    </div>
-
+<script>
+$("#idautres").addClass("active");
+</script>
 {% endblock %}

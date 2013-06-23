@@ -14,11 +14,11 @@ class UserTypeNew extends AbstractType
             ->add('username', null, array('label' => 'Nom d\'utilisateur'))
             ->add('email', null, array('label' => 'Email'))
 
-            ->add('locked', 'choice', array(
+            ->add('enabled', 'choice', array(
                 'label' => 'Compte',
                 'choices' => array(
-                    0 => 'Actif',
-                    1 => 'Désactivé'
+                    0 => 'Désactivé',
+                    1 => 'Actif'
                 )))
             ->add('roles', 'choice', array(
                 'label' => 'Role',
@@ -30,12 +30,12 @@ class UserTypeNew extends AbstractType
                 'multiple' => true,
                 
                 ))
-                            ->add('plainPassword', 'repeated', array(
+             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
                 'options' => array('translation_domain' => 'FOSUserBundle'),
                 'first_options' => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Confirmation mot de passe'),
-                'invalid_message' => 'fos_user.password.mismatch',
+                'invalid_message' => 'Les deux mots de passe ne sont pas identiques',
             ))
                 
         ;

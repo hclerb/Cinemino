@@ -1,6 +1,6 @@
-mediafilm:
+mediaFilm:
     pattern:  /
-    defaults: { _controller: "CineminoSiteBundle:Media:index" }
+    defaults: { _controller: "CineminoSiteBundle:MediaFilm:index" }
 
 mediaFilm_show:
     pattern:  /{id}/show

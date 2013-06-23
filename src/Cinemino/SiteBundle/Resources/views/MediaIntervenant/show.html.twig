@@ -1,11 +1,5 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }} -  Accueil
-{% endblock %}
-
-{% block alert %}Gérez les médias liés au films. Un média peut etre lié a plusieurs films.<br>
-{% endblock %}
 
 {% block titre %}{{ entity.titre }}{% endblock %}
 
@@ -26,16 +20,24 @@
             <th>Type: </th>
             <td>{% if entity.type == 'p' %}Photo{% else %}Video{% endif %}</td>
         </tr>
+        <tr>
+            <th>L'Intervenant associé :</th>
+            <td>
+               {% if entity.idInter is defined %} <a href="{{ path('intervenant_show', { 'id': entity.idInter.id }) }}">{{ entity.idInter.nomIntervenant }}</a>{% endif %}
+            </td>
+        </tr>
     </tbody>
 </table>
 {% if entity.type == 'p' %}
-<br><img class="img-polaroid" width="450" src="{{asset('medias/Film/photos/big/')}}{{ entity.url }}" alt=""/>
+<br><img class="img-polaroid" width="450" src="{{asset('medias/Intervenant/photos/big/')}}{{ entity.url }}" alt=""/>
 {% endif %}
 
 <br><br>
 
-      <a class="btn" href="{{ path('media') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
-      <a class="btn" href="{{ path('mediafilm_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
+      <a class="btn" href="{{ path('mediaIntervenant') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+      <a class="btn" href="{{ path('mediaIntervenant_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
 
-
+<script>
+ $("#idmedias").addClass("active");
+ </script>
 {% endblock content %}

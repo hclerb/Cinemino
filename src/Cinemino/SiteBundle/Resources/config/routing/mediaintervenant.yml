@@ -1,0 +1,30 @@
+mediaIntervenant:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:MediaIntervenant:index" }
+
+mediaIntervenant_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:MediaIntervenant:show" }
+
+mediaIntervenant_new:
+    pattern:  /Intervenant
+    defaults: { _controller: "CineminoSiteBundle:MediaIntervenant:new" }
+
+mediaIntervenant_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:MediaIntervenant:create" }
+    requirements: { _method: post }
+
+mediaIntervenant_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:MediaIntervenant:edit" }
+
+mediaIntervenant_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:MediaIntervenant:update" }
+    requirements: { _method: post }
+
+mediaIntervenant_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:MediaIntervenant:delete" }
+    requirements: { _method: post }

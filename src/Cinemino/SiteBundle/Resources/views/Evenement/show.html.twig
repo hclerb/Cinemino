@@ -33,8 +33,10 @@
 <br><br><br>
     
 <a class="btn btn-info" href="{{ path('evenement_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
-<a class="btn" href="{{ path('evenement') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+<a class="btn" href="{{ path('evenement') }}"><i class="icon-arrow-left"></i> Revenir à la liste des évènements</a>
 
 <br><br>
-
+<script>
+ $("#idevt").addClass("active");
+</script>
 {% endblock %}

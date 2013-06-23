@@ -1,12 +1,4 @@
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }}
-{% endblock %}
-
-{% block alert %}Ajouter ou modifier les programmecourts présent dans la base de données.
-{% endblock alert %}
-
-{% block titre %}{% endblock %}
 
 {% block content %}
 
@@ -183,7 +175,7 @@
 {{ form_rest(form) }} 
 </form>
 
- <a class="btn" href="{{ path('film') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+ <a class="btn" href="{{ path('film') }}"><i class="icon-arrow-left"></i> Revenir à la liste des programmes</a>
 
 </div>
 
@@ -192,10 +184,7 @@
            <button class="btn btn-danger" type="submit">Supprimer le film</button><i class="icon-remove icon-white"></i>
 </form>
 
-<!-- On charge la librairie jQuery. Ici, je la prends depuis le
-site jquery.com, mais si vous l'avez en local, changez simplement
-l'adresse. -->
-<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
     /*$('input[type=file]').change(function(e){
@@ -229,6 +218,10 @@ l'adresse. -->
           }
         	
         });
+        
+
+ $("#idprogcourt").addClass("active");
+
 });
 
 </script>

@@ -19,8 +19,13 @@ class IntervenantType extends AbstractType
             ->add('urlPhotoIntervenant', null, array('label' => 'Photo'))
             ->add('filephoto', 'file', array('label' => 'Fichier de la photo :', 'required' => false))
             ->add('urlLogo', null, array('label' => 'Logo'))
-            ->add('filelogo', 'file', array('label' => 'Fichier de la photo :', 'required' => false))
+            ->add('filelogo', 'file', array('label' => 'Fichier de son logo :', 'required' => false))
             ->add('idEvenements', null, array('label' => 'Evènement(s) rataché(s)', 'required' => false))
+            ->add('idMedias', 'collection', array('type'   => new MediaType('MediaIntervenant','mediaintervenantssid'),
+                                                 'label'    => ' ',
+						 'allow_add' => true,
+						 'allow_delete' => true,
+						 'by_reference' => false,))
         ;
     }
 

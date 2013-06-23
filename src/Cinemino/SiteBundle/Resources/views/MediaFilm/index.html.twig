@@ -1,6 +1,8 @@
-<a class="btn btn-info" href="{{ path('mediaFilm_new') }}"><i class="icon-white icon-plus"></i> Ajouter un média à un film</a>
-<br/><br/>
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block content %}
 
+<a class="btn btn-info" href="{{ path('mediaFilm_new') }}"><i class="icon-white icon-plus"></i> Ajouter un média à un film</a>
+<br/>
 {% set idfilm = 0 %}
 {% for entity in entities %}
   {% if entity.idFilm.id != idfilm %} 
@@ -28,3 +30,7 @@
 {% endfor %}
 </tbody>    
 </table>
+<script>
+ $("#idmedias").addClass("active");
+ </script>
+{% endblock content %}

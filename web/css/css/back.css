@@ -1,30 +1,23 @@
+
 #ajout_media {
     border-style: dashed;
     margin-bottom: 10px;
     padding-left: 6px;
 }
 .themedia {
-    border-style: inset;
-    padding-left: 0px;
-    border-width: 1px;
-    border-color: brown;
-    margin: 11px 10px 0px 2px;
+    margin: 10px 10px 0 25px;
     padding: 0px;
 }
-
-.inthemedia{
-    margin: 11px 10px 0px 2px;
+.inthemedia {
+    margin: 11px 10px 0 2px;
 }
-
-#formulaire_seance{
-   width:800px;
-   margin:auto;
+#formulaire_seance {
+    margin: auto;
+    width: 800px;
 }
-
-#formulaire_seance .row{
+#formulaire_seance .row {
     padding-left: 30px;
 }
-
 label {
     margin-top: 10px;
 }

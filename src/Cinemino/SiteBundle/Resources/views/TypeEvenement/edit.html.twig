@@ -1,0 +1,31 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+
+
+<div id="formulaire" class="well">
+
+<form action="{{ path('typeevenement_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+
+<br/>
+<div class="row">
+  <div class="span5">
+      <button class="btn btn-primary" type="submit">Valider l'enregistrement du type d'Evènement</button>
+      <a class="btn" href="{{ path('typeevenement') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+  </div>
+  <div class="span4">  
+      <form action="{{ path('typeevenement_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+           <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer le type d'Evènement</button>
+      </form>
+  </div>
+</div>
+    
+{{ form_rest(edit_form) }} 
+</form>
+</div>
+<script>
+$("#idautres").addClass("active");
+</script>  
+{% endblock %}

@@ -10,10 +10,11 @@
 <table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
     <thead>
         <tr>
-            <th>Nom sponsor</th>
+            <th>Nom</th>
             <th>Logo</th>
             <th>Site web</th>
             <th>Actif</th>
+            <th>Institution</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -21,19 +22,22 @@
     {% for entity in entities %}
         <tr>
             <td><a href="{{ path('sponsor_show', { 'id': entity.id }) }}">{{ entity.nomSponsor }}</a></td>
-            <td><img class="img-polaroid" style="height:75px;" src="{{entity.logo }}" alt=""/></td>
+            <td><img class="img-polaroid" style="height:75px;" src="{{asset('medias/Sponsor/small/')}}{{entity.logo }}" alt=""/></td>
             <td><a href="{{ entity.siteWeb }}" target="_blank">{{ entity.siteWeb }}</a></td>
-            <td>{% if entity.actif == 'o' %}<div style="color:green">Oui</div>{% else %}<div style="color:red">Non</div>{% endif %}</td>
+            <td>{% if entity.actif %}<div style="color:green">Oui</div>{% else %}<div style="color:red">Non</div>{% endif %}</td>
+            <td>{% if entity.institution %}<div style="color:green">Oui</div>{% else %}<div style="color:red">Non</div>{% endif %}</td>
             <td width="160px">
                 
           <a class="btn" href="{{ path('sponsor_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
-          <a class="btn btn-info" href="{{ path('sponsor_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-white icon-pencil"></i> Editer</a>
+          <a class="btn btn-info" href="{{ path('sponsor_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
-
+<script>
+$("#idautres").addClass("active");
+</script>
 
 
 

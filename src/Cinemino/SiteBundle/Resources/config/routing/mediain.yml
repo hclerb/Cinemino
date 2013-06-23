@@ -1,0 +1,30 @@
+mediain:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:MediaIn:index" }
+
+mediain_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:MediaIn:show" }
+
+mediain_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:MediaIn:new" }
+
+mediain_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:MediaIn:create" }
+    requirements: { _method: post }
+
+mediain_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:MediaIn:edit" }
+
+mediain_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:MediaIn:update" }
+    requirements: { _method: post }
+
+mediain_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:MediaIn:delete" }
+    requirements: { _method: post }

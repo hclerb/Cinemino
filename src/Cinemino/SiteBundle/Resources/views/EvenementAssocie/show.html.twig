@@ -1,13 +1,4 @@
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }}
-{% endblock %}
-
-{% block alert %}Gérer les évènements lié aux séances.
-{% endblock alert %}
-
-{% block titre %}{{ entity }}{% endblock %}
-
 
 {% block content %}
 
@@ -51,8 +42,10 @@
 
     
 <a class="btn btn-info" href="{{ path('evenementassocie_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
-<a class="btn" href="{{ path('evenementassocie') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+<a class="btn" href="{{ path('evenementassocie') }}"><i class="icon-arrow-left"></i> Revenir à la liste des Evènements Associés</a>
 
 <br><br>
-
+<script>
+ $("#idevt").addClass("active");
+</script>
 {% endblock %}

@@ -1,11 +1,5 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }} -  Accueil
-{% endblock %}
-
-{% block alert %}Gérez les médias liés au films. Un média peut etre lié a plusieurs films.<br>
-{% endblock %}
 
 {% block titre %}{{ entity.titre }}{% endblock %}
 
@@ -37,5 +31,7 @@
       <a class="btn" href="{{ path('media') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
       <a class="btn" href="{{ path('mediaFilm_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
 
-
+<script>
+ $("#idmedias").addClass("active");
+ </script>
 {% endblock content %}

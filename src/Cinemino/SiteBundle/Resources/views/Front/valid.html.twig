@@ -8,8 +8,11 @@
         <link href="{{ asset('css/css/front2.css') }}" rel="stylesheet">
     </head>
     <body>
-        {% if entity.id is defined %} <h1>Vous êtes déjà inscrit !</h1>
-        {% else %} <h1>Voilà vous êtes inscrit, vous recevrez régulièrement de nos nouvelles !</h1>
+        <img  src="{{asset('css/img/')}}lescomperes.jpg" alt=""/>
+        <h1 id="b1">C'est quand même pas pour tout de suite tout de suite...</h1>
+        <h1 id="b2">Oui mais regarde comme il sera beau ! <br/>Ça vaut le coup d'attendre un peu non ?</h1>
+        {% if entity.id is defined %} <h1 id="b4">Merci mais... vous êtes déjà inscrit !</h1>
+        {% else %} <h1 id="b5">Voilà vous êtes inscrit, maintenant, vous recevrez régulièrement de nos nouvelles !</h1>
         {% endif %}
     </body>
 </html>

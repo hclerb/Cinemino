@@ -9,6 +9,11 @@ define("HtAfficheFBig",201);
 define("LgAfficheFSmall", 75);
 define("HtAfficheFSmall",100);
 
+define("LgPhotoFSmall", 319);
+define("HtPhotoFSmall",213);
+define("LgPhotoFBig", 720);
+define("HtPhotoFBig",480);
+
 
 /**
  * Film
@@ -134,6 +139,13 @@ class Film
      * @ORM\Column(name="TYPE", type="string", length=1, nullable=true)
      */
     protected $type;
+    
+        /**
+     * @var boolean
+     *
+     * @ORM\Column(name="STOCKE", type="boolean")
+     */
+    protected $stocke;
 
     /**
      *
@@ -145,7 +157,7 @@ class Film
     /**
      * @var \Doctrine\Common\Collections\Collection
      * 
-     * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\MediaFilm", mappedBy="idFilm")
+     * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\MediaFilm", mappedBy="idFilm", cascade={"remove", "persist"})
      */
     protected $idMedias;
     
@@ -587,4 +599,27 @@ class Film
     {
         return $this->file;
     }    
+
+    /**
+     * Set stock
+     *
+     * @param boolean $range
+     * @return Film
+     */
+    public function setStocke($range)
+    {
+        $this->stocke = $range;
+    
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
+     * @return boolean 
+     */
+    public function getStocke()
+    {
+        return $this->stocke;
+    }
 }

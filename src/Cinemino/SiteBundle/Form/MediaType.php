@@ -18,8 +18,8 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', null, array( 'label' => 'Légende', 'required' => true))
-            ->add('url', 'text', array('label' => 'Nom du fichier','read_only' => true))
+            ->add('titre', null, array( 'label' => 'Légende du média', 'required' => true))
+            ->add('url', 'text', array('label' => 'Nom du fichier', 'required' => false))
             ->add('file', 'file', array('label' => 'Fichier associé', 'required' => false))
             ->add('type', 'choice', array('label' => 'Type','required' => true,   
                 'choices' => array(

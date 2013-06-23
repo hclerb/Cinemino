@@ -4,6 +4,9 @@ namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+define("LgPicto", 50);
+define("HtPicto", 50);
+
 /**
  * TypeEvenement
  *
@@ -35,6 +38,8 @@ class TypeEvenement
      */
     private $picto;
 
+    private $file;              //permet de stocker temporairement le fichier affiche
+    
     /**
      * Set label
      *
@@ -94,4 +99,15 @@ class TypeEvenement
     {
         return $this->picto;
     }
+    
+    // gestion fichier    
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }  
 }

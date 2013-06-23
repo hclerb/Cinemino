@@ -12,15 +12,12 @@ class SponsorType extends AbstractType
     {
         $builder
             ->add('nomSponsor', null, array('label' => 'Nom du sponsor', 'required' => true))
-            ->add('logo', null, array('label' => 'Url logo', 'required' => true))
+            ->add('logo', null, array('label' => 'Url logo', 'required' => false))
+            ->add('fileLogo', 'file', array('label' => 'Fichier du logo', 'required' => false))
             ->add('adresse', null, array('label' => 'adresse', 'required' => true))
             ->add('siteWeb', null, array('label' => 'Site Web'))
-            ->add('actif', 'choice', array('label' => 'Actif', 'required' => true, 
-                'choices' => array(
-                    'o' => 'Oui',
-                    'n' => 'Non'
-                    ))
-                  )
+            ->add('institution', 'checkbox', array('label' => 'Institution', 'required' => false))
+            ->add('actif', 'checkbox', array('label' => 'Actif', 'required' => false))
         ;
     }
 

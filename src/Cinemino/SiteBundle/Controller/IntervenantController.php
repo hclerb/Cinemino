@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Cinemino\SiteBundle\Entity\Intervenant;
+use Cinemino\SiteBundle\Entity\MediaIntervenant;
 use Cinemino\SiteBundle\Form\IntervenantType;
 use Cinemino\SiteBundle\Form\IntervenantCreateType;
 
@@ -100,6 +101,27 @@ class IntervenantController extends Controller
               $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoIBig,HtPhotoIBig)); 
               $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoISmall,HtPhotoISmall);
             }
+            foreach($entity->getIdMedias() as $media)  
+            {
+              if ($media->getFile()!=NULL)
+              { 
+                $url = $media->getFile();
+                $dest="medias/Intervenant/sons";           // par défaut on dit que c'est un son
+                switch ($media->getType()) {
+                    case 'p':                       // C'est une phot, on la redimension et on l'upload
+                             $media->setUrl($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoMBig,HtPhotoMBig)); 
+                             $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
+                       break;
+                    case 'v': $dest = "medias/Intervenant/videos";
+                    default :
+                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
+                            $url->move($dest,$url->getClientOriginalName());
+                 }
+                $media->setIdInter($entity);
+                $em->persist($media);
+              } else $entity->removeIdMedia ($media);
+            }
+            
             $em->persist($entity);
             $em->flush();
 
@@ -119,7 +141,6 @@ class IntervenantController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('CineminoSiteBundle:Intervenant')->findAll();
         $entity = $em->getRepository('CineminoSiteBundle:Intervenant')->find($id);
 
         if (!$entity) {
@@ -131,9 +152,8 @@ class IntervenantController extends Controller
 
         return $this->render('CineminoSiteBundle:Intervenant:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'entities' => $entities,
         ));
     }
 
@@ -151,6 +171,9 @@ class IntervenantController extends Controller
             throw $this->createNotFoundException('Unable to find Intervenant entity.');
         }
 
+        $originalMedias = array();
+    	foreach ($entity->getIdMedias() as $oldmedia) $originalMedias[] = $oldmedia;
+        
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new IntervenantType(), $entity);
         $editForm->bind($request);
@@ -167,6 +190,35 @@ class IntervenantController extends Controller
               $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoIBig,HtPhotoIBig)); 
               $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoISmall,HtPhotoISmall);
             }
+            foreach($entity->getIdMedias() as $media)  
+            {
+              // Si le médias est toujours actifs on le supprime du tableau de nettoyage  
+              foreach ($originalMedias as $key => $toDel) {
+    		if ($toDel->getId() === $media->getId()) unset($originalMedias[$key]);
+              }
+              if ($media->getFile()!=NULL)
+              { 
+                $url = $media->getFile();
+                $dest="medias/Intervenant/sons";           // par défaut on dit que c'est un son
+                switch ($media->getType()) {
+                    case 'p':                       // C'est une phot, on la redimension et on l'upload
+                             $media->setUrl($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoMBig,HtPhotoMBig)); 
+                             $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
+                       break;
+                    case 'v': $dest = "medias/Intervenant/videos";
+                    default :
+                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
+                            $url->move($dest,$url->getClientOriginalName());
+                 }
+              }
+              $media->setIdInter($entity);
+              $em->persist($media);
+            }
+            
+            // Supprime les médias qui ont été enlevés dans la mise oà jour
+    	    foreach ($originalMedias as $media) {
+              $em->remove($media);
+    	    }
             $em->persist($entity);
             $em->flush();
 
@@ -175,7 +227,7 @@ class IntervenantController extends Controller
 
         return $this->render('CineminoSiteBundle:Intervenant:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

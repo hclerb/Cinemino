@@ -108,7 +108,7 @@ class FilmController extends Controller
             $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
             $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
             } 
-                          
+            print_r($entity->getIdMedias());              
             foreach($entity->getIdMedias() as $media)  
             {
               if ($media->getFile()!=NULL)
@@ -133,7 +133,7 @@ class FilmController extends Controller
             
             $em->flush();
 
-            return $this->redirect($this->generateUrl('film', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('film'));
         }
 
         return $this->render('CineminoSiteBundle:Film:new.html.twig', array(
@@ -240,7 +240,7 @@ class FilmController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('film', array('id' => $id)));
+            return $this->redirect($this->generateUrl('film'));
         }
 
         return $this->render('CineminoSiteBundle:Film:edit.html.twig', array(

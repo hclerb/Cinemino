@@ -1,11 +1,5 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }} -  Accueil
-{% endblock %}
-
-{% block alert %}Gérez les sponsors<br>
-{% endblock %}
 
 {% block titre %}{{ entity.nomSponsor }}{% endblock %}
 
@@ -37,11 +31,13 @@
     </tbody>
 </table>
 
-<br><img class="img-polaroid" width="450" src="{{ entity.logo }}" alt=""/>
+<br><img class="img-polaroid" width="450" src="{{asset('medias/Sponsor/big/')}}{{ entity.logo }}" alt=""/>
 
 <br><br>
 
-      <a class="btn" href="{{ path('sponsor') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
-      <a class="btn" href="{{ path('sponsor_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-pencil"></i> Editer</a>
-
+      <a class="btn" href="{{ path('sponsor') }}"><i class="icon-arrow-left"></i> Revenir à la liste des sponsors</a>
+      <a class="btn" href="{{ path('sponsor_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
+<script>
+$("#idautres").addClass("active");
+</script>
 {% endblock %}

@@ -77,6 +77,12 @@ class SponsorController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            if($entity->getFileLogo()!=NULL){ 
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+            $url = $entity->getFileLogo();
+            $entity->setLogo($resize->UploadPhoto($url,"Sponsor/big",LgLogoSBig,HtLogoSBig)); 
+            $resize->UploadPhoto($url,"Sponsor/small",LgLogoSSmall,HtLogoSSmall);
+            }
             $em->persist($entity);
             $em->flush();
 
@@ -132,10 +138,16 @@ class SponsorController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            if($entity->getFileLogo()!=NULL){
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+            $url = $entity->getFileLogo();
+            $entity->setLogo($resize->UploadPhoto($url,"Sponsor/big",LgLogoSBig,HtLogoSBig)); 
+            $resize->UploadPhoto($url,"Sponsor/small",LgLogoSSmall,HtLogoSSmall);
+            } 
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('sponsor_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('sponsor', array('id' => $id)));
         }
 
         return $this->render('CineminoSiteBundle:Sponsor:edit.html.twig', array(

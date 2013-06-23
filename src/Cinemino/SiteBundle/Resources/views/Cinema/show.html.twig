@@ -1,19 +1,10 @@
 
 {% extends "CineminoSiteBundle::layout.html.twig" %}
-{% block title %}
-{{ parent() }} -  Accueil
-{% endblock %}
-
-{% block alert %}Ici vous pouvez gérer l'ensemble des cinémas dont vous avez la charge ( modification / visualisation ).<br> 
-Seul l'Administrateur peut supprimer ou ajouter un cinéma.
-{% endblock %}
-{% block titre %}{{ entity.nomCinema }}{% endblock %}
-
 
 {% block content %}
 
-  <td> <img class="img-polaroid" width="450" src="{{ entity.photo }}" alt=""/></td>
-  <td> <img class="img-polaroid" width="250px" src="{{ entity.logo }}" alt=""/></td>
+  <td> <img class="img-polaroid" src="{{asset('medias/Cinema/photo/big/')}}{{ entity.photo }}" alt=""/></td>
+  <td> <img class="img-polaroid" src="{{asset('medias/Cinema/logo/big/')}}{{ entity.logo }}" alt=""/></td>
 <br><br>
 <table class="record_properties">
     <tbody>
@@ -49,7 +40,7 @@ Seul l'Administrateur peut supprimer ou ajouter un cinéma.
 
 
    
-        <a class="btn" href="{{ path('cinema') }}"><i class="icon-arrow-left"></i> Revenir a la liste</a>
+        <a class="btn" href="{{ path('cinema') }}"><i class="icon-arrow-left"></i> Revenir à la liste des cinémas</a>
    
 
         
@@ -63,5 +54,9 @@ Seul l'Administrateur peut supprimer ou ajouter un cinéma.
         </form>
     {% endif %}
 
-
+<script>
+ $("#idcinemas").addClass("active");
+    
+    
+</script> 
 {% endblock %}

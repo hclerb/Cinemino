@@ -1,14 +1,19 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+<div style="width:1250px">
 <a class="btn btn-info" href="{{ path('evenementassocie_new') }}"><i class="icon-white icon-plus"></i> Ajouter un évenement associé</a>
 <br/><br/>
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th width="150px">Titre de l'évènement</th>
-            <th width="400px">Description de l'évènement</th>
+            <th width="150px">Titre</th>
+            <th width="400px">Description</th>
             <th width="50px">Type</th>
             <th width="80px">Date début </th>
-            <th width="80px">Date de fin</th>
+            <th width="80px">Date fin</th>
             <th width="50px">Priorite</th>
+            <th width="50px">Lieu</th>
             <th width="100px">Intervenants</th>
             <th width="160px">Actions</th>
         </tr>
@@ -22,6 +27,7 @@
             <td>{% if entity.dateEvenement %}{{ entity.dateEvenement|date('Y-m-d') }}{% endif %}</td>
             <td>{% if entity.dateFin %}{{ entity.dateFin|date('Y-m-d') }}{% endif %}</td>
             <td>{{ entity.priorite }}</td>
+            <td>{{ entity.idLieu }}</td>
             <td>
                 {% if entity.idIntervenants[0] is defined %}
                   {% for evt in entity.idIntervenants %}
@@ -38,3 +44,8 @@
     {% endfor %}
     </tbody>
 </table>
+</div>
+<script>
+ $("#idevt").addClass("active");
+</script>
+{% endblock content %}

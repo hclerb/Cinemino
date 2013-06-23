@@ -5,6 +5,16 @@ namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+define("LgPhotoCBig", 500);
+define("HtPhotoCBig",282);
+define("LgPhotoCSmall", 100);
+define("HtPhotoCSmall",60);
+
+define("LgLogoCBig", 500);
+define("HtLogoCBig",282);
+define("LgLogoCSmall", 100);
+define("HtLogoCSmall",60);
 /**
  * Cinema
  *
@@ -77,14 +87,49 @@ class Cinema
      * @ORM\Column(name="COULEUR_FOND_CINEMA", type="string", length=15, nullable=true)
      */
     private $couleurFondCinema;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="LATITUDE", type="string", length=15, nullable=true)
+     */
+    private $latitude;
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="LONGITUDE", type="string", length=15, nullable=true)
+     */
+    private $longitude;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ZONE", type="smallint", nullable=true)
+     */
+    private $zone;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="TYPE", type="smallint", nullable=true)
+     */
+    private $type;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="CDPC", type="boolean", nullable=true)
+     */
+    private $cdpc;    
 
     /**
      * @var string
      *
-     * @ORM\Column(name="TYPE", type="string", length=1, nullable=false)
+     * @ORM\Column(name="SPECIFICITE", type="string", length=250, nullable=true)
      */
-    private $type;
-
+    private $specificite;    
+    
     /**
      * @var \CineminoUser
      *
@@ -95,6 +140,10 @@ class Cinema
      */
     private $idCompte;
 
+    
+    private $filePhoto;              //permet de stocker temporairement le fichier photo
+    
+    private $fileLogo;              //permet de stocker temporairement le fichier logo
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -384,5 +433,142 @@ class Cinema
     
     public function __toString() {     
         return $this->nomCinema;
+    }
+    
+    // gestion fichier    
+    public function setFilePhoto($file)
+    {
+        $this->filePhoto = $file;
+    }
+
+    public function getFilePhoto()
+    {
+        return $this->filePhoto;
+    }  
+    
+    // gestion fichier    
+    public function setFileLogo($file)
+    {
+        $this->fileLogo = $file;
+    }
+
+    public function getFileLogo()
+    {
+        return $this->fileLogo;
+    } 
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     * @return Cinema
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string 
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     * @return Cinema
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string 
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set zone
+     *
+     * @param integer $zone
+     * @return Cinema
+     */
+    public function setZone($zone)
+    {
+        $this->zone = $zone;
+    
+        return $this;
+    }
+
+    /**
+     * Get zone
+     *
+     * @return integer 
+     */
+    public function getZone()
+    {
+        return $this->zone;
+    }
+
+    /**
+     * Set cdpc
+     *
+     * @param boolean $cdpc
+     * @return Cinema
+     */
+    public function setCdpc($cdpc)
+    {
+        $this->cdpc = $cdpc;
+    
+        return $this;
+    }
+
+    /**
+     * Get cdpc
+     *
+     * @return boolean 
+     */
+    public function getCdpc()
+    {
+        return $this->cdpc;
+    }
+
+    /**
+     * Set specificite
+     *
+     * @param string $specificite
+     * @return Cinema
+     */
+    public function setSpecificite($specificite)
+    {
+        $this->specificite = $specificite;
+    
+        return $this;
+    }
+
+    /**
+     * Get specificite
+     *
+     * @return string 
+     */
+    public function getSpecificite()
+    {
+        return $this->specificite;
     }
 }

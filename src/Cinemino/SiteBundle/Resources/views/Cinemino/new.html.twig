@@ -1,0 +1,53 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="well">
+
+<form action="{{ path('cinemino_create') }}" method="post" {{ form_enctype(form) }}>
+  <div class="row">
+    <div class="span5">
+     <div id="datetimepicker1" class="input-append date">
+      {{ form_label(form.dateDebut) }}
+      {{ form_errors(form.dateDebut) }}
+      {{ form_widget(form.dateDebut) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+   <div class="span4">       
+     <div id="datetimepicker2" class="input-append date">
+      {{ form_label(form.dateFin) }}
+      {{ form_errors(form.dateFin) }}
+      {{ form_widget(form.dateFin) }}
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+     </div>
+   </div>
+ </div>     
+ <br/>    
+
+ {{ form_widget(form) }}
+        <br/>
+        
+         <button class="btn btn-primary" type="submit">Spécifier Cinémino</button>
+         <a class="btn" href="{{ path('evenementassocie') }}"><i class="icon-ban-circle"></i> Annuler</a>
+</form>
+</div>
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false,
+    });
+    $('#datetimepicker2').datetimepicker({
+      language: 'FR',
+      format :'dd/MM/yyyy',
+      pickTime: false
+    });
+
+  });
+</script>
+{% endblock %}

@@ -1,9 +1,5 @@
 
 {% extends "CineminoSiteBundle::interlayout.html.twig" %}
-{% block title %}
-{{ parent() }} - Intervenants
-{% endblock %}
-
 
 {% block formulaire %}
 
@@ -43,6 +39,17 @@
                 {% endif %}
             </td>
         </tr>
+        <tr>
+            <th>Les médias associés :</th>
+            <td>
+               {% if entity.idMedias[0] is defined %}
+                  {% for media in entity.idMedias %}
+                   <a href="{{ path('mediaIntervenant_show', { 'id': media.id }) }}">{{ media.titre }}</a>
+                   <br/>
+                  {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
         
     </tbody>
 </table>
@@ -55,4 +62,7 @@
       <a class="btn" href="{{ path('intervenant') }}"><i class="icon-ban-circle"></i>Annuler</a>
 
 </div>
+<script>
+ $("#idinterv").addClass("active");
+</script>
 {% endblock %}

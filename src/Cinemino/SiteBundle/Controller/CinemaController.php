@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Cinemino\SiteBundle\Entity\Cinema;
 use Cinemino\SiteBundle\Form\CinemaType;
-
+use Cinemino\SiteBundle\Form\CinemaCreateType;
 
 
 /**
@@ -74,7 +74,7 @@ class CinemaController extends Controller
     {
         
         $entity = new Cinema();
-        $form   = $this->createForm(new CinemaType($this->get('form.type.cinema')), $entity);
+        $form   = $this->createForm(new CinemaCreateType(), $entity);
 
         return $this->render('CineminoSiteBundle:Cinema:new.html.twig', array(
             'entity' => $entity,
@@ -89,11 +89,22 @@ class CinemaController extends Controller
     public function createAction(Request $request)
     {
         $entity  = new Cinema();
-        $form = $this->createForm(new CinemaType(), $entity);
+        $form = $this->createForm(new CinemaCreateType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+             $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+            if($entity->getFilePhoto()!=NULL){   
+            $url = $entity->getFilePhoto();
+            $entity->setPhoto($resize->UploadPhoto($url,"Cinema/photo/big",LgPhotoCBig,HtPhotoCBig)); 
+            $resize->UploadPhoto($url,"Cinema/photo/small",LgPhotoCSmall,HtPhotoCSmall);
+            } 
+            if($entity->getFileLogo()!=NULL){   
+            $url = $entity->getFileLogo();
+            $entity->setLogo($resize->UploadPhoto($url,"Cinema/logo/big",LgLogoCBig,HtLogoCBig)); 
+            $resize->UploadPhoto($url,"Cinema/logo/small",LgLogoCSmall,HtLogoCSmall);
+            } 
             $em->persist($entity);
             $em->flush();
 
@@ -131,7 +142,7 @@ class CinemaController extends Controller
 
         return $this->render('CineminoSiteBundle:Cinema:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -161,11 +172,21 @@ class CinemaController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            
+            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
+            if($entity->getFilePhoto()!=NULL){   
+            $url = $entity->getFilePhoto();
+            $entity->setPhoto($resize->UploadPhoto($url,"Cinema/photo/big",LgPhotoCBig,HtPhotoCBig)); 
+            $resize->UploadPhoto($url,"Cinema/photo/small",LgPhotoCSmall,HtPhotoCSmall);
+            } 
+            if($entity->getFileLogo()!=NULL){   
+            $url = $entity->getFileLogo();
+            $entity->setLogo($resize->UploadPhoto($url,"Cinema/logo/big",LgLogoCBig,HtLogoCBig)); 
+            $resize->UploadPhoto($url,"Cinema/logo/small",LgLogoCSmall,HtLogoCSmall);
+            } 
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cinema_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('cinema', array('id' => $id)));
         }
 
         return $this->render('CineminoSiteBundle:Cinema:edit.html.twig', array(

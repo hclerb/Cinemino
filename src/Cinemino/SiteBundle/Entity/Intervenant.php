@@ -59,6 +59,12 @@ class Intervenant
      */
     private $urlLogo;
 
+        /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\OneToMany(targetEntity="Cinemino\SiteBundle\Entity\MediaIntervenant", mappedBy="idInter")
+     */
+    protected $idMedias;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -240,5 +246,38 @@ class Intervenant
     public function removeIdEvenement(\Cinemino\SiteBundle\Entity\Evenement $idEvt)
     {
         $this->idEvenements->removeElement($idEvt);
+    }
+    /**
+     * Add idMedia
+     *
+     * @param \Cinemino\SiteBundle\Entity\MediaIntervenant $idMedia
+     * @return Film
+     */
+    public function addIdMedia(\Cinemino\SiteBundle\Entity\MediaIntervenant $idMedia)
+    {
+        $this->idMedias[] = $idMedia;
+        $idMedia->setIdInter($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove idMedia
+     *
+     * @param \Cinemino\SiteBundle\Entity\MediaIntervenant $idMedia
+     */
+    public function removeIdMedia(\Cinemino\SiteBundle\Entity\MediaIntervenant $idMedia)
+    {
+        $this->idMedias->removeElement($idMedia);
+    }
+
+    /**
+     * Get idMedia
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIdMedias()
+    {
+        return $this->idMedias;
     }
 }

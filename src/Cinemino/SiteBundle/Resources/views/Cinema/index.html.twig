@@ -13,7 +13,7 @@
             <th>Photo</th>
             <th>Logo</th>
             <th>Site web</th>
-            <th>Type</th>
+            <th>Salle</th>
             <th>Programmateur</th>
             <th>Actions</th>
         </tr>
@@ -22,10 +22,10 @@
     {% for entity in entities %}
         <tr>
             <td><a href="{{ path('cinema_show', { 'id': entity.id }) }}">{{ entity.nomCinema }}</a></td>
-            <td><img class="img-polaroid" style="height:60px;" src="{{ entity.photo }}" alt=""/></td>
-            <td><img class="img-polaroid" style="height:60px;" src="{{ entity.logo }}" alt=""/></td>
+            <td><img class="img-polaroid" src="{{asset('medias/Cinema/photo/small/')}}{{ entity.photo }}" alt=""/></td>
+            <td><img class="img-polaroid" src="{{asset('medias/Cinema/logo/small/')}}{{ entity.logo }}" alt=""/></td>
             <td><a href="{{ entity.siteWeb }}" target="_blank">{{ entity.siteWeb }}</a></td>
-            <td>  {% if entity.type == 'i' %}Itinérant {% else %}Normal{% endif %}</td>
+            <td>  {% if entity.type == '0' %}Fixe {% else %}Circuit Itinérant{% endif %}</td>
             <td>{{ entity.idCompte }}</td>
             <td>
             
@@ -36,5 +36,9 @@
     {% endfor %}
  
 </table>
-   
+<script>
+ $("#idcinemas").addClass("active");
+    
+    
+</script>   
 {% endblock %}

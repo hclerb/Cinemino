@@ -108,11 +108,20 @@ class UserController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('user', array('id' => $entity->getId())));
         }
-
+        
+        $em = $this->getDoctrine()->getManager();
+        if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) $entities = $em->getRepository('CineminoUserBundle:User')->findAll();
+         else 
+         {   
+             $entity = $em->getRepository('CineminoUserBundle:User')->find($user->getId());
+             $entities[0]=$entity;
+         }
+         
         return $this->render('CineminoUserBundle:User:new.html.twig', array(
             'entity' => $entity,
+            'entities' => $entities,
             'form'   => $form->createView(),
         ));
     }
@@ -130,7 +139,7 @@ class UserController extends Controller
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) 
         {   
             $entities = $em->getRepository('CineminoUserBundle:User')->findAll();
-                    $editForm = $this->createForm(new \Cinemino\UserBundle\Form\UserTypeNew(), $entity);
+            $editForm = $this->createForm(new \Cinemino\UserBundle\Form\UserTypeNew(), $entity);
         }
          else 
          {   
@@ -171,23 +180,27 @@ class UserController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) 
         {  
+          $entities = $em->getRepository('CineminoUserBundle:User')->findAll();
           $editForm = $this->createForm(new \Cinemino\UserBundle\Form\UserTypeNew(), $entity);
         }
         else
         {
+          $entity = $em->getRepository('CineminoUserBundle:User')->find($id);
+          $entities[0]=$entity;
           $editForm = $this->createForm(new \Cinemino\UserBundle\Form\UserType(), $entity);  
         }
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+            $usermanager = $this->get('fos_user.user_manager');
+            $usermanager->updateUser($entity);
 
-            return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('user'));
         }
 
         return $this->render('CineminoUserBundle:User:edit.html.twig', array(
             'entity'      => $entity,
+            'entities' => $entities,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));

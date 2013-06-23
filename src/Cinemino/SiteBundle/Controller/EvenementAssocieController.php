@@ -22,12 +22,9 @@ class EvenementassocieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CineminoSiteBundle:Evenement')->findAll();
-
         $entitiesAss = $em->getRepository('CineminoSiteBundle:Evenementassocie')->findAll();
         
-        return $this->render('CineminoSiteBundle:AllEvenement:index.html.twig', array(
-            'entities' => $entities,
+        return $this->render('CineminoSiteBundle:EvenementAssocie:index.html.twig', array(
             'entitiesAss' => $entitiesAss,
         ));
     }
@@ -251,7 +248,7 @@ class EvenementassocieController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('evenement'));
+        return $this->redirect($this->generateUrl('evenementassocie'));
     }
 
     private function createDeleteForm($id)
