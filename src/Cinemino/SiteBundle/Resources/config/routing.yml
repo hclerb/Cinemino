@@ -1,11 +1,6 @@
 cineminoSite_front:
-    pattern:  /
-    defaults: { _controller: CineminoSiteBundle:Front:index }
-
-frontnewsletter_create:
-    pattern:  /newsletter
-    defaults: { _controller: CineminoSiteBundle:Front:createnewsletter }  
-    requirements: { _method: post }
+    resource: "routing/front.yml"
+    prefix:   /
 
 cineminoSite_back:
     pattern:  /backoffice

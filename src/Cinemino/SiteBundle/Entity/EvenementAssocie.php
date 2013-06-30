@@ -50,6 +50,7 @@ class EvenementAssocie extends Evenement
      */
     public function __construct()
     {
+        parent::__construct();
     }
     
     /**

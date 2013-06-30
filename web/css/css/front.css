@@ -1,17 +1,28 @@
 
-body {
-    background-image: url("../../css/img/toupin1.jpg");
-    background-repeat: no-repeat;
-}
-#bulle {
-    font-family: "Trebuchet MS";
-    font-size: 16px;
-    margin: 133px 0 0 22px;
-    width: 534px;
-}
-#bulle h1 {
+html, body {
+    height: 100%;
     margin: 0;
-    text-align: left;
+    padding: 0;
+}
+header {
+    height: 5%;
+}
+header a {
+    color: green;
+    font-family: cursive;
+    font-size: 2em;
+    padding-left: 15px;
+    text-decoration: none;
+}
+#inscription {
+    background-color: grey;
+    border-radius: 20px 20px 20px 20px;
+    border-style: groove;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    padding: 20px 15px 20px 25px;
+    width: 600px;
 }
 form.registration {
     font-family: "Trebuchet MS";
@@ -22,24 +33,25 @@ form.registration {
 form.registration fieldset {
     background-color: #707070;
     border: medium none;
-    margin: 8px 30px 0 4px;
+    border-radius: 20px 20px 20px 20px;
+    margin: 0 30px -16px 4px;
 }
 form.registration legend {
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 19px;
     font-weight: bold;
     margin-left: 21px;
-    padding: 0 3px 23px;
+    padding: 35px 3px 0;
     text-align: left;
 }
 form.registration label {
     clear: none;
     color: #FFFFFF;
     float: inherit;
-    font-size: 26px;
-    margin: 0 0 0 2px;
+    font-size: 19px;
+    margin: 0;
     padding: 0;
-    text-align: right;
+    text-align: left;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
     width: 200px;
 }
@@ -52,7 +64,7 @@ form.registration input {
     height: 28px;
     margin: 9px 0 4px 2px;
     padding: 3px;
-    width: 392px;
+    width: 532px;
 }
 form.registration input:focus, form.registration select:focus {
     background-color: #E0E6FF;
@@ -75,8 +87,8 @@ form.registration select {
     float: right;
     font-weight: bold;
     height: 30px;
-    margin-right: 95px;
-    margin-top: 12px;
+    margin-right: 130px;
+    margin-top: 43px;
     padding: 15px 10px 6px;
     text-decoration: none;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
@@ -109,7 +121,7 @@ form.registration select {
     border: 1px solid #FFFFFF;
     float: left;
     height: 83px;
-    margin: 0 0 0 109px;
+    margin: 0 0 13px 109px;
     overflow: hidden;
     width: 348px;
 }
@@ -120,8 +132,11 @@ form.registration select {
     font-size: 12px;
     text-align: center;
 }
-h2 {
+h3 {
     font-style: oblique;
-    margin: 82px 0 0 14px;
-    width: 518px;
+    margin: 111px 0 3px 33px;
+    width: 540px;
+}
+form.registration h3 {
+    margin: 10px;
 }

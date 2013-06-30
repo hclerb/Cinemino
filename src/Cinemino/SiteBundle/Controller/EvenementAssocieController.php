@@ -5,14 +5,14 @@ namespace Cinemino\SiteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Cinemino\SiteBundle\Entity\Evenementassocie;
-use Cinemino\SiteBundle\Form\EvenementassocieType;
+use Cinemino\SiteBundle\Entity\EvenementAssocie;
+use Cinemino\SiteBundle\Form\EvenementAssocieType;
 
 /**
  * Evenementassocie controller.
  *
  */
-class EvenementassocieController extends Controller
+class EvenementAssocieController extends Controller
 {
     /**
      * Lists all Evenementassocie entities.
@@ -22,7 +22,7 @@ class EvenementassocieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entitiesAss = $em->getRepository('CineminoSiteBundle:Evenementassocie')->findAll();
+        $entitiesAss = $em->getRepository('CineminoSiteBundle:EvenementAssocie')->findAll();
         
         return $this->render('CineminoSiteBundle:EvenementAssocie:index.html.twig', array(
             'entitiesAss' => $entitiesAss,
@@ -37,7 +37,7 @@ class EvenementassocieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CineminoSiteBundle:Evenementassocie')->find($id);
+        $entity = $em->getRepository('CineminoSiteBundle:EvenementAssocie')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Evenementassocie entity.');
@@ -45,7 +45,7 @@ class EvenementassocieController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('CineminoSiteBundle:Evenementassocie:show.html.twig', array(
+        return $this->render('CineminoSiteBundle:EvenementAssocie:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
@@ -59,7 +59,7 @@ class EvenementassocieController extends Controller
         $entity = new Evenementassocie();
         $form   = $this->createForm(new EvenementassocieType(), $entity);
 
-        return $this->render('CineminoSiteBundle:Evenementassocie:new.html.twig', array(
+        return $this->render('CineminoSiteBundle:EvenementAssocie:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -104,7 +104,7 @@ class EvenementassocieController extends Controller
             return $this->redirect($this->generateUrl('evenementassocie', array('id' => $entity->getId())));
         }
 
-        return $this->render('CineminoSiteBundle:Evenementassocie:new.html.twig', array(
+        return $this->render('CineminoSiteBundle:EvenementAssocie:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -118,7 +118,7 @@ class EvenementassocieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CineminoSiteBundle:Evenementassocie')->find($id);
+        $entity = $em->getRepository('CineminoSiteBundle:EvenementAssocie')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Evenementassocie entity.');
@@ -127,7 +127,7 @@ class EvenementassocieController extends Controller
         $editForm = $this->createForm(new EvenementAssocieType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('CineminoSiteBundle:Evenementassocie:edit.html.twig', array(
+        return $this->render('CineminoSiteBundle:EvenementAssocie:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -142,7 +142,7 @@ class EvenementassocieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CineminoSiteBundle:Evenementassocie')->find($id);
+        $entity = $em->getRepository('CineminoSiteBundle:EvenementAssocie')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Evenementassocie entity.');
@@ -220,7 +220,7 @@ class EvenementassocieController extends Controller
             return $this->redirect($this->generateUrl('evenementassocie', array('id' => $id)));
         }
 
-        return $this->render('CineminoSiteBundle:Evenementassocie:edit.html.twig', array(
+        return $this->render('CineminoSiteBundle:EvenementAssocie:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -238,7 +238,7 @@ class EvenementassocieController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CineminoSiteBundle:Evenementassocie')->find($id);
+            $entity = $em->getRepository('CineminoSiteBundle:EvenementAssocie')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Evenementassocie entity.');

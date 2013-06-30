@@ -41,7 +41,7 @@ class FilmController extends Controller
 
         $entities = $em->getRepository('CineminoSiteBundle:Film')->findAll();
          
-        return $this->render('CineminoSiteBundle:film:index.html.twig', array(
+        return $this->render('CineminoSiteBundle:Film:index.html.twig', array(
             'entities' => $entities,
             'dir_url' => $dir_url
         ));

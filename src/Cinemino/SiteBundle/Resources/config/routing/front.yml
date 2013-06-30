@@ -1,0 +1,12 @@
+front:
+    pattern:  /
+    defaults: { _controller: CineminoSiteBundle:Front:index }
+    
+frontinscription:
+    pattern: /inscription
+    defaults: { _controller: CineminoSiteBundle:Front:inscription }
+    
+frontnewsletter_create:
+    pattern:  /newsletter
+    defaults: { _controller: CineminoSiteBundle:Front:createnewsletter }  
+    requirements: { _method: post }

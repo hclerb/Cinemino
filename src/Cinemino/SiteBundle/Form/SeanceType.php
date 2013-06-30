@@ -22,13 +22,12 @@ class SeanceType extends AbstractType
             ->add('dateSeance', 'datetime',
                     array('widget' => 'single_text',                     
                           'label' => 'Jour et Heure de la séance',
-                          'format' => 'dd/MM/yyyy hh:mm'))
+                          'format' => 'dd/MM/yyyy HH:mm'))
             ->add('version',  'choice', array('label' => 'Version (VO, VOSTFR etc..)','choices' => array(
                     'VF' => 'VF',
                     'VOST' => 'VOST',
                     'VOSTM' => 'VOST pour Malentendants',
-                   ), 
-                'required' => true))
+                   )))
             ->add('type', 'choice', array('label' => 'Type (2D, 3D)','choices' => array(
                     '2D' => '2D',
                     '3D' => '3D',
@@ -37,13 +36,11 @@ class SeanceType extends AbstractType
             ->add('avantPremiere', 'choice', array('label' => 'Avant première','choices' => array(
                     'n' => 'Non',
                     'o' => 'Oui',
-                    ),
-                'required' => true))
+                    )))
             ->add('sortieNationale', 'choice', array('label' => 'Sortie Nationale','choices' => array(
                     'n' => 'Non',
                     'o' => 'Oui',
-                    ),
-                'required' => true))
+                    )))
             ->add('idEvenements', null, array('label' => 'Attacher un ou plusieurs évènements', 'required' => false))
             ->add('idEvenementAssocies', null, array('label' => 'Attacher un ou plusieurs évènements associés', 'required' => false))                
             ->add('idCinema', 'entity', array(

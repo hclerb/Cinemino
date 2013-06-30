@@ -19,11 +19,10 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new FOS\UserBundle\FOSUserBundle(), 
             new Cinemino\SiteBundle\CineminoSiteBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
-            new Cinemino\userBundle\CineminoUserBundle(),
-            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
-            
+            new Cinemino\UserBundle\CineminoUserBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),     
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

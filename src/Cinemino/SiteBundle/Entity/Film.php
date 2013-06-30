@@ -45,7 +45,7 @@ class Film
     /**
      * @var string
      *
-     * @ORM\Column(name="REALISATEUR", type="string", length=25, nullable=true)
+     * @ORM\Column(name="REALISATEUR", type="string", length=55, nullable=true)
      */
     protected $realisateur;
 
@@ -94,7 +94,7 @@ class Film
     /**
      * @var string
      *
-     * @ORM\Column(name="ACTEURS", type="string", length=60, nullable=true)
+     * @ORM\Column(name="ACTEURS", type="string", length=255, nullable=true)
      */
     protected $acteurs;
 

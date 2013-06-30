@@ -217,7 +217,7 @@ class ProgrammeCourtsController extends Controller
          
             $em->flush();
 
-            return $this->redirect($this->generateUrl('programmecourts_show', array('id' => $leprogramme->getId())));
+            return $this->redirect($this->generateUrl('programmecourts'));
         }
 
         return $this->render('CineminoSiteBundle:ProgrammeCourts:edit.html.twig', array(

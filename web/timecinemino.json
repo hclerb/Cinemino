@@ -16,21 +16,21 @@
         "date": [
             {
                 "startDate":"2013,3,20",
-		"endDate":"2013,3,21",
-                "headline":"Réunion Bilan",
-                "text":"<p>Le bilan est à faire....</p>",
+		"endDate":"2013,3,20",
+                "headline":"L'heure du Bilan",
+                "text":"<p>Vous avez été 32048 spectateurs à nous faire confiance<br/>La palme revient à ... Ernest et Célestine avec plus de 4500 spectateurs</p>",
                 "asset":
                 {
-                    "media":"",
+                    "media":"../medias/old/ErnestEtCelestine.jpg",
                     "credit":"",
                     "caption":""
                 }
             },
             {
-                "startDate":"2013,6,26",
-                "endDate":"2013,6,26",
+                "startDate":"2013,5,24",
+                "endDate":"2013,5,24",
                 "headline":"Déjeuner sur .... toîle",
-                "text":"<p>La recette de toujours : convivialité, amitié, envie de cinéma</p>",
+                "text":"<p>La recette de toujours : convivialité, amitié, envie de cinéma<br/> La préparation de l'édition 2014 est en marche !</p>",
                 "asset":
                 {
                     "media":"",

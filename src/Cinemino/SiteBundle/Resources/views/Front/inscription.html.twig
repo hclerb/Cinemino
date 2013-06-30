@@ -63,12 +63,11 @@
         </script>
     </head>
     <body>
-        <div id="bulle">
-        <h1>Foi de ToutPeint, le site est en rénovation!<h1/><br/>
-        <h1>Bref, il est ‘PasFini’ tout simplement, et un ‘PasFini’ n’est pas fréquentable (croyez-moi)!</h1><br/>
-        <h1>Alors, faites comme moi, après avoir reconstitué le mot magique Cinémino, donnez votre adresse mail, cliquez sur ‘enregistrez moi!’ et vous serez prévenu lorsque le site de Cinémino sera enfin terminé ou plus exactement ‘toutcomplet’....</h1><br/>
-        </div>
+     <div id="inscription">
         <form class="registration" action="{{ path('frontnewsletter_create') }}" method="post" {{ form_enctype(form) }}>
+            <fieldset>
+                <h3> Si vous désirez que l'on vous informe des évènements, de l'avancé du programme bref de tout ce qui touche cinémino, il vous suffit de nous communiquer votre adresse mail</h3>
+            </fieldset>
             <fieldset>
                 <legend>Reconstituez le mot Cinémino</legend>
                 <div class="captcha_wrap">
@@ -88,16 +87,17 @@
                 </div>
             </fieldset>
             <fieldset>
-                {{ form_label(form.email) }}
+                <legend>{{ form_label(form.email) }}</legend>
                 {{ form_errors(form.email) }}
                 {{ form_widget(form.email) }}
                 <p>{{ erreur }}</p>
                 {{ form_errors(form) }}
                 {{ form_widget(form) }}
            </fieldset>
-                <a id="formsubmit" class="button">Enregistrez moi pour me donner des nouvelles de cinémino!</a>
+                <a id="formsubmit" class="button">Cliquez ici pour valider votre inscription</a>
 
         </form>
-        <h2> Remarque : <br/>Votre adresse mail sera uniquement utilisé pour vous donner des nouvelles de Cinémino... </h2>
+        <h3> Remarque : <br/>Votre adresse mail sera uniquement utilisé pour vous donner des nouvelles de Cinémino... </h3>
+    </div>
     </body>
 </html>

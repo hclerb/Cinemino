@@ -99,7 +99,7 @@ class SeanceController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         $entity = new Seance();
-        
+        $entity->setDateSeance(new \DateTime);
         $user = $this->container->get('security.context')->getToken()->getUser();
         
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')){ 

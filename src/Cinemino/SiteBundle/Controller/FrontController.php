@@ -11,18 +11,22 @@ use Cinemino\SiteBundle\Form\NewsLetterFrontType;
 
 class FrontController extends Controller
 {   
-    public function indexAction()
+    public function inscriptionAction()
     {
         $entity = new NewsLetter();
         $form   = $this->createForm(new NewsLetterFrontType(), $entity);
 
-       return $this->render('CineminoSiteBundle:front:index.html.twig', array(
+       return $this->render('CineminoSiteBundle:Front:inscription.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'erreur' => "",
         ));
     }
-        
+    
+   public function indexAction()
+    {
+       return $this->render('CineminoSiteBundle:Front:index.html.twig');
+    }
     
     public function createnewsletterAction(Request $request)
     {
@@ -38,16 +42,15 @@ class FrontController extends Controller
               $entity2 = $em->getRepository('CineminoSiteBundle:NewsLetter')->findOneByEmail($entity->getEmail());
               if ($entity2 == NULL)
               {
+               $entity->setEnabled(true);   
                $em->persist($entity);
                $em->flush();
               }
-              return $this->render('CineminoSiteBundle:front:valid.html.twig', array(
-                   'entity' => $entity2,
-             ));
+              return $this->redirect($this->generateUrl('front'));
             }
             $pasderreur="Vous devez indiquer une adresse mail correcte !";
         }
-        return $this->render('CineminoSiteBundle:front:index.html.twig', array(
+        return $this->render('CineminoSiteBundle:Front:inscription.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'erreur' => $pasderreur,
