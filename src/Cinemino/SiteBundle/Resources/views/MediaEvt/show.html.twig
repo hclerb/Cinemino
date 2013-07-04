@@ -18,13 +18,16 @@
         </tr>
         <tr>
             <th>Type: </th>
-            <td>{% if entity.type == 'p' %}Photo{% else %}Video{% endif %}</td>
+            <td>
+                {% if entity.type == 'p' %} <img class="img-polaroid" style="height:70px;" src="{{asset('medias/Film/photos/small/')}}{{ entity.url }}" alt=""/>
+                {% elseif entity.type == 'v' %} Video
+                {% elseif entity.type == 'd' %} Documents
+                {% else %} Son
+                {% endif %}
+            </td>
         </tr>
     </tbody>
 </table>
-{% if entity.type == 'p' %}
-<br><img class="img-polaroid" width="450" src="{{asset('medias/Evt/photos/big/')}}{{ entity.url }}" alt=""/>
-{% endif %}
 
 <br><br>
 

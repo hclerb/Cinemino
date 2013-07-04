@@ -13,6 +13,9 @@ services:
     Cinemino_Site.resizeimg:
         class: Cinemino\SiteBundle\Service\ResizeImg
         
+    Cinemino_Site.enregistremedia:
+        class: Cinemino\SiteBundle\Service\EnregistreMedia
+        
     form.type.cinema:
         class: Cinemino\SiteBundle\Form\CinemaType
         arguments: ["@security.context"]

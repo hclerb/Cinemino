@@ -8,8 +8,8 @@
 
 
 <form action="{{ path('mediaIntervenant_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-<img class="img-polaroid" width="350px" src="{{asset('medias/Intervenant/photos/big/')}}{{ entity.url }}" alt=""/>    
 {{ form_widget(edit_form) }}
+ {% if entity.type == 'p' %}<img class="img-polaroid" width="350px" src="{{asset('medias/Intervenant/photos/big/')}}{{ entity.url }}" alt=""/> {% endif %}  
     
         <br>
             <button type="submit" class="btn btn-primary">Sauvegarder</button>

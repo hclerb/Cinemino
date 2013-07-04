@@ -9,7 +9,6 @@
         <tr>
             <th>Titre</th>
             <th>Url</th>
-            <th>Apercu</th>
             <th>Type</th>
             <th>Actions</th>
         </tr>
@@ -19,8 +18,13 @@
         <tr>
             <td><a href="{{ path('mediain_show', { 'id': entity.id }) }}">{{ entity.titre }}</a></td>
             <td>{{ entity.url }}</td>
-            <td><img class="img-polaroid" style="height:70px;" src="{{asset('medias/In/photos/small/')}}{{ entity.url }}" alt=""/></td>
-            <td>{% if entity.type == 'v' %}Vidéo{% else %}Photo{% endif %}</td>
+            <td>          
+             {% if entity.type == 'p' %} <img class="img-polaroid" style="height:70px;" src="{{asset('medias/In/photos/small/')}}{{ entity.url }}" alt=""/>
+             {% elseif entity.type == 'v' %} Video
+             {% elseif entity.type == 'd' %} Documents
+             {% else %} Son
+             {% endif %}
+            </td>
             <td width="160px">
                 
           <a class="btn" href="{{ path('mediain_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>

@@ -75,23 +75,9 @@ class MediaEvtController extends MediaController
         $form->bind($request);
 
         if ($form->isValid()) {
-            
-           $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
-           if($entity->getFile()!=NULL){   
-            $url = $entity->getFile();
-            $dest="medias/Evt/sons";           // par défaut on dit que c'est un son
-            switch ($entity->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Evt/photos/big",LgPhotoMBig,HtPhotoMBig)); 
-                             $resize->UploadPhoto($url,"Evt/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
-                       break;
-                    case 'v': $dest = "medias/Evt/videos";
-                    default :
-                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-            } 
-            
+            $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+            $Enreg->EnregistrementMedia($entity, "Evt", $this->container);
+                        
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -150,22 +136,8 @@ class MediaEvtController extends MediaController
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
-            if ($entity->getFile()!=NULL)
-              { 
-                $url = $entity->getFile();
-                $dest="medias/Evt/sons";           // par défaut on dit que c'est un son
-                switch ($entity->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Evt/photos/big",LgPhotoMBig,HtPhotoMBig)); 
-                             $resize->UploadPhoto($url,"Evt/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
-                       break;
-                    case 'v': $dest = "medias/Evt/videos";
-                    default :
-                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-              }
+            $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+            $Enreg->EnregistrementMedia($entity, "Evt", $this->container);
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);

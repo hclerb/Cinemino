@@ -105,18 +105,8 @@ class IntervenantController extends Controller
             {
               if ($media->getFile()!=NULL)
               { 
-                $url = $media->getFile();
-                $dest="medias/Intervenant/sons";           // par défaut on dit que c'est un son
-                switch ($media->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $media->setUrl($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoMBig,HtPhotoMBig)); 
-                             $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
-                       break;
-                    case 'v': $dest = "medias/Intervenant/videos";
-                    default :
-                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
+                $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+                $Enreg->EnregistrementMedia($media, "Intervenant", $this->container); 
                 $media->setIdInter($entity);
                 $em->persist($media);
               } else $entity->removeIdMedia ($media);
@@ -196,21 +186,8 @@ class IntervenantController extends Controller
               foreach ($originalMedias as $key => $toDel) {
     		if ($toDel->getId() === $media->getId()) unset($originalMedias[$key]);
               }
-              if ($media->getFile()!=NULL)
-              { 
-                $url = $media->getFile();
-                $dest="medias/Intervenant/sons";           // par défaut on dit que c'est un son
-                switch ($media->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $media->setUrl($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoMBig,HtPhotoMBig)); 
-                             $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
-                       break;
-                    case 'v': $dest = "medias/Intervenant/videos";
-                    default :
-                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-              }
+              $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+              $Enreg->EnregistrementMedia($media, "Intervenant", $this->container); 
               $media->setIdInter($entity);
               $em->persist($media);
             }

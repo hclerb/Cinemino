@@ -18,6 +18,7 @@
       <td>
           {% if entity.type == 'p' %} <img class="img-polaroid" style="height:70px;" src="{{asset('medias/Film/photos/small/')}}{{ entity.url }}" alt=""/>
           {% elseif entity.type == 'v' %} Video
+          {% elseif entity.type == 'd' %} Documents
           {% else %} Son
           {% endif %}
       </td>

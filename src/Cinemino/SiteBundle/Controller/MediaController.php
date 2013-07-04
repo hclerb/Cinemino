@@ -20,12 +20,6 @@ class MediaController extends Controller
      *
      */
     
-      
-    public function __construct()
-    {
-    }
-
-    
     public function indexAction()
     {
          
@@ -99,7 +93,7 @@ class MediaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('media_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('media'));
         }
 
         return $this->render('CineminoSiteBundle:Media:new.html.twig', array(
@@ -201,22 +195,5 @@ class MediaController extends Controller
         ;
     }
     
-    public function EnregistrementMedia($entity, $typemedia) {
-           $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
-           if($entity->getFile()!=NULL){   
-            $url = $entity->getFile();
-            $dest="medias/". $typemedia . "/sons";           // par défaut on dit que c'est un son
-            switch ($entity->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,$typemedia."/photos/big",LgPhotoMBig,HtPhotoMBig)); 
-                             $resize->UploadPhoto($url,$typemedia."/photos/small",LgPhotoMSmall,HtPhotoMSmall); 
-                       break;
-                    case 'v': $dest="medias/". $typemedia . "/videos";
-                    default :
-                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-            }
-        
-    }
 }
+    

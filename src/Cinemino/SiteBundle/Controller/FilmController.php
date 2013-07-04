@@ -113,18 +113,8 @@ class FilmController extends Controller
             {
               if ($media->getFile()!=NULL)
               { 
-                $url = $media->getFile();
-                $dest="medias/Film/sons";           // par défaut on dit que c'est un son
-                switch ($media->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoFBig,HtPhotoFBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoFSmall,HtPhotoFSmall); 
-                       break;
-                    case 'v': $dest = "medias/Film/videos";
-                    default :
-                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
+                $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+                $Enreg->EnregistrementMedia($media, "Film", $this->container); 
                 $media->setIdFilm($entity);
                 $em->persist($media);
               } else $entity->removeIdMedia ($media);
@@ -212,21 +202,8 @@ class FilmController extends Controller
               foreach ($originalMedias as $key => $toDel) {
     		if ($toDel->getId() === $media->getId()) unset($originalMedias[$key]);
               }
-              if ($media->getFile()!=NULL)
-              { 
-                $url = $media->getFile();
-                $dest="medias/Film/sons";           // par défaut on dit que c'est un son
-                switch ($media->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoFBig,HtPhotoFBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoFSmall,HtPhotoFSmall); 
-                       break;
-                    case 'v': $dest = "medias/Film/videos";
-                    default :
-                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-              }
+              $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+              $Enreg->EnregistrementMedia($media, "Film", $this->container);
               $media->setIdFilm($entity);
               $em->persist($media);
             }

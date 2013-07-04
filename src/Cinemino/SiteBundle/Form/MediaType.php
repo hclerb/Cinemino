@@ -25,7 +25,8 @@ class MediaType extends AbstractType
                 'choices' => array(
                     'p' => 'photo',
                     'v' => 'Video',
-                    's' => 'Bande son'
+                    's' => 'Bande son',
+                    'd' => 'Document'
                 )))
         ;
     }

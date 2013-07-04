@@ -18,7 +18,7 @@
       {{ form_widget(edit_form.type) }} 
     </div>
  </div>
- <img class="img-polaroid" src="{{asset('medias/In/photos/big/')}}{{ entity.url }}" alt=""/>
+ {% if entity.type == 'p' %} <img class="img-polaroid" src="{{asset('medias/In/photos/big/')}}{{ entity.url }}" alt=""/>{% endif %}
  <div class="row">
     <div class="span5">
      <div id="datetimepicker1" class="input-append date">

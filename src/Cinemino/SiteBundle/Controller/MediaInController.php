@@ -73,14 +73,17 @@ class MediaInController extends MediaController
         $entity  = new MediaIn();
         $form = $this->createForm(new MediaInCreateType('MediaIn','mediaincreate'), $entity);
         $form->bind($request);
+        if ($entity->getDateFin() > $entity->getDateDebut())
+        {  
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+                $Enreg->EnregistrementMedia($entity, "In", $this->container);
+                $em->persist($entity);
+                $em->flush();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $this->EnregistrementMedia($entity, "In"); 
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('mediain_show', array('id' => $entity->getId())));
+                return $this->redirect($this->generateUrl('mediain'));
+            }
         }
 
         return $this->render('CineminoSiteBundle:MediaIn:new.html.twig', array(
@@ -130,15 +133,17 @@ class MediaInController extends MediaController
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new MediaInType('MediaIn','mediain'), $entity);
         $editForm->bind($request);
+        if ($entity->getDateFin() > $entity->getDateDebut())
+        { 
+            if ($editForm->isValid()) {
+                $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+                $Enreg->EnregistrementMedia($entity, "In", $this->container);
+                $em->persist($entity);
+                $em->flush();
 
-        if ($editForm->isValid()) {
-            $this->EnregistrementMedia($entity, "In");
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('mediain_edit', array('id' => $id)));
+                return $this->redirect($this->generateUrl('mediain'));
+            }
         }
-
         return $this->render('CineminoSiteBundle:MediaIn:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),

@@ -75,28 +75,14 @@ class MediaFilmController extends MediaController
         $form->bind($request);
 
         if ($form->isValid()) {
-            
-           $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
-           if($entity->getFile()!=NULL){   
-            $url = $entity->getFile();
-            $dest="medias/Film/sons";           // par défaut on dit que c'est un son
-            switch ($entity->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
-                       break;
-                    case 'v': $dest = "medias/Film/videos";
-                    default :
-                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-            } 
-            
+ 
+            $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+            $Enreg->EnregistrementMedia($entity, "Film", $this->container);
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('mediaFilm_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('mediaFilm'));
         }
 
         return $this->render('CineminoSiteBundle:MediaFilm:new.html.twig', array(
@@ -150,28 +136,13 @@ class MediaFilmController extends MediaController
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
-            if ($entity->getFile()!=NULL)
-              { 
-                $url = $entity->getFile();
-                $dest="medias/Film/sons";           // par défaut on dit que c'est un son
-                switch ($entity->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $entity->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoBig,HtPhotoBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoSmall,HtPhotoSmall); 
-                       break;
-                    case 'v': $dest = "medias/Film/videos";
-                    default :
-                            $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-              }
-            
+            $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+            $Enreg->EnregistrementMedia($entity, "Film", $this->container);   
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('media', array('id' => $id)));
+            return $this->redirect($this->generateUrl('mediaFilm'));
         }
 
         return $this->render('CineminoSiteBundle:MediaFilm:edit.html.twig', array(
@@ -212,4 +183,5 @@ class MediaFilmController extends MediaController
             ->getForm()
         ;
     }
+    
 }
