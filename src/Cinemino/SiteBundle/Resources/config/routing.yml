@@ -78,3 +78,8 @@ CineminoSiteBundle_mediain:
 CineminoSiteBundle_cinemino:
         resource: "@CineminoSiteBundle/Resources/config/routing/cinemino.yml"
         prefix:   /backoffice/cinemino
+        
+CineminoSiteBundle_lieu:
+        resource: "@CineminoSiteBundle/Resources/config/routing/lieu.yml"
+        prefix:   /backoffice/lieu
+

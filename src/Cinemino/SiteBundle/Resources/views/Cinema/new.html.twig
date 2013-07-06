@@ -119,7 +119,7 @@
     });
     
     $("#getcoord").click(function(){
-      if (navigator.geolocation) navigator.geolocation.getCurrentPosition(initlocalisation);
+      if (navigator.geolocation) navigator.geolocation.getCurrentPosition(initlocalisation, erreurPosition);
       else  alert("Désolé votre navigateur ne supporte pas la géolocalisation");
     });
     
@@ -128,6 +128,25 @@
      $("#{{ form.longitude.vars.id }}").val(position.coords.longitude);
     }
     
+        // Fonction de callback en cas d’erreur
+    function erreurPosition(error) {
+        var info = "Erreur lors de la géolocalisation : ";
+        switch(error.code) {
+        case error.TIMEOUT:
+            info += "Timeout !";
+        break;
+        case error.PERMISSION_DENIED:
+        info += "Vous n’avez pas donné la permission";
+        break;
+        case error.POSITION_UNAVAILABLE:
+            info += "La position n’a pu être déterminée";
+        break;
+        case error.UNKNOWN_ERROR:
+            info += "Erreur inconnue";
+        break;
+       }
+       alert(info);
+    }
   });
 
  $("#idcinemas").addClass("active");

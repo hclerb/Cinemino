@@ -14,6 +14,14 @@
             <td>{{ entity.adresse }}</td>
         </tr>
         <tr>
+            <th>Longitude :</th>
+            <td>{{ entity.longitude }}</td>
+        </tr>
+        <tr>
+            <th>Latitude :</th>
+            <td>{{ entity.latitude }}</td>
+        </tr>
+        <tr>
             <th>Adresse mail :</th>
             <td>{{ entity.adresseMail }}</td>
         </tr>
@@ -30,20 +38,21 @@
             <td style="background-color:#{{ entity.couleurFondCinema }}"></td>
         </tr>
         <tr>
-            <th>Type :</th>
-            <td>{% if entity.type == 'i' %}Itinérant {% else %}Normal{% endif %}</td>
+            <th>Salle :</th>
+            <td>{% if entity.type == '1' %}Cirduit Itinérant{% else %}Fixe{% endif %}</td>
         </tr>
+        {% if entity.cdpc == true %}
+        <tr>
+            <th>Spécificité</th>
+            <td>{{ entity.specificite|raw }}</td>
+        </tr>
+        {% endif %}
     </tbody>
 </table>
 
 <br><br>
 
-
-   
-        <a class="btn" href="{{ path('cinema') }}"><i class="icon-arrow-left"></i> Revenir à la liste des cinémas</a>
-   
-
-        
+        <a class="btn" href="{{ path('cinema') }}"><i class="icon-arrow-left"></i> Revenir à la liste des cinémas</a>     
         <a class="btn" href="{{ path('cinema_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
             
 <br><br>

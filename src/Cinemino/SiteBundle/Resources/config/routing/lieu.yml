@@ -1,0 +1,30 @@
+lieu:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:Lieu:index" }
+
+lieu_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:Lieu:show" }
+
+lieu_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:Lieu:new" }
+
+lieu_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:Lieu:create" }
+    requirements: { _method: post }
+
+lieu_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:Lieu:edit" }
+
+lieu_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:Lieu:update" }
+    requirements: { _method: post }
+
+lieu_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:Lieu:delete" }
+    requirements: { _method: post }

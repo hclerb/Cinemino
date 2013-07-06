@@ -1,0 +1,61 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+
+  <td> <img class="img-polaroid" src="{{asset('medias/Lieu/photos/big/')}}{{ entity.photo }}" alt=""/></td>
+  <td> <img class="img-polaroid" src="{{asset('medias/Lieu/logo/big/')}}{{ entity.logo }}" alt=""/></td>
+<br><br>
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Nom du lieu</th>
+            <td>{{ entity.nom }}</td>
+        </tr>
+        <tr>
+            <th>Adresse :</th>
+            <td>{{ entity.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Adresse mail :</th>
+            <td>{{ entity.adresseMail }}</td>
+        </tr>
+        <tr>
+            <th>Coordonnees tel :</th>
+            <td>{{ entity.coordonneesTel }}</td>
+        </tr>
+        <tr>
+            <th>Site web :</th>
+            <td>{{ entity.siteWeb }}</td>
+        </tr>
+        <tr>
+            <th>Longitude :</th>
+            <td>{{ entity.longitude }}</td>
+        </tr>
+        <tr>
+            <th>Latitude :</th>
+            <td>{{ entity.latitude }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ entity.description|raw }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br><br>
+ 
+        <a class="btn" href="{{ path('lieu') }}"><i class="icon-arrow-left"></i> Revenir à la liste des lieux Associés</a>   
+        <a class="btn" href="{{ path('lieu_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
+            
+<br><br>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <form action="{{ path('lieu_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit"><i class="icon-remove icon-white"></i> Supprimer {{ entity.nom }}</button>
+        </form>
+    {% endif %}
+
+<script>
+ $("#idcinemas").addClass("active");  
+</script> 
+{% endblock %}

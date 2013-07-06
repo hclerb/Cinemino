@@ -108,7 +108,7 @@ class CinemaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cinema_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('cinema'));
         }
 
         return $this->render('CineminoSiteBundle:Cinema:new.html.twig', array(
@@ -186,7 +186,7 @@ class CinemaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cinema', array('id' => $id)));
+            return $this->redirect($this->generateUrl('cinema'));
         }
 
         return $this->render('CineminoSiteBundle:Cinema:edit.html.twig', array(
