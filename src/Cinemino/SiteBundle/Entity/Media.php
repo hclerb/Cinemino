@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"media" = "Media", "mediafilm"="MediaFilm", "mediaevt"="MediaEvt", "mediain"="MediaIn", "mediaintervenant"="MediaIntervenant"})
+ * @ORM\DiscriminatorMap({"media" = "Media", "mediafilm"="MediaFilm", "mediaevt"="MediaEvt", "mediain"="MediaIn", "mediaintervenant"="MediaIntervenant", "mediaarchive"="MediaArchive"})
  */
 class Media
 {
@@ -28,14 +28,14 @@ class Media
     /**
      * @var string
      *
-     * @ORM\Column(name="TITRE", type="string", length=25, nullable=true)
+     * @ORM\Column(name="TITRE", type="string", length=100, nullable=true)
      */
     protected $titre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="URL", type="string", length=100, nullable=true)
+     * @ORM\Column(name="URL", type="string", length=1000, nullable=true)
      */
     protected $url;
 

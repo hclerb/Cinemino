@@ -56,11 +56,18 @@
     {{ form_errors(form.siteWeb) }}
     {{ form_widget(form.siteWeb, { 'attr': {'style': 'width:530px'} }) }}
     </div> 
-    <div class="offset1 span2">     
+    <div class="span2">     
     {{ form_label(form.adresseMail) }}
     {{ form_errors(form.adresseMail) }}
     {{ form_widget(form.adresseMail) }}
   </div>
+ </div>
+ <div class="row">
+  <div class="span12">     
+    {{ form_label(form.equipe) }}
+    {{ form_errors(form.equipe) }}
+    {{ form_widget(form.equipe, { 'attr': {'style': 'width:1120px;'} }) }}
+  </div> 
  </div>
  <div class="row"> 
    <div class="offset1 span2">     

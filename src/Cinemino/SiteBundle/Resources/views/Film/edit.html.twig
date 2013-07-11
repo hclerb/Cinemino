@@ -118,6 +118,16 @@
     {{ form_errors(form.couleurFondFilm) }}
     {{ form_widget(form.couleurFondFilm, { 'attr': {'class': 'color', 'value': entity.couleurFondFilm}} ) }}
   </div>
+  <div class="span2">
+    {{ form_label(form.animation) }}
+    {{ form_errors(form.animation) }}
+    {{ form_widget(form.animation) }}
+  </div>
+  <div class="span3">
+    {{ form_label(form.typeAnimation) }}
+    {{ form_errors(form.typeAnimation) }}
+    {{ form_widget(form.typeAnimation) }}
+  </div>
  </div>   
 <div id="ajout_media">
   <h5>Médias associés</h5>

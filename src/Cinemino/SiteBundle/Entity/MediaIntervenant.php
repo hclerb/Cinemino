@@ -24,9 +24,9 @@ class MediaIntervenant extends Media
 
     
     /**
-     * Set idEvt
+     * Set idInter
      *
-     * @param \Cinemino\SiteBundle\Entity\Film $idEvt
+     * @param \Cinemino\SiteBundle\Entity\Intervenant $idIntervenant
      * @return Media
      */
     public function setIdInter(\Cinemino\SiteBundle\Entity\Intervenant $idInter)

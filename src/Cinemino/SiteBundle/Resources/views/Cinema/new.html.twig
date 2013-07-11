@@ -53,6 +53,13 @@
     {{ form_widget(form.adresseMail) }}
   </div>
  </div>
+ <div class="row">
+  <div class="span12">     
+    {{ form_label(form.equipe) }}
+    {{ form_errors(form.equipe) }}
+    {{ form_widget(form.equipe, { 'attr': {'style': 'width:1120px;'} }) }}
+  </div> 
+ </div>
  <div class="row"> 
    <div class="offset1 span2">     
     {{ form_label(form.latitude) }}

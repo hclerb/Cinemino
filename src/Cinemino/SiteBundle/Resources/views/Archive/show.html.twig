@@ -1,0 +1,55 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+
+<div id="show" class="well" style="width:1024px">
+<div class="page-header"><h3>Archive : {{ entity.annee }}</h3></div>   
+<table class="table table-bordered table-striped table-hover">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Annee</th>
+            <td>{{ entity.annee }}</td>
+        </tr>
+        <tr>
+            <th>Rapport</th>
+            <td>{{ entity.rapport|raw }}</td>
+        </tr>
+        <tr>
+            <th>Affiche</th>
+            <td>{% if entity.affiche is not null %}<img class="img-polaroid" src="{{asset('medias/Archive/affiches/big/')}}{{ entity.affiche }}" alt=""/>{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Programme</th>
+            <td>{{ entity.programme }}</td>
+        </tr>
+        <tr>
+            <th>Les médias associés :</th>
+            <td>
+               {% if entity.idMedias[0] is defined %}
+                  {% for media in entity.idMedias %}
+                     {{ media.titre }} - {{ media.url }} - {{ media.type }} 
+                     <br/>
+                  {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+
+
+<br><br>
+
+   
+      <a class="btn" href="{{ path('archive_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
+      <a class="btn" href="{{ path('archive') }}"><i class="icon-ban-circle"></i>Retourner à la liste des archives</a>
+
+</div>
+<script>
+ $("#idautres").addClass("active");
+</script>
+{% endblock %}

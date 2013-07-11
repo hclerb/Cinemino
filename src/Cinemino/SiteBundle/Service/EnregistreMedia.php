@@ -13,9 +13,11 @@ class EnregistreMedia{
            if($entity->getFile()!=NULL){   
              $url = $entity->getFile();
              switch ($entity->getType()) {
-                case 'p':                       // C'est une phot, on la redimension et on l'upload
+                case 'p':                       // C'est une phot, on la redimension et on l'upload et on stocke le fichier brut
                          $entity->setUrl($resize->UploadPhoto($url,$typemedia . "/photos/big",LgPhotoBig,HtPhotoBig)); 
                          $resize->UploadPhoto($url,$typemedia . "/photos/small",LgPhotoSmall,HtPhotoSmall); 
+                         $dest = "medias/" . $typemedia ."/photos/brut";
+                         $url->move($dest,$url->getClientOriginalName());
                    break;
                 case 'v': $dest = "medias/" . $typemedia . "/videos";
                           $entity->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload

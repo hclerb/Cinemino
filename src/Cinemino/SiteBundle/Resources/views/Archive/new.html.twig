@@ -1,0 +1,119 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+{% block content %}
+
+
+<div id="formulaire" class="well" style="width:1040px"> 
+<form action="{{ path('archive_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ tinymce_init() }} 
+  <div class="row">
+   <div class="span11">
+      {{ form_label(form.annee) }}
+      {{ form_errors(form.annee) }}
+      {{ form_widget(form.annee) }}
+   </div>
+ </div>
+   <div class="row">
+   <div class="span11">
+      {{ form_label(form.rapport) }}
+      {{ form_errors(form.rapport) }}
+      {{ form_widget(form.rapport, { 'attr': {'style': 'width:1020px;'} }) }}
+   </div>
+ </div>
+        <br/>
+ <div class="row">
+   <div class="offset1 span5">
+      {{ form_label(form.fileaffiche) }}
+      {{ form_errors(form.fileaffiche) }}
+      {{ form_widget(form.fileaffiche) }}
+   </div>
+   <div class="span4">
+      {{ form_label(form.fileprogramme) }}
+      {{ form_errors(form.fileprogramme) }}
+      {{ form_widget(form.fileprogramme) }}
+   </div>
+ </div>
+        <br/>
+   <br/>
+  <div id="ajout_media">
+  <h5>Médias associés</h5>
+  <div id="list_medias"> 
+      {% for key, item in form.idMedias %}
+          {{ _self.prototype(item) }}
+      {% endfor %}
+      {% macro prototype(item) %}
+        <div class="row" style="padding-left: 5px;">
+        <div class="themedia">
+           <div class="span4">
+             {{ form_label(item.titre) }}
+             {{ form_errors(item.titre) }}
+             {{ form_widget(item.titre, { 'attr': {'style': 'width:380px;'} }) }}
+           </div>
+           <div class="span2">
+             {{ form_label(item.type) }}
+             {{ form_errors(item.type) }}
+             {{ form_widget(item.type, { 'attr': {'style': 'width:110px;'} }) }}
+           </div> 
+           <div class="span3">
+             {{ form_label(item.file) }}
+             {{ form_errors(item.file) }}
+             {{ form_widget(item.file) }}
+           </div> 
+           <div class="span1">
+             <br/>
+             <a  class="btn btn-danger" href="#supp_media" rel="parametre">Supprimer</a>
+          </div>
+       </div>
+       </div>
+       <br/>
+     {% endmacro %}
+     <script type="text/html">
+       {{ _self.prototype(form.idMedias.get('prototype')) }} 
+     </script>
+ </div>
+ <div class="row">  
+  <div class="span12">
+    <a class="btn btn-info" href="#add_media" id="add_media"><i class="icon-white icon-plus"></i> Ajouter un média</a>
+  </div>
+ </div>
+<br/>
+</div>
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+       <button class="btn btn-primary" type="submit">Valider la création</button>
+       <a class="btn" href="{{ path('archive') }}"><i class="icon-arrow-left"></i> Revenir à la liste des archives</a>
+</form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+ 
+    // On définit une fonction qui va ajouter un champ.
+    function add_media() {
+        var $container = $('.themedia');
+        var index = $container.length;
+	var newForm = $('script[type="text/html"]').text().replace(/__name__/g, index);
+
+	$("div#list_medias").append(newForm);
+
+              
+    }
+
+    // On ajoute un premier champ directement s'il n'en existe pas déjà un.
+ 
+ 
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $('#add_media').click(function() {
+        add_media();
+    });
+    
+    $("div#list_medias").on("click","a[rel='parametre']", function(){ 
+          if (confirm('Voulez vous réellement supprimer ce média ?')) {
+            $(this).parents("div.row").remove();
+          }
+        	
+        });
+         $("#idautres").addClass("active");
+});
+
+</script>
+{% endblock %}

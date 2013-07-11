@@ -82,6 +82,8 @@ class SponsorController extends Controller
             $url = $entity->getFileLogo();
             $entity->setLogo($resize->UploadPhoto($url,"Sponsor/big",LgLogoSBig,HtLogoSBig)); 
             $resize->UploadPhoto($url,"Sponsor/small",LgLogoSSmall,HtLogoSSmall);
+            $url->move("medias/Sponsor/brut",$url->getClientOriginalName());
+            
             }
             $em->persist($entity);
             $em->flush();
@@ -143,6 +145,7 @@ class SponsorController extends Controller
             $url = $entity->getFileLogo();
             $entity->setLogo($resize->UploadPhoto($url,"Sponsor/big",LgLogoSBig,HtLogoSBig)); 
             $resize->UploadPhoto($url,"Sponsor/small",LgLogoSSmall,HtLogoSSmall);
+            $url->move("medias/Sponsor/brut",$url->getClientOriginalName());
             } 
             $em->persist($entity);
             $em->flush();

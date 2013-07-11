@@ -83,11 +83,13 @@ class LieuController extends Controller
             $url = $entity->getFilePhoto();
             $entity->setPhoto($resize->UploadPhoto($url,"Lieu/photos/big",LgPhotoLBig,HtPhotoLBig)); 
             $resize->UploadPhoto($url,"Lieu/photos/small",LgPhotoLSmall,HtPhotoLSmall);
+            $url->move("medias/Lieu/photo/brut",$url->getClientOriginalName());
             } 
             if($entity->getFileLogo()!=NULL){   
             $url = $entity->getFileLogo();
             $entity->setLogo($resize->UploadPhoto($url,"Lieu/logo/big",LgLogoLBig,HtLogoLBig)); 
             $resize->UploadPhoto($url,"Lieu/logo/small",LgLogoLSmall,HtLogoLSmall);
+            $url->move("medias/Lieu/logo/brut",$url->getClientOriginalName());
             }
             $em->persist($entity);
             $em->flush();
@@ -149,11 +151,13 @@ class LieuController extends Controller
             $url = $entity->getFilePhoto();
             $entity->setPhoto($resize->UploadPhoto($url,"Lieu/photos/big",LgPhotoLBig,HtPhotoLBig)); 
             $resize->UploadPhoto($url,"Lieu/photos/small",LgPhotoLSmall,HtPhotoLSmall);
+            $url->move("medias/Lieu/photos/brut",$url->getClientOriginalName());
             } 
             if($entity->getFileLogo()!=NULL){   
             $url = $entity->getFileLogo();
             $entity->setLogo($resize->UploadPhoto($url,"Lieu/logo/big",LgLogoLBig,HtLogoLBig)); 
             $resize->UploadPhoto($url,"Lieu/logo/small",LgLogoLSmall,HtLogoLSmall);
+            $url->move("medias/Lieu/logo/brut",$url->getClientOriginalName());
             }
             $em->persist($entity);
             $em->flush();

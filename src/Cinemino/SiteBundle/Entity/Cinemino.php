@@ -74,6 +74,25 @@ class Cinemino
      */
     private $couleurTypo;
     
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="TARIF_PLEIN", type="string", length=5, nullable=true)
+     */
+    private $tarifPlein;
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="TARIF_ABO", type="string", length=5, nullable=true)
+     */
+    private $tarifAbo;
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="SURCOUT_3D", type="string", length=5, nullable=true)
+     */
+    private $surcout3D;
+    
     private $fileAffiche;              //permet de stocker temporairement le fichier Affiche
     
     private $fileLogo;              //permet de stocker temporairement le fichier Logo
@@ -248,4 +267,73 @@ class Cinemino
     {
         return $this->fileLogo;
     } 
+
+    /**
+     * Set tarifPlein
+     *
+     * @param string $tarifPlein
+     * @return Cinemino
+     */
+    public function setTarifPlein($tarifPlein)
+    {
+        $this->tarifPlein = $tarifPlein;
+    
+        return $this;
+    }
+
+    /**
+     * Get tarifPlein
+     *
+     * @return string 
+     */
+    public function getTarifPlein()
+    {
+        return $this->tarifPlein;
+    }
+
+    /**
+     * Set tarifAbo
+     *
+     * @param string $tarifAbo
+     * @return Cinemino
+     */
+    public function setTarifAbo($tarifAbo)
+    {
+        $this->tarifAbo = $tarifAbo;
+    
+        return $this;
+    }
+
+    /**
+     * Get tarifAbo
+     *
+     * @return string 
+     */
+    public function getTarifAbo()
+    {
+        return $this->tarifAbo;
+    }
+
+    /**
+     * Set surcout3D
+     *
+     * @param string $surcout3D
+     * @return Cinemino
+     */
+    public function setSurcout3D($surcout3D)
+    {
+        $this->surcout3D = $surcout3D;
+    
+        return $this;
+    }
+
+    /**
+     * Get surcout3D
+     *
+     * @return string 
+     */
+    public function getSurcout3D()
+    {
+        return $this->surcout3D;
+    }
 }

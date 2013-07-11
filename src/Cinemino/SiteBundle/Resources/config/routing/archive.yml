@@ -1,0 +1,30 @@
+archive:
+    pattern:  /
+    defaults: { _controller: "CineminoSiteBundle:Archive:index" }
+
+archive_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CineminoSiteBundle:Archive:show" }
+
+archive_new:
+    pattern:  /new
+    defaults: { _controller: "CineminoSiteBundle:Archive:new" }
+
+archive_create:
+    pattern:  /create
+    defaults: { _controller: "CineminoSiteBundle:Archive:create" }
+    requirements: { _method: post }
+
+archive_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CineminoSiteBundle:Archive:edit" }
+
+archive_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CineminoSiteBundle:Archive:update" }
+    requirements: { _method: post }
+
+archive_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CineminoSiteBundle:Archive:delete" }
+    requirements: { _method: post }

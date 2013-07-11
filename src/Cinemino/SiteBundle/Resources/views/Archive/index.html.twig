@@ -1,0 +1,41 @@
+{% extends "CineminoSiteBundle::layout.html.twig" %}
+
+{% block content %}
+
+<a class="btn btn-info" href="{{ path('archive_new') }}"><i class="icon-white icon-plus"></i> Ajouter une archive</a>
+<br><br>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+           <tr bgcolor="#EAE8FF">
+            <th width=100>Année</th>
+            <th width=250>Rapport</th>
+            <th width=88>Affiche</th>
+            <th width=88>Programme</th>
+            <th width=160>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+      {% if entity.lescourts is not defined %}
+        <tr>
+            <td><a href="{{ path('archive_show', { 'id': entity.id }) }}">{{ entity.annee }}</a></td>
+            <td>{{ entity.rapport|raw }}</td>
+            <td><img class="img-polaroid" style="width:75px;" src="{{asset('medias/Archive/affiches/small/')}}{{entity.affiche }}" alt=""/></td>
+            <!-- big/ ou small/ selon si on veut recuperer l'affiche redimensionnée ou non -->
+            <td>{{ entity.programme }}</td>
+            <td>
+                      
+          <a class="btn" href="{{ path('archive_show', { 'id': entity.id }) }}"><i class="icon icon-search"></i> Info</a>
+          <a class="btn btn-info" href="{{ path('archive_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
+      
+            </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+<script>
+ $("#idautres").addClass("active");
+</script>
+{% endblock content %}
+

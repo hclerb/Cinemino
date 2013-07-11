@@ -25,6 +25,9 @@ class CineminoType extends AbstractType
             ->add('fileLogo', 'file', array('label' => 'Fichier du logo :', 'required' => false))
             ->add('couleurFond', 'text',  array('label' => 'Couleur de fond', 'attr' => array('class' => 'color')))
             ->add('couleurTypo', 'text',  array('label' => 'Couleur de la typo', 'attr' => array('class' => 'color')))
+            ->add('tarifPlein', 'text',  array('label' => 'Tarif Plein'))
+            ->add('tarifAbo', 'text',  array('label' => 'Tarif Abonnement'))
+            ->add('surcout3D', 'text',  array('label' => 'Surcoût 3D'))
         ;
     }
 

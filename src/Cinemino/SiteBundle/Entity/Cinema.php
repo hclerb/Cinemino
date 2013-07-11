@@ -126,10 +126,16 @@ class Cinema
     /**
      * @var string
      *
-     * @ORM\Column(name="SPECIFICITE", type="string", length=250, nullable=true)
+     * @ORM\Column(name="SPECIFICITE", type="string", length=500, nullable=true)
      */
     private $specificite;    
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="EQUIPE", type="string", length=500, nullable=true)
+     */
+    private $equipe; 
     /**
      * @var \CineminoUser
      *
@@ -570,5 +576,28 @@ class Cinema
     public function getSpecificite()
     {
         return $this->specificite;
+    }
+
+    /**
+     * Set equipe
+     *
+     * @param string $equipe
+     * @return Cinema
+     */
+    public function setEquipe($equipe)
+    {
+        $this->equipe = $equipe;
+    
+        return $this;
+    }
+
+    /**
+     * Get equipe
+     *
+     * @return string 
+     */
+    public function getEquipe()
+    {
+        return $this->equipe;
     }
 }

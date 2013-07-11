@@ -35,7 +35,8 @@ class FilmType extends AbstractType
                     '7' => '7',
                     '8' => '8',
                     '9' => '9',
-                    '10'=> '10'),
+                    '10'=> '10',
+                    '11'=> '>10'),
                     'required' => true))
             ->add('acteurs', null, array('label' => 'Acteurs', 'required' => false))
             ->add('synopsys', 'textarea', array('label' => 'Synopsis','attr' => array(
@@ -46,6 +47,11 @@ class FilmType extends AbstractType
                     'class' => 'tinymce',
                     'data-theme' => 'simple', 
                     'required' => true)))
+            ->add('animation','checkbox',array('label' => 'Animation ?','required' => false) )
+            ->add('typeAnimation', 'choice', array('label' => 'Type de l\'animation','choices' => array(
+                    0 => 'Pixilisation',
+                    1 => 'Stop',
+                    2 => 'ordinateur'),'required' => false) )
             ->add('affiche','text', array('label' => '','read_only' => true))
             ->add('file', 'file', array('label' => 'Fichier de l\'affiche :', 'required' => false))
             ->add('couleurTexte', null, array('label' => 'Couleur du texte'))

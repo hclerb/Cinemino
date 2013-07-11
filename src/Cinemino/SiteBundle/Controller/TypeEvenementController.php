@@ -82,6 +82,7 @@ class TypeEvenementController extends Controller
            if($entity->getFile()!=NULL){   
             $url = $entity->getFile();
             $entity->setPicto($resize->UploadPhoto($url,"picto",LgPicto,HtPicto)); 
+            $url->move("medias/picto/brut",$url->getClientOriginalName());
             }
             $em->persist($entity);
             $em->flush();
@@ -142,6 +143,7 @@ class TypeEvenementController extends Controller
            if($entity->getFile()!=NULL){   
             $url = $entity->getFile();
             $entity->setPicto($resize->UploadPhoto($url,"picto",LgPicto,HtPicto)); 
+            $url->move("medias/picto/brut",$url->getClientOriginalName());
             }
             $em->persist($entity);
             $em->flush();

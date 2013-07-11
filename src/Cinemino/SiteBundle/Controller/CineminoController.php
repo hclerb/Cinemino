@@ -82,11 +82,13 @@ class CineminoController extends Controller
             $url = $entity->getFileAffiche();
             $entity->setAffiche($resize->UploadPhoto($url,"Cinemino/big",LgAfficheCoBig,HtAfficheCoBig)); 
             $resize->UploadPhoto($url,"Cinemino/small",LgAfficheCoSmall,HtAfficheCoSmall);
+            $url->move("medias/Cinemino/brut",$url->getClientOriginalName());
             }
             if($entity->getFileLogo()!=NULL){   
             $url = $entity->getFileLogo();
             $entity->setLogo($resize->UploadPhoto($url,"Cinemino/big",LgLogoCoBig,HtLogoCoBig)); 
             $resize->UploadPhoto($url,"Cinemino/small",LgLogoCoSmall,HtLogoCoSmall);
+            $url->move("medias/Cinemino/brut",$url->getClientOriginalName());
             }
             $em->persist($entity);
             $em->flush();
@@ -146,11 +148,13 @@ class CineminoController extends Controller
             $url = $entity->getFileAffiche();
             $entity->setAffiche($resize->UploadPhoto($url,"Cinemino/big",LgAfficheCoBig,HtAfficheCoBig)); 
             $resize->UploadPhoto($url,"Cinemino/small",LgAfficheCoSmall,HtAfficheCoSmall);
+            $url->move("medias/Cinemino/brut",$url->getClientOriginalName());
             }
             if($entity->getFileLogo()!=NULL){   
             $url = $entity->getFileLogo();
             $entity->setLogo($resize->UploadPhoto($url,"Cinemino/big",LgLogoCoBig,HtLogoCoBig)); 
             $resize->UploadPhoto($url,"Cinemino/small",LgLogoCoSmall,HtLogoCoSmall);
+            $url->move("medias/Cinemino/brut",$url->getClientOriginalName());
             }
             $em->persist($entity);
             $em->flush();

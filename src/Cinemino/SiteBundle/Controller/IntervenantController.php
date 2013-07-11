@@ -95,11 +95,13 @@ class IntervenantController extends Controller
               $url = $entity->getFilelogo();
               $entity->setUrlLogo($resize->UploadPhoto($url,"Intervenant/logo/big",LgLogoIBig,HtLogoIBig)); 
               $resize->UploadPhoto($url,"Intervenant/logo/small",LgLogoISmall,HtLogoISmall);
+              $url->move("medias/Intervenant/logo/brut",$url->getClientOriginalName());
             }
             if($entity->getFilephoto()!=NULL){   
               $url = $entity->getFilephoto();
               $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoIBig,HtPhotoIBig)); 
               $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoISmall,HtPhotoISmall);
+              $url->move("medias/Intervenant/photos/brut",$url->getClientOriginalName());
             }
             foreach($entity->getIdMedias() as $media)  
             {
@@ -115,7 +117,7 @@ class IntervenantController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('intervenant', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('intervenant'));
         }
 
         return $this->render('CineminoSiteBundle:Intervenant:new.html.twig', array(
@@ -174,11 +176,13 @@ class IntervenantController extends Controller
               $url = $entity->getFilelogo();
               $entity->setUrlLogo($resize->UploadPhoto($url,"Intervenant/logo/big",LgPhotoIBig,HtPhotoIBig)); 
               $resize->UploadPhoto($url,"Intervenant/logo/small",LgPhotoISmall,HtPhotoISmall);
+              $url->move("medias/Intervenant/logo/brut",$url->getClientOriginalName());
             }
             if($entity->getFilephoto()!=NULL){   
               $url = $entity->getFilephoto();
               $entity->setUrlPhotoIntervenant($resize->UploadPhoto($url,"Intervenant/photos/big",LgPhotoIBig,HtPhotoIBig)); 
               $resize->UploadPhoto($url,"Intervenant/photos/small",LgPhotoISmall,HtPhotoISmall);
+              $url->move("medias/Intervenant/photos/brut",$url->getClientOriginalName());
             }
             foreach($entity->getIdMedias() as $media)  
             {
@@ -199,7 +203,7 @@ class IntervenantController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('intervenant', array('id' => $id)));
+            return $this->redirect($this->generateUrl('intervenant'));
         }
 
         return $this->render('CineminoSiteBundle:Intervenant:edit.html.twig', array(

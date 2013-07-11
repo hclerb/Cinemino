@@ -23,11 +23,15 @@ class CinemaType extends AbstractType
             ->add('adresseMail', 'text',  array('label' => 'Adresse mail'))
             ->add('coordonneesTel', 'text',  array('label' => 'Téléphone'))
             ->add('siteWeb', 'text',  array('label' => 'Site web'))
+            ->add('equipe', 'textarea', array('label' => 'Equipe','attr' => array(
+                'class' => 'tinymce',
+                'data-theme' => 'simple'), 
+                'required' => false)) 
             ->add('couleurFondCinema', 'text',  array('label' => 'Couleur de fond', 'attr' => array('class' => 'color')))
             ->add('latitude', 'text',  array('label' => 'Latitude', 'required' => false))
             ->add('longitude', 'text',  array('label' => 'Longitude', 'required' => false))
             ->add('zone', 'choice',  array('label' => 'Zone géographique',  'choices' => array(
-                    '0' => 'Historique',
+                    '0' => 'Première page',
                     '1' => 'Haute - Savoie',
                     '2' => 'Savoie',
                     '3' => 'ain'
@@ -41,7 +45,7 @@ class CinemaType extends AbstractType
                 'class' => 'tinymce',
                 'data-theme' => 'simple'), 
                 'required' => false))   
-            ->add('idCompte', null,  array('label' => 'Utilisateur qui gère ce cinéma :'))
+            ->add('idCompte', null,  array('label' => 'Programmateur qui gère ce cinéma :'))
           
         ;
     }

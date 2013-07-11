@@ -104,9 +104,10 @@ class FilmController extends Controller
             $entity->setDuree($entity->getDuree()->format('H'). ':' . $entity->getDuree()->format('i'));
             $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
            if($entity->getFile()!=NULL){   
-            $url = $entity->getFile();
+            $url = $entity->getFile();     
             $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
             $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
+            $url->move("medias/Film/affiches/brut",$url->getClientOriginalName());
             } 
             print_r($entity->getIdMedias());              
             foreach($entity->getIdMedias() as $media)  
@@ -190,9 +191,10 @@ class FilmController extends Controller
             $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images 
             if ($entity->getFile()!=NULL) 
             {
-              $url = $entity->getFile();               
+              $url = $entity->getFile(); 
               $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
               $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
+              $url->move("medias/Film/affiches/brut",$url->getClientOriginalName());
             }
   
             

@@ -99,11 +99,13 @@ class CinemaController extends Controller
             $url = $entity->getFilePhoto();
             $entity->setPhoto($resize->UploadPhoto($url,"Cinema/photo/big",LgPhotoCBig,HtPhotoCBig)); 
             $resize->UploadPhoto($url,"Cinema/photo/small",LgPhotoCSmall,HtPhotoCSmall);
+            $url->move("medias/Cinema/photo/brut",$url->getClientOriginalName());
             } 
             if($entity->getFileLogo()!=NULL){   
-            $url = $entity->getFileLogo();
+            $url = $entity->getFileLogo();    
             $entity->setLogo($resize->UploadPhoto($url,"Cinema/logo/big",LgLogoCBig,HtLogoCBig)); 
             $resize->UploadPhoto($url,"Cinema/logo/small",LgLogoCSmall,HtLogoCSmall);
+            $url->move("medias/Cinema/logo/brut",$url->getClientOriginalName());
             } 
             $em->persist($entity);
             $em->flush();
@@ -177,11 +179,13 @@ class CinemaController extends Controller
             $url = $entity->getFilePhoto();
             $entity->setPhoto($resize->UploadPhoto($url,"Cinema/photo/big",LgPhotoCBig,HtPhotoCBig)); 
             $resize->UploadPhoto($url,"Cinema/photo/small",LgPhotoCSmall,HtPhotoCSmall);
+            $url->move("medias/Cinema/photo/brut",$url->getClientOriginalName());
             } 
             if($entity->getFileLogo()!=NULL){   
             $url = $entity->getFileLogo();
             $entity->setLogo($resize->UploadPhoto($url,"Cinema/logo/big",LgLogoCBig,HtLogoCBig)); 
             $resize->UploadPhoto($url,"Cinema/logo/small",LgLogoCSmall,HtLogoCSmall);
+            $url->move("medias/Cinema/logo/brut",$url->getClientOriginalName());
             } 
             $em->persist($entity);
             $em->flush();

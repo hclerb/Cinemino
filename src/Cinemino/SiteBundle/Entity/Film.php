@@ -147,6 +147,19 @@ class Film
      */
     protected $stocke;
 
+     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="ANIMATION", type="boolean")
+     */
+    protected $animation;   
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="TYPE_ANIMATION", type="string", length=1, nullable=true)
+     */
+    protected $typeAnimation;    
     /**
      *
      * @ORM\ManyToOne(targetEntity="Cinemino\SiteBundle\Entity\ProgrammeCourts",inversedBy="lescourts"); 													inversedBy="lesseances")
@@ -621,5 +634,51 @@ class Film
     public function getStocke()
     {
         return $this->stocke;
+    }
+
+    /**
+     * Set animation
+     *
+     * @param boolean $animation
+     * @return Film
+     */
+    public function setAnimation($animation)
+    {
+        $this->animation = $animation;
+    
+        return $this;
+    }
+
+    /**
+     * Get animation
+     *
+     * @return boolean 
+     */
+    public function getAnimation()
+    {
+        return $this->animation;
+    }
+
+    /**
+     * Set typeAnimation
+     *
+     * @param string $typeAnimation
+     * @return Film
+     */
+    public function setTypeAnimation($typeAnimation)
+    {
+        $this->typeAnimation = $typeAnimation;
+    
+        return $this;
+    }
+
+    /**
+     * Get typeAnimation
+     *
+     * @return string 
+     */
+    public function getTypeAnimation()
+    {
+        return $this->typeAnimation;
     }
 }

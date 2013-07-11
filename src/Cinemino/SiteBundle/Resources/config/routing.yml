@@ -82,4 +82,8 @@ CineminoSiteBundle_cinemino:
 CineminoSiteBundle_lieu:
         resource: "@CineminoSiteBundle/Resources/config/routing/lieu.yml"
         prefix:   /backoffice/lieu
+        
+CineminoSiteBundle_archive:
+        resource: "@CineminoSiteBundle/Resources/config/routing/archive.yml"
+        prefix:   /backoffice/archive
 
