@@ -12,7 +12,7 @@
 {% block content %}
 
 
-<table class="record_properties">
+<table class="table table-bordered table-striped table-hover">
     <tbody>
         <tr>
             <th>Titre film</th>
@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <th>Annee production</th>
-            <td>{{ entity.anneeProd|date('Y-m-d H:i:s') }}</td>
+            <td>{{ entity.anneeProd }}</td>
         </tr>
         <tr>
             <th>Classement art essai</th>
@@ -64,7 +64,7 @@
         </tr>
         <tr>
             <th>Film d'Animation</th>
-            <td>{{ entity.aniamation }}</td>
+            <td>{{ entity.animation }}</td>
         </tr>
         <tr>
             <th>Type d'Animation</th>
@@ -83,7 +83,20 @@
             <td>{{ entity.type }}</td>
         </tr>
         <tr>
-            
+        <tr>
+            <th>Les médias associés :</th>
+            <td>
+               {% if entity.idMedias[0] is defined %}
+                  {% for media in entity.idMedias %}
+                      <a href="{{ path('mediaFilm_edit', { 'id': media.id }) }}">{{ media.titre }}</a>
+                      {% if media.type =="p" %} <img class="img-polaroid" width="450" src="{{asset('medias/Film/photos/big/')}}{{ media.url }}" alt=""/>
+                        {% else %} {{ media.url|raw }}
+                      {% endif %}
+                     <br/>
+                  {% endfor %}
+                {% endif %}
+            </td>
+        </tr>            
         </tr>
     </tbody>
 </table>

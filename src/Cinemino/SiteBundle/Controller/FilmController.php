@@ -24,9 +24,6 @@ class FilmController extends Controller
     
     public function __construct()
     {
-        global $dir_url;
-        $dir_url = 'affiche/';
-        // URL vers le dossier affiche   
     }
     
     
@@ -35,15 +32,12 @@ class FilmController extends Controller
     public function indexAction()
     {
         
-        global $dir_url;
-        
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('CineminoSiteBundle:Film')->findAll();
          
         return $this->render('CineminoSiteBundle:Film:index.html.twig', array(
-            'entities' => $entities,
-            'dir_url' => $dir_url
+            'entities' => $entities
         ));
     }
 
@@ -65,7 +59,8 @@ class FilmController extends Controller
 
         return $this->render('CineminoSiteBundle:Film:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView()
+        ));
     }
 
     
@@ -73,7 +68,6 @@ class FilmController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         
-        $entities = $em->getRepository('CineminoSiteBundle:Film')->findAll();
         $entity = new Film();
         $entity->setDuree(new \DateTime("1:30"));
         $form_recherche = $this->container->get('form.factory')->create(new FilmRechercheForm());     
@@ -82,10 +76,7 @@ class FilmController extends Controller
         return $this->render('CineminoSiteBundle:Film:new.html.twig', array(
 
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'form_recherche'   => $form_recherche->createView(),
-            'entities' => $entities,
-
+            'form'   => $form->createView()
         ));
     }
     /**
@@ -129,8 +120,7 @@ class FilmController extends Controller
 
         return $this->render('CineminoSiteBundle:Film:new.html.twig', array(
             'entity'  => $entity,
-            'form'    => $form->createView(),
- 
+            'form'    => $form->createView()
         ));
     }
 
@@ -140,8 +130,7 @@ class FilmController extends Controller
      */
     public function editAction($id)
     {
-        global $dir_url;
-         
+     
         $em = $this->getDoctrine()->getManager();
         
         $entities = $em->getRepository('CineminoSiteBundle:Film')->findAll();
@@ -158,9 +147,7 @@ class FilmController extends Controller
         return $this->render('CineminoSiteBundle:Film:edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-            'entities' => $entities,
-            'dir_url' => $dir_url
+            'delete_form' => $deleteForm->createView()
         ));
     }
 

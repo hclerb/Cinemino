@@ -49,32 +49,43 @@ class ResizeImg{
     public function UploadPhoto($filename,$sousrep,$width,$heightf)
         {
 
+          /*$ListeExtension = array('jpg' => 'image/jpeg', 'jpeg'=>'image/jpeg');
+          $ListeExtensionIE = array('jpg' => 'image/pjpeg', 'jpeg'=>'image/pjpeg');*/
+  
+    
+  
+          $ExtensionPresumee = explode('.', $filename->getClientOriginalName());
+          $ExtensionPresumee = strtolower($ExtensionPresumee[count($ExtensionPresumee)-1]);
+                            
+          if ($ExtensionPresumee == 'jpg' || $ExtensionPresumee == 'jpeg')
+          {
+            list($width_orig, $height_orig) = getimagesize($filename);
 
-        list($width_orig, $height_orig) = getimagesize($filename);
 
-        
-        $ratio_orig = $width_orig/$height_orig;
-        //calcul de la hauteur voulue
-        $height = $width/$ratio_orig;
-   
-        if ($heightf > $height) $heightf = $height; 
-        
-        // Redimensionnement
-        $image_p = imagecreatetruecolor($width, $height);
-        $image_f = imagecreatetruecolor($width, $heightf);
-        $image = imagecreatefromjpeg($filename);
-        imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
-        imagecopy($image_f, $image_p, 0, 0, 0, 0, $width, $heightf);
+            $ratio_orig = $width_orig/$height_orig;
+            //calcul de la hauteur voulue
+            $height = $width/$ratio_orig;
 
-        // enregistrement
-        $nom_fichier = $filename->getClientOriginalName();
-        imagejpeg($image_f, 'medias/'. $sousrep . '/' .$nom_fichier, 200);
-        imagedestroy($image);
-        imagedestroy($image_p);
-        imagedestroy($image_f);
-        return $nom_fichier;
-    }         
- }
+            if ($heightf > $height) $heightf = $height; 
+
+            // Redimensionnement
+            $image_p = imagecreatetruecolor($width, $height);
+            $image_f = imagecreatetruecolor($width, $heightf);
+            $image = imagecreatefromjpeg($filename);
+            imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+            imagecopy($image_f, $image_p, 0, 0, 0, 0, $width, $heightf);
+
+            // enregistrement
+            $nom_fichier = $filename->getClientOriginalName();
+            imagejpeg($image_f, 'medias/'. $sousrep . '/' .$nom_fichier, 200);
+            imagedestroy($image);
+            imagedestroy($image_p);
+            imagedestroy($image_f);
+            return $nom_fichier;
+        }  
+        else return "fichier image n'est pas en JPG";   
+    }
+}
         
         
         

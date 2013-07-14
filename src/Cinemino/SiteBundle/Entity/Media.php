@@ -3,7 +3,7 @@
 namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Media
@@ -46,7 +46,14 @@ class Media
      */
     protected $type;
    
-    
+     /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "4096k"
+     * )
+     */
     protected $file;              //permet de stocker temporairement le fichier url
     
     

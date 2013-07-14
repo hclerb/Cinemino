@@ -10,12 +10,12 @@
     {% set idEvt = entity.idEvt.id %}
     {% if loop.first == false %}</tbody></table> {% endif %}
     <table class="table table-bordered table-striped" style="border-collapse: collapse;">
-       <h4>Evènement Associé : {{ entity.idEvt.titreEvenement }}</h4>
+       <h4>Evènement concerné : {{ entity.idEvt.titreEvenement }}</h4>
        <tbody>
   {% endif %}   
   <tr>
       <td width=400><a href="{{ path('mediaEvt_show', { 'id': entity.id }) }}">{{ entity.titre }}</a></td>
-      <td width=300>{{ entity.url }}</td>
+      <td width=300>{{ entity.url|raw }}</td>
       <td>
           {% if entity.type == 'p' %} <img class="img-polaroid" style="height:70px;" src="{{asset('medias/Evt/photos/small/')}}{{ entity.url }}" alt=""/>
           {% elseif entity.type == 'v' %} Video

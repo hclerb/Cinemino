@@ -49,9 +49,17 @@ class FilmType extends AbstractType
                     'required' => true)))
             ->add('animation','checkbox',array('label' => 'Animation ?','required' => false) )
             ->add('typeAnimation', 'choice', array('label' => 'Type de l\'animation','choices' => array(
-                    0 => 'Pixilisation',
-                    1 => 'Stop',
-                    2 => 'ordinateur'),'required' => false) )
+                    0 => 'dessin sur papier',
+                    1 => 'animation d\'objets',
+                    2 => 'ordinateur 2D',
+                    3 => 'ordinateur 3D',
+                    4 => 'éléments découpés',
+                    5 => 'peinture sur verre',
+                    6 => 'dessin sur cellulos',
+                    7 => 'marionnettes',
+                    8 => 'techniques diverses',
+                    9 => 'pâte à modeler',
+                    10 => 'rotoscopie'),'required' => false) )
             ->add('affiche','text', array('label' => '','read_only' => true))
             ->add('file', 'file', array('label' => 'Fichier de l\'affiche :', 'required' => false))
             ->add('couleurTexte', null, array('label' => 'Couleur du texte'))

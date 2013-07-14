@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div id="formulaire" class="well" style="width:1024px">
+<div class="well" style="width:1024px">
 <div class="page-header"><h3>Modification Archive : {{ entity.annee }}</h3></div>   
 
 <form action="{{ path('archive_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>

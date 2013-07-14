@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div id="formulaire_film" class="well" style="width:auto">
+<div class="well" style="width:auto">
 <form action="{{ path('film_create') }}" method="post" {{ form_enctype(form) }}>
     
 {{ tinymce_init() }}      

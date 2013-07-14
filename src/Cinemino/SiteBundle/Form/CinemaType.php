@@ -14,7 +14,7 @@ class CinemaType extends AbstractType
     {
         
         $builder
-            ->add('nomCinema', 'text',  array('label' => 'Nom cinéma'))
+            ->add('nomCinema', 'text',  array('label' => 'Nom cinéma', 'required' => true))
             ->add('photo', 'text', array('label' => 'Nom fichier photo','read_only' => true))
             ->add('filePhoto', 'file', array('label' => 'Fichier de la photo', 'required' => false))
             ->add('logo', 'text',  array('label' => 'Nom fichier logo','read_only' => true))

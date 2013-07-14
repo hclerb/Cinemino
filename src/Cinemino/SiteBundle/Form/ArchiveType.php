@@ -11,11 +11,10 @@ class ArchiveType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('annee', null, array('label' => 'L\'année en question'))
-            ->add('rapport', 'textarea', array('label' => 'Commentaire sur cette année là','attr' => array(
+            ->add('annee', null, array('label' => 'L\'année en question', 'required' => true))
+            ->add('rapport', 'textarea', array('label' => 'Commentaire sur cette année là','required' => true,'attr' => array(
                 'class' => 'tinymce',
-                'data-theme' => 'simple', 
-                'required' => true)))
+                'data-theme' => 'simple')))
             ->add('affiche', null, array('label' => 'L\'affiche','read_only' => true))
             ->add('fileaffiche', 'file', array('label' => 'Fichier de l\'affiche :', 'required' => false))
             ->add('programme', null, array('label' => 'Le programme en PDF','read_only' => true))

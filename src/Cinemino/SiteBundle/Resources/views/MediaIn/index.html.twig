@@ -17,7 +17,7 @@
     {% for entity in entitiesIn %}
         <tr>
             <td><a href="{{ path('mediain_show', { 'id': entity.id }) }}">{{ entity.titre }}</a></td>
-            <td>{{ entity.url }}</td>
+            <td>{{ entity.url|raw }}</td>
             <td>          
              {% if entity.type == 'p' %} <img class="img-polaroid" style="height:70px;" src="{{asset('medias/In/photos/small/')}}{{ entity.url }}" alt=""/>
              {% elseif entity.type == 'v' %} Video

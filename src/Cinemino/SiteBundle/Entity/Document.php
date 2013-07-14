@@ -3,6 +3,7 @@
 namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Document
@@ -56,7 +57,15 @@ class Document
      */
     private $urlFichier;
 
-    private $filefichier;              //permet de stocker temporairement le fichier affiche
+    /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "4096k"
+     *     )
+     */    
+    private $filefichier;              //permet de stocker temporairement le fichier 
 
     /**
      * Set nomDocument

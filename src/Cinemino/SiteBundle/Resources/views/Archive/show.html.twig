@@ -31,7 +31,7 @@
             <td>
                {% if entity.idMedias[0] is defined %}
                   {% for media in entity.idMedias %}
-                     {{ media.titre }} - {{ media.url }} - {{ media.type }} 
+                     {{ media.titre }} - {{ media.url|raw }} - {{ media.type }} 
                      <br/>
                   {% endfor %}
                 {% endif %}

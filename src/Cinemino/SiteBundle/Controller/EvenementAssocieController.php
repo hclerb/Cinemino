@@ -91,7 +91,7 @@ class EvenementAssocieController extends Controller
             }
             $em->flush();
 
-            return $this->redirect($this->generateUrl('evenementassocie', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('evenementassocie'));
         }
 
         return $this->render('CineminoSiteBundle:EvenementAssocie:new.html.twig', array(
@@ -194,7 +194,7 @@ class EvenementAssocieController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('evenementassocie', array('id' => $id)));
+            return $this->redirect($this->generateUrl('evenementassocie'));
         }
 
         return $this->render('CineminoSiteBundle:EvenementAssocie:edit.html.twig', array(

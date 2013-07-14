@@ -11,11 +11,10 @@ class IntervenantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomIntervenant', null, array('label' => 'Nom de l\'intervenant'))
-            ->add('descriptionIntervenant', 'textarea', array('label' => 'Description intervenant','attr' => array(
+            ->add('nomIntervenant', null, array('label' => 'Nom de l\'intervenant', 'required' => true))
+            ->add('descriptionIntervenant', 'textarea', array('label' => 'Description intervenant','required' => true,'attr' => array(
                 'class' => 'tinymce',
-                'data-theme' => 'simple', 
-                'required' => true)))
+                'data-theme' => 'simple')))
             ->add('urlPhotoIntervenant', null, array('label' => 'Photo'))
             ->add('filephoto', 'file', array('label' => 'Fichier de la photo :', 'required' => false))
             ->add('urlLogo', null, array('label' => 'Logo'))

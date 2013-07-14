@@ -11,7 +11,7 @@ class LieuType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', 'text',  array('label' => 'Nom du Lieu Associé'))
+            ->add('nom', 'text',  array('label' => 'Nom du Lieu Associé', 'required' => true))
             ->add('photo', 'text', array('label' => 'Nom fichier photo','read_only' => true))
             ->add('filePhoto', 'file', array('label' => 'Fichier de la photo', 'required' => false))
             ->add('logo', 'text',  array('label' => 'Nom fichier logo','read_only' => true))

@@ -42,9 +42,6 @@ class IntervenantController extends Controller
         $entities = $em->getRepository('CineminoSiteBundle:Intervenant')->findAll();
         $entity = $em->getRepository('CineminoSiteBundle:Intervenant')->find($id);
         
-        //$evenements = $em->getRepository('CineminoSiteBundle:Evenement')->findByidIntervenant($id);
-        // recup des évènements lié a l'intervenant
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Intervenant entity.');
         }
@@ -54,10 +51,8 @@ class IntervenantController extends Controller
         return $this->render('CineminoSiteBundle:Intervenant:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-            'entities' => $entities,
-           // 'evenements' => $evenements
-            )
-                );
+            'entities' => $entities
+            ));
     }
 
     /**
@@ -67,14 +62,11 @@ class IntervenantController extends Controller
     public function newAction()
     {
         $entity = new Intervenant();
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('CineminoSiteBundle:Intervenant')->findAll();
         $form   = $this->createForm(new IntervenantCreateType(), $entity);
 
         return $this->render('CineminoSiteBundle:Intervenant:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
-            'entities' => $entities
+            'form'   => $form->createView()
         ));
     }
 
@@ -122,7 +114,7 @@ class IntervenantController extends Controller
 
         return $this->render('CineminoSiteBundle:Intervenant:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form'   => $form->createView()
         ));
     }
 

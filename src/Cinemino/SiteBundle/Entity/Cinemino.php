@@ -4,7 +4,7 @@ namespace Cinemino\SiteBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 define("LgLogoCoBig", 500);
 define("HtLogoCoBig",282);
@@ -93,8 +93,28 @@ class Cinemino
      */
     private $surcout3D;
     
+    /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg"},
+     *     mimeTypesMessage = "Attention fichier image de type jpeg"
+     *     )
+     */    
     private $fileAffiche;              //permet de stocker temporairement le fichier Affiche
     
+    /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg"},
+     *     mimeTypesMessage = "Attention fichier image de type jpeg"
+     *     )
+     */    
     private $fileLogo;              //permet de stocker temporairement le fichier Logo
 
     /**

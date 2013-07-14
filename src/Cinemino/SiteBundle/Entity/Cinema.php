@@ -4,6 +4,7 @@ namespace Cinemino\SiteBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 define("LgPhotoCBig", 500);
@@ -64,6 +65,10 @@ class Cinema
      * @var string
      *
      * @ORM\Column(name="ADRESSE_MAIL", type="string", length=50, nullable=true)
+     * 
+     * @Assert\Email(
+     *     message = "L' email '{{ value }}' n'est pas une adresse mail valide"
+     * )
      */
     private $adresseMail;
 
@@ -78,6 +83,7 @@ class Cinema
      * @var string
      *
      * @ORM\Column(name="SITE_WEB", type="string", length=50, nullable=true)
+     * @Assert\Url()
      */
     private $siteWeb;
 
@@ -146,9 +152,28 @@ class Cinema
      */
     private $idCompte;
 
-    
+    /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg"},
+     *     mimeTypesMessage = "Attention fichier image de type jpeg"
+     *     )
+     */
     private $filePhoto;              //permet de stocker temporairement le fichier photo
     
+     /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg"},
+     *     mimeTypesMessage = "Attention fichier image de type jpeg"
+     *     )
+     */
     private $fileLogo;              //permet de stocker temporairement le fichier logo
 
     /**

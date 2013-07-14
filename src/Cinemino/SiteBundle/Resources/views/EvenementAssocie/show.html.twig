@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<table class="record_properties">
+<table class="table table-bordered table-striped table-hover">
     <tbody>
         <tr>
             <th>Titre évenement Associé : </th>
@@ -32,6 +32,20 @@
                   {% for evt in entity.idIntervenants %}
                    <a href="{{ path('intervenant_show', { 'id': evt.id }) }}">{{ evt.nomIntervenant }}</a>
                    <br/>
+                  {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+                <tr>
+            <th>Les médias associés :</th>
+            <td>
+               {% if entity.idMedias[0] is defined %}
+                  {% for media in entity.idMedias %}
+                      <a href="{{ path('mediaEvt_edit', { 'id': media.id }) }}">{{ media.titre }}</a>
+                      {% if media.type =="p" %} <img class="img-polaroid" width="450" src="{{asset('medias/Evt/photos/big/')}}{{ media.url }}" alt=""/>
+                        {% else %} {{ media.url|raw }}
+                      {% endif %}
+                     <br/>
                   {% endfor %}
                 {% endif %}
             </td>

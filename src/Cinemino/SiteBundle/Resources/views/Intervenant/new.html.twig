@@ -1,9 +1,9 @@
-
 {% extends "CineminoSiteBundle::layout.html.twig" %}
+
 {% block content %}
 
 
-<div id="formulaire" class="well" style="width:800px"> 
+<div class="well" style="width:800px"> 
 <form action="{{ path('intervenant_create') }}" method="post" {{ form_enctype(form) }}>
     {{ tinymce_init() }} 
   <div class="row">
@@ -120,7 +120,8 @@
           }
         	
         });
-         $("#idinterv").addClass("active");
+         
+    $("#idinterv").addClass("active");
 });
 
 </script>

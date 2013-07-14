@@ -3,7 +3,7 @@
 namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 define("LgLogoSBig", 500);
@@ -53,6 +53,7 @@ class Sponsor
      * @var string
      *
      * @ORM\Column(name="SITE_WEB", type="string", length=50, nullable=true)
+     * @Assert\Url()
      */
     private $siteWeb;
 
@@ -70,7 +71,16 @@ class Sponsor
      */
     private $institution;
 
-    
+     /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg"},
+     *     mimeTypesMessage = "Attention fichier image de type jpeg"
+     *     )
+     */
     private $fileLogo;              //permet de stocker temporairement le fichier logo
     
     /**

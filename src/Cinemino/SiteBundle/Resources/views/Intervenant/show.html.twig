@@ -6,7 +6,7 @@
 <div id="show" class="well" style="width:800px">
 <div class="page-header"><h3>Intervenant : {{ entity.nomIntervenant }}</h3></div>   
 
-<table class="record_properties">
+<table class="table table-bordered table-striped table-hover">
     <tbody>
         <tr>
             <th>Nom intervenant :</th>
@@ -44,12 +44,15 @@
             <td>
                {% if entity.idMedias[0] is defined %}
                   {% for media in entity.idMedias %}
-                   <a href="{{ path('mediaIntervenant_show', { 'id': media.id }) }}">{{ media.titre }}</a>
-                   <br/>
+                      <a href="{{ path('mediaIntervenant_edit', { 'id': media.id }) }}">{{ media.titre }}</a>
+                      {% if media.type =="p" %} <img class="img-polaroid" width="450" src="{{asset('medias/Intervenant/photos/big/')}}{{ media.url }}" alt=""/>
+                        {% else %} {{ media.url|raw }}
+                      {% endif %}
+                     <br/>
                   {% endfor %}
                 {% endif %}
             </td>
-        </tr>
+        </tr> 
         
     </tbody>
 </table>

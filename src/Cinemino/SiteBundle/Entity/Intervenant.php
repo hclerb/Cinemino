@@ -3,6 +3,7 @@
 namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 define("LgPhotoIBig", 151);
 define("HtPhotoIBig",201);
@@ -78,8 +79,29 @@ class Intervenant
      */
     private $idEvenements;
 
+     /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg"},
+     *     mimeTypesMessage = "Attention fichier image de type jpeg"
+     *     )
+     */
     private $filephoto;              //permet de stocker temporairement le fichier affiche
     
+    
+     /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg"},
+     *     mimeTypesMessage = "Attention fichier image de type jpeg"
+     *     )
+     */
     private $filelogo;              //permet de stocker temporairement le fichier affiche
     
     /**

@@ -1,10 +1,12 @@
 {% extends "CineminoSiteBundle::layout.html.twig" %}
+
 {% block content %}
 
-
-<div id="formulaire" class="well" style="width:1040px"> 
+<div class="well" style="width:1040px"> 
 <form action="{{ path('archive_create') }}" method="post" {{ form_enctype(form) }}>
+    
     {{ tinymce_init() }} 
+    {{ form_errors(form) }}
   <div class="row">
    <div class="span11">
       {{ form_label(form.annee) }}
@@ -32,7 +34,7 @@
       {{ form_widget(form.fileprogramme) }}
    </div>
  </div>
-        <br/>
+   <br/>
    <br/>
   <div id="ajout_media">
   <h5>Médias associés</h5>
@@ -77,7 +79,6 @@
  </div>
 <br/>
 </div>
-    {{ form_errors(form) }}
     {{ form_widget(form) }}
        <button class="btn btn-primary" type="submit">Valider la création</button>
        <a class="btn" href="{{ path('archive') }}"><i class="icon-arrow-left"></i> Revenir à la liste des archives</a>

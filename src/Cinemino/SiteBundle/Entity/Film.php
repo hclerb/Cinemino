@@ -3,6 +3,7 @@
 namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 define("LgAfficheFBig", 151);
 define("HtAfficheFBig",201);
@@ -174,7 +175,16 @@ class Film
      */
     protected $idMedias;
     
-    
+     /**
+     *
+     * @var file
+     * 
+     * @Assert\file(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg"},
+     *     mimeTypesMessage = "Attention fichier image de type jpeg"
+     *     )
+     */
     private $file;              //permet de stocker temporairement le fichier affiche
 
     /**
