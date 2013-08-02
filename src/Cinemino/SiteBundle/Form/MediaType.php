@@ -20,7 +20,7 @@ class MediaType extends AbstractType
         $builder
             ->add('titre', null, array( 'label' => 'Légende du média', 'required' => true))
             ->add('url', 'text', array('label' => 'Nom du fichier', 'required' => false))
-            ->add('file', 'file', array('label' => 'Fichier associé', 'required' => false))
+            ->add('file', 'file', array('label' => 'Fichier au format jpeg pour photo, pdf pour document, Taille 2Mo Maxi', 'required' => false))
             ->add('type', 'choice', array('label' => 'Type','required' => true,   
                 'choices' => array(
                     'p' => 'photo',

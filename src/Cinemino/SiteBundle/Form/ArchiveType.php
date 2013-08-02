@@ -16,9 +16,9 @@ class ArchiveType extends AbstractType
                 'class' => 'tinymce',
                 'data-theme' => 'simple')))
             ->add('affiche', null, array('label' => 'L\'affiche','read_only' => true))
-            ->add('fileaffiche', 'file', array('label' => 'Fichier de l\'affiche :', 'required' => false))
+            ->add('fileaffiche', 'file', array('label' => 'Fichier de l\'affiche (format jpeg, Taille 2Mo Maxi)', 'required' => false))
             ->add('programme', null, array('label' => 'Le programme en PDF','read_only' => true))
-            ->add('fileprogramme', 'file', array('label' => 'Fichier du programme :', 'required' => false))                
+            ->add('fileprogramme', 'file', array('label' => 'Fichier du programme (format pdf, Taille 4Mo Maxi)', 'required' => false))                
             ->add('idMedias', 'collection', array('type'   => new MediaType('MediaArchive','mediaarchivessid'),
                                                  'label'    => ' ',
 						 'allow_add' => true,

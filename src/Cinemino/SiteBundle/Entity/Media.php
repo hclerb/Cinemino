@@ -50,7 +50,7 @@ class Media
      *
      * @var file
      * 
-     * @Assert\file(
+     * @Assert\File(
      *     maxSize = "4096k"
      * )
      */

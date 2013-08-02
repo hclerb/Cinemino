@@ -20,9 +20,9 @@ class CineminoType extends AbstractType
                           'label' => 'Date de fin',
                           'format' => 'dd/MM/yyyy'))
             ->add('affiche','text', array('label' => '','read_only' => true))
-            ->add('fileAffiche', 'file', array('label' => 'Fichier de l\'affiche :', 'required' => false))
+            ->add('fileAffiche', 'file', array('label' => 'Affiche (format jpeg, Taille 2Mo Maxi)', 'required' => false))
             ->add('logo','text', array('label' => '','read_only' => true))
-            ->add('fileLogo', 'file', array('label' => 'Fichier du logo :', 'required' => false))
+            ->add('fileLogo', 'file', array('label' => 'Logo (format jpeg, Taille 2Mo Maxi)', 'required' => false))
             ->add('couleurFond', 'text',  array('label' => 'Couleur de fond', 'attr' => array('class' => 'color')))
             ->add('couleurTypo', 'text',  array('label' => 'Couleur de la typo', 'attr' => array('class' => 'color')))
             ->add('tarifPlein', 'text',  array('label' => 'Tarif Plein'))

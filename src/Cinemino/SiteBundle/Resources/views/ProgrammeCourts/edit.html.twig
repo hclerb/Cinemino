@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<div id="formulaire" class="well">
+<div class="well" style="width:auto">
 <form action="{{ path('programmecourts_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>
  
         
@@ -51,7 +51,7 @@
     </div>
   </div> 
   <div class="span3">
-    <h5>Affiche du film</h5>
+     {{ form_label(form.file) }}
      {{ form_errors(form.affiche) }}
      {{ form_widget(form.affiche, { 'attr': {'style': 'width:300px;'} }) }}
      {{ form_errors(form.file) }}

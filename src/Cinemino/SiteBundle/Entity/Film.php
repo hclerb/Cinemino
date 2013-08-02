@@ -179,7 +179,7 @@ class Film
      *
      * @var file
      * 
-     * @Assert\file(
+     * @Assert\File(
      *     maxSize = "2048k",
      *     mimeTypes = {"image/jpeg"},
      *     mimeTypesMessage = "Attention fichier image de type jpeg"

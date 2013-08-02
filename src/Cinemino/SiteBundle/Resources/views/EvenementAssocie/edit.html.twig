@@ -95,7 +95,10 @@
              {{ form_errors(item.type) }}
              {{ form_widget(item.type, { 'attr': {'style': 'width:110px;'} }) }}
             </div> 
-
+            <div class="offset1 span1">
+              <br/>
+              <a  class="btn btn-danger" href="#supp_media" rel="parametre">Supprimer</a>
+            </div>
            </div>
            <div class="row inthemedia">           
             <div class="span4">
@@ -103,17 +106,12 @@
              {{ form_errors(item.url) }}
              {{ form_widget(item.url, { 'attr': {'style': 'width:370px;'} }) }}
             </div>
-            <div class="span4">
+            <div class="offset1 span5">
              {{ form_label(item.file) }}
              {{ form_errors(item.file) }}
              {{ form_widget(item.file, { 'attr': {'style': 'marging-left:30px;'} }) }}
             </div>
-            <div class="offset1 span1">
-              <br/>
-              <a  class="btn btn-danger" href="#supp_media" rel="parametre">Supprimer</a>
-            </div>
            </div>
-       </div>
        <br/>
      {% endmacro %}
      <script type="text/html">

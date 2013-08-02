@@ -25,7 +25,7 @@ class DocumentType extends AbstractType
                           'label' => 'Date de fin d\'affichage',
                           'format' => 'dd/MM/yyyy'))
             ->add('urlFichier', null, array('label' => 'Fichier Document','read_only' => true))
-            ->add('filefichier', 'file', array('label' => 'Fichier du document :', 'required' => false))
+            ->add('filefichier', 'file', array('label' => 'Fichier du document (Taille 4Mo Maxi)', 'required' => false))
         ;
     }
 

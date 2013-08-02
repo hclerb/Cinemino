@@ -12,16 +12,16 @@
  
  
 <div class="row">
-  <div class="span8">   
-    <h5> Titre du Programme de courts </h5>
+  <div class="span8">    
+    {{ form_label(form.titreFilm) }}  
     {{ form_errors(form.titreFilm) }}
-    {{ form_widget(form.titreFilm, { 'attr': {'style': 'width:740px;'} }) }}
+    {{ form_widget(form.titreFilm, { 'attr': {'style': 'width:700px;'} }) }}
   
   </div> 
   <div class="span3">
-    <h5>Affiche du film</h5>
+     {{ form_label(form.file) }}
      {{ form_errors(form.file) }}
-     {{ form_widget(form.file) }}
+     {{ form_widget(form.file, { 'attr': {'style': 'padding-left:40px;'} }) }}
   </div>
    
 </div>

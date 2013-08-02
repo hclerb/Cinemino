@@ -67,7 +67,7 @@ class Archive
      *
      * @var file
      * 
-     * @Assert\file(
+     * @Assert\File(
      *     maxSize = "2048k",
      *     mimeTypes = {"image/jpeg"},
      *     mimeTypesMessage = "Attention fichier image de type jpeg"
@@ -79,7 +79,7 @@ class Archive
      *
      * @var file
      * 
-     * @Assert\file(
+     * @Assert\File(
      *     maxSize = "4096k",
      *     mimeTypes = {"application/pdf"},
      *     mimeTypesMessage = "Attention fichier image de type pdf"
