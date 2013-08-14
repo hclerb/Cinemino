@@ -17,7 +17,7 @@ class BackController extends Controller
             * sinon on affiche seulement les cinémas que peut gérer l'utilisateur avec ses droits
             */
           $repository = $this->getDoctrine()
-                             ->getEntityManager()
+                             ->getManager()
                              ->getRepository('CineminoSiteBundle:Cinema');
           
           if( ! $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN') )
