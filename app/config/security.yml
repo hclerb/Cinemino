@@ -33,7 +33,10 @@ security:
              remember_me: true
           remember_me:
              key: %secret%
-          logout: true
+          logout:
+             path: /logout
+             target: /
+             invalidate_session: false
 
 
 

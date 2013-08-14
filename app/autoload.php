@@ -11,7 +11,7 @@ if (!function_exists('intl_get_error_code'))
 }
 
     $loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
-    $loader->add('FOS', __DIR__.'/../vendor/bundles');
+    $loader->add('FOS', __DIR__.'/../vendor/friendsofsymfony/user-bundle');
     $loader->add('Stfalcon', __DIR__.'/../vendor/bundles'); // TinyMCE Editeur WYSWYG
     
 
