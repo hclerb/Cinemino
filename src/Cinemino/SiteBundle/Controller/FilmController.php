@@ -99,8 +99,7 @@ class FilmController extends Controller
             $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
             $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
             $url->move("medias/Film/affiches/brut",$url->getClientOriginalName());
-            } 
-            print_r($entity->getIdMedias());              
+            }          
             foreach($entity->getIdMedias() as $media)  
             {
               if ($media->getFile()!=NULL)
