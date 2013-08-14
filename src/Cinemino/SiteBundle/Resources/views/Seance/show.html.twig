@@ -1,4 +1,4 @@
-{% extends "CineminoSiteBundle::seancelayout.html.twig" %}
+{% extends "CineminoSiteBundle::layout.html.twig" %}
 {% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
 {% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
 
@@ -8,8 +8,8 @@
 
 
 
-{% block formulaire %}
-<div id="formulaire" class="well">
+{% block content %}
+<div class="well">
 <div class="page-header"><h3>Séance du {{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }} à {{ entity.dateSeance|date('H:i') }}  - {{ entity.idCinema.nomCinema }}</h3></div>
 <div class="row">
     <div class = "span2">
@@ -63,8 +63,9 @@
     </div>
 </div>
 <div class="row">
-    <div class = "span2">
-      <a class="btn" href="{{ path('seance_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-pencil"></i> Editer</a>
+    <div class = "span5">
+           <a class="btn" href="{{ path('seance') }}"><i class="icon-arrow-left"></i>Retourner à la liste des séances</a>
+            <a class="btn btn-info" href="{{ path('seance_edit', { 'id': entity.id }) }}#formulaire"><i class="icon-pencil"></i> Editer</a>
     </div>
     <div class = "span2">
       <form action="{{ path('seance_delete', { 'id': entity.id }) }}" method="post">

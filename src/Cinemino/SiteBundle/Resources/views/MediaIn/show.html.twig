@@ -39,9 +39,9 @@
 <br><br>
 
   <div class="row"> 
-      <div class="span3">
+      <div class="span5">
+        <a class="btn" href="{{ path('mediain') }}"><i class="icon-arrow-left"></i> Revenir à la liste des médias associés à Cinémino</a>
         <a class="btn btn-info" href="{{ path('mediain_edit', { 'id': entity.id }) }}"><i class="icon-white icon-pencil"></i> Editer</a>
-        <a class="btn" href="{{ path('mediain') }}"><i class="icon-ban-circle"></i> Annuler</a>
       </div>
         <div class="span5">        
       <form action="{{ path('mediain_delete', { 'id': entity.id }) }}" method="post">

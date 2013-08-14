@@ -44,7 +44,7 @@ class SeanceController extends Controller
         $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
         
 
-        return $this->render('CineminoSiteBundle::seancelayout.html.twig', array(
+        return $this->render('CineminoSiteBundle:Seance:index.html.twig', array(
             'entities' => $entities,
             'dir_url' => $dir_url,
             'cinemas' => $cinemas             

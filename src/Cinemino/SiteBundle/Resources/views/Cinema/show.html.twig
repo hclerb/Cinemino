@@ -57,7 +57,7 @@
 <br><br>
 
         <a class="btn" href="{{ path('cinema') }}"><i class="icon-arrow-left"></i> Revenir à la liste des cinémas</a>     
-        <a class="btn" href="{{ path('cinema_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
+        <a class="btn btn-info" href="{{ path('cinema_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
             
 <br><br>
     {% if is_granted('ROLE_SUPER_ADMIN') %}

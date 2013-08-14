@@ -43,11 +43,8 @@
 
 
 <br><br>
-
-   
-      <a class="btn" href="{{ path('archive_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
-      <a class="btn" href="{{ path('archive') }}"><i class="icon-ban-circle"></i>Retourner à la liste des archives</a>
-
+   <a class="btn" href="{{ path('archive') }}"><i class="icon-arrow-left"></i>Retourner à la liste des archives</a>
+   <a class="btn" href="{{ path('archive_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
 </div>
 <script>
  $("#idautres").addClass("active");

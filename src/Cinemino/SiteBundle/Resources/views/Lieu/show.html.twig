@@ -45,7 +45,7 @@
 <br><br>
  
         <a class="btn" href="{{ path('lieu') }}"><i class="icon-arrow-left"></i> Revenir à la liste des lieux Associés</a>   
-        <a class="btn" href="{{ path('lieu_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
+        <a class="btn btn-info" href="{{ path('lieu_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Editer</a>
             
 <br><br>
     {% if is_granted('ROLE_SUPER_ADMIN') %}

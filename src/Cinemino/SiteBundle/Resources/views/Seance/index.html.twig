@@ -1,9 +1,8 @@
-
 {% extends "CineminoSiteBundle::layout.html.twig" %}
 
 {% block content %}
 
-<a class="btn btn-info" href="{{ path('seance_new') }}#formulaire"><i class="icon-white icon-plus"></i> Créer une séance</a>
+<a class="btn btn-info" href="{{ path('seance_new') }}"><i class="icon-white icon-plus"></i> Créer une séance</a>
 <br><br>
 
 {% for cin in cinemas %}
@@ -65,12 +64,4 @@
 <script>
 $("#idseances").addClass("active");
 </script>
- 
-
-{% block formulaire %}
-
-{% endblock formulaire %}
-
-
-
 {% endblock content %}
