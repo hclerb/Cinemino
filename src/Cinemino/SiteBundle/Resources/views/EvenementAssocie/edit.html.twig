@@ -10,7 +10,7 @@
 
 
 {% block content %}
-<div class="well"   >
+<div class="well" style="width:1170px">
 <form action="{{ path('evenementassocie_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
      {{ tinymce_init() }}
  <div class="row">
@@ -21,10 +21,10 @@
      </div>
  </div>
  <div class="row"> 
-      <div class="span11">    
+      <div class="span12">    
       {{ form_label(edit_form.descriptionEvenement) }}
       {{ form_errors(edit_form.descriptionEvenement) }}
-      {{ form_widget(edit_form.descriptionEvenement, { 'attr': {'style': 'width:1130px;'} }) }}
+      {{ form_widget(edit_form.descriptionEvenement, { 'attr': {'style': 'height:200px;'} }) }}
       </div>
   <br/>
 </div>

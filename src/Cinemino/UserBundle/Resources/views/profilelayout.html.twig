@@ -9,12 +9,13 @@
 {% block content %}
 
 
-{% for key, flash in app.session.getFlashes() %}
-    <div class="alert alert-success">
-        {{ flash|trans }}
-    </div>
+{% for type, flashMessages in app.session.flashbag.all() %}
+    {% for flashMessage in flashMessages %}
+        <div class="alert alert-success">
+            {{ flashMessage|trans }}
+        </div>
+    {% endfor %}
 {% endfor %}
-
 
 
 

@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<div id="formulaire_programmecourts" class="well" style="width:auto">
+<div id="formulaire_programmecourts" class="well" style="width:1170px">
 <form action="{{ path('programmecourts_create') }}" method="post" {{ form_enctype(form) }}>
     
 {{ tinymce_init() }}      
@@ -66,7 +66,7 @@
   <div class="span12">     
     {{ form_label(form.synopsys) }}
     {{ form_errors(form.synopsys) }}
-    {{ form_widget(form.synopsys, { 'attr': {'style': 'width:1120px;height:300px;'} }) }}
+    {{ form_widget(form.synopsys, { 'attr': {'style': 'height:300px;'} }) }}
   </div> 
  </div>
 <br/>    
@@ -74,7 +74,7 @@
   <div class="span12"> 
     {{ form_label(form.critique) }}
     {{ form_errors(form.critique) }}
-    {{ form_widget(form.critique, { 'attr': {'style': 'width:1120px;height:300px'} }) }}
+    {{ form_widget(form.critique, { 'attr': {'style': 'height:300px'} }) }}
   </div>
 </div>
 <br/>     

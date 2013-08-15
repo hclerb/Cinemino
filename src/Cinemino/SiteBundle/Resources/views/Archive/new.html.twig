@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="well" style="width:1040px"> 
+<div class="well" style="width:1170px""> 
 <form action="{{ path('archive_create') }}" method="post" {{ form_enctype(form) }}>
     
     {{ tinymce_init() }} 
@@ -15,10 +15,10 @@
    </div>
  </div>
    <div class="row">
-   <div class="span11">
+   <div class="span12">
       {{ form_label(form.rapport) }}
       {{ form_errors(form.rapport) }}
-      {{ form_widget(form.rapport, { 'attr': {'style': 'width:1020px;'} }) }}
+      {{ form_widget(form.rapport, { 'attr': {'style': 'height:200px;'} }) }}
    </div>
  </div>
         <br/>

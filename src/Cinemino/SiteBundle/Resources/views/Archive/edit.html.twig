@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="well" style="width:1024px">
+<div class="well" style="width:1170px">
 <div class="page-header"><h3>Modification Archive : {{ entity.annee }}</h3></div>   
 
 <form action="{{ path('archive_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>
@@ -18,7 +18,7 @@
    <div class="span11">
       {{ form_label(form.rapport) }}
       {{ form_errors(form.rapport) }}
-      {{ form_widget(form.rapport, { 'attr': {'style': 'width:1010px;'} }) }}
+      {{ form_widget(form.rapport, { 'attr': {'style': 'height:200px;'} }) }}
    </div>
  </div>
         <br/>

@@ -1,7 +1,7 @@
 {% extends "CineminoSiteBundle::layout.html.twig" %}
 
 {% block content %}
-<div class="well" style="width:750px;">
+<div class="well" style="width:1170px;">
 <form action="{{ path('document_create') }}" method="post" {{ form_enctype(form) }}>
    {{ tinymce_init() }}
  <div class="row">
@@ -12,10 +12,10 @@
      </div>
  </div>
  <div class="row"> 
-      <div class="span8">    
+      <div class="span12">    
       {{ form_label(form.descriptifDocument) }}
       {{ form_errors(form.descriptifDocument) }}
-      {{ form_widget(form.descriptifDocument) }}
+      {{ form_widget(form.descriptifDocument, { 'attr': {'style': 'height:200px;'} }) }}
       </div>
   <br/>
 </div> 
