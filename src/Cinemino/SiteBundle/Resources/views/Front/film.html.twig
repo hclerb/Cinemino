@@ -1,0 +1,88 @@
+{% extends "CineminoSiteBundle:Front:layoutfront.html.twig" %}
+{% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
+{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
+
+
+
+{% block contentcentral %}
+<div class="row" id="fichefilm">
+    <div class="offset1 span4">
+        <img class="img-polaroid" src="{{asset('medias/Film/affiches/big/')}}{{entity.affiche }}" alt=""/>
+        {% for media in entity.idmedias %}
+          {% if media.type == 'p' %} <img class="img-polaroid" src="{{asset('medias/Film/photos/big/')}}{{ media.url }}" alt=""/>
+          {% elseif media.type == 'v' %} Video
+          {% elseif media.type == 'd' %} Documents
+          {% else %} Son
+          {% endif %}
+        {% endfor %}
+    </div>
+    <div class="span10">
+        <div class="offset1 span9">
+            {% if progcourt %} <h1>Programme de courts métrages </h1>{% endif %} <h1>{{ entity.titreFilm|raw }}</h1> 
+            <h2>Réalisé par {{ entity.realisateur }}</h2> 
+            <h2>{{ entity.acteurs }}</h2>
+            <h3>{% if entity.provenance == '0' %}France{% elseif entity.provenance == '1' %}Usa{% elseif entity.provenance == '2' %}Europe{% else %}Reste du Monde{% endif %} - {{ entity.anneeProd }} - {% if entity.duree|date('G')!="0" %} {{ entity.duree|date('G') }}h{% endif %}{{ entity.duree|date('i') }}mn</h3>
+            <h3>A partir de {{ entity.ageConseille }} ans</h3>
+            {% if progcourt %} 
+              {% for court in entitiesC %}
+                <div class="court">
+                   <h2>{{ court.titreFilm|raw }}</h2> 
+                   <h4>Réalisation : {{ court.realisateur }} ({% if court.provenance == '0' %}France{% elseif court.provenance == '1' %}Usa{% elseif court.provenance == '2' %}Europe{% else %}Reste du Monde{% endif %} - {{ court.anneeProd }} - {% if court.duree|date('G')!="0" %} {{ court.duree|date('G') }}h{% endif %}{{ court.duree|date('i') }}mn)</h4>
+                    <img class="img-polaroid" src="{{asset('medias/Film/affiches/big/')}}{{court.affiche }}" alt=""/>            
+                    <h3>{{ court.acteurs }}</h3>
+                    {{ court.synopsys|raw }}             
+                </div>
+              {% endfor %}
+            {% else %} 
+               
+               {{ entity.synopsys|raw }}
+            {% endif %}
+            <div style="clear: both;font-size: 22px;">{{ entity.critique|raw }}</div>
+        </div>
+        <div>
+            <div class="span10" id="ligneVerte"></div>
+            <div class='span1'>
+                <img id="fanseances" src="{{ asset('bundles/cineminosite/images/fanSeances.png') }}" alt=""/>
+            </div>
+            <div class='spanS'>
+                {% if lesseances|length <= 1 %} 
+                   <img class='span3' src="{{asset('bundles/cineminosite/images/miss.jpg')}}" />
+                   <p id='regret' class='span5'>{% if lesseances|length == 0 %} Malédiction!   Il n'y a plus de séances!!! {% else %} Hi hi hi! Attention....</br></br>............................ c'est la dernière séance...{% endif %}</p>
+                {% endif %}
+                <table id='idseance' class="table table-striped table-hover">
+                  <tbody>
+                    {% for entity in lesseances %}  
+                          <tr style='color:#{{ entity.idCinema.couleurFondCinema }}'>
+                            <td class="jseance">{{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }}</td>
+                            <td class="hseance">{{ entity.dateSeance|date("H") }}H{{ entity.dateSeance|date("i") }}</td>     
+                            <td class="cseance">{{ entity.idCinema.nomCinema }}</td>
+                            <td>{% if entity.type == '3D' %}3D {% endif %}{% if entity.version == 'VOST' %}VOST {% endif %}{% if entity.avantPremiere == 'o' %}Avant-Première {% endif %}{% if entity.sortieNationale == 'o' %}Sortie Nationale {% endif %}</td>
+                            <td>{% if entity.idEvenements[0] is defined %}
+                                  {% for evt in entity.idEvenements %}
+                                   <a href="{{ path('evenement_show', { 'id': evt.id }) }}">{{ evt.titreEvenement }}</a>
+                                  {% endfor %}
+                                {% endif %}
+                                {% if entity.idEvenementAssocies[0] is defined %}
+                                  Associés :<br/>  
+                                  {% for evt in entity.idEvenementAssocies %}
+                                    <a href="{{ path('evenementassocie_show', { 'id': evt.id }) }}"><p style="text-align:right;">{{ evt.titreEvenement }}</p></a>
+                                  {% endfor %}
+                                {% endif %} 
+
+                            </td>
+                          </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+              </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+ $("#idfilms").addClass("active");
+    
+    
+</script>
+{% endblock %}

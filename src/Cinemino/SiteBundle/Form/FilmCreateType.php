@@ -11,7 +11,7 @@ class FilmCreateType extends FilmType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->remove('affiche');;
+        $builder->remove('affiche');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -80,35 +80,26 @@ class ProgrammeCourtsController extends Controller
 
         if ($form->isValid()) {
            $em = $this->getDoctrine()->getManager(); 
+           $entity->setType('n');
            $entity->setDuree($entity->getDuree()->format('H'). ':' . $entity->getDuree()->format('i'));
            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images  
            if($entity->getFile()!=NULL){      
             $url = $entity->getFile();
             $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
             $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
+            $url->move("medias/Film/affiches/brut",$url->getClientOriginalName());
            }
            foreach($entity->getIdMedias() as $media)  
             {
-              if ($media->getUrl()!=NULL)
+              if ($media->getFile()!=NULL)
               { 
-                $url = $media->getUrl(); 
-                $type = $media->getType();
-                if ($type== 'p')
-                  {
-                   $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoFBig,HtPhotoFBig)); 
-                   $resize->UploadPhoto($url,"Film/photos/small",LgPhotoFSmall,HtPhotoFSmall); 
-                  }
-              else
-                 {
-                  if ($type== 'v')$dest = "medias/Film/videos";
-                    else $dest="medias/Film/sons";
-                  $media->setUrl($url->getClientOriginalName());
-                  $url->move($dest,$url->getClientOriginalName());
-                 }
+                $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+                $Enreg->EnregistrementMedia($media, "Film", $this->container); 
                 $media->setIdFilm($entity);
                 $em->persist($media);
-              }else $entity->removeIdMedia($media);
+              } else $entity->removeIdMedia ($media);
             }
+            
             $em->persist($entity);
             // On met les liens entre les courts et le programme de courts
             foreach($entity->getLescourts() as $court)  
@@ -157,7 +148,9 @@ class ProgrammeCourtsController extends Controller
 
         $originalMedias = array();
     	foreach ($leprogramme->getIdMedias() as $oldmedia) $originalMedias[] = $oldmedia;
+        
         $lescourts = $entities = $em->getRepository('CineminoSiteBundle:Film')->findByprogCourts($leprogramme->getId());
+        
         $leprogramme->setDuree(new \DateTime($leprogramme->getDuree()));
         $deleteForm = $this->createDeleteForm($leprogramme->getId());
         $editForm = $this->createForm(new ProgrammeCourtsType(), $leprogramme);
@@ -171,36 +164,27 @@ class ProgrammeCourtsController extends Controller
               $url = $leprogramme->getFile();
               $leprogramme->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
               $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
+              $url->move("medias/Film/affiches/brut",$url->getClientOriginalName());
             }
+            
             foreach($leprogramme->getIdMedias() as $media)  
             {
               // Si le médias est toujours actifs on le supprime du tableau de nettoyage  
               foreach ($originalMedias as $key => $toDel) {
     		if ($toDel->getId() === $media->getId()) unset($originalMedias[$key]);
               }
-              if ($media->getFile()!=NULL)
-              { 
-                $url = $media->getFile();
-                $dest="medias/Film/sons";           // par défaut on dit que c'est un son
-                switch ($media->getType()) {
-                    case 'p':                       // C'est une phot, on la redimension et on l'upload
-                             $media->setUrl($resize->UploadPhoto($url,"Film/photos/big",LgPhotoFBig,HtPhotoFBig)); 
-                             $resize->UploadPhoto($url,"Film/photos/small",LgPhotoFSmall,HtPhotoFSmall); 
-                       break;
-                    case 'v': $dest = "medias/Film/videos";
-                    default :
-                            $media->setUrl($url->getClientOriginalName());      // On stocke le nom et on upload
-                            $url->move($dest,$url->getClientOriginalName());
-                 }
-              }
+              $Enreg = $this->container->get('Cinemino_Site.enregistremedia');
+              $Enreg->EnregistrementMedia($media, "Film", $this->container);
               $media->setIdFilm($leprogramme);
               $em->persist($media);
             }
+            
             // Supprime les médias qui ont été enlevés dans la mise oà jour
     	    foreach ($originalMedias as $media) {
               $em->remove($media);
     	    }
             
+                    
             $em->persist($leprogramme);
             // on enlève le lien des films avant la mise à jour
             foreach($lescourts as $court)  
@@ -239,11 +223,16 @@ class ProgrammeCourtsController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('CineminoSiteBundle:ProgrammeCourts')->find($id);
-
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find ProgrammeCourts entity.');
             }
 
+            foreach($entity->getLescourts() as $court)  
+            {
+                $court->setProgCourts(NULL);
+                $em->persist($court);
+            }  
+        
             $em->remove($entity);
             $em->flush();
         }

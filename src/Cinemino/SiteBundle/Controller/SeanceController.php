@@ -32,21 +32,19 @@ class SeanceController extends Controller
     
     public function indexAction()
     {
-        global $dir_url;
-        
-        
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) $cinemas = $em->getRepository('CineminoSiteBundle:Cinema')->findAll();
           else $cinemas = $em->getRepository('CineminoSiteBundle:Cinema')->findByidCompte($user->getId());
 
-        $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
+        $entities = $em->getRepository('CineminoSiteBundle:Seance')->findFromToday();
         
-
+        foreach ($entities as $value) {$value->setFinSeance();
+            
+        }
         return $this->render('CineminoSiteBundle:Seance:index.html.twig', array(
             'entities' => $entities,
-            'dir_url' => $dir_url,
             'cinemas' => $cinemas             
         ));
     }
@@ -70,7 +68,6 @@ class SeanceController extends Controller
         else{
            $cinemas = $em->getRepository('CineminoSiteBundle:Cinema')->findByidCompte($user->getId());}
 
-        $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Seance entity.');
         }
@@ -78,7 +75,6 @@ class SeanceController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CineminoSiteBundle:Seance:show.html.twig', array(
-            'entities' => $entities,
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(), 
             'cinemas' => $cinemas,
@@ -94,9 +90,8 @@ class SeanceController extends Controller
      *
      */
     public function newAction()
-    {
-        global $dir_url;
-        
+    {   
+        $erreur = 0;
         $em = $this->getDoctrine()->getManager();
         $entity = new Seance();
         $entity->setDateSeance(new \DateTime);
@@ -108,17 +103,14 @@ class SeanceController extends Controller
         else{
            $cinemas = $em->getRepository('CineminoSiteBundle:Cinema')->findByidCompte($user->getId());        
         }
-
-        $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
         
         $form   = $this->createForm(new SeanceType($this->getUser()), $entity);
 
         return $this->render('CineminoSiteBundle:Seance:new.html.twig', array(
-            'entities' => $entities,
             'entity' => $entity,
             'form'   => $form->createView(),
             'cinemas' => $cinemas,
-            'dir_url' => $dir_url
+            'erreur' => $erreur,
         ));
     }
 
@@ -129,25 +121,32 @@ class SeanceController extends Controller
     public function createAction(Request $request)
     {
         $entity  = new Seance();
-        
+        $erreur = 0;
         $em = $this->getDoctrine()->getManager();  
         $form = $this->createForm(new SeanceType($this->getUser()), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('seance_show', array('id' => $entity->getId())));
+            if ($em->getRepository('CineminoSiteBundle:Seance')->dejaUneAvant($entity)== NULL)
+            {
+               if ($em->getRepository('CineminoSiteBundle:Seance')->dejaUneApres($entity)== true)
+               {
+                $em->persist($entity);
+                $em->flush();
+                return $this->redirect($this->generateUrl('seance_show', array('id' => $entity->getId())));
+               }
+               else $erreur=2;
+            }
+            else {
+                $erreur = 1;
+            }
         }
         
-        $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
-
         return $this->render('CineminoSiteBundle:Seance:new.html.twig', array(
-            'entities' => $entities,
             'entity' => $entity,
             'form'   => $form->createView(),
+            'erreur' => $erreur,
         ));
     }
 
@@ -158,12 +157,11 @@ class SeanceController extends Controller
     public function editAction($id)
     {
         
-        global $dir_url;
-         
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CineminoSiteBundle:Seance')->find($id);
         
+        $erreur = 0;
            
          if(($entity->getIdCinema()->getIdCompte()->getId() != $this->get('security.context')->getToken()->getUser()->getId())
             and !($this->get('security.context')->isGranted('ROLE_ADMIN'))  )
@@ -186,15 +184,15 @@ class SeanceController extends Controller
 
         $editForm = $this->createForm(new SeanceType($this->getUser()), $entity);
         $deleteForm = $this->createDeleteForm($id);
-        $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
+//        $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
         
         return $this->render('CineminoSiteBundle:Seance:edit.html.twig', array(
-            'entities' => $entities,
+//            'entities' => $entities,
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'cinemas' => $cinemas,
-            'dir_url' => $dir_url
+            'erreur' => $erreur,
         ));
     }
 
@@ -208,12 +206,13 @@ class SeanceController extends Controller
 
         $entity = $em->getRepository('CineminoSiteBundle:Seance')->find($id);
 
+        $erreur=0;
                    
          if(($entity->getIdCinema()->getIdCompte()->getId() != $this->get('security.context')->getToken()->getUser()->getId())
             and !($this->get('security.context')->isGranted('ROLE_ADMIN'))  )
-    {
-        throw new AccessDeniedException("Vous n'avez pas accès à cette séance");
-    }
+        {
+            throw new AccessDeniedException("Vous n'avez pas accès à cette séance");
+        }
         
         
         if (!$entity) {
@@ -225,11 +224,19 @@ class SeanceController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('notice', 'La séance a été éditée.');
-            return $this->redirect($this->generateUrl('seance'));
+           if ($em->getRepository('CineminoSiteBundle:Seance')->dejaUneAvantMaj($entity)== NULL)
+            {
+               if ($em->getRepository('CineminoSiteBundle:Seance')->dejaUneApresMaj($entity)== true)
+               {
+                $em->persist($entity);
+                $em->flush();
+                return $this->redirect($this->generateUrl('seance'));
+               }
+               else $erreur=2;
+            }
+            else {
+                $erreur = 1;
+            }            
         }
 
         $entities = $em->getRepository('CineminoSiteBundle:Seance')->findAll();
@@ -238,6 +245,7 @@ class SeanceController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'erreur' => $erreur,
         ));
     }
 

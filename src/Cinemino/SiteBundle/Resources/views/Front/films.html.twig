@@ -1,0 +1,56 @@
+{% extends "CineminoSiteBundle:Front:layoutfront.html.twig" %}
+
+{% block contentcentral %}
+<img id="spirale" src="{{ asset('bundles/cineminosite/images/spirale.png') }}"/>
+<div class="row afflesfilms">
+   {% for entity in entities %}
+     {% if loop.index == 20 %}
+         </div>
+         <div class="row afflesfilms">
+     {% endif %}
+     {% if (loop.index == 8 or loop.index == 15) %}
+         </div>
+         <div class="row afflesfilms">
+           {% if entity.type == 'n' %}
+             <div class="span2" >
+              <a href='{{ path('f_film', { 'id': entity.id }) }}'><img class="img-polaroid" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" id="{{ loop.index0 }}" alt=""/></a> 
+             </div>
+             <div class="span4 pop" id="pop{{ loop.index }}"></div>
+           {% endif %}
+     {% else %}        
+        {% if entity.type == 'n' %}
+         <div class="span2" >
+           <a href='{{ path('f_film', { 'id': entity.id }) }}'><img class="img-polaroid" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" id="{{ loop.index0 }}" alt=""/></a> 
+         </div>         
+        {% endif %}
+      {% endif %}             
+    {% endfor %}
+</div>
+{% block detailfilm %}
+{% endblock %}
+{% endblock %}
+    
+{% block  javascripts %}
+<script> 
+    var resumefilm=[];
+    var resumefilm2=[];
+    {% for entity in entities %}
+         resumefilm[{{ loop.index0 }}] = "<h3>{{ entity.titreFilm|raw }}</h3><h4>{{ entity.realisateur }}</h4><h5>{% if entity.provenance == '0' %}France{% elseif entity.provenance == '1' %}Usa{% elseif entity.provenance == '2' %}Europe{% else %}Reste du Monde{% endif %} - {{ entity.anneeProd }} - {{ entity.duree|date('H:i') }}</h5>";
+         resumefilm2[{{ loop.index0 }}] = "<h4>Synopsys : </h4><p>{{ entity.synopsys[:200]|e('js') }}....</p>";
+         $("#{{ loop.index0 }}").fadeTo('fast',0.5);
+    {% endfor %}
+    $(".img-polaroid").hover(function() {
+        $(this).fadeTo('fast',1);
+        $("#pop8").html(resumefilm[$(this).attr("id")]);
+        $("#pop15").html(resumefilm2[$(this).attr("id")]);
+     },function(){
+        $(this).fadeTo('fast',0.5);
+        $("#pop8").html("");
+        $("#pop15").html("");
+     });
+
+ $("#idfilms").addClass("active");
+
+</script>
+{% endblock %}
+

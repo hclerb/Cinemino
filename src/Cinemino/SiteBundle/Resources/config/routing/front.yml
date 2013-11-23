@@ -10,3 +10,40 @@ frontnewsletter_create:
     pattern:  /newsletter
     defaults: { _controller: CineminoSiteBundle:Front:createnewsletter }  
     requirements: { _method: post }
+    
+f_festival:
+    pattern:  /festival
+    defaults: { _controller: CineminoSiteBundle:Front:festival }
+
+f_films:
+    pattern:  /films
+    defaults: { _controller: CineminoSiteBundle:Front:films } 
+    
+f_film:
+    pattern:  /{id}/film
+    defaults: { _controller: CineminoSiteBundle:Front:film } 
+        
+f_salles:
+    pattern:  /salles
+    defaults: { _controller: CineminoSiteBundle:Front:salles } 
+    
+f_anims:
+    pattern:  /anims
+    defaults: { _controller: CineminoSiteBundle:Front:anims } 
+    
+f_pfolio:
+    pattern:  /pfolio
+    defaults: { _controller: CineminoSiteBundle:Front:pfolio }
+
+f_docs:
+    pattern:  /docs
+    defaults: { _controller: CineminoSiteBundle:Front:docs }
+    
+f_infos:
+    pattern:  /infos
+    defaults: { _controller: CineminoSiteBundle:Front:infos }
+    
+f_semaine:
+    pattern:  /{id}/semaine
+    defaults: { _controller: CineminoSiteBundle:Front:semaines }  
+    requirements: { _method: get }

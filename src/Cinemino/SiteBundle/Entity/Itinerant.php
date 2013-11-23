@@ -42,4 +42,60 @@ class Itinerant
     private $cinCinema;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idCinema
+     *
+     * @param \Cinemino\SiteBundle\Entity\Cinema $idCinema
+     * @return Itinerant
+     */
+    public function setIdCinema(\Cinemino\SiteBundle\Entity\Cinema $idCinema = null)
+    {
+        $this->idCinema = $idCinema;
+    
+        return $this;
+    }
+
+    /**
+     * Get idCinema
+     *
+     * @return \Cinemino\SiteBundle\Entity\Cinema 
+     */
+    public function getIdCinema()
+    {
+        return $this->idCinema;
+    }
+
+    /**
+     * Set cinCinema
+     *
+     * @param \Cinemino\SiteBundle\Entity\Cinema $cinCinema
+     * @return Itinerant
+     */
+    public function setCinCinema(\Cinemino\SiteBundle\Entity\Cinema $cinCinema = null)
+    {
+        $this->cinCinema = $cinCinema;
+    
+        return $this;
+    }
+
+    /**
+     * Get cinCinema
+     *
+     * @return \Cinemino\SiteBundle\Entity\Cinema 
+     */
+    public function getCinCinema()
+    {
+        return $this->cinCinema;
+    }
 }

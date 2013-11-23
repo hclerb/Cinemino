@@ -1,5 +1,5 @@
-
 {% extends "CineminoSiteBundle::layout.html.twig" %}
+
 {% block title %}
 {{ parent() }} - Séances
 {% endblock %}
@@ -88,6 +88,8 @@
     
    $("#idseances").addClass("active");
 
+  if ({{ erreur }} == 1) alert("Ajout de la séance impossible, il y a déjà une séance à cette heure là où la séance avant n'est pas terminé!");
+   else if ({{ erreur }} == 2) alert("Ajout de la séance impossible, il y a déjà une séance avant cette heure et elles se chevauchent!");
   });
 </script>
 {% endblock content %}

@@ -10,14 +10,15 @@ use \Cinemino\SiteBundle\Entity\CineminoUser;
 class SeanceType extends AbstractType
 {
     protected $iduser;
-    
+        
     public function __construct($iduser) {
-        $this->iduser = $iduser;;
+        $this->iduser = $iduser;
     }
     
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $iduser= $this->iduser;
         $builder
             ->add('dateSeance', 'datetime',
                     array('widget' => 'single_text',                     
@@ -47,8 +48,8 @@ class SeanceType extends AbstractType
                 'label' => 'Cinéma',
                 'class' => 'CineminoSiteBundle:Cinema',
                 'property' => 'nomCinema',
-                'query_builder' => function (\Cinemino\SiteBundle\Entity\CinemaRepository $r){
-                                    return $r->getCineAutorise($this->iduser);
+                'query_builder' => function (\Cinemino\SiteBundle\Entity\CinemaRepository $r) use($iduser){
+                                    return $r->getCineAutorise($iduser);
                                   }  
                 ))
             ->add('idFilm', null, array('label' => 'Choisir le film pour cette séance', 'required' => true))

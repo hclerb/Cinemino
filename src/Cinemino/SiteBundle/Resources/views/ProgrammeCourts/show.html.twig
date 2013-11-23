@@ -73,8 +73,19 @@
             </td>
         </tr>
         <tr>
-            
-        </tr>
+            <th>Les médias associés :</th>
+            <td>
+               {% if entity.idMedias[0] is defined %}
+                  {% for media in entity.idMedias %}
+                      <a href="{{ path('mediaFilm_edit', { 'id': media.id }) }}">{{ media.titre }}</a>
+                      {% if media.type =="p" %} <img class="img-polaroid" width="450" src="{{asset('medias/Film/photos/big/')}}{{ media.url }}" alt=""/>
+                        {% else %} {{ media.url|raw }}
+                      {% endif %}
+                     <br/>
+                  {% endfor %}
+                {% endif %}
+            </td>
+        </tr> 
     </tbody>
 </table>
 

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Festival Cinémino {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BackOffice du festival Cinémino">
+    <meta name="author" content="Herve Clerbout">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="{{ asset('bundles/cineminosite/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cineminosite/css/front.css') }}" rel="stylesheet">
+    
+    <script src="{{ asset('bundles/cineminosite/js/jquery-1.8.3.min.js')}}"></script>
+<script type="text/javascript">
+function scrolldown() {
+ var h=0;
+     
+ if (window.innerHeight) h = window.innerHeight;
+ else if (document.body && document.body.offsetHeight) h = window.document.body.offsetHeight;
+ else if (document.documentElement && document.documentElement.clientHeight) h = document.documentElement.clientHeight;
+     
+this.scroll(1,h);
+}       
+
+</script> 
+
+  </head>
+
+  <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+
+<!-- Navbar
+================================================== -->
+<header>
+ <div class="row">
+     <img src="{{ asset('bundles/cineminosite/images/header.jpg') }}"/>
+</div>
+</header>
+<nav id="navbar">
+<div class="navbar navbar-inverse">
+<!-- <div class="navbar-inner">-->
+      <div class="container">
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li id="idhome"><a href="{{ path('front') }}"><img src="{{ asset('bundles/cineminosite/images/home.png') }}"/></a></li>
+            <li id="idfestival"><a href="{{ path('f_festival') }}">Le Festival</a></li>        
+            <li id="idsalles"><a href="{{ path('f_salles') }}">Les salles</a></li>
+            <li id="idfilms"><a href="{{ path('f_films') }}">Les films</a></li>
+            <li id="idlesseances" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Les séances <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                {% for semaine in semaines %}
+                  <li><a href="{{ path('f_semaine', { 'id': loop.index }) }}">{{ semaine }}</a></li>
+                   {% if not loop.last %}<li class="divider"></li> {% endif %} 
+                {% endfor %}
+              </ul>
+            </li> 
+            <li id="idlesanims"><a href="{{ path('f_anims') }}">Les animations</a></li>
+            <li id="idportfolio"><a href="{{ path('f_pfolio') }}">PortFolio</a></li>
+            <li id="iddocuments""><a href="{{ path('f_docs') }}">Documents</a></li>
+            <li id="idinfos""><a href="{{ path('f_infos') }}">Infos Pratiques</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+<!-- </div> <!-- /navbar -->
+</nav>
+<section>  
+    <div class="row" id="bloccentral">
+        {% block contentcentral %} {% endblock %}
+    </div>
+    <div class="row lh">
+    </div>
+    <div class="row" id="blocsbas">
+        <div class="span4" id="basgauche">
+            {% block basgauche %} {% endblock %}
+        </div>  
+        <div class="span1 lv"></div>
+         <div class="span4" id="basmilieu">
+            {% block basmilieu %} {% endblock %}
+        </div>
+        <div class="span1 lv"></div>
+        <div class="span4" id="basdroit">
+             {% block basdroit %} {% endblock %}
+        </div>       
+    </div>
+
+</section>
+     <!-- Footer
+      ================================================== -->
+      <hr>
+
+<footer id="footer">
+        <p class="pull-right"><a href="#">Revenir en haut</a></p>
+        <div class="links">
+          <a href="{{ path('front') }}">Cinemino</a>
+        </div>
+</footer>
+
+
+    <!-- Le javascript
+    ================================================== -->
+<script src={{ asset('bundles/cineminosite/js/bootstrap.min.js') }}></script>
+<script src="{{ asset('bundles/cineminosite/js/jquery-scrolltofixed-min.js')}}"></script>
+<script src="{{ asset('bundles/cineminosite/js/jQueryRotateCompressed.js')}}"></script>
+<script type="text/javascript">
+    $("#navbar").scrollToFixed();
+</script> 
+{% block javascripts %}{% endblock %}
+ </body>
+</html>

@@ -95,11 +95,12 @@ class FilmController extends Controller
             $entity->setDuree($entity->getDuree()->format('H'). ':' . $entity->getDuree()->format('i'));
             $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
            if($entity->getFile()!=NULL){   
-            $url = $entity->getFile();     
-            $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
-            $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
-            $url->move("medias/Film/affiches/brut",$url->getClientOriginalName());
-            }          
+                $url = $entity->getFile();     
+                $entity->setAffiche($resize->UploadPhoto($url,"Film/affiches/big",LgAfficheFBig,HtAfficheFBig)); 
+                $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
+                $url->move("medias/Film/affiches/brut",$url->getClientOriginalName());
+            } 
+            
             foreach($entity->getIdMedias() as $media)  
             {
               if ($media->getFile()!=NULL)
@@ -164,9 +165,9 @@ class FilmController extends Controller
             throw $this->createNotFoundException('Unable to find Film entity.');
         }
 
-        $originalMedias = array();
-    	
+        $originalMedias = array();    	
     	foreach ($entity->getIdMedias() as $oldmedia) $originalMedias[] = $oldmedia;
+        
         $entity->setDuree(new \DateTime($entity->getDuree()));
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new FilmType(), $entity);

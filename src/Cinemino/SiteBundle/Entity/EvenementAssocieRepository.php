@@ -3,6 +3,7 @@
 namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Cinemino\SiteBundle\Entity\EvenementRepository;
 use Cinemino\SiteBundle\Entity\EvenementAssocie;
 
 /**

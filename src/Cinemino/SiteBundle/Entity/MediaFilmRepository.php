@@ -21,4 +21,14 @@ class MediaFilmRepository extends EntityRepository
       $query = $queryBuilder->getQuery(); 		 	  
       return $query->getResult();        
     }
+    
+  public function findAllgroupbyfilm() {
+       $queryBuilder = $this->createQueryBuilder('m')
+                        ->leftJoin('m.idFilm', 'f')
+                        ->addSelect('f')
+                        ->orderBy('m.idFilm');
+            
+       return $queryBuilder->getQuery()
+                           ->getArrayResult();
+    }
 }

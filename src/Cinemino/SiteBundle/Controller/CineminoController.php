@@ -90,6 +90,12 @@ class CineminoController extends Controller
             $resize->UploadPhoto($url,"Cinemino/small",LgLogoCoSmall,HtLogoCoSmall);
             $url->move("medias/Cinemino/brut",$url->getClientOriginalName());
             }
+            if($entity->getFileCouverture()!=NULL){   
+            $url = $entity->getFileCouverture();
+            $entity->setCouverture($resize->UploadPhoto($url,"Cinemino/big",LgCouvertureCoBig,HtCouvertureCoBig)); 
+            $resize->UploadPhoto($url,"Cinemino/small",LgCouvertureCoSmall,HtCouvertureCoSmall);
+            $url->move("medias/Cinemino/brut",$url->getClientOriginalName());
+            }            
             $em->persist($entity);
             $em->flush();
 
@@ -156,6 +162,12 @@ class CineminoController extends Controller
             $resize->UploadPhoto($url,"Cinemino/small",LgLogoCoSmall,HtLogoCoSmall);
             $url->move("medias/Cinemino/brut",$url->getClientOriginalName());
             }
+            if($entity->getFileCouverture()!=NULL){   
+            $url = $entity->getFileCouverture();
+            $entity->setCouverture($resize->UploadPhoto($url,"Cinemino/big",LgCouvertureCoBig,HtCouvertureCoBig)); 
+            $resize->UploadPhoto($url,"Cinemino/small",LgCouvertureCoSmall,HtCouvertureCoSmall);
+            $url->move("medias/Cinemino/brut",$url->getClientOriginalName());
+            }             
             $em->persist($entity);
             $em->flush();
 

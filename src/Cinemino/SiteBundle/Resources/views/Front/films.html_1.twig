@@ -1,0 +1,27 @@
+{% extends "CineminoSiteBundle:Front:layoutfront.html.twig" %}
+
+{% block contentcentral %}
+<div class="row">
+   {% for entity in entities %}
+     
+      {% if entity.lescourts is not defined %}
+        <div class="span2" >
+          <a href="#" id="pop"  rel="popover" data-content="De {{ entity.realisateur }}<br/> {{ entity.provenance }} <br/> {{ entity.anneeProd }}<br/>{{ entity.duree }}" data-original-title="{{ entity.titreFilm }}">
+          <img class="img-polaroid" src="{{asset('medias/Film/affiches/big/')}}{{entity.affiche }}" alt=""/></a> 
+        </div>
+      {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
+    
+{% block  javascripts %}
+<script> 
+$(function(){ 
+  $("#pop").popover({
+      delay: {show:300, hide:300 },
+      trigger:'hover'  
+  });
+  });
+</script>
+{% endblock %}
+

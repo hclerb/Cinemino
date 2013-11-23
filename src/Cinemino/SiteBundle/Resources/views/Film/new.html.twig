@@ -197,11 +197,13 @@
  
  
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
-    $('#add_media').click(function() {
+    $('#add_media').click(function(e) {
+        e.preventDefault();
         add_media();
     });
     
-        $("div#list_medias").on("click","a[rel='parametre']", function(){ 
+        $("div#list_medias").on("click","a[rel='parametre']", function(e){
+            e.preventDefault();
           if (confirm('Voulez vous réellement supprimer ce média ?')) {
             $(this).parents("div.row").remove();
           }

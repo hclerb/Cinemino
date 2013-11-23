@@ -1,0 +1,20 @@
+{% extends "CineminoSiteBundle:Front:layoutfront.html.twig" %}
+{% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
+{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
+
+{% block contentcentral %}
+<br/><br/>
+ {% for laseance in entities %}
+   <p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>
+    {{ lejour[laseance.dateSeance|date('w')] }}
+    {{ laseance.dateSeance|date(' d ') }}
+    {{ mois[laseance.dateSeance|date('n')] }}
+    {{ laseance.dateSeance|date('H:i') }}
+    {{ laseance.idFilm.titreFilm|raw }}
+    {{ laseance.idCinema.nomCinema }}  
+   </p>
+ {% endfor %}
+<script>
+    $("#idemaines").addClass("active");       
+</script>
+{% endblock contentcentral %}

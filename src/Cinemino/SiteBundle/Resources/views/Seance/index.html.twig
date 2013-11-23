@@ -1,4 +1,6 @@
 {% extends "CineminoSiteBundle::layout.html.twig" %}
+{% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
+{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
 
 {% block content %}
 
@@ -12,7 +14,8 @@
     <thead>
         <tr bgcolor="#F6FFA3">
             <th width='100px'>Date de la séance</th>
-            <th width='50px'>Heure</th>
+            <th width='50px'>Debut Séance</th>
+            <th width='50px'>Fin Séance</th>
             <th width='300px'>Film</th>
             <th width='50px'>Version</th>
             <th width='30px'>Type</th>
@@ -26,8 +29,9 @@
     {% for entity in entities %}
        {% if entity.idCinema == cin %}     
           <tr bgcolor="white">
-            <td><a href="{{ path('seance_show', { 'id': entity.id }) }}">{{ entity.dateSeance|date("d/m/Y") }}</a></td>
+            <td><a href="{{ path('seance_show', { 'id': entity.id }) }}">{{ lejour[entity.dateSeance|date('w')] }} {{ entity.dateSeance|date('d') }} {{ mois[entity.dateSeance|date('n')] }} {{ entity.dateSeance|date('Y') }}</a></td>
             <td>{{ entity.dateSeance|date("H:i") }}</td>
+            <td>{{ entity.finSeance|date("H:i") }}</td>
             <td>{{ entity.idFilm.titreFilm }} Réalisé par {{ entity.idFilm.realisateur }}</td>           
             <td>{{ entity.version }}</td>
             <td>{{ entity.type }}</td>

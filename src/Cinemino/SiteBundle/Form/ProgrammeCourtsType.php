@@ -63,8 +63,8 @@ class ProgrammeCourtsType extends AbstractType
                 'multiple'  => true,
                 'required'  =>  false)
             )
-           ->add('idMedias', 'collection', array('type'   => new MediaFilmType('MediaFilm','mediafilmssid'),
-                                                 'label'    => ' ',               
+            ->add('idMedias', 'collection', array('type'   => new MediaType('MediaFilm','mediafilmssid'),
+                                                 'label'    => ' ',
 						 'allow_add' => true,
 						 'allow_delete' => true,
 						 'by_reference' => false,))

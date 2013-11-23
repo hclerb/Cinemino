@@ -1,0 +1,208 @@
+
+body {
+    margin: auto;
+    width: 1200px;
+}
+header {
+    margin-left: 20px;
+}
+.nav {
+    background-image: url("../images/menu.jpg");
+    text-align: center;
+    width: 1200px;
+}
+#idhome img {
+    width: 23px;
+}
+#idhome a {
+    margin: -4px 0 0 -4px;
+}
+#idfestival {
+    margin-left: -2px;
+    width: 140px;
+}
+#idsalles {
+    margin-left: 2px;
+    width: 143px;
+}
+#idfilms {
+    margin-left: 2px;
+    width: 143px;
+}
+#idlesseances {
+    margin-left: 2px;
+    width: 142px;
+}
+#idlesanims {
+    margin-left: 2px;
+    width: 143px;
+}
+#idportfolio {
+    margin-left: 2px;
+    width: 142px;
+}
+#iddocuments {
+    margin-left: 2px;
+    width: 143px;
+}
+#idinfos {
+    margin-left: 2px;
+    width: 142px;
+}
+#fichefilm {
+    margin-top: 30px;
+}
+#bloccentral {
+    background-color: #FFFFFF;
+    margin-left: 0;
+    margin-top: -20px;
+    width: 1200px;
+}
+#nuage {
+    margin-top: 0;
+    position: relative;
+}
+#rosace {
+    margin-left: 863px;
+    margin-top: 37px;
+    position: relative;
+    z-index: 2;
+}
+#fondhome {
+    margin-left: -13px;
+    margin-top: -173px;
+    position: relative;
+    z-index: 1;
+}
+#infoseance {
+    background-color: #ADD8E6;
+    border-radius: 10px;
+    margin: 15px;
+    padding: 15px;
+    position: absolute;
+    visibility: hidden;
+    z-index: 2;
+}
+.afflesfilms {
+    margin: 10px;
+}
+
+#spirale{
+    position: absolute;
+     margin: 404px 186px 0;
+}
+.pop {
+    background-color: #008000;
+    height: 197px;
+    margin-right: -10px;
+    padding-left: 10px;
+}
+.pop h1 {
+    font-family: cursive;
+    padding-top: 10px;
+    text-align: center;
+}
+.pop h4 {
+    font-family: fantasy;
+}
+.pop h3 {
+}
+
+#ligneVerte {
+    background-color: #38A962;
+    height: 3px;
+}
+#fanseances {
+    margin-left: -1px;
+    max-width: 150%;
+}
+#idseance {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.spanS {
+    width: 680px;
+}
+#regret {
+    font-family: cursive;
+    font-size: x-large;
+    margin: 77px 10px 10px 30px;
+}
+.jseance {
+    width: 110px;
+}
+.hseance {
+    width: 30px;
+}
+.cseance {
+    width: 100px;
+}
+.lh {
+    background-image: url("../images/ligneHor.jpg");
+    height: 6px;
+    margin: 0 1px 8px 41px;
+    width: 1103px;
+}
+.lv {
+    background-image: url("../images/ligneVer.jpg");
+    height: 553px;
+    margin-left: 0;
+    width: 6px;
+}
+
+.court{
+    margin-left: -50px;
+    clear: both;
+}
+
+.court img{
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.court h4{
+    margin: 0 0 9px -2px;
+    padding: 0px;
+}
+
+.court p{
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.court h2{
+    font-family: cursive;
+    color: green;
+    margin: 18px 0px 0px 0px;
+}
+#blocsbas {
+}
+#basgauche {
+    background-color: #FFFFFF;
+    margin-left: 20px;
+    width: 397px;
+}
+#basgauche img {
+    margin-left: 43px;
+}
+#basmilieu {
+    background-color: #FFFFFF;
+    margin-left: 0;
+    width: 394px;
+}
+#basdroit {
+    background-color: #FFFFFF;
+    margin-left: 0;
+    width: 397px;
+}
+.nav {
+    font-family: menu;
+    font-size: 18px;
+}
+.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+    color: #000000;
+}
+.dropdown-menu {
+    text-align: left;
+}

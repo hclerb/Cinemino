@@ -165,26 +165,25 @@
  </div>
  <br/>
 </div>
+  
+{{ form_rest(form) }} 
+
 <div class="row">
-  <div class="span12">
-      <button class="btn btn-primary" type="submit">Valider l'enregistrement du programme</button>
+  <div class="span5">
+      <button class="btn btn-primary" type="submit">Valider l'enregistrement du film</button>
+      <a class="btn" href="{{ path('programmecourts') }}"><i class="icon-arrow-left"></i> Revenir à la liste des programmes</a>
   </div>
 </div>
-    
-
-{{ form_rest(form) }} 
+ 
 </form>
 
- <a class="btn" href="{{ path('programmecourts') }}"><i class="icon-arrow-left"></i> Revenir à la liste des programmes</a>
-
-</div>
 
 <form action="{{ path('programmecourts_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
            <button class="btn btn-danger" type="submit">Supprimer le film</button><i class="icon-remove icon-white"></i>
 </form>
 
-
+</div>
 <script type="text/javascript">
     $(document).ready(function() {
     /*$('input[type=file]').change(function(e){

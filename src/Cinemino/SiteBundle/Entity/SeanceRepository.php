@@ -13,5 +13,144 @@ use Cinemino\SiteBundle\Entity\Media;
  */
 class SeanceRepository extends EntityRepository
 {
-
+   public function findFromToday()
+   {
+      $datejour = new \DateTime('now');
+      $queryBuilder = $this->createQueryBuilder('s') 
+               ->where('s.dateSeance >= :date1')
+               ->setParameter('date1', $datejour->format('Y-m-d H:i:s'))
+               ->orderBy('s.dateSeance','ASC');
+      
+      return $queryBuilder->getQuery()
+                           ->getResult();
+   }
+   
+      public function findFromTodayForFilm($idfilm)
+   {
+      $datejour = new \DateTime('now');
+      $queryBuilder = $this->createQueryBuilder('s') 
+               ->where('s.dateSeance >= :date1')
+               ->setParameter('date1', $datejour->format('Y-m-d H:i:s'))
+               ->andWhere('s.idFilm = :idfilm')
+               ->setParameter('idfilm', $idfilm)
+               ->orderBy('s.dateSeance','ASC');
+      
+      return $queryBuilder->getQuery()
+                           ->getResult();
+   }
+           
+   public function findentredate(\Datetime $date1, \Datetime $date2)
+   {
+       $queryBuilder = $this->createQueryBuilder('s')
+                     ->innerJoin('s.idFilm', 'f')
+                      ->innerJoin('s.idCinema', 'c')
+                     ->addSelect('f')
+                     ->addSelect('c');
+       $queryBuilder->where('s.dateSeance >= :date1 ')
+                    ->setParameter('date1', $date1->format('Y-m-d H:i:s')); 
+       $queryBuilder->andWhere('s.dateSeance <= :date2 ')
+                    ->setParameter('date2', $date2->format('Y-m-d H:i:s'))
+                     ->orderBy('s.dateSeance','ASC');
+              
+       return $queryBuilder->getQuery()
+                           ->getArrayResult();
+   }
+   
+   public function dejaUneAvant($entity)
+   {
+       $queryBuilder = $this->createQueryBuilder('s')
+               ->where('s.dateSeance >= :date1')
+               ->setParameter('date1', $entity->getDateSeance()->format('Y-m-d H:i:s'));
+       
+       $datefin = new \DateTime($entity->getDateSeance()->format('Y-m-d H:i:s'));
+       $duree = \explode(":",$entity->getIdFilm()->getDuree());
+       $datefin->add(new \DateInterval('PT' . $duree[0] . 'H' . $duree[1] . 'M'));
+       
+       $queryBuilder->andWhere('s.dateSeance <= :date2')
+                    ->setParameter('date2', $datefin->format('Y-m-d H:i:s'));
+       $queryBuilder->andWhere('s.idCinema = :idcinema ')
+                    ->setParameter('idcinema', $entity->getIdCinema()->getId());
+       
+       return $queryBuilder->getQuery()
+                           ->getResult();
+   } 
+   
+   public function dejaUneApres($entity)
+   {
+       $queryBuilder = $this->createQueryBuilder('s')
+               ->where('s.dateSeance < :date1')
+               ->setParameter('date1', $entity->getDateSeance()->format('Y-m-d H:i:s'));
+       
+       $datefin = new \DateTime($entity->getDateSeance()->format('Y-m-d H:i:s'));
+       $datefin->sub(new \DateInterval('PT3H'));
+       
+       $queryBuilder->andWhere('s.dateSeance > :date2')
+                    ->setParameter('date2', $datefin->format('Y-m-d H:i:s'));
+       $queryBuilder->andWhere('s.idCinema = :idcinema ')
+                    ->setParameter('idcinema', $entity->getIdCinema()->getId())   
+                    ->orderBy('s.dateSeance','DESC');
+       
+            
+       $entities = $queryBuilder->getQuery()->getResult();
+       if ($entities !=NULL)
+        {
+          $datefin = new \DateTime($entities[0]->getDateSeance()->format('Y-m-d H:i:s'));
+          $duree = \explode(":",$entities[0]->getIdFilm()->getDuree());
+          $datefin->add(new \DateInterval('PT' . $duree[0] . 'H' . $duree[1] . 'M'));
+          if ($entity->getDateSeance()>$datefin) return true;
+          else {return false;}
+        }
+       return true;
+   }
+   
+   public function dejaUneAvantMaj($entity)
+   {
+       $queryBuilder = $this->createQueryBuilder('s')
+               ->where('s.dateSeance >= :date1')
+               ->setParameter('date1', $entity->getDateSeance()->format('Y-m-d H:i:s'));
+       
+       $datefin = new \DateTime($entity->getDateSeance()->format('Y-m-d H:i:s'));
+       $duree = \explode(":",$entity->getIdFilm()->getDuree());
+       $datefin->add(new \DateInterval('PT' . $duree[0] . 'H' . $duree[1] . 'M'));
+       
+       $queryBuilder->andWhere('s.dateSeance <= :date2')
+                    ->setParameter('date2', $datefin->format('Y-m-d H:i:s'));
+       $queryBuilder->andWhere('s.idCinema = :idcinema ')
+                    ->setParameter('idcinema', $entity->getIdCinema()->getId());
+       $queryBuilder->andWhere('s.id != :id ')
+                    ->setParameter('id', $entity->getId());
+       
+       return $queryBuilder->getQuery()
+                           ->getResult();
+   } 
+   
+   public function dejaUneApresMaj($entity)
+   {
+       $queryBuilder = $this->createQueryBuilder('s')
+               ->where('s.dateSeance < :date1')
+               ->setParameter('date1', $entity->getDateSeance()->format('Y-m-d H:i:s'));
+       
+       $datefin = new \DateTime($entity->getDateSeance()->format('Y-m-d H:i:s'));
+       $datefin->sub(new \DateInterval('PT3H'));
+       
+       $queryBuilder->andWhere('s.dateSeance > :date2')
+                    ->setParameter('date2', $datefin->format('Y-m-d H:i:s'));
+       $queryBuilder->andWhere('s.idCinema = :idcinema ')
+                    ->setParameter('idcinema', $entity->getIdCinema()->getId());
+       $queryBuilder->andWhere('s.id != :id ')
+                    ->setParameter('id', $entity->getId())       
+                    ->orderBy('s.dateSeance','DESC');
+       
+            
+       $entities = $queryBuilder->getQuery()->getResult();
+       if ($entities !=NULL)
+        {
+          $datefin = new \DateTime($entities[0]->getDateSeance()->format('Y-m-d H:i:s'));
+          $duree = \explode(":",$entities[0]->getIdFilm()->getDuree());
+          $datefin->add(new \DateInterval('PT' . $duree[0] . 'H' . $duree[1] . 'M'));
+          if ($entity->getDateSeance()>$datefin) return true;
+          else return false;
+        }
+       return true;
+   }
 }

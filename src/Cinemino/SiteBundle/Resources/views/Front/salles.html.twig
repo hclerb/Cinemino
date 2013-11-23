@@ -1,0 +1,30 @@
+{% extends "CineminoSiteBundle:Front:layoutfront.html.twig" %}
+
+{% block contentcentral %}
+<table class="table table-bordered table-striped table-hover" style="border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Photo</th>
+            <th>Logo</th>
+            <th>Site web</th>
+            <th>Salle</th>
+        </tr>
+    </thead>
+
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.nomCinema }}</td>
+            <td><img class="img-polaroid" src="{{asset('medias/Cinema/photo/small/')}}{{ entity.photo }}" alt=""/></td>
+            <td><img class="img-polaroid" src="{{asset('medias/Cinema/logo/small/')}}{{ entity.logo }}" alt=""/></td>
+            <td><a href="{{ entity.siteWeb }}" target="_blank">{{ entity.siteWeb }}</a></td>
+            <td>  {% if entity.type == '0' %}Fixe {% else %}Circuit Itinérant{% endif %}</td>
+        </tr>
+    {% endfor %}
+</table>
+<script>
+ $("#idsalles").addClass("active");
+    
+    
+</script>   
+{% endblock %}

@@ -65,6 +65,18 @@
      {{ form_widget(form.fileLogo) }}
   </div>
  </div>
+    <div class="row">
+  <div class="span3">
+     {{ form_label(form.couverture) }}
+     {{ form_errors(form.couverture) }}
+     {{ form_widget(form.couverture, { 'attr': {'style': 'width:175px'} }) }}
+  </div>
+  <div class="span4">
+     {{ form_label(form.fileCouverture) }}
+     {{ form_errors(form.fileCouverture) }}
+     {{ form_widget(form.fileCouverture) }}
+  </div>
+ </div>
  {{ form_widget(form) }}
         <br/>
         

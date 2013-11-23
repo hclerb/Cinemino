@@ -1,35 +1,173 @@
-<!DOCTYPE html>
-</html>
+{% extends "CineminoSiteBundle:Front:layoutfront.html.twig" %}
+{% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
+{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
 
-  <head>
-    <title>Cinémino se prépare</title>
-    <meta charset="utf-8">
-    <meta name="description" content="Cinemino">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <!-- Style-->
-    <link href="{{ asset('css/css/front.css') }}" rel="stylesheet">
-  <script src="{{ asset('css/js/jquery-1.3.2.js')}}"></script>
-    <!-- HTML5 shim, for IE6-8 support of HTML elements--><!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  </head>
-</html>
-<body>
+{% block contentcentral %}
+  <img id="nuage" src="{{ asset('bundles/cineminosite/images/nuage.png') }}"/>
+  <img id="rosace" src="{{ asset('bundles/cineminosite/images/rosace.png') }}"/>
+  <img id="fondhome" src="{{ asset('bundles/cineminosite/images/progsemaine.png') }}"/>
+  <div id="infoseance"> </div>
+{% endblock contentcentral %}
+{% block basgauche %} 
+      <img src="{{ asset('bundles/cineminosite/images/telecharg.png') }}"/>
+      <img src="{{asset('medias/Cinemino/big/')}}{{cinemino[0].couverture }}"/>
+{% endblock %}
+{% block javascripts %}
+  <script>
+     $(function(){ 
+        function rand(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+         }
 
-  <header>
-      <a href="{{ path('frontinscription') }}">Pour recevoir automatiquement des nouvelles de Cinémino cliquez sur cette phrase</a> 
-  </header>
-  <!-- BEGIN Timeline Embed -->
-  <div id="timeline-embed"></div>
-  <script type="text/javascript">
-    var timeline_config = {
-     width: "100%",
-     height: "95%",
-     source: '../timecinemino.json',
-     embed_id:'timeline-embed'
-    }
+         var angle=0;
+         var coord_depart = $("#nuage").offset(); 
+        function animrosace(){ 
+            angle+=2;
+            if (angle>=180)angle=0;
+            $("#rosace").rotate(angle);
+            setTimeout(animrosace, 100);
+        }
+        
+        function animnuage() { 
+        // On bouge le nuage
+            coords= $("#nuage").offset();
+            coords.top +=rand(-4,+7);
+            if (coords.top>(coord_depart.top + 30)) coords.top -=7;
+             else if (coords.top>(coord_depart.top - 30)) coords.top +=4;
+            coords.left += 3;
+            if(coords.left>(coord_depart.left + 1000)) coords=coord_depart;
+            $("#nuage").offset(coords);
+            setTimeout(animnuage, 2500);
+        }
+        setTimeout(function(){
+          animnuage();  
+        },2500);
+        
+        setTimeout(function(){
+          animrosace();  
+        },300);
+      
+     $( "#fondhome" ).mousemove(function( event ) {
+       // transformation coordonnées souris en relatif
+       var i=0;
+        var posX = event.pageX;
+        var posY = event.pageY - 335;
+        var coord = {top : posY+300, left : event.pageX };
+       if($( window ).width()>1200) posX -= (($( window ).width() - 1200)/2); 
+       var lesseances="";
+       // Test si devant lampe 
+       $("#infoseance").offset(coord);
+       if (posX>90 && posX<120 && posY>211 && posY<244)
+       {
+           // sur la première lampe
+          {% for laseance in entities[0] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+        {% endfor %} 
+       }
+       else{
+           if (posX>178 && posX<208 && posY>229 && posY<259)
+            {
+            // sur la seconde lampe
+          {% for laseance in entities[1] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+            }
+            else{
+                if (posX>270 && posX<300 && posY>241 && posY<271)
+                {
+                // sur la seconde lampe
+          {% for laseance in entities[2] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+                }
+                else{
+                if (posX>355 && posX<385 && posY>253 && posY<283)
+                 {
+          {% for laseance in entities[3] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                 }
+                else{
+                    if (posX>443 && posX<473 && posY>261 && posY<291)
+                    {
+                    // sur la seconde lampe
+          {% for laseance in entities[4] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                    }
+                    else{
+                        if (posX>545 && posX<575 && posY>265 && posY<295)
+                        {
+                        // sur la seconde lampe
+          {% for laseance in entities[5] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+                        }
+                        else{
+                           if (posX>621 && posX<651 && posY>268 && posY<298)
+                           {
+                            // sur la seconde lampe
+          {% for laseance in entities[6] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                            }else{
+                                if (posX>712 && posX<742 && posY>266 && posY<296)
+                                {
+                                    // sur la seconde lampe
+          {% for laseance in entities[7] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+                                }
+                                else{
+                                    if (posX>808 && posX<838 && posY>258 && posY<288)
+                                    {
+                                        // sur la seconde lampe
+          {% for laseance in entities[8] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                                    }
+                                    else{
+                                        if (posX>896 && posX<926 && posY>247 && posY<277)
+                                        {
+                                            // sur la seconde lampe
+          {% for laseance in entities[9] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+                                        }else{
+                                            if (posX>983 && posX<1013 && posY>234 && posY<264)
+                                            {
+                                                // sur la seconde lampe
+          {% for laseance in entities[10] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                                            }else{
+                                                if (posX>1073 && posX<1103 && posY>217 && posY<247)
+                                                 {
+                                                    // sur la seconde lampe
+          {% for laseance in entities[11] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                                                  }
+                                                  else i=-1;//$("#infoseance").css("visibility","hidden"); 
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                           }
+                        }
+                     }
+                }
+            }
+        }
+     if(i==-1) $("#infoseance").css("visibility","hidden");  
+       else
+       {      
+          $("#infoseance").html(lesseances);        
+          $("#infoseance").css("visibility","visible"); 
+       }
+    });   
+        
+     });
   </script>
-  <script type="text/javascript" src="../compiled/js/storyjs-embed.js"></script>
-  <!-- END Timeline Embed-->
-</body>
+{% endblock %}

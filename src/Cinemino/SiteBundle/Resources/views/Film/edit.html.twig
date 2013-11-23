@@ -153,7 +153,6 @@
               <a  class="btn btn-danger" href="#supp_media" rel="parametre">Supprimer</a>
             </div>
            </div>
-           </div>
            <div class="row inthemedia">           
             <div class="span4">
              {{ form_label(item.url) }}
@@ -165,7 +164,8 @@
              {{ form_errors(item.file) }}
              {{ form_widget(item.file, { 'attr': {'style': 'marging-left:30px;'} }) }}
             </div>
-       </div>
+            </div>
+         </div>
        <br/>
      {% endmacro %}
      <script type="text/html">

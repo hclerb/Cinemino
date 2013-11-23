@@ -5,10 +5,10 @@ namespace Cinemino\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-define("LgAfficheFBig", 151);
-define("HtAfficheFBig",201);
-define("LgAfficheFSmall", 75);
-define("HtAfficheFSmall",100);
+define("LgAfficheFBig", 300);
+define("HtAfficheFBig",402);
+define("LgAfficheFSmall", 150);
+define("HtAfficheFSmall",201);
 
 define("LgPhotoFSmall", 319);
 define("HtPhotoFSmall",213);
@@ -109,7 +109,7 @@ class Film
     /**
      * @var string
      *
-     * @ORM\Column(name="CRITIQUE", type="string", length=15, nullable=true)
+     * @ORM\Column(name="CRITIQUE", type="text", nullable=true)
      */
     protected $critique;
 
@@ -144,14 +144,14 @@ class Film
         /**
      * @var boolean
      *
-     * @ORM\Column(name="STOCKE", type="boolean")
+     * @ORM\Column(name="STOCKE", type="boolean", nullable=true)
      */
     protected $stocke;
 
      /**
      * @var boolean
      *
-     * @ORM\Column(name="ANIMATION", type="boolean")
+     * @ORM\Column(name="ANIMATION", type="boolean", nullable=true)
      */
     protected $animation;   
     

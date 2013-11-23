@@ -11,10 +11,15 @@ define("HtLogoCoBig",282);
 define("LgLogoCoSmall", 100);
 define("HtLogoCoSmall",60);
 
-define("LgAfficheCoBig", 151);
-define("HtAfficheCoBig",201);
+define("LgAfficheCoBig", 346);
+define("HtAfficheCoBig",518);
 define("LgAfficheCoSmall", 75);
-define("HtAfficheCoSmall",100);
+define("HtAfficheCoSmall",112);
+
+define("LgCouvertureCoBig", 346);
+define("HtCouvertureCoBig",487);
+define("LgCouvertureCoSmall", 75);
+define("HtCouvertureCoSmall",105);
 /**
  * Cinema
  *
@@ -53,6 +58,13 @@ class Cinemino
      */
     private $affiche;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="COUVERTURE", type="string", length=250, nullable=true)
+     */
+    private $couverture;
+    
     /**
      * @var string
      *
@@ -117,6 +129,19 @@ class Cinemino
      */    
     private $fileLogo;              //permet de stocker temporairement le fichier Logo
 
+    
+        /**
+     *
+     * @var file
+     * 
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg"},
+     *     mimeTypesMessage = "Attention fichier image de type jpeg"
+     *     )
+     */    
+    private $fileCouverture;              //permet de stocker temporairement le fichier Couverture
+    
     /**
      * Set affiche
      *
@@ -356,4 +381,38 @@ class Cinemino
     {
         return $this->surcout3D;
     }
+
+    /**
+     * Set couverture
+     *
+     * @param string $couverture
+     * @return Cinemino
+     */
+    public function setCouverture($couverture)
+    {
+        $this->couverture = $couverture;
+    
+        return $this;
+    }
+
+    /**
+     * Get couverture
+     *
+     * @return string 
+     */
+    public function getCouverture()
+    {
+        return $this->couverture;
+    }
+    
+    // gestion fichier    
+    public function setFileCouverture($file)
+    {
+        $this->fileCouverture= $file;
+    }
+
+    public function getFileCouverture()
+    {
+        return $this->fileCouverture;
+    }  
 }

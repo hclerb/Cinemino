@@ -96,6 +96,8 @@ class Seance
      */
     private $idEvenementAssocies;
     
+    
+    protected $finSeance;
 
     /**
      * Set dateSeance
@@ -341,5 +343,24 @@ class Seance
     public function getIdEvenementAssocies()
     {
         return $this->idEvenementAssocies;
+    }
+    
+
+    public function setFinSeance()
+    {
+      $this->finSeance = new \DateTime($this->getDateSeance()->format('Y-m-d H:i:s'));
+      if ($this->getIdFilm()!=NULL)
+      {          
+       $duree = \explode(":",$this->getIdFilm()->getDuree());
+       $this->finSeance->add(new \DateInterval('PT' . $duree[0] . 'H' . $duree[1] . 'M'));
+      }
+    
+      return $this;
+    }
+
+    
+    public function getFinseance()
+    {
+        return $this->finSeance;
     }
 }
