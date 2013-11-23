@@ -2,9 +2,12 @@
 
 namespace Cinemino\SiteBundle\Form;
 
+use Cinemino\SiteBundle\Entity\donnees;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 
 class FilmType extends AbstractType
 {
@@ -23,7 +26,7 @@ class FilmType extends AbstractType
                     2 => 'Classé avec le label Jeune public',
                     3 => 'Classé avec le label Patrimoine et répertoire',
                     4 => 'Classé avec le label Recherche et Découverte')))
-            ->add('provenance','choice', array('label' => 'Provenance','choices'=> array(0=>'France', 1=>'USA',2=>'Europe',3=>'Reste du monde'))) 
+            ->add('provenance','choice', array('label' => 'Provenance','choices'=> donnees::$pays)) 
             ->add('interdiction','choice', array('choices'=> array(0=>'Pas d\'interdiction', 1=>'-12 ans',2=>'-16 ans',3=>'-18 ans')))
             ->add('ageConseille', 'choice', array('label' => 'Age conseillé', 'required' => true,'choices' => array(
                     '1' => '1',

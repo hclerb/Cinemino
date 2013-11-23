@@ -13,6 +13,7 @@ use Cinemino\SiteBundle\Entity\Semaine;
 use Cinemino\SiteBundle\Entity\Seance;
 use Cinemino\SiteBundle\Entity\SeanceRepository;
 use Cinemino\SiteBundle\Entity\Film;
+use Cinemino\SiteBundle\Entity\donnees;
 
 use Cinemino\SiteBundle\Entity\ProgrammeCourts;
 
@@ -166,12 +167,14 @@ class FrontController extends Controller
 //       $entities = $em->getRepository('CineminoSiteBundle:Film')->findall();
        $leseances = $em->getRepository('CineminoSiteBundle:Seance')->findFromTodayForFilm($id);
        
+     
        return $this->render('CineminoSiteBundle:Front:film.html.twig', array(
             'semaines' => $stsemaines,
             'entity' => $entity,
            'lesseances' => $leseances,
            'progcourt' => $progcourt,
            'entitiesC' => $entitiesC,
+           'pays' => donnees::$pays,
 //            'entities' => $entities,
         ));
     }
@@ -189,6 +192,7 @@ class FrontController extends Controller
        return $this->render('CineminoSiteBundle:Front:films.html.twig', array(
             'semaines' => $stsemaines,
             'entities' => $entities,
+            'pays' => donnees::$pays,           
         ));
     }
 

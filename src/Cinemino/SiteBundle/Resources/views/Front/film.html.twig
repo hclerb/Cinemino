@@ -21,13 +21,13 @@
             {% if progcourt %} <h1>Programme de courts métrages </h1>{% endif %} <h1>{{ entity.titreFilm|raw }}</h1> 
             <h2>Réalisé par {{ entity.realisateur }}</h2> 
             <h2>{{ entity.acteurs }}</h2>
-            <h3>{% if entity.provenance == '0' %}France{% elseif entity.provenance == '1' %}Usa{% elseif entity.provenance == '2' %}Europe{% else %}Reste du Monde{% endif %} - {{ entity.anneeProd }} - {% if entity.duree|date('G')!="0" %} {{ entity.duree|date('G') }}h{% endif %}{{ entity.duree|date('i') }}mn</h3>
+            <h3>{{ pays[entity.provenance] }} - {{ entity.anneeProd }} - {% if entity.duree|date('G')!="0" %} {{ entity.duree|date('G') }}h{% endif %}{{ entity.duree|date('i') }}mn</h3>
             <h3>A partir de {{ entity.ageConseille }} ans</h3>
             {% if progcourt %} 
               {% for court in entitiesC %}
                 <div class="court">
                    <h2>{{ court.titreFilm|raw }}</h2> 
-                   <h4>Réalisation : {{ court.realisateur }} ({% if court.provenance == '0' %}France{% elseif court.provenance == '1' %}Usa{% elseif court.provenance == '2' %}Europe{% else %}Reste du Monde{% endif %} - {{ court.anneeProd }} - {% if court.duree|date('G')!="0" %} {{ court.duree|date('G') }}h{% endif %}{{ court.duree|date('i') }}mn)</h4>
+                   <h4>Réalisation : {{ court.realisateur }} ({{ pays[entity.provenance] }} - {{ court.anneeProd }} - {% if court.duree|date('G')!="0" %} {{ court.duree|date('G') }}h{% endif %}{{ court.duree|date('i') }}mn)</h4>
                     <img class="img-polaroid" src="{{asset('medias/Film/affiches/big/')}}{{court.affiche }}" alt=""/>            
                     <h3>{{ court.acteurs }}</h3>
                     {{ court.synopsys|raw }}             

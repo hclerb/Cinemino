@@ -35,7 +35,7 @@
     var resumefilm=[];
     var resumefilm2=[];
     {% for entity in entities %}
-         resumefilm[{{ loop.index0 }}] = "<h3>{{ entity.titreFilm|raw }}</h3><h4>{{ entity.realisateur }}</h4><h5>{% if entity.provenance == '0' %}France{% elseif entity.provenance == '1' %}Usa{% elseif entity.provenance == '2' %}Europe{% else %}Reste du Monde{% endif %} - {{ entity.anneeProd }} - {{ entity.duree|date('H:i') }}</h5>";
+         resumefilm[{{ loop.index0 }}] = "<h3>{{ entity.titreFilm|raw }}</h3><h4>{{ entity.realisateur }}</h4><h5>{{ pays[entity.provenance] }} - {{ entity.anneeProd }} - {{ entity.duree|date('H:i') }}</h5>";
          resumefilm2[{{ loop.index0 }}] = "<h4>Synopsys : </h4><p>{{ entity.synopsys[:200]|e('js') }}....</p>";
          $("#{{ loop.index0 }}").fadeTo('fast',0.5);
     {% endfor %}

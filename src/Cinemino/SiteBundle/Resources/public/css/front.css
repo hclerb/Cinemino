@@ -95,7 +95,7 @@ header {
     background-color: #008000;
     height: 197px;
     margin-right: -10px;
-    padding-left: 10px;
+    padding: 5px 0 5px 10px;
 }
 .pop h1 {
     font-family: cursive;
