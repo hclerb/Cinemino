@@ -21,4 +21,13 @@ class FilmRepository extends EntityRepository
         
         return $qb;
     }
+  public function getlongs()
+    {
+        $qb = $this->createQueryBuilder('f')
+              ->where("f.type = 'n'")
+              ->orderBy('f.ageConseille','ASC');
+        return $qb->getQuery()
+                  ->getResult();
+    }
+    
 }

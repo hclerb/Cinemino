@@ -88,7 +88,7 @@ class Film
     /**
      * @var string
      *
-     * @ORM\Column(name="AGE_CONSEILLE", type="string", length=25, nullable=true)
+     * @ORM\Column(name="AGE_CONSEILLE", type="integer", length=25, nullable=true)
      */
     protected $ageConseille;
 

@@ -4,25 +4,21 @@
 <img id="spirale" src="{{ asset('bundles/cineminosite/images/spirale.png') }}"/>
 <div class="row afflesfilms">
    {% for entity in entities %}
-     {% if loop.index == 20 %}
+     {% if (loop.index == 18 or loop.index == 25) %}
          </div>
          <div class="row afflesfilms">
      {% endif %}
-     {% if (loop.index == 8 or loop.index == 15) %}
+     {% if (loop.index == 8 or loop.index == 13) %}
          </div>
          <div class="row afflesfilms">
-           {% if entity.type == 'n' %}
              <div class="span2" >
               <a href='{{ path('f_film', { 'id': entity.id }) }}'><img class="img-polaroid" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" id="{{ loop.index0 }}" alt=""/></a> 
              </div>
              <div class="span4 pop" id="pop{{ loop.index }}"></div>
-           {% endif %}
      {% else %}        
-        {% if entity.type == 'n' %}
          <div class="span2" >
            <a href='{{ path('f_film', { 'id': entity.id }) }}'><img class="img-polaroid" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" id="{{ loop.index0 }}" alt=""/></a> 
          </div>         
-        {% endif %}
       {% endif %}             
     {% endfor %}
 </div>
@@ -35,18 +31,18 @@
     var resumefilm=[];
     var resumefilm2=[];
     {% for entity in entities %}
-         resumefilm[{{ loop.index0 }}] = "<h3>{{ entity.titreFilm|raw }}</h3><h4>{{ entity.realisateur }}</h4><h5>{{ pays[entity.provenance] }} - {{ entity.anneeProd }} - {{ entity.duree|date('H:i') }}</h5>";
+         resumefilm[{{ loop.index0 }}] = "{% if entity.titreFilm|length >20 %}<h4>{{ entity.titreFilm|raw }}</h4> {% else %} <h3>{{ entity.titreFilm|raw }}</h3>{% endif %}<h4>De {{ entity.realisateur }}</h4><h5>{{ pays[entity.provenance] }} - {{ entity.anneeProd }} - {{ entity.duree|date('H:i') }}<br/>A partir de {{ entity.ageConseille }} ans</h5>";
          resumefilm2[{{ loop.index0 }}] = "<h4>Synopsys : </h4><p>{{ entity.synopsys[:200]|e('js') }}....</p>";
          $("#{{ loop.index0 }}").fadeTo('fast',0.5);
     {% endfor %}
     $(".img-polaroid").hover(function() {
         $(this).fadeTo('fast',1);
         $("#pop8").html(resumefilm[$(this).attr("id")]);
-        $("#pop15").html(resumefilm2[$(this).attr("id")]);
+        $("#pop13").html(resumefilm2[$(this).attr("id")]);
      },function(){
         $(this).fadeTo('fast',0.5);
         $("#pop8").html("");
-        $("#pop15").html("");
+        $("#pop13").html("");
      });
 
  $("#idfilms").addClass("active");

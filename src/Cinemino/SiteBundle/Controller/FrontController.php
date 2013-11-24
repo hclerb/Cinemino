@@ -187,7 +187,7 @@ class FrontController extends Controller
            foreach ($semaines as $semaine) $stsemaines[] = $semaine->__toString();  
        } else $stsemaines[0] = null;
        $em = $this->getDoctrine()->getManager();
-       $entities = $em->getRepository('CineminoSiteBundle:Film')->findall();
+       $entities = $em->getRepository('CineminoSiteBundle:Film')->getlongs();
 
        return $this->render('CineminoSiteBundle:Front:films.html.twig', array(
             'semaines' => $stsemaines,
