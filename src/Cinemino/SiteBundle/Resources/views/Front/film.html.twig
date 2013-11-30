@@ -5,11 +5,12 @@
 
 
 {% block contentcentral %}
+<div id="diagimage" title=""></div>
 <div class="row" id="fichefilm">
     <div class="offset1 span4">
         <img class="img-polaroid" src="{{asset('medias/Film/affiches/big/')}}{{entity.affiche }}" alt=""/>
         {% for media in entity.idmedias %}
-          {% if media.type == 'p' %} <img class="img-polaroid" src="{{asset('medias/Film/photos/big/')}}{{ media.url }}" alt=""/>
+          {% if media.type == 'p' %} <img class="img-polaroid" src="{{asset('medias/Film/photos/big/')}}{{ media.url }}" alt="{{ media.titre }}"/>
           {% elseif media.type == 'v' %} Video
           {% elseif media.type == 'd' %} Documents
           {% else %} Son
@@ -80,9 +81,22 @@
     </div>
 </div>
 </div>
+<script src="{{ asset('bundles/cineminosite/js/jquery-ui-1.9.2.custom.min.js')}}"></script>
 <script>
  $("#idfilms").addClass("active");
-    
+  
+ $(".img-polaroid").click(function(){
+     var chemin = new String($(this).attr("src"));
+     var newC = chemin.replace("big","brut");
+    $("#diagimage").html('<img src="' + newC + '"/>');
+    $("#diagimage").dialog({
+        modal : true,
+        title : $(this).attr("alt"),
+        width :  1000,
+        show : "puff",
+        hide : "puff"
+    });
+ });
     
 </script>
 {% endblock %}
