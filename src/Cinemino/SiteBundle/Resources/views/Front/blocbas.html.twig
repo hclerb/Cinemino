@@ -1,31 +1,3 @@
-{% extends "CineminoSiteBundle:Front:layoutfront.html.twig" %}
-
-{% block contentcentral %}
-<img id="spirale" src="{{ asset('bundles/cineminosite/images/spirale.png') }}"/>
-<div class="row afflesfilms">
-   {% for entity in entities %}
-     {% if (loop.index == 18 or loop.index == 25) %}
-         </div>
-         <div class="row afflesfilms">
-     {% endif %}
-     {% if (loop.index == 8 or loop.index == 13) %}
-         </div>
-         <div class="row afflesfilms">
-             <div class="span2" >
-              <a href='{{ path('f_film', { 'id': entity.id }) }}'><img class="img-polaroid" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" id="{{ loop.index0 }}" alt=""/></a> 
-             </div>
-             <div class="span4 pop" id="pop{{ loop.index }}"></div>
-     {% else %}        
-         <div class="span2" >
-           <a href='{{ path('f_film', { 'id': entity.id }) }}'><img class="img-polaroid" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" id="{{ loop.index0 }}" alt=""/></a> 
-         </div>         
-      {% endif %}             
-    {% endfor %}
-</div>
-{% block detailfilm %}
-{% endblock %}
-{% endblock %}
-
 {% block basgauche %}       
       <img src="{{ asset('bundles/cineminosite/images/telecharg.png') }}"/>
       <img src="{{asset('medias/Cinemino/big/')}}{{cinemino[0].couverture }}"/>
@@ -55,29 +27,4 @@ Caractère pratique et non-sens du contenu
 Les faux-textes sont également couramment employés à des fins de présentation et de comparaison de la maquette et des variantes typographiques. Ces textes sont pour la plupart sans valeur sémantique, leurs contenus en soit sont dénués de sens. La perception humaine étant apte à intégrer certaines formes et certains schémas de répétitions à la lecture, l'inintelligibilité de leur contenu reste la principale raison de leur utilisation répandue dans le domaine du graphisme. Si tant est que la répartition et la longueur des "mots" reste arbitraire, ceux-ci ne détournent alors en rien l'attention du lecteur de l'appréciation de l'effet visuel et de la lisibilité des polices de caractère (typographies), tout autant que de la disposition et du calibrage du texte sur la page (mise-en-page et surface de composition). C'est pourquoi les faux-textes consistent souvent en une suite plus ou moins arbitraire de mots ou de syllabes. Les schémas de répétitions ne peuvent donc plus troubler l'impression générale, et les typographies peuvent être comparées plus aisément. D'autre part, il est avantageux que le faux-texte reste relativement réaliste, afin que la maquette corresponde au produit final et que la future publication n'en soit pas altérée.
 
       <p>
-{% endblock %} 
-    
-{% block  javascripts %}
-<script> 
-    var resumefilm=[];
-    var resumefilm2=[];
-    {% for entity in entities %}
-         resumefilm[{{ loop.index0 }}] = "{% if entity.titreFilm|length >20 %}<h4>{{ entity.titreFilm|raw }}</h4> {% else %} <h3>{{ entity.titreFilm|raw }}</h3>{% endif %}<h4>De {{ entity.realisateur }}</h4><h5>{{ pays[entity.provenance] }} - {{ entity.anneeProd }} - {{ entity.duree|date('H:i') }}<br/>A partir de {{ entity.ageConseille }} ans</h5>";
-         resumefilm2[{{ loop.index0 }}] = "<h4>Synopsys : </h4><p>{{ entity.synopsys[:200]|e('js') }}....</p>";
-         $("#{{ loop.index0 }}").fadeTo('fast',0.5);
-    {% endfor %}
-    $(".img-polaroid").hover(function() {
-        $(this).fadeTo('fast',1);
-        $("#pop8").html(resumefilm[$(this).attr("id")]);
-        $("#pop13").html(resumefilm2[$(this).attr("id")]);
-     },function(){
-        $(this).fadeTo('fast',0.5);
-        $("#pop8").html("");
-        $("#pop13").html("");
-     });
-
- $("#idfilms").addClass("active");
-
-</script>
 {% endblock %}
-

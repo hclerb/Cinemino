@@ -175,7 +175,13 @@ class FrontController extends Controller
 //       $entities = $em->getRepository('CineminoSiteBundle:Film')->findall();
        $leseances = $em->getRepository('CineminoSiteBundle:Seance')->findFromTodayForFilm($id);
        
-     
+       $cineminoinfo = $em->getRepository('CineminoSiteBundle:Cinemino')->findall();
+       //récupération dernier media cinemino saisit
+       $photos = $em->getRepository('CineminoSiteBundle:MediaIn')->findBy(array(), array('id' => 'desc'),1,0);
+
+        if (count($photos)>1) $photo = $photos[count($photos)-1];
+            else $photo=null;
+            
        return $this->render('CineminoSiteBundle:Front:film.html.twig', array(
             'semaines' => $stsemaines,
             'entity' => $entity,
@@ -183,6 +189,8 @@ class FrontController extends Controller
            'progcourt' => $progcourt,
            'entitiesC' => $entitiesC,
            'pays' => donnees::$pays,
+           'photo' => $photo,
+           'cinemino' => $cineminoinfo,
 //            'entities' => $entities,
         ));
     }
@@ -196,11 +204,19 @@ class FrontController extends Controller
        } else $stsemaines[0] = null;
        $em = $this->getDoctrine()->getManager();
        $entities = $em->getRepository('CineminoSiteBundle:Film')->getlongs();
+       
+       $cineminoinfo = $em->getRepository('CineminoSiteBundle:Cinemino')->findall();
+        //récupération dernier media cinemino saisit
+       $photos = $em->getRepository('CineminoSiteBundle:MediaIn')->findBy(array(), array('id' => 'desc'),1,0);
 
+        if (count($photos)>1) $photo = $photos[count($photos)-1];
+            else $photo=null;
        return $this->render('CineminoSiteBundle:Front:films.html.twig', array(
             'semaines' => $stsemaines,
             'entities' => $entities,
-            'pays' => donnees::$pays,           
+            'pays' => donnees::$pays, 
+            'photo' => $photo,
+            'cinemino' => $cineminoinfo,
         ));
     }
 
