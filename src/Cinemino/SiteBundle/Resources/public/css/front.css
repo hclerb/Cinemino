@@ -86,10 +86,9 @@ header {
 .afflesfilms {
     margin: 10px;
 }
-
-#spirale{
+#spirale {
+    margin: 402px 199px 0;
     position: absolute;
-     margin: 402px 199px 0;
 }
 .pop {
     background-color: #008000;
@@ -107,7 +106,6 @@ header {
 }
 .pop h3 {
 }
-
 #ligneVerte {
     background-color: #38A962;
     height: 3px;
@@ -149,32 +147,27 @@ header {
     margin-left: 0;
     width: 6px;
 }
-
-.court{
-    margin-left: -50px;
+.court {
     clear: both;
+    margin-left: -50px;
 }
-
-.court img{
+.court img {
     float: left;
-    margin-right: 10px;
     margin-bottom: 20px;
+    margin-right: 10px;
 }
-
-.court h4{
+.court h4 {
     margin: 0 0 9px -2px;
-    padding: 0px;
+    padding: 0;
 }
-
-.court p{
+.court p {
     font-size: 18px;
     margin-top: 5px;
 }
-
-.court h2{
+.court h2 {
+    color: #008000;
     font-family: cursive;
-    color: green;
-    margin: 18px 0px 0px 0px;
+    margin: 18px 0 0;
 }
 #blocsbas {
 }
@@ -193,8 +186,11 @@ header {
 }
 #basdroit {
     background-color: #FFFFFF;
-    margin-left: 0;
-    width: 397px;
+    border: 1px solid;
+    height: 553px;
+    margin-left: 8px;
+    padding: 2px 5px;
+    width: 367px;
 }
 .nav {
     font-family: menu;
@@ -205,4 +201,41 @@ header {
 }
 .dropdown-menu {
     text-align: left;
+}
+#blocphoto {
+    background-image: url("../images/fondphoto.jpg");
+    background-repeat: repeat;
+    border: 1px solid;
+    height: 339px;
+    margin-left: 39px;
+    margin-top: 113px;
+    width: 314px;
+}
+#miss {
+    margin: -709px 9px 20px 38px;
+    position: relative;
+}
+#rh {
+    margin-left: 34px;
+    margin-top: -700px;
+    position: relative;
+}
+#rb {
+    margin-left: 50px;
+    margin-top: -73px;
+    position: relative;
+}
+#bulle {
+    margin-left: -21px;
+    margin-top: -832px;
+    position: relative;
+}
+#phind {
+    margin: 10px;
+    width: 281px;
+}
+#legind {
+    font-family: cursive;
+    font-size: 20px;
+    text-align: center;
 }

@@ -14,6 +14,7 @@ use Cinemino\SiteBundle\Entity\Seance;
 use Cinemino\SiteBundle\Entity\SeanceRepository;
 use Cinemino\SiteBundle\Entity\Film;
 use Cinemino\SiteBundle\Entity\donnees;
+use Cinemino\SiteBundle\Entity\MediaIn;
 
 use Cinemino\SiteBundle\Entity\ProgrammeCourts;
 
@@ -129,10 +130,17 @@ class FrontController extends Controller
            $entities[11] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
        }
        $cineminoinfo = $em->getRepository('CineminoSiteBundle:Cinemino')->findall();
-       return $this->render('CineminoSiteBundle:Front:index.html.twig', array(
+       
+       //récupération dernier media cinemino saisit
+       $photos = $em->getRepository('CineminoSiteBundle:MediaIn')->findBy(array(), array('id' => 'desc'),1,0);
+
+        if (count($photos)>1) $photo = $photos[count($photos)-1];
+            else $photo=null;
+        return $this->render('CineminoSiteBundle:Front:index.html.twig', array(
             'semaines' => $stsemaines,
            'entities' => $entities,
            'cinemino' => $cineminoinfo,
+           'photo' => $photo,
         ));
     }
 

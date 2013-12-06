@@ -13,9 +13,10 @@
 
     <link href="{{ asset('bundles/cineminosite/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/cineminosite/css/ui-lightness/jquery-ui-1.9.2.custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cineminosite/css/jquery.mCustomScrollbar.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/cineminosite/css/front.css') }}" rel="stylesheet">
     
-    <script src="{{ asset('bundles/cineminosite/js/jquery-1.8.3.min.js')}}"></script>
+    <script src="{{ asset('bundles/cineminosite/js/minified/jquery-1.9.1.min.js')}}"></script>
 <script type="text/javascript">
 function scrolldown() {
  var h=0;
@@ -85,8 +86,8 @@ this.scroll(1,h);
             {% block basmilieu %} {% endblock %}
         </div>
         <div class="span1 lv"></div>
-        <div class="span4" id="basdroit">
-             {% block basdroit %} {% endblock %}
+        <div class="span4 mCustomScrollBox mCS-light" id="basdroit">
+           {% block basdroit %} {% endblock %}
         </div>       
     </div>
 
@@ -108,8 +109,10 @@ this.scroll(1,h);
 <script src={{ asset('bundles/cineminosite/js/bootstrap.min.js') }}></script>
 <script src="{{ asset('bundles/cineminosite/js/jquery-scrolltofixed-min.js')}}"></script>
 <script src="{{ asset('bundles/cineminosite/js/jQueryRotateCompressed.js')}}"></script>
+<script src="{{ asset('bundles/cineminosite/js/minified/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 <script type="text/javascript">
     $("#navbar").scrollToFixed();
+    $("#basdroit").mCustomScrollbar();
 </script> 
 {% block javascripts %}{% endblock %}
  </body>

@@ -14,5 +14,11 @@ use Cinemino\SiteBundle\Entity\MediaIn;
  */
 class MediaInRepository extends EntityRepository
 {
-
+   public function thelast()
+   {
+       $queryBuilder = $this->createQueryBuilder('m');
+       $queryBuilder->having($queryBuilder->expr()->max('m.dateFin'));             
+       return $queryBuilder->getQuery()
+                           ->getArrayResult();
+   }
 }
