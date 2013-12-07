@@ -75,22 +75,7 @@ this.scroll(1,h);
     <div class="row" id="bloccentral">
         {% block contentcentral %} {% endblock %}
     </div>
-    <div class="row lh">
-    </div>
-    <div class="row" id="blocsbas">
-        <div class="span4" id="basgauche">
-            {% block basgauche %} {% endblock %}
-        </div>  
-        <div class="span1 lv"></div>
-         <div class="span4" id="basmilieu">
-            {% block basmilieu %} {% endblock %}
-        </div>
-        <div class="span1 lv"></div>
-        <div class="span4 mCustomScrollBox mCS-light" id="basdroit">
-           {% block basdroit %} {% endblock %}
-        </div>       
-    </div>
-
+    {% block contentbas %} {% endblock %}
 </section>
      <!-- Footer
       ================================================== -->

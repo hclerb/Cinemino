@@ -85,26 +85,28 @@ header {
 }
 .afflesfilms {
     margin: 10px;
+    position: relative;
 }
 #spirale {
     margin: 402px 199px 0;
     position: absolute;
 }
-.pop {
-    background-color: #008000;
-    height: 187px;
+#pop {
+    height: 192px;
     margin-right: -10px;
-    padding: 5px 0 5px 10px;
+    padding: 0 0 5px 10px;
+    position: absolute;
+    width: 298px;
 }
-.pop h1 {
+#pop h1 {
     font-family: cursive;
     padding-top: 10px;
     text-align: center;
 }
-.pop h4 {
+#pop h4 {
     font-family: fantasy;
 }
-.pop h3 {
+#pop h3 {
 }
 #ligneVerte {
     background-color: #38A962;

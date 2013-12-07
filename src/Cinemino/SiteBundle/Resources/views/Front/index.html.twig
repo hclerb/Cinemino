@@ -7,38 +7,42 @@
   <img id="rosace" src="{{ asset('bundles/cineminosite/images/rosace.png') }}"/>
   <img id="fondhome" src="{{ asset('bundles/cineminosite/images/progsemaine.png') }}"/>
   <div id="infoseance"> </div>
+  <div class="row lh"></div>
 {% endblock contentcentral %}
-  
-{% block basgauche %}       
-      <img src="{{ asset('bundles/cineminosite/images/telecharg.png') }}"/>
-      <img src="{{asset('medias/Cinemino/big/')}}{{cinemino[0].couverture }}"/>
-{% endblock %}
-      
-{% block basmilieu %}
-     <div id="blocphoto">
-         {% if photo is null %}
-            <img id="phind" class="img-polaroid" src="{{asset('medias/In/photos/big/nothing.jpg')}}"/>
-            <p id="legind">C'était l'année dernière</p>
-         {% else %}
-            <img id="phind" class="img-polaroid" src="{{asset('medias/In/photos/big/')}}{{ photo.url }}"/>
-            <p id="legind">{{ photo.titre }}</p>            
-         {% endif %}
-      </div>
-      <img id="miss" src="{{ asset('bundles/cineminosite/images/missmini.png') }}"/>
-      <img id="bulle" src="{{asset('bundles/cineminosite/images/bullephoto.png') }}"/>
-      <img id="rh" src="{{asset('bundles/cineminosite/images/rubanBR.png') }}"/>
-      <img id="rb" src="{{asset('bundles/cineminosite/images/rubanR.png') }}"/>
-{% endblock %}
-      
-{% block basdroit %}
-      <p>aux-texte: a pour fonction de faire office de texte de substitution ou d'outil permettant la comparaison et l'appréciation de différentes polices.
-On appelle Lipsum un texte qui, en l'absence du texte définitif, sert de substitut aux futurs contenus lors de la production de maquettes pour les publications ou sites Web. Le terme Lipsum est issu de la contraction du plus connu de ce type de texte "Lorem ipsum". Ils sont également connus sous les noms de texte blanc, faux-texte, bolo bolo, pseudo texte, texte factice, vrai faux texte, faux contenu, texte de remplissage, de remplacement, ou d'attente. Outre son usage dans les milieux de l'imprimerie et du graphisme, certains chansonniers en font l'utilisation lors de la composition de mélodies, chantant ces textes en amont de l'écriture de leur textes. L'utilisation de faux-textes aurait déjà été une pratique courante depuis le 16ème siècle dans les milieux de l'imprimerie et de la composition.
 
-Caractère pratique et non-sens du contenu
-Les faux-textes sont également couramment employés à des fins de présentation et de comparaison de la maquette et des variantes typographiques. Ces textes sont pour la plupart sans valeur sémantique, leurs contenus en soit sont dénués de sens. La perception humaine étant apte à intégrer certaines formes et certains schémas de répétitions à la lecture, l'inintelligibilité de leur contenu reste la principale raison de leur utilisation répandue dans le domaine du graphisme. Si tant est que la répartition et la longueur des "mots" reste arbitraire, ceux-ci ne détournent alors en rien l'attention du lecteur de l'appréciation de l'effet visuel et de la lisibilité des polices de caractère (typographies), tout autant que de la disposition et du calibrage du texte sur la page (mise-en-page et surface de composition). C'est pourquoi les faux-textes consistent souvent en une suite plus ou moins arbitraire de mots ou de syllabes. Les schémas de répétitions ne peuvent donc plus troubler l'impression générale, et les typographies peuvent être comparées plus aisément. D'autre part, il est avantageux que le faux-texte reste relativement réaliste, afin que la maquette corresponde au produit final et que la future publication n'en soit pas altérée.
+{% block contentbas %}
+    <div class="row" id="blocsbas">
+        <div class="span4" id="basgauche">
+            <img src="{{ asset('bundles/cineminosite/images/telecharg.png') }}"/>
+            <img src="{{asset('medias/Cinemino/big/')}}{{cinemino[0].couverture }}"/>
+        </div>  
+        <div class="span1 lv"></div>
+         <div class="span4" id="basmilieu">
+            <div id="blocphoto">
+                {% if photo is null %}
+                   <img id="phind" class="img-polaroid" src="{{asset('medias/In/photos/big/nothing.jpg')}}"/>
+                   <p id="legind">C'était l'année dernière</p>
+                {% else %}
+                   <img id="phind" class="img-polaroid" src="{{asset('medias/In/photos/big/')}}{{ photo.url }}"/>
+                   <p id="legind">{{ photo.titre }}</p>            
+                {% endif %}
+             </div>
+             <img id="miss" src="{{ asset('bundles/cineminosite/images/missmini.png') }}"/>
+             <img id="bulle" src="{{asset('bundles/cineminosite/images/bullephoto.png') }}"/>
+             <img id="rh" src="{{asset('bundles/cineminosite/images/rubanBR.png') }}"/>
+             <img id="rb" src="{{asset('bundles/cineminosite/images/rubanR.png') }}"/>
+        </div>
+        <div class="span4 mCustomScrollBox mCS-light" id="basdroit">
+                    <p>aux-texte: a pour fonction de faire office de texte de substitution ou d'outil permettant la comparaison et l'appréciation de différentes polices.
+              On appelle Lipsum un texte qui, en l'absence du texte définitif, sert de substitut aux futurs contenus lors de la production de maquettes pour les publications ou sites Web. Le terme Lipsum est issu de la contraction du plus connu de ce type de texte "Lorem ipsum". Ils sont également connus sous les noms de texte blanc, faux-texte, bolo bolo, pseudo texte, texte factice, vrai faux texte, faux contenu, texte de remplissage, de remplacement, ou d'attente. Outre son usage dans les milieux de l'imprimerie et du graphisme, certains chansonniers en font l'utilisation lors de la composition de mélodies, chantant ces textes en amont de l'écriture de leur textes. L'utilisation de faux-textes aurait déjà été une pratique courante depuis le 16ème siècle dans les milieux de l'imprimerie et de la composition.
 
-      <p>
-{% endblock %}  
+              Caractère pratique et non-sens du contenu
+              Les faux-textes sont également couramment employés à des fins de présentation et de comparaison de la maquette et des variantes typographiques. Ces textes sont pour la plupart sans valeur sémantique, leurs contenus en soit sont dénués de sens. La perception humaine étant apte à intégrer certaines formes et certains schémas de répétitions à la lecture, l'inintelligibilité de leur contenu reste la principale raison de leur utilisation répandue dans le domaine du graphisme. Si tant est que la répartition et la longueur des "mots" reste arbitraire, ceux-ci ne détournent alors en rien l'attention du lecteur de l'appréciation de l'effet visuel et de la lisibilité des polices de caractère (typographies), tout autant que de la disposition et du calibrage du texte sur la page (mise-en-page et surface de composition). C'est pourquoi les faux-textes consistent souvent en une suite plus ou moins arbitraire de mots ou de syllabes. Les schémas de répétitions ne peuvent donc plus troubler l'impression générale, et les typographies peuvent être comparées plus aisément. D'autre part, il est avantageux que le faux-texte reste relativement réaliste, afin que la maquette corresponde au produit final et que la future publication n'en soit pas altérée.
+
+                    </p>
+        </div>       
+    </div>  
+{% endblock %} 
           
 {% block javascripts %}
   <script>
