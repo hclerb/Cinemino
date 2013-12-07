@@ -97,7 +97,9 @@ this.scroll(1,h);
 <script src="{{ asset('bundles/cineminosite/js/minified/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 <script type="text/javascript">
     $("#navbar").scrollToFixed();
-    $("#basdroit").mCustomScrollbar();
+    $("#basdroit").mCustomScrollbar({
+        theme:"dark"
+    });
 </script> 
 {% block javascripts %}{% endblock %}
  </body>
