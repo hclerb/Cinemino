@@ -94,7 +94,7 @@ class SeanceController extends Controller
         $erreur = 0;
         $em = $this->getDoctrine()->getManager();
         $entity = new Seance();
-        $entity->setDateSeance(new \DateTime);
+        
         $user = $this->container->get('security.context')->getToken()->getUser();
         
         if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')){ 
@@ -103,7 +103,11 @@ class SeanceController extends Controller
         else{
            $cinemas = $em->getRepository('CineminoSiteBundle:Cinema')->findByidCompte($user->getId());        
         }
-        
+        $derniereseance = $em->getRepository('CineminoSiteBundle:Seance')->findBy(array("idCinema" => $cinemas[0]->getId()), array('dateSeance' => 'desc'),1,0);
+
+        if (count($derniereseance)>0)$entity->setDateSeance($derniereseance[0]->getDateSeance());
+            else $entity->setDateSeance(new \DateTime);
+
         $form   = $this->createForm(new SeanceType($this->getUser()), $entity);
 
         return $this->render('CineminoSiteBundle:Seance:new.html.twig', array(
