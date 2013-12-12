@@ -134,7 +134,7 @@ class SeanceController extends Controller
                {
                 $em->persist($entity);
                 $em->flush();
-                return $this->redirect($this->generateUrl('seance_show', array('id' => $entity->getId())));
+                return $this->redirect($this->generateUrl('seance_new', array('id' => $entity->getId())));
                }
                else $erreur=2;
             }

@@ -64,24 +64,103 @@ header {
 }
 #rosace {
     margin-left: 863px;
-    margin-top: 37px;
+    margin-top: 48px;
     position: relative;
+    z-index: 2;
+}
+#lp1 {
+    margin-left: 75px;
+    margin-top: -1086px;
+}
+#lp2 {
+    margin-left: 54px;
+    margin-top: -1052px;
+}
+#lp3 {
+    margin-left: 56px;
+    margin-top: -1025px;
+}
+#lp4 {
+    margin-left: 50px;
+    margin-top: -1000px;
+}
+#lp5 {
+    margin-left: 51px;
+    margin-top: -987px;
+}
+#lp6 {
+    margin-left: 64px;
+    margin-top: -979px;
+}
+#lp7 {
+    margin-left: 45px;
+    margin-top: -980px;
+}
+#lp8 {
+    margin-left: 53px;
+    margin-top: -983px;
+}
+#lp9 {
+    margin-left: 58px;
+    margin-top: -997px;
+}
+#lp10 {
+    margin-left: 53px;
+    margin-top: -1017px;
+}
+#lp11 {
+    margin-left: 49px;
+    margin-top: -1044px;
+}
+#lp12 {
+    margin-left: 53px;
+    margin-top: -1081px;
+}
+.lp {
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+#jour1 {
+    margin-left: 141px;
+    margin-top: -637px;
+    position: absolute;
+    z-index: 2;
+}
+#jour0 {
+    margin-left: 145px;
+    margin-top: -693px;
+    position: absolute;
     z-index: 2;
 }
 #fondhome {
     margin-left: -13px;
-    margin-top: -173px;
+    margin-top: -145px;
     position: relative;
     z-index: 1;
 }
 #infoseance {
-    background-color: #ADD8E6;
+    background: linear-gradient(to bottom, #FEFCEA 28%, #F1DA36 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-radius: 10px;
     margin: 15px;
     padding: 15px;
     position: absolute;
     visibility: hidden;
+    width: 322px;
     z-index: 2;
+}
+#infoseance img {
+    float: left;
+    margin-top: 2px;
+}
+#infoseance p {
+    margin-left: 119px;
+}
+#infoseance .pfilm {
+    padding-top: 19px;
+}
+#infoseance .pcine {
+    clear: both;
 }
 .afflesfilms {
     margin: 10px;
@@ -139,6 +218,7 @@ header {
 }
 .lh {
     background-image: url("../images/ligneHor.jpg");
+    clear: both;
     height: 6px;
     margin: 0 1px 8px 41px;
     width: 1103px;
@@ -241,18 +321,16 @@ header {
     font-size: 20px;
     text-align: center;
 }
-#diapo{
-    visibility: hidden;
+#diapo {
+    background-color: #FFFFFF;
     position: absolute;
+    visibility: hidden;
     width: 1200px;
-    background-color: white;
 }
-
-.slide img{
+.slide img {
     display: block;
-    margin: 5px auto 0px auto;
+    margin: 5px auto 0;
 }
-
-.ph{
+.ph {
     cursor: pointer;
 }

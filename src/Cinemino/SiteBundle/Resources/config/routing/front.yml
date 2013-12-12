@@ -26,6 +26,10 @@ f_film:
 f_salles:
     pattern:  /salles
     defaults: { _controller: CineminoSiteBundle:Front:salles } 
+
+f_cinema:
+    pattern:  /{id}/salles
+    defaults: { _controller: CineminoSiteBundle:Front:salle } 
     
 f_anims:
     pattern:  /anims

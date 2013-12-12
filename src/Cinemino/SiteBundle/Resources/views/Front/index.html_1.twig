@@ -1,0 +1,224 @@
+{% extends "CineminoSiteBundle:Front:layoutfront.html.twig" %}
+{% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
+{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
+
+{% block contentcentral %}
+  <img id="nuage" src="{{ asset('bundles/cineminosite/images/index/nuage.png') }}"/>
+  <img id="rosace" src="{{ asset('bundles/cineminosite/images/index/rosace.png') }}"/>
+  <img id="fondhome" src="{{ asset('bundles/cineminosite/images/index/progsemaine.png') }}"/>
+  <img id="lp1" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
+  <div id="infoseance"> </div>
+  <div class="row lh"></div>
+{% endblock contentcentral %}
+
+{% block contentbas %}
+    <div class="row" id="blocsbas">
+        <div class="span4" id="basgauche">
+            <img src="{{ asset('bundles/cineminosite/images/telecharg.png') }}"/>
+            <img src="{{asset('medias/Cinemino/big/')}}{{cinemino[0].couverture }}"/>
+        </div>  
+        <div class="span1 lv"></div>
+         <div class="span4" id="basmilieu">
+            <div id="blocphoto">
+                {% if photo is null %}
+                   <img id="phind" class="img-polaroid" src="{{asset('medias/In/photos/big/nothing.jpg')}}"/>
+                   <p id="legind">C'était l'année dernière</p>
+                {% else %}
+                   <img id="phind" class="img-polaroid" src="{{asset('medias/In/photos/big/')}}{{ photo.url }}"/>
+                   <p id="legind">{{ photo.titre }}</p>            
+                {% endif %}
+             </div>
+             <img id="miss" src="{{ asset('bundles/cineminosite/images/missmini.png') }}"/>
+             <img id="bulle" src="{{asset('bundles/cineminosite/images/bullephoto.png') }}"/>
+             <img id="rh" src="{{asset('bundles/cineminosite/images/rubanBR.png') }}"/>
+             <img id="rb" src="{{asset('bundles/cineminosite/images/rubanR.png') }}"/>
+        </div>
+        <div class="span4" id="basdroit">
+                    <p>aux-texte: a pour fonction de faire office de texte de substitution ou d'outil permettant la comparaison et l'appréciation de différentes polices.
+              On appelle Lipsum un texte qui, en l'absence du texte définitif, sert de substitut aux futurs contenus lors de la production de maquettes pour les publications ou sites Web. Le terme Lipsum est issu de la contraction du plus connu de ce type de texte "Lorem ipsum". Ils sont également connus sous les noms de texte blanc, faux-texte, bolo bolo, pseudo texte, texte factice, vrai faux texte, faux contenu, texte de remplissage, de remplacement, ou d'attente. Outre son usage dans les milieux de l'imprimerie et du graphisme, certains chansonniers en font l'utilisation lors de la composition de mélodies, chantant ces textes en amont de l'écriture de leur textes. L'utilisation de faux-textes aurait déjà été une pratique courante depuis le 16ème siècle dans les milieux de l'imprimerie et de la composition.
+
+              Caractère pratique et non-sens du contenu
+              Les faux-textes sont également couramment employés à des fins de présentation et de comparaison de la maquette et des variantes typographiques. Ces textes sont pour la plupart sans valeur sémantique, leurs contenus en soit sont dénués de sens. La perception humaine étant apte à intégrer certaines formes et certains schémas de répétitions à la lecture, l'inintelligibilité de leur contenu reste la principale raison de leur utilisation répandue dans le domaine du graphisme. Si tant est que la répartition et la longueur des "mots" reste arbitraire, ceux-ci ne détournent alors en rien l'attention du lecteur de l'appréciation de l'effet visuel et de la lisibilité des polices de caractère (typographies), tout autant que de la disposition et du calibrage du texte sur la page (mise-en-page et surface de composition). C'est pourquoi les faux-textes consistent souvent en une suite plus ou moins arbitraire de mots ou de syllabes. Les schémas de répétitions ne peuvent donc plus troubler l'impression générale, et les typographies peuvent être comparées plus aisément. D'autre part, il est avantageux que le faux-texte reste relativement réaliste, afin que la maquette corresponde au produit final et que la future publication n'en soit pas altérée.
+
+                    </p>
+        </div>       
+    </div>  
+{% endblock %} 
+          
+{% block javascripts %}
+  <script>
+     $(function(){ 
+       function rand(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+         }
+
+         var angle=0;
+         var coord_depart = $("#nuage").offset(); 
+        function animrosace(){ 
+            angle+=2;
+            if (angle>=180)angle=0;
+            $("#rosace").rotate(angle);
+            setTimeout(animrosace, 100);
+        }
+        
+        function animnuage() { 
+        // On bouge le nuage
+            coords= $("#nuage").offset();
+            coords.top +=rand(-4,+7);
+            if (coords.top>(coord_depart.top + 30)) coords.top -=7;
+             else if (coords.top>(coord_depart.top - 30)) coords.top +=4;
+            coords.left += 3;
+            if(coords.left>(coord_depart.left + 1000)) coords=coord_depart;
+            $("#nuage").offset(coords);
+            setTimeout(animnuage, 2500);
+        }
+        setTimeout(function(){
+          animnuage();  
+        },2500);
+        
+        setTimeout(function(){
+          animrosace();  
+        },300);
+      
+     $( "#fondhome" ).mousemove(function( event ) {
+       // transformation coordonnées souris en relatif
+       var i=0;
+        var posX = event.pageX;
+        var posY = event.pageY - 335;
+        var coord = {top : posY+300, left : event.pageX };
+       if($( window ).width()>1200) posX -= (($( window ).width() - 1200)/2); 
+       var lesseances="";
+       // Test si devant lampe 
+       $("#infoseance").offset(coord);
+       if (posX>90 && posX<120 && posY>211 && posY<244)
+       {
+           // sur la première lampe
+          {% for laseance in entities[0] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+        {% endfor %} 
+       }
+       else{
+           if (posX>178 && posX<208 && posY>229 && posY<259)
+            {
+            // sur la seconde lampe
+          {% for laseance in entities[1] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+            }
+            else{
+                if (posX>270 && posX<300 && posY>241 && posY<271)
+                {
+                // sur la seconde lampe
+          {% for laseance in entities[2] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+                }
+                else{
+                if (posX>355 && posX<385 && posY>253 && posY<283)
+                 {
+          {% for laseance in entities[3] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                 }
+                else{
+                    if (posX>443 && posX<473 && posY>261 && posY<291)
+                    {
+                    // sur la seconde lampe
+          {% for laseance in entities[4] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                    }
+                    else{
+                        if (posX>545 && posX<575 && posY>265 && posY<295)
+                        {
+                        // sur la seconde lampe
+          {% for laseance in entities[5] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+                        }
+                        else{
+                           if (posX>621 && posX<651 && posY>268 && posY<298)
+                           {
+                            // sur la seconde lampe
+          {% for laseance in entities[6] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                            }else{
+                                if (posX>712 && posX<742 && posY>266 && posY<296)
+                                {
+                                    // sur la seconde lampe
+          {% for laseance in entities[7] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+                                }
+                                else{
+                                    if (posX>808 && posX<838 && posY>258 && posY<288)
+                                    {
+                                        // sur la seconde lampe
+          {% for laseance in entities[8] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                                    }
+                                    else{
+                                        if (posX>896 && posX<926 && posY>247 && posY<277)
+                                        {
+                                            // sur la seconde lampe
+          {% for laseance in entities[9] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+         {% endfor %} 
+                                        }else{
+                                            if (posX>983 && posX<1013 && posY>234 && posY<264)
+                                            {
+                                                // sur la seconde lampe
+          {% for laseance in entities[10] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                                            }else{
+                                                if (posX>1073 && posX<1103 && posY>217 && posY<247)
+                                                 {
+                                                    // sur la seconde lampe
+          {% for laseance in entities[11] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+                                                  }
+                                                  else i=-1;//$("#infoseance").css("visibility","hidden"); 
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                           }
+                        }
+                     }
+                }
+            }
+        }
+     if(i==-1) $("#infoseance").css("visibility","hidden");  
+       else
+       {      
+          $("#infoseance").html(lesseances);        
+          $("#infoseance").css("visibility","visible"); 
+       }
+    }); 
+    
+    $("#lp1").click(function(){
+      var lesseances="";
+      // sur la première lampe
+          {% for laseance in entities[0] %}
+           lesseances +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>{{ lejour[laseance.dateSeance|date('w')] }} {{ laseance.dateSeance|date(' d ') }} {{ mois[laseance.dateSeance|date('n')] }} {{ laseance.dateSeance|date('H:i') }} {{ laseance.idFilm.titreFilm }} {{ laseance.idCinema.nomCinema }}</p>";
+          {% endfor %} 
+       
+       var coord= $(this).offset();
+       coord.top +=30;
+       $("#infoseance").offset(coord);
+       $("#infoseance").html(lesseances);        
+       $("#infoseance").css("visibility","visible"); 
+    });
+     $("#blocphoto").rotate(-10);   
+     $("#miss").rotate(-10);  
+     $("#rb").rotate(-10);  
+     $("#rh").rotate(-10); 
+     
+});
+  </script>
+{% endblock %}

@@ -40,95 +40,11 @@ class FrontController extends Controller
        {   
            foreach ($semaines as $semaine) $stsemaines[] = $semaine->__toString();  
        } else $stsemaines[0] = null;
-       for($i=0;$i<12;$i++) $entities[$i] = null;
+
        $em = $this->getDoctrine()->getManager();
-       $thisday = new \DateTime();
-       $cejour = new \DateTime();
-       $cejourfin = new \DateTime();
-       $cejour->setTime(8, 0, 0);
-       $cejourfin->setTime(9, 45, 0);
-       if($thisday<$cejourfin) 
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[0] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(9, 45, 0);
-       $cejourfin->setTime(10, 15,0);
-       if($thisday<$cejourfin)        
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[1] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(10, 15,0);
-       $cejourfin->setTime(10,45,0);
-       if($thisday<$cejourfin)
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[2] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(10, 45, 0);
-       $cejourfin->setTime(12, 30,0);
-       if($thisday<$cejourfin) 
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[3] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(12, 30, 0);
-       $cejourfin->setTime(14, 15,0);
-       if($thisday<$cejourfin) 
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[4] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(14, 15, 0);
-       $cejourfin->setTime(15, 15,0);
-       if($thisday<$cejourfin)           
-        {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[5] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(15, 15, 0);
-       $cejourfin->setTime(15,45,0);
-       if($thisday<$cejourfin) 
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[6] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }       
-       $cejour->setTime(15, 45, 0);
-       $cejourfin->setTime(16, 15,0);
-       if($thisday<$cejourfin) 
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[7] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(16, 15, 0);
-       $cejourfin->setTime(16, 45,0);
-       if($thisday<$cejourfin) 
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[8] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(16, 45, 0);
-       $cejourfin->setTime(18,15 ,0);
-       if($thisday<$cejourfin) 
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[9] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(18, 15, 0);
-       $cejourfin->setTime(20,150);
-       if($thisday<$cejourfin) 
-       {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[10] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
-       $cejour->setTime(20, 15, 0);
-       $cejourfin->setTime(23, 59,0);
-       if($thisday<$cejourfin) 
-        {
-           if($thisday>$cejour) $cejour = $thisday;
-           $entities[11] = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($cejour,$cejourfin);
-       }
+
+      $entities = $em->getRepository('CineminoSiteBundle:Seance')->findRestantToday();
+ 
        $cineminoinfo = $em->getRepository('CineminoSiteBundle:Cinemino')->findall();
        
        //récupération dernier media cinemino saisit
@@ -221,6 +137,22 @@ public function sallesAction()
             'entities' => $entities,
         ));
     }
+    
+public function salleAction($id)
+    {
+       $semaines = $this->init_menu_seances();
+       if (isset($semaines[0])) 
+       {   
+           foreach ($semaines as $semaine) $stsemaines[] = $semaine->__toString();  
+       } else $stsemaines[0] = null;
+       $em = $this->getDoctrine()->getManager();
+       $entitie = $em->getRepository('CineminoSiteBundle:Cinema')->find($id);
+       $entities[0] = $entitie;
+       return $this->render('CineminoSiteBundle:Front:salles.html.twig', array(
+            'semaines' => $stsemaines,
+            'entities' => $entities,
+        ));
+    }    
  
    public function animsAction()
     {

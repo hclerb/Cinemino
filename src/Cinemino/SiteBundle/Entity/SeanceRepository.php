@@ -25,7 +25,7 @@ class SeanceRepository extends EntityRepository
                            ->getResult();
    }
    
-      public function findFromTodayForFilm($idfilm)
+   public function findFromTodayForFilm($idfilm)
    {
       $datejour = new \DateTime('now');
       $queryBuilder = $this->createQueryBuilder('s') 
@@ -39,17 +39,20 @@ class SeanceRepository extends EntityRepository
                            ->getResult();
    }
            
-   public function findentredate(\Datetime $date1, \Datetime $date2)
+   public function findRestantToday()
    {
+       $datejour = new \DateTime('now');
+       $cejourfin = new \DateTime('now');
+       $cejourfin->setTime(23, 59, 0);
        $queryBuilder = $this->createQueryBuilder('s')
                      ->innerJoin('s.idFilm', 'f')
                       ->innerJoin('s.idCinema', 'c')
                      ->addSelect('f')
                      ->addSelect('c');
        $queryBuilder->where('s.dateSeance >= :date1 ')
-                    ->setParameter('date1', $date1->format('Y-m-d H:i:s')); 
+                    ->setParameter('date1', $datejour->format('Y-m-d H:i:s')); 
        $queryBuilder->andWhere('s.dateSeance <= :date2 ')
-                    ->setParameter('date2', $date2->format('Y-m-d H:i:s'))
+                    ->setParameter('date2', $cejourfin->format('Y-m-d H:i:s'))
                      ->orderBy('s.dateSeance','ASC');
               
        return $queryBuilder->getQuery()
