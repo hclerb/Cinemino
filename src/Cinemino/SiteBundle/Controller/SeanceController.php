@@ -134,6 +134,7 @@ class SeanceController extends Controller
                {
                 $em->persist($entity);
                 $em->flush();
+                $this->get('session')->getFlashBag()->add('info','Séance Ajoutée');
                 return $this->redirect($this->generateUrl('seance_new', array('id' => $entity->getId())));
                }
                else $erreur=2;

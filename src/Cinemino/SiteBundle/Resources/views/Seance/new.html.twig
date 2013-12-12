@@ -7,6 +7,9 @@
 
 {% block content %}
 <div id="formulaire_seance" class="well">
+{% for message in app.session.flashbag.get('info') %}
+    <p id="mess"> {{ message }} </p>
+{% endfor %}
 <form action="{{ path('seance_create') }}" method="post" {{ form_enctype(form) }}>
   <div class="row">  
    <div id="datetimepicker1" class="input-append date offset2">
@@ -90,6 +93,10 @@
 
   if ({{ erreur }} == 1) alert("Ajout de la séance impossible, il y a déjà une séance à cette heure là où la séance avant n'est pas terminé!");
    else if ({{ erreur }} == 2) alert("Ajout de la séance impossible, il y a déjà une séance avant cette heure et elles se chevauchent!");
+   
+  setTimeout(function(){
+          $("#mess").remove();  
+        },2500);
   });
 </script>
 {% endblock content %}
