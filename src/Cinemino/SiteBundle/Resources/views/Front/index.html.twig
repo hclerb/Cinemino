@@ -112,7 +112,18 @@
             {% set i = i+1 %}
             leshoraires[{{ i }}]='<h1>' + '{{ laseance.dateSeance|date('H:i') }}' + '<br/></h1>';
         {% endif %}   
-        lesseances[{{ i }}] +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p class='pfilm' >{{ laseance.idFilm.titreFilm }}</p><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'> <a href='{{ path('f_cinema', { 'id': laseance.idCinema.id }) }}'>{{ laseance.idCinema.nomCinema }}</a></p><div class='pcine'></div>"; 
+        lesseances[{{ i }}] +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p class='pfilm' >{{ laseance.idFilm.titreFilm }}</p><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'> <a href='{{ path('f_cinema', { 'id': laseance.idCinema.id }) }}'>{{ laseance.idCinema.nomCinema }}</a></p>"; 
+        {% if laseance.idEvenements[0] is defined %}
+            {% for evt in laseance.idEvenements %}      
+              lesseances[{{ i }}] += "<p><a href='{{ path('f_anim', { 'id': laseance.id }) }}'>{{ evt.titreEvenement }}</a></p>";
+            {% endfor %}
+        {% endif %}
+        {% if laseance.idEvenementAssocies[0] is defined %}
+           {% for evt in laseance.idEvenementAssocies %}
+               lesseances[{{ i }}] += "<p><a href='{{ path('evenementassocie_show', { 'id': laseance.id }) }}'>{{ evt.titreEvenement }}</a></p>";
+           {% endfor %}
+        {% endif %}
+        lesseances[{{ i }}] +="<div class='pcine'></div>";
         {% set heure=laseance.dateSeance|date('H:i') %}
     {% endfor %}
     // on spécifie suivant le nombre d'heures différents    

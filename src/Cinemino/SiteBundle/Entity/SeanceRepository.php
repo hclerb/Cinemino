@@ -47,8 +47,12 @@ class SeanceRepository extends EntityRepository
        $queryBuilder = $this->createQueryBuilder('s')
                      ->innerJoin('s.idFilm', 'f')
                       ->innerJoin('s.idCinema', 'c')
-                     ->addSelect('f')
-                     ->addSelect('c');
+                      ->innerJoin('s.idEvenements', 'e')
+                      ->innerJoin('s.idEvenementAssocies', 'a')
+                      ->addSelect('f')
+                      ->addSelect('c')
+                      ->addSelect('e')
+                      ->addSelect('a');
        $queryBuilder->where('s.dateSeance >= :date1 ')
                     ->setParameter('date1', $datejour->format('Y-m-d H:i:s')); 
        $queryBuilder->andWhere('s.dateSeance <= :date2 ')

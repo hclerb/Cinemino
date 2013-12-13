@@ -166,6 +166,22 @@ public function salleAction($id)
         ));
     }
  
+    public function animAction($id)
+    {
+       $em = $this->getDoctrine()->getManager();
+       $semaines = $this->init_menu_seances();
+       if (isset($semaines[0])) 
+       {   
+           foreach ($semaines as $semaine) $stsemaines[] = $semaine->__toString();  
+       } else $stsemaines[0] = null;
+       
+       $entity = $em->getRepository('CineminoSiteBundle:Seance')->find($id);
+       return $this->render('CineminoSiteBundle:Front:animation.html.twig', array(
+            'semaines' => $stsemaines,
+            'entity' => $entity
+        ));
+    }
+    
   public function pfolioAction()
     {
        $semaines = $this->init_menu_seances();

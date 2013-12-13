@@ -72,7 +72,8 @@
                             <td>{% if entity.type == '3D' %}3D {% endif %}{% if entity.version == 'VOST' %}VOST {% endif %}{% if entity.avantPremiere == 'o' %}Avant-Première {% endif %}{% if entity.sortieNationale == 'o' %}Sortie Nationale {% endif %}</td>
                             <td>{% if entity.idEvenements[0] is defined %}
                                   {% for evt in entity.idEvenements %}
-                                   <a href="{{ path('evenement_show', { 'id': evt.id }) }}">{{ evt.titreEvenement }}</a>
+                                      <img src="{{asset('medias/picto/')}}{{evt.idType.picto }}" alt=""/>
+                                      <a href="{{ path('f_anim', { 'id': entity.id }) }}">{{ evt.titreEvenement }}</a>
                                   {% endfor %}
                                 {% endif %}
                                 {% if entity.idEvenementAssocies[0] is defined %}

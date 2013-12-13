@@ -22,10 +22,6 @@ class SeanceController extends Controller
      */
     function __construct() {
         
-        global $dir_url;
-        $dir_url = 'affiche/';
-        // URL vers le dossier affiche  
-        
     }
     
     
@@ -55,8 +51,7 @@ class SeanceController extends Controller
      */
     public function showAction($id)
     {
-        global $dir_url;
-        
+      
         $em = $this->getDoctrine()->getManager();
         
         $entity = $em->getRepository('CineminoSiteBundle:Seance')->find($id);
@@ -77,10 +72,7 @@ class SeanceController extends Controller
         return $this->render('CineminoSiteBundle:Seance:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(), 
-            'cinemas' => $cinemas,
-            'dir_url' => $dir_url
-            
-            
+            'cinemas' => $cinemas       
             ));
         
     }

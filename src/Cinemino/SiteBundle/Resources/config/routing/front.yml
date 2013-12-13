@@ -35,6 +35,10 @@ f_anims:
     pattern:  /anims
     defaults: { _controller: CineminoSiteBundle:Front:anims } 
     
+f_anim:
+    pattern:  /{id}/anim
+    defaults: { _controller: CineminoSiteBundle:Front:anim }     
+    
 f_pfolio:
     pattern:  /pfolio
     defaults: { _controller: CineminoSiteBundle:Front:pfolio }
