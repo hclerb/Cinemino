@@ -16,8 +16,8 @@ define("HtAfficheCoBig",518);
 define("LgAfficheCoSmall", 75);
 define("HtAfficheCoSmall",112);
 
-define("LgCouvertureCoBig", 346);
-define("HtCouvertureCoBig",487);
+define("LgCouvertureCoBig", 247);
+define("HtCouvertureCoBig",376);
 define("LgCouvertureCoSmall", 75);
 define("HtCouvertureCoSmall",105);
 /**

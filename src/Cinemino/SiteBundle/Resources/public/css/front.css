@@ -1,7 +1,7 @@
 
 body {
     margin: auto;
-    width: 1200px;
+    width: 1024px;
 }
 header {
     margin-left: 20px;
@@ -54,72 +54,79 @@ header {
 }
 #bloccentral {
     background-color: #FFFFFF;
+    height: 714px;
+    margin-bottom: 0;
     margin-left: 0;
-    margin-top: -20px;
-    width: 1200px;
+    margin-top: 0;
+    padding: 0;
+    width: 1000px;
 }
 #nuage {
     margin-top: 0;
     position: relative;
 }
-#rosace {
-    margin-left: 863px;
-    margin-top: 48px;
+#nuage1 {
+    margin-top: 0;
     position: relative;
-    z-index: 2;
+}
+#rosace {
+    margin-left: 926px;
+    margin-top: -122px;
+    position: relative;
+    z-index: 4;
 }
 #lp1 {
-    margin-left: 75px;
-    margin-top: -1086px;
+    margin-left: -950px;
+    margin-top: -1028px;
 }
 #lp2 {
-    margin-left: 54px;
-    margin-top: -1052px;
-}
-#lp3 {
-    margin-left: 56px;
-    margin-top: -1025px;
-}
-#lp4 {
-    margin-left: 50px;
-    margin-top: -1000px;
-}
-#lp5 {
-    margin-left: 51px;
-    margin-top: -987px;
-}
-#lp6 {
-    margin-left: 64px;
-    margin-top: -979px;
-}
-#lp7 {
-    margin-left: 45px;
-    margin-top: -980px;
-}
-#lp8 {
-    margin-left: 53px;
-    margin-top: -983px;
-}
-#lp9 {
-    margin-left: 58px;
+    margin-left: 13px;
     margin-top: -997px;
 }
+#lp3 {
+    margin-left: 9px;
+    margin-top: -971px;
+}
+#lp4 {
+    margin-left: 13px;
+    margin-top: -954px;
+}
+#lp5 {
+    margin-left: 13px;
+    margin-top: -940px;
+}
+#lp6 {
+    margin-left: 13px;
+    margin-top: -931px;
+}
+#lp7 {
+    margin-left: 13px;
+    margin-top: -930px;
+}
+#lp8 {
+    margin-left: 13px;
+    margin-top: -934px;
+}
+#lp9 {
+    margin-left: 13px;
+    margin-top: -948px;
+}
 #lp10 {
-    margin-left: 53px;
-    margin-top: -1017px;
+    margin-left: 13px;
+    margin-top: -966px;
 }
 #lp11 {
-    margin-left: 49px;
-    margin-top: -1044px;
+    margin-left: 13px;
+    margin-top: -992px;
 }
 #lp12 {
-    margin-left: 53px;
-    margin-top: -1081px;
+    margin-left: 13px;
+    margin-top: -1026px;
 }
 .lp {
     cursor: pointer;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 #jour1 {
     margin-left: 141px;
@@ -134,28 +141,40 @@ header {
     z-index: 2;
 }
 #fondhome {
-    margin-left: -13px;
-    margin-top: -145px;
+    margin-left: 0;
+    margin-top: -123px;
+    position: relative;
+    z-index: 3;
+}
+#fondville {
+    margin-left: 6px;
+    margin-top: -500px;
+    position: relative;
+    z-index: 2;
+}
+#fondrose {
+    margin-left: 6px;
+    margin-top: -700px;
     position: relative;
     z-index: 1;
 }
 #infoseance {
     background: linear-gradient(to bottom, #FEFCEA 28%, #F1DA36 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-radius: 10px;
-    margin: 15px;
+    margin: 20px 15px 10px 20px;
     padding: 15px;
     position: absolute;
     visibility: hidden;
     width: 322px;
-    z-index: 2;
+    z-index: 3;
 }
 #infoseance img {
     float: left;
     margin-top: 2px;
 }
 #infoseance p {
+    margin-bottom: 0;
     margin-left: 119px;
-    margin-bottom: 0px;
 }
 #infoseance .pfilm {
     padding-top: 19px;
@@ -166,10 +185,6 @@ header {
 .afflesfilms {
     margin: 10px;
     position: relative;
-}
-#spirale {
-    margin: 402px 199px 0;
-    position: absolute;
 }
 #pop {
     height: 192px;
@@ -220,13 +235,13 @@ header {
 .lh {
     background-image: url("../images/ligneHor.jpg");
     clear: both;
-    height: 6px;
-    margin: 0 1px 8px 41px;
-    width: 1103px;
+    height: 5px;
+    margin: -23px 1px 0 0;
+    width: 994px;
 }
 .lv {
     background-image: url("../images/ligneVer.jpg");
-    height: 553px;
+    height: 498px;
     margin-left: 0;
     width: 6px;
 }
@@ -256,11 +271,13 @@ header {
 }
 #basgauche {
     background-color: #FFFFFF;
-    margin-left: 20px;
-    width: 397px;
+    margin-left: -9px;
+    width: 302px;
 }
 #basgauche img {
+    margin-bottom: 5px;
     margin-left: 43px;
+    margin-top: 8px;
 }
 #basmilieu {
     background-color: #FFFFFF;
@@ -270,10 +287,10 @@ header {
 #basdroit {
     background-color: #FFFFFF;
     border: 1px solid;
-    height: 553px;
+    height: 497px;
     margin-left: 8px;
     padding: 2px 5px;
-    width: 367px;
+    width: 299px;
 }
 .nav {
     font-family: menu;
@@ -286,20 +303,18 @@ header {
     text-align: left;
 }
 #blocphoto {
-    background-image: url("../images/fondphoto.jpg");
-    background-repeat: repeat;
-    border: 1px solid;
+    background-image: url("../images/index/fondphoto.png");
     height: 339px;
     margin-left: 39px;
-    margin-top: 113px;
-    width: 314px;
+    margin-top: 103px;
+    width: 323px;
 }
 #miss {
-    margin: -709px 9px 20px 38px;
+    margin: -725px 9px 20px 38px;
     position: relative;
 }
 #rh {
-    margin-left: 34px;
+    margin-left: 0;
     margin-top: -700px;
     position: relative;
 }
@@ -314,7 +329,7 @@ header {
     position: relative;
 }
 #phind {
-    margin: 10px;
+    margin: 16px 12px 12px 16px;
     width: 281px;
 }
 #legind {

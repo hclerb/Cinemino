@@ -4,23 +4,26 @@
 
 {% block contentcentral %}
   <img id="nuage" src="{{ asset('bundles/cineminosite/images/index/nuage.png') }}"/>
+  <img id="nuage1" src="{{ asset('bundles/cineminosite/images/index/ptnuage.png') }}"/>
   <img id="rosace" src="{{ asset('bundles/cineminosite/images/index/rosace.png') }}"/>
-  <img id="fondhome" src="{{ asset('bundles/cineminosite/images/index/progsemaine.png') }}"/>
+  <img id="fondhome" src="{{ asset('bundles/cineminosite/images/index/potofilet.png') }}"/>
+  <img id="fondville" src="{{ asset('bundles/cineminosite/images/index/villebleue.jpg') }}"/>
+  <img id="fondrose" src="{{ asset('bundles/cineminosite/images/index/fdrose.png') }}"/>
   <img id="lp1" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
   <img id="lp2" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe2.png') }}"/>
   <img id="lp3" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe3.png') }}"/>
-  <img id="lp4" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
-  <img id="lp5" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
-  <img id="lp6" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
-  <img id="lp7" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
-  <img id="lp8" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
-  <img id="lp9" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
-  <img id="lp10" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
-  <img id="lp11" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
-  <img id="lp12" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
+  <img id="lp4" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe4.png') }}"/>
+  <img id="lp5" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe5.png') }}"/>
+  <img id="lp6" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe6.png') }}"/>
+  <img id="lp7" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe7.png') }}"/>
+  <img id="lp8" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe8.png') }}"/>
+  <img id="lp9" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe9.png') }}"/>
+  <img id="lp10" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe10.png') }}"/>
+  <img id="lp11" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe11.png') }}"/>
+  <img id="lp12" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe12.png') }}"/>
   {% if entities[0] is defined %}  
-        <div id="jour0">{{ lejour[entities[0].dateSeance|date('w')] }}</div> 
-        <div id="jour1">{{ entities[0].dateSeance|date(' d ') }} {{ mois[entities[0].dateSeance|date('n')] }}</div>
+        <div id="jour0">PROGRAMME</div> 
+        <div id="jour1">{{ lejour[entities[0].dateSeance|date('w')] }} {{ entities[0].dateSeance|date(' d ') }} {{ mois[entities[0].dateSeance|date('n')] }}</div>
   {% else %} <div id="jour0">Aujourd'hui</div><div id="jour1">Pas ou plus de séances</div>
   {% endif %}
  <div id="infoseance"> </div>
@@ -30,7 +33,7 @@
 {% block contentbas %}
     <div class="row" id="blocsbas">
         <div class="span4" id="basgauche">
-            <img src="{{ asset('bundles/cineminosite/images/telecharg.png') }}"/>
+            <img src="{{ asset('bundles/cineminosite/images/index/telecharg.png') }}"/>
             <img src="{{asset('medias/Cinemino/big/')}}{{cinemino[0].couverture }}"/>
         </div>  
         <div class="span1 lv"></div>
@@ -44,11 +47,12 @@
                    <p id="legind">{{ photo.titre }}</p>            
                 {% endif %}
              </div>
-             <img id="miss" src="{{ asset('bundles/cineminosite/images/missmini.png') }}"/>
-             <img id="bulle" src="{{asset('bundles/cineminosite/images/bullephoto.png') }}"/>
-             <img id="rh" src="{{asset('bundles/cineminosite/images/rubanBR.png') }}"/>
-             <img id="rb" src="{{asset('bundles/cineminosite/images/rubanR.png') }}"/>
+             <img id="miss" src="{{ asset('bundles/cineminosite/images/index/miss.png') }}"/>
+             <img id="bulle" src="{{asset('bundles/cineminosite/images/index/bulle.png') }}"/>
+             <img id="rh" src="{{asset('bundles/cineminosite/images/index/rubanR.png') }}"/>
+             <img id="rb" src="{{asset('bundles/cineminosite/images/index/rubanBR.png') }}"/>
         </div>
+        <div class="span1 lv"></div>
         <div class="span4" id="basdroit">
                     <p>aux-texte: a pour fonction de faire office de texte de substitution ou d'outil permettant la comparaison et l'appréciation de différentes polices.
               On appelle Lipsum un texte qui, en l'absence du texte définitif, sert de substitut aux futurs contenus lors de la production de maquettes pour les publications ou sites Web. Le terme Lipsum est issu de la contraction du plus connu de ce type de texte "Lorem ipsum". Ils sont également connus sous les noms de texte blanc, faux-texte, bolo bolo, pseudo texte, texte factice, vrai faux texte, faux contenu, texte de remplissage, de remplacement, ou d'attente. Outre son usage dans les milieux de l'imprimerie et du graphisme, certains chansonniers en font l'utilisation lors de la composition de mélodies, chantant ces textes en amont de l'écriture de leur textes. L'utilisation de faux-textes aurait déjà été une pratique courante depuis le 16ème siècle dans les milieux de l'imprimerie et de la composition.
@@ -86,6 +90,13 @@
             coords.left += 3;
             if(coords.left>(coord_depart.left + 1000)) coords=coord_depart;
             $("#nuage").offset(coords);
+            coords= $("#nuage1").offset();
+            coords.top +=rand(-4,+7);
+            if (coords.top>(coord_depart.top + 30)) coords.top -=7;
+             else if (coords.top>(coord_depart.top - 30)) coords.top +=4;
+            coords.left += 3;
+            if(coords.left>(coord_depart.left + 1000)) coords=coord_depart;
+            $("#nuage1").offset(coords);
             setTimeout(animnuage, 2500);
         }
         setTimeout(function(){
@@ -168,8 +179,10 @@
             }
     });
     
-     $("#blocphoto").rotate(-10);   
-     $("#miss").rotate(-10);  
+     $("#blocphoto").rotate(-10); 
+ 
+     
+     $("#miss").rotate(-7);  
      $("#rb").rotate(-10);  
      $("#rh").rotate(-10); 
      $("#jour0").rotate(-20); 
