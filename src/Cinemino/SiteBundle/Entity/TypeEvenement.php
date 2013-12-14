@@ -4,8 +4,8 @@ namespace Cinemino\SiteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-define("LgPicto", 50);
-define("HtPicto", 50);
+define("LgPicto", 30);
+define("HtPicto", 30);
 
 /**
  * TypeEvenement

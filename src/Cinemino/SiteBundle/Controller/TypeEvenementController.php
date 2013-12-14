@@ -73,6 +73,8 @@ class TypeEvenementController extends Controller
      * Creates a new TypeEvenement entity.
      *
      */
+    
+    
     public function createAction(Request $request)
     {
         $entity  = new TypeEvenement();
@@ -84,22 +86,8 @@ class TypeEvenementController extends Controller
             $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
            if($entity->getFile()!=NULL){   
             $url = $entity->getFile();
-            $ExtensionPresumee = explode('.', $url->getClientOriginalName());
-            $ExtensionPresumee = strtolower($ExtensionPresumee[count($ExtensionPresumee)-1]);
-                            
-            if ($ExtensionPresumee == 'jpg' || $ExtensionPresumee == 'jpeg') 
-              {
-                $entity->setPicto($resize->UploadPhoto($url,"picto",LgPicto,HtPicto));
-                $url->move("medias/picto/brut/",$url->getClientOriginalName());
-              }
-              else
-              {
-                  $fs = new Filesystem();
-                  $url->move("medias/picto/",$url->getClientOriginalName());
-                  $entity->setPicto($url->getClientOriginalName());
-                  
-                  $fs->copy("medias/picto/".$url->getClientOriginalName(), "medias/picto/brut/".$url->getClientOriginalName());
-              }                         
+            $entity->setPicto($resize->UploadPhoto($url,"picto",LgPicto,HtPicto));
+            $url->move("medias/picto/brut/",$url->getClientOriginalName());                       
             }
             $em->persist($entity);
             $em->flush();
@@ -159,23 +147,8 @@ class TypeEvenementController extends Controller
            $resize = $this->container->get('Cinemino_Site.resizeimg'); // appel du service qui redimensionne les images
            if($entity->getFile()!=NULL){   
             $url = $entity->getFile();
-            $ExtensionPresumee = explode('.', $url->getClientOriginalName());
-            $ExtensionPresumee = strtolower($ExtensionPresumee[count($ExtensionPresumee)-1]);
-                            
-            if ($ExtensionPresumee == 'jpg' || $ExtensionPresumee == 'jpeg') 
-              {
-                $entity->setPicto($resize->UploadPhoto($url,"picto",LgPicto,HtPicto));
-                $url->move("medias/picto/brut/",$url->getClientOriginalName());
-              }
-              else
-              {
-                  $fs = new Filesystem();
-                  $url->move("medias/picto/",$url->getClientOriginalName());
-                  $entity->setPicto($url->getClientOriginalName());
-                  
-                  $fs->copy("medias/picto/".$url->getClientOriginalName(), "medias/picto/brut/".$url->getClientOriginalName());
-              }
-            
+            $entity->setPicto($resize->UploadPhoto($url,"picto",LgPicto,HtPicto));
+            $url->move("medias/picto/brut/",$url->getClientOriginalName());           
             }
             $em->persist($entity);
             $em->flush();

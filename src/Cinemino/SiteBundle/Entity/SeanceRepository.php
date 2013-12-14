@@ -38,7 +38,27 @@ class SeanceRepository extends EntityRepository
       return $queryBuilder->getQuery()
                            ->getResult();
    }
-           
+
+      public function findRestantToday2()
+   {
+       $datejour = new \DateTime('now');
+       $cejourfin = new \DateTime('now');
+       $cejourfin->setTime(23, 59, 0);
+       $queryBuilder = $this->createQueryBuilder('s')
+                     ->innerJoin('s.idFilm', 'f')
+                      ->innerJoin('s.idCinema', 'c')
+                      ->addSelect('f')
+                      ->addSelect('c');
+       $queryBuilder->where('s.dateSeance >= :date1 ')
+                    ->setParameter('date1', $datejour->format('Y-m-d H:i:s')); 
+       $queryBuilder->andWhere('s.dateSeance <= :date2 ')
+                    ->setParameter('date2', $cejourfin->format('Y-m-d H:i:s'))
+                     ->orderBy('s.dateSeance','ASC');
+              
+       return $queryBuilder->getQuery()
+                           ->getArrayResult();
+   }
+   
    public function findRestantToday()
    {
        $datejour = new \DateTime('now');
@@ -47,12 +67,16 @@ class SeanceRepository extends EntityRepository
        $queryBuilder = $this->createQueryBuilder('s')
                      ->innerJoin('s.idFilm', 'f')
                       ->innerJoin('s.idCinema', 'c')
-                      ->innerJoin('s.idEvenements', 'e')
-                      ->innerJoin('s.idEvenementAssocies', 'a')
+                      ->leftJoin ('s.idEvenements', 'e')
+                      ->leftJoin('e.idType', 't')
+                      ->leftJoin('s.idEvenementAssocies', 'a')
+                      ->leftJoin('a.idType', 'at')
                       ->addSelect('f')
                       ->addSelect('c')
                       ->addSelect('e')
-                      ->addSelect('a');
+                      ->addSelect('t')
+                      ->addSelect('a')
+                      ->addSelect('at');
        $queryBuilder->where('s.dateSeance >= :date1 ')
                     ->setParameter('date1', $datejour->format('Y-m-d H:i:s')); 
        $queryBuilder->andWhere('s.dateSeance <= :date2 ')

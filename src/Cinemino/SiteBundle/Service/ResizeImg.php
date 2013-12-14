@@ -57,7 +57,7 @@ class ResizeImg{
           $ExtensionPresumee = explode('.', $filename->getClientOriginalName());
           $ExtensionPresumee = strtolower($ExtensionPresumee[count($ExtensionPresumee)-1]);
                             
-          if ($ExtensionPresumee == 'jpg' || $ExtensionPresumee == 'jpeg')
+          if ($ExtensionPresumee == 'jpg' || $ExtensionPresumee == 'jpeg' || $ExtensionPresumee == 'png' || $ExtensionPresumee == 'PNG')
           {
             list($width_orig, $height_orig) = getimagesize($filename);
 
@@ -71,19 +71,36 @@ class ResizeImg{
             // Redimensionnement
             $image_p = imagecreatetruecolor($width, $height);
             $image_f = imagecreatetruecolor($width, $heightf);
-            $image = imagecreatefromjpeg($filename);
+            if ($ExtensionPresumee == 'png' || $ExtensionPresumee == 'PNG')
+            {
+                imagesavealpha($image_p, true); 
+
+                // Fill the image with transparent color 
+                $color = imagecolorallocatealpha($image_p,0x00,0x00,0x00,127); 
+                imagefill($image_p, 0, 0, $color); 
+                imagesavealpha($image_p, true); 
+
+                imagesavealpha($image_f, true);
+                // Fill the image with transparent color 
+                $color = imagecolorallocatealpha($image_f,0x00,0x00,0x00,127); 
+                imagefill($image_f, 0, 0, $color); 
+            }
+            
+            if ($ExtensionPresumee == 'jpg' || $ExtensionPresumee == 'jpeg') $image = imagecreatefromjpeg($filename);
+            else $image = imagecreatefrompng ($filename);
             imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
             imagecopy($image_f, $image_p, 0, 0, 0, 0, $width, $heightf);
 
             // enregistrement
             $nom_fichier = $filename->getClientOriginalName();
-            imagejpeg($image_f, 'medias/'. $sousrep . '/' .$nom_fichier, 200);
+            if ($ExtensionPresumee == 'jpg' || $ExtensionPresumee == 'jpeg') imagejpeg($image_f, 'medias/'. $sousrep . '/' .$nom_fichier, 200);
+            else imagepng($image_f, 'medias/'. $sousrep . '/' .$nom_fichier, 5);
             imagedestroy($image);
             imagedestroy($image_p);
             imagedestroy($image_f);
             return $nom_fichier;
         }  
-        else return "fichier image n'est pas en JPG";   
+        else return "fichier image n'est pas en JPG ou PNG";   
     }
 }
         
