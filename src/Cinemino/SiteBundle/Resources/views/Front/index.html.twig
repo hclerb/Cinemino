@@ -8,26 +8,33 @@
   <img id="rosace" src="{{ asset('bundles/cineminosite/images/index/rosace.png') }}"/>
   <img id="fondhome" src="{{ asset('bundles/cineminosite/images/index/potofilet.png') }}"/>
   <img id="fondville" src="{{ asset('bundles/cineminosite/images/index/villebleue.jpg') }}"/>
-  <img id="fondrose" src="{{ asset('bundles/cineminosite/images/index/fdrose.png') }}"/>
-  <img id="lp1" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1.png') }}"/>
-  <img id="lp2" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe2.png') }}"/>
-  <img id="lp3" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe3.png') }}"/>
-  <img id="lp4" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe4.png') }}"/>
-  <img id="lp5" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe5.png') }}"/>
-  <img id="lp6" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe6.png') }}"/>
-  <img id="lp7" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe7.png') }}"/>
-  <img id="lp8" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe8.png') }}"/>
-  <img id="lp9" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe9.png') }}"/>
-  <img id="lp10" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe10.png') }}"/>
-  <img id="lp11" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe11.png') }}"/>
-  <img id="lp12" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe12.png') }}"/>
-  {% if entities[0] is defined %}  
-        <div id="jour0">PROGRAMME</div> 
-        <div id="jour1">{{ lejour[entities[0].dateSeance|date('w')] }} {{ entities[0].dateSeance|date(' d ') }} {{ mois[entities[0].dateSeance|date('n')] }}</div>
-  {% else %} <div id="jour0">Aujourd'hui</div><div id="jour1">Pas ou plus de séances</div>
-  {% endif %}
- <div id="infoseance"> </div>
+  <img id="lp1" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe1E.png') }}"/>  
+  <img id="lp2" class="lp"src="{{ asset('bundles/cineminosite/images/index/lampe2E.png') }}"/>
+  <img id="lp3" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe3E.png') }}"/>
+  <img id="lp4" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe4E.png') }}"/>
+  <img id="lp5" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe5E.png') }}"/>
+  <img id="lp6" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe6E.png') }}"/>
+  <img id="lp7" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe7E.png') }}"/>
+  <img id="lp8" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe8E.png') }}"/>
+  <img id="lp9" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe9E.png') }}"/>
+  <img id="lp10" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe10E.png') }}"/>
+  <img id="lp11" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe11E.png') }}"/>
+  <img id="lp12" class="lp" src="{{ asset('bundles/cineminosite/images/index/lampe12E.png') }}"/>
+ <div id="jour1">{{ lejour["now"|date('w')] }} {{ "now"|date(' d ') }} {{ mois["now"|date('n')] }}</div>
+ <p class="tlp" id="tlp0"></p>
+ <p class="tlp" id="tlp1"></p>
+ <p class="tlp" id="tlp2"></p>
+ <p class="tlp" id="tlp3"></p>
+ <p class="tlp" id="tlp4"></p>
+ <p class="tlp" id="tlp5"></p>
+ <p class="tlp" id="tlp6"></p>
+ <p class="tlp" id="tlp7"></p>
+ <p class="tlp" id="tlp8"></p>
+ <p class="tlp" id="tlp9"></p>
+ <p class="tlp" id="tlp10"></p>
+ <p class="tlp" id="tlp11"></p>
  <div class="row lh"></div>
+ <div id="infoseance"> </div>
 {% endblock contentcentral %}
 
 {% block contentbas %}
@@ -62,7 +69,11 @@
 
                     </p>
         </div>       
-    </div>  
+    </div>
+    <audio preload="auto" id="son">
+     <source src="{{ asset('bundles/cineminosite/sons/inter.mp3') }}" type="audio/mp3">
+     <source src="{{ asset('bundles/cineminosite/sons/inter.ogg') }}" type="audio/ogg">
+   </audio>
 {% endblock %} 
           
 {% block javascripts %}
@@ -121,7 +132,7 @@
     {% for laseance in entities %}
         {% if laseance.dateSeance|date('H:i') != heure %}
             {% set i = i+1 %}
-            leshoraires[{{ i }}]='<h1>' + '{{ laseance.dateSeance|date('H:i') }}' + '<br/></h1>';
+            leshoraires[{{ i }}]="{{ laseance.dateSeance|date('H') }}H{{ laseance.dateSeance|date('i') }}";
         {% endif %}   
         lesseances[{{ i }}] +="<a href='{{ path('f_film', { 'id': laseance.idFilm.id }) }}'><img class='img-polaroid' style='width:100px;' src='{{asset('medias/Film/affiches/small/')}}{{laseance.idFilm.affiche }}' alt=''/></a><p class='pfilm' >{{ laseance.idFilm.titreFilm }}</p><p style='color:#{{ laseance.idCinema.couleurFondCinema }}'> <a href='{{ path('f_cinema', { 'id': laseance.idCinema.id }) }}'>{{ laseance.idCinema.nomCinema }}</a></p>"; 
         {% if laseance.idEvenements[0] is defined %}
@@ -134,45 +145,63 @@
                lesseances[{{ i }}] += "<p><a href='{{ path('f_anim', { 'id': laseance.id }) }}'><img src='{{asset('medias/picto/')}}{{evt.idType.picto }}' alt=''/></a></p>";
            {% endfor %}
         {% endif %}
-        lesseances[{{ i }}] +="<div class='pcine'></div>";
+        lesseances[{{ i }}] +="<div class='pcine'></div><div id='ligneBleu'></div>";
         {% set heure=laseance.dateSeance|date('H:i') %}
     {% endfor %}
+    {% set i = i+1 %} // pour ne pas avoir -1 s'il n'y a pas de séances
     // on spécifie suivant le nombre d'heures différents    
-    if ({{ i }}>0 && {{ i }}<12) 
+    if ({{ i }}>1 && {{ i }}<13) 
     {     
-      var modulo = parseInt(10 / {{ i }});
-      var y =0;
+      var modulo = parseInt((12-{{ i }}) / ({{ i }}));
+      if(modulo<1) modulo=1;
+      var y =-1;
       for (var i=0; i<12;i++)
       {
         lesseancesf[i] = "";
         leshorairesf[i] = "";  
       }
-      for (var i=0; i<({{ i }}+1) ;i++)
+      
+      if (modulo==1 && {{ i }} <10) y= (parseInt((12-{{ i }}) / 2))-1;
+
+      for (var i=0; i<{{ i }} ;i++)
       {
+        y +=modulo;
         lesseancesf[y] = lesseances[i];
         leshorairesf[y] = leshoraires[i];
-        y +=modulo;
-      }
+        var z=y+1;
+        var fichier = $("#lp"+z).attr("src");
+        var nvfich = fichier.replace('E','');
+        $("#lp"+z).attr("src",nvfich);
+        $("#lp"+z).addClass("lpA");
+        // alert(z);
+       }
 
       for (var i=0; i<12;i++)
       {
-        lesseances[i] = lesseancesf[i];
-        leshoraires[i] = leshorairesf[i]; 
+        lesseances[i] = "";
+        leshoraires[i] = "";
+        if (lesseancesf[i] !="")
+        { 
+            lesseances[i] = "<div class='iseance'>" + lesseancesf[i] + "</div>";
+            leshoraires[i] = "<h1>" + leshorairesf[i] + "</h1>"; 
+            $("#tlp"+i).text(leshorairesf[i]);
+        }
       }    
 
     }
     var lpallume = 0;
     $(".lp").click(function(){
-      var coord= $(this).offset();
+            var coord= $(this).offset();
       var num = parseInt($(this).attr("id").substring(2))-1;
       if ($("#infoseance").css("visibility")=="visible" && num==lpallume || lesseances[num]==0) $("#infoseance").css("visibility","hidden");
          else 
             {
                 lpallume = num;
                 coord.top +=40;
-                if (num == 5) coord.left -=156;
-                 else if (num>5) coord.left -=322;
-                
+                /*if (num == 5) coord.left -=156;
+                 else if (num>5)*/ 
+                coord.left -=145;
+                $('#son')[0].play();
                 $("#infoseance").offset(coord);
                 $("#infoseance").html(leshoraires[num] + lesseances[num]);        
                 $("#infoseance").css("visibility","visible"); 
@@ -185,8 +214,7 @@
      $("#miss").rotate(-7);  
      $("#rb").rotate(-10);  
      $("#rh").rotate(-10); 
-     $("#jour0").rotate(-20); 
-     $("#jour1").rotate(10); 
+     $("#jour1").rotate(13); 
      
 });
   </script>

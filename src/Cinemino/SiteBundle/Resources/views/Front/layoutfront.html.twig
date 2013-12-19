@@ -51,11 +51,11 @@ this.scroll(1,h);
         <div class="nav-collapse">
           <ul class="nav">
             <li id="idhome"><a href="{{ path('front') }}"><img src="{{ asset('bundles/cineminosite/images/home.png') }}"/></a></li>
-            <li id="idfestival"><a href="{{ path('f_festival') }}">Le Festival</a></li>        
-            <li id="idsalles"><a href="{{ path('f_salles') }}">Les salles</a></li>
-            <li id="idfilms"><a href="{{ path('f_films') }}">Les films</a></li>
+            <li id="idfestival"><a href="{{ path('f_festival') }}">LE FESTIVAL</a></li>        
+            <li id="idsalles"><a href="{{ path('f_salles') }}">LES SALLES</a></li>
+            <li id="idfilms"><a href="{{ path('f_films') }}">LES FILMS</a></li>
             <li id="idlesseances" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Les séances <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LES SEANCES<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 {% for semaine in semaines %}
                   <li><a href="{{ path('f_semaine', { 'id': loop.index }) }}">{{ semaine }}</a></li>
@@ -63,10 +63,10 @@ this.scroll(1,h);
                 {% endfor %}
               </ul>
             </li> 
-            <li id="idlesanims"><a href="{{ path('f_anims') }}">Les animations</a></li>
-            <li id="idportfolio"><a href="{{ path('f_pfolio') }}">PortFolio</a></li>
-            <li id="iddocuments""><a href="{{ path('f_docs') }}">Documents</a></li>
-            <li id="idinfos""><a href="{{ path('f_infos') }}">Infos Pratiques</a></li>
+            <li id="idlesanims"><a href="{{ path('f_anims') }}">LES ANIMATIONS</a></li>
+            <li id="idportfolio"><a href="{{ path('f_pfolio') }}">PORTFOLIO</a></li>
+            <li id="iddocuments""><a href="{{ path('f_docs') }}">DOCUMENTS</a></li>
+            <li id="idinfos""><a href="{{ path('f_infos') }}">INFOS PRATIQUES</a></li>
           </ul>
         </div><!-- /.nav-collapse -->
       </div>

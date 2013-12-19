@@ -2,7 +2,6 @@
 
 {% set i = 0 %}
 {% block contentcentral %}
-
 <div class="row afflesfilms">
    {% for entity in entities %}
      {% if i == 7 %}
@@ -11,7 +10,7 @@
          {% set i = 0 %}
      {% endif %}
     
-    <div class="span2" >
+    <div class="span2fs" >
         <a href='{{ path('f_film', { 'id': entity.id }) }}'><img class="img-polaroid" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" id="{{ loop.index0 }}" {% if i >= 4 %}t="-1"{% else %}t="1"{% endif %}alt=""/></a> 
     </div>
     {% set i = i+1 %}         
@@ -32,11 +31,11 @@
     $(".img-polaroid").hover(function() {
         $(this).fadeTo('fast',1);
         var gauche=$(this).offset();
-        if ($(this).attr("t") == "1") gauche.left += 160;
-        else gauche.left -= 320;
+        if ($(this).attr("t") == "1") gauche.left += 140;
+        else gauche.left -= 280;
         $("#pop").offset(gauche);
         $("#pop").css("background-color", couleurfilm[$(this).attr("id")])
-        $("#pop").css({ "z-index":2, "top" : "550px" });
+        $("#pop").css({ "z-index":2, "top" : "168px" });
         $("#pop").html(resumefilm[$(this).attr("id")]);
      },function(){
         $(this).fadeTo('fast',0.5);

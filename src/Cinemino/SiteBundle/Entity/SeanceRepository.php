@@ -39,20 +39,17 @@ class SeanceRepository extends EntityRepository
                            ->getResult();
    }
 
-      public function findRestantToday2()
+      public function findentredate($datedebut,$datefin)
    {
-       $datejour = new \DateTime('now');
-       $cejourfin = new \DateTime('now');
-       $cejourfin->setTime(23, 59, 0);
        $queryBuilder = $this->createQueryBuilder('s')
                      ->innerJoin('s.idFilm', 'f')
                       ->innerJoin('s.idCinema', 'c')
                       ->addSelect('f')
                       ->addSelect('c');
        $queryBuilder->where('s.dateSeance >= :date1 ')
-                    ->setParameter('date1', $datejour->format('Y-m-d H:i:s')); 
+                    ->setParameter('date1', $datedebut->format('Y-m-d H:i:s')); 
        $queryBuilder->andWhere('s.dateSeance <= :date2 ')
-                    ->setParameter('date2', $cejourfin->format('Y-m-d H:i:s'))
+                    ->setParameter('date2', $datefin->format('Y-m-d H:i:s'))
                      ->orderBy('s.dateSeance','ASC');
               
        return $queryBuilder->getQuery()

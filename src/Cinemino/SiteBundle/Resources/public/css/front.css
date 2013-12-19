@@ -1,172 +1,296 @@
 
+html {
+    background-image: url("../images/cover.jpg");
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
 body {
     margin: auto;
     width: 1024px;
+}
+@font-face {
+    font-family: "SsPro2italic";
+    src: local("SsPro2italic"), url("../fonts/SSPro2italic.ttf");
+}
+@font-face {
+    font-family: "SsPro2";
+    src: local("SsPro2"), url("../fonts/SSPro2.ttf");
+}
+@font-face {
+    font-family: "Megrim";
+    src: local("Megrim"), url("../fonts/Megrimregular.ttf");
+}
+@font-face {
+    font-family: "BenchNine";
+    src: local("BenchNine"), url("../fonts/BenchNine700.ttf");
 }
 header {
     margin-left: 20px;
 }
 .nav {
-    background-image: url("../images/menu.jpg");
+    background-image: url("../images/menu.png");
+    background-repeat: no-repeat;
     text-align: center;
-    width: 1200px;
+    width: 1024px;
+}
+#idhome {
+    margin-left: 0;
+    width: 39px;
 }
 #idhome img {
-    width: 23px;
+    width: 17px;
 }
 #idhome a {
     margin: -4px 0 0 -4px;
 }
 #idfestival {
-    margin-left: -2px;
-    width: 140px;
+    margin-left: -1px;
+    width: 123px;
 }
 #idsalles {
-    margin-left: 2px;
-    width: 143px;
+    margin-left: 1px;
+    width: 123px;
 }
 #idfilms {
-    margin-left: 2px;
-    width: 143px;
+    margin-left: 0;
+    width: 123px;
 }
 #idlesseances {
-    margin-left: 2px;
-    width: 142px;
+    margin-left: 0;
+    width: 123px;
 }
 #idlesanims {
-    margin-left: 2px;
-    width: 143px;
+    margin-left: 1px;
+    width: 123px;
 }
 #idportfolio {
-    margin-left: 2px;
-    width: 142px;
+    margin-left: 0;
+    width: 123px;
 }
 #iddocuments {
-    margin-left: 2px;
-    width: 143px;
+    margin-left: -1px;
+    width: 123px;
 }
 #idinfos {
-    margin-left: 2px;
-    width: 142px;
+    margin-left: 0;
+    width: 123px;
 }
 #fichefilm {
     margin-top: 30px;
 }
+#fichefilm h1 {
+    color: #E94149;
+    font-family: "Megrim";
+    font-size: 34px;
+    margin: 5px 0 0;
+}
+#fichefilm h2 {
+    color: #E94149;
+    font-family: "SsPro2italic";
+    font-size: 16px;
+    font-style: italic;
+    height: 22px;
+    margin: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+#fichefilm h3 {
+    color: #000000;
+    font-family: "SsPro2";
+    font-size: 18px;
+}
+#fichefilm p {
+    color: #000000;
+    font-family: "SsPro2";
+    font-size: 15px;
+}
 #bloccentral {
     background-color: #FFFFFF;
-    height: 714px;
+    height: 743px;
     margin-bottom: 0;
     margin-left: 0;
     margin-top: 0;
     padding: 0;
-    width: 1000px;
+    position: relative;
+    width: 1024px;
 }
 #nuage {
     margin-top: 0;
     position: relative;
+    z-index: 1;
 }
 #nuage1 {
     margin-top: 0;
     position: relative;
+    z-index: 1;
 }
 #rosace {
-    margin-left: 926px;
-    margin-top: -122px;
+    left: 618px;
     position: relative;
+    top: -18px;
     z-index: 4;
 }
 #lp1 {
-    margin-left: -950px;
-    margin-top: -1028px;
+    left: 61px;
+    top: -924px;
+}
+#tlp0 {
+    left: 69px;
 }
 #lp2 {
-    margin-left: 13px;
-    margin-top: -997px;
+    left: 73px;
+    top: -917px;
+}
+#tlp1 {
+    left: 146px;
 }
 #lp3 {
-    margin-left: 9px;
-    margin-top: -971px;
+    left: 79px;
+    top: -914px;
+}
+#tlp2 {
+    left: 221px;
 }
 #lp4 {
-    margin-left: 13px;
-    margin-top: -954px;
+    left: 105px;
+    top: -909px;
+}
+#tlp3 {
+    left: 307px;
 }
 #lp5 {
-    margin-left: 13px;
-    margin-top: -940px;
+    left: 109px;
+    top: -908px;
+}
+#tlp4 {
+    left: 380px;
 }
 #lp6 {
-    margin-left: 13px;
-    margin-top: -931px;
+    left: 108px;
+    top: -905px;
+}
+#tlp5 {
+    left: 446px;
 }
 #lp7 {
-    margin-left: 13px;
-    margin-top: -930px;
+    left: 117px;
+    top: -906px;
+}
+#tlp6 {
+    left: 520px;
 }
 #lp8 {
-    margin-left: 13px;
-    margin-top: -934px;
+    left: 130px;
+    top: -907px;
+}
+#tlp7 {
+    left: 601px;
 }
 #lp9 {
-    margin-left: 13px;
-    margin-top: -948px;
+    left: 152px;
+    top: -909px;
+}
+#tlp8 {
+    left: 687px;
 }
 #lp10 {
-    margin-left: 13px;
-    margin-top: -966px;
+    left: 168px;
+    top: -913px;
+}
+#tlp9 {
+    left: 770px;
 }
 #lp11 {
-    margin-left: 13px;
-    margin-top: -992px;
+    left: 181px;
+    top: -919px;
+}
+#tlp10 {
+    left: 853px;
 }
 #lp12 {
-    margin-left: 13px;
-    margin-top: -1026px;
+    left: 181px;
+    top: -923px;
+}
+#tlp11 {
+    left: 919px;
 }
 .lp {
-    cursor: pointer;
     position: relative;
+    z-index: 4;
+}
+.tlp {
+    color: #2B306D;
+    font-family: "BenchNine";
+    font-size: 21px;
+    position: absolute;
+    top: 329px;
     z-index: 3;
 }
-#jour1 {
-    margin-left: 141px;
-    margin-top: -637px;
-    position: absolute;
-    z-index: 2;
+.lpA {
+    cursor: pointer;
 }
-#jour0 {
-    margin-left: 145px;
-    margin-top: -693px;
-    position: absolute;
-    z-index: 2;
+#jour1 {
+    color: #000000;
+    font-family: "Megrim";
+    font-size: 21px;
+    left: 67px;
+    position: relative;
+    top: -1009px;
+    z-index: 3;
 }
 #fondhome {
-    margin-left: 0;
-    margin-top: -123px;
+    left: -1px;
     position: relative;
+    top: -97px;
+    width: 1024px;
     z-index: 3;
 }
 #fondville {
-    margin-left: 6px;
-    margin-top: -500px;
+    left: 4px;
     position: relative;
+    top: -464px;
     z-index: 2;
 }
-#fondrose {
-    margin-left: 6px;
-    margin-top: -700px;
-    position: relative;
-    z-index: 1;
+#infoseance:before{
+    content: url("../images/index/halolumh.png"); 
+    margin-left: -16px;
 }
+
+#infoseance:after{
+    content: url("../images/index/halolumbb.png"); 
+    margin-left: -12px;
+}
+
 #infoseance {
-    background: linear-gradient(to bottom, #FEFCEA 28%, #F1DA36 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
-    border-radius: 10px;
-    margin: 20px 15px 10px 20px;
+
     padding: 15px;
-    position: absolute;
+    position: relative;
     visibility: hidden;
     width: 322px;
     z-index: 3;
+}
+
+.iseance {
+background: -moz-linear-gradient(top,  rgba(252,248,173,1) 0%, rgba(250,242,140,0.05) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,248,173,1)), color-stop(100%,rgba(250,242,140,0.05)));
+background: -webkit-linear-gradient(top,  rgba(252,248,173,1) 0%,rgba(250,242,140,0.05) 100%);
+background: -o-linear-gradient(top,  rgba(252,248,173,1) 0%,rgba(250,242,140,0.05) 100%);
+background: -ms-linear-gradient(top,  rgba(252,248,173,1) 0%,rgba(250,242,140,0.05) 100%);
+background: linear-gradient(to bottom,  rgba(252,248,173,1) 0%,rgba(250,242,140,0.05) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcf8ad', endColorstr='#0dfaf28c',GradientType=0 );
+margin: -14px -14px 0px -16px;
+padding: inherit;
+}
+
+#infoseance h1 {
+    color: #2B306D;
+    font-family: "BenchNine";
+    font-size: 31px;
+    left: 142px;
+    position: absolute;
+    text-align: center;
+    top: 77px;
 }
 #infoseance img {
     float: left;
@@ -187,11 +311,11 @@ header {
     position: relative;
 }
 #pop {
-    height: 192px;
+    height: 163px;
     margin-right: -10px;
     padding: 0 0 5px 10px;
     position: absolute;
-    width: 298px;
+    width: 257px;
 }
 #pop h1 {
     font-family: cursive;
@@ -207,6 +331,16 @@ header {
     background-color: #38A962;
     height: 3px;
 }
+#ligneRougeH {
+    background-color: #E94149;
+    height: 2px;
+    margin-left: 0;
+}
+#ligneRouge {
+    background-color: #E94149;
+    height: 3px;
+    margin-left: 54px;
+}
 #fanseances {
     margin-left: -1px;
     max-width: 150%;
@@ -220,8 +354,36 @@ header {
 }
 #regret {
     font-family: cursive;
-    font-size: x-large;
-    margin: 77px 10px 10px 30px;
+    font-size: medium;
+    margin: 37px 10px 10px 30px;
+}
+.offset1f {
+    margin-left: 55px;
+}
+.span1f {
+    width: 55px;
+}
+.span2f {
+    margin: 10px 21px 10px 49px;
+    width: 86px;
+}
+.span2fs {
+    width: 119px;
+}
+.span6f {
+    width: 508px;
+}
+.span7f {
+    width: 583px;
+}
+.span8f {
+    width: 638px;
+}
+.span4f {
+    width: 276px;
+}
+.bulle {
+    margin: 22px 10px 5px -57px;
 }
 .jseance {
     width: 110px;
@@ -233,17 +395,21 @@ header {
     width: 100px;
 }
 .lh {
-    background-image: url("../images/ligneHor.jpg");
+    background-image: url("../images/index/ligneHor.jpg");
     clear: both;
-    height: 5px;
-    margin: -23px 1px 0 0;
-    width: 994px;
+    height: 2px;
+    left: 21px;
+    position: relative;
+    top: -535px;
+    width: 1024px;
+    left: 20px;
+    z-index: 3;
 }
 .lv {
-    background-image: url("../images/ligneVer.jpg");
-    height: 498px;
+    background-image: url("../images/index/ligneVer.jpg");
+    height: 490px;
     margin-left: 0;
-    width: 6px;
+    width: 2px;
 }
 .court {
     clear: both;
@@ -268,33 +434,34 @@ header {
     margin: 18px 0 0;
 }
 #blocsbas {
+    position: absolute;
 }
 #basgauche {
     background-color: #FFFFFF;
-    margin-left: -9px;
-    width: 302px;
+    margin-left: 21px;
+    width: 278px;
 }
 #basgauche img {
     margin-bottom: 5px;
-    margin-left: 43px;
-    margin-top: 8px;
+    margin-left: 15px;
+    margin-top: 13px;
 }
 #basmilieu {
     background-color: #FFFFFF;
     margin-left: 0;
-    width: 394px;
+    width: 401px;
 }
 #basdroit {
     background-color: #FFFFFF;
     border: 1px solid;
-    height: 497px;
-    margin-left: 8px;
+    height: 481px;
+    margin-left: 14px;
     padding: 2px 5px;
-    width: 299px;
+    width: 305px;
 }
 .nav {
     font-family: menu;
-    font-size: 18px;
+    font-size: 14px;
 }
 .navbar-inverse .brand, .navbar-inverse .nav > li > a {
     color: #000000;
@@ -306,7 +473,7 @@ header {
     background-image: url("../images/index/fondphoto.png");
     height: 339px;
     margin-left: 39px;
-    margin-top: 103px;
+    margin-top: 110px;
     width: 323px;
 }
 #miss {
@@ -319,13 +486,13 @@ header {
     position: relative;
 }
 #rb {
-    margin-left: 50px;
-    margin-top: -73px;
+    margin-left: 31px;
+    margin-top: -84px;
     position: relative;
 }
 #bulle {
-    margin-left: -21px;
-    margin-top: -832px;
+    margin-left: -23px;
+    margin-top: -826px;
     position: relative;
 }
 #phind {
@@ -335,18 +502,23 @@ header {
 #legind {
     font-family: cursive;
     font-size: 20px;
-    text-align: center;
+    margin-right: 20px;
+    margin-top: -5px;
+    text-align: end;
 }
 #diapo {
     background-color: #FFFFFF;
     position: absolute;
     visibility: hidden;
-    width: 1200px;
+    width: 1024px;
 }
 .slide img {
     display: block;
-    margin: 5px auto 0;
+    margin: 5px 0 0 56px;
 }
 .ph {
     cursor: pointer;
+}
+li {
+    line-height: 13px;
 }
