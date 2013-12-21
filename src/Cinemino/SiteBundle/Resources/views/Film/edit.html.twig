@@ -62,7 +62,14 @@
      {{ form_widget(form.file, { 'attr': {'style': 'padding:10px;'} }) }}
     <img src="{{asset('medias/Film/affiches/big/')}}{{entity.affiche }}" width="151px"/>
   </div>
-   
+   <div class="span3">
+     {{ form_label(form.filet) }}
+     {{ form_errors(form.totem) }}
+     {{ form_widget(form.totem, { 'attr': {'style': 'width:300px;'} }) }}
+     {{ form_errors(form.filet) }}
+     {{ form_widget(form.filet, { 'attr': {'style': 'padding:10px;'} }) }}
+    <img src="{{asset('medias/Film/totems/')}}{{ entity.totem }}" width="151px"/>
+  </div>  
 </div>
      
 <div class="row">     

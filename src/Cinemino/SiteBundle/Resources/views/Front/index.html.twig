@@ -3,6 +3,7 @@
 {% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
 
 {% block contentcentral %}
+<div id="blocindex">
   <img id="nuage" src="{{ asset('bundles/cineminosite/images/index/nuage.png') }}"/>
   <img id="nuage1" src="{{ asset('bundles/cineminosite/images/index/ptnuage.png') }}"/>
   <img id="rosace" src="{{ asset('bundles/cineminosite/images/index/rosace.png') }}"/>
@@ -35,6 +36,7 @@
  <p class="tlp" id="tlp11"></p>
  <div class="row lh"></div>
  <div id="infoseance"> </div>
+</div> 
 {% endblock contentcentral %}
 
 {% block contentbas %}
@@ -150,7 +152,7 @@
     {% endfor %}
     {% set i = i+1 %} // pour ne pas avoir -1 s'il n'y a pas de séances
     // on spécifie suivant le nombre d'heures différents    
-    if ({{ i }}>1 && {{ i }}<13) 
+    if ({{ i }}>0 && {{ i }}<13) 
     {     
       var modulo = parseInt((12-{{ i }}) / ({{ i }}));
       if(modulo<1) modulo=1;

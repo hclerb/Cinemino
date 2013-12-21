@@ -4,14 +4,14 @@
 {% block contentcentral %}
 <div class="row afflesfilms">
    {% for entity in entities %}
-     {% if i == 7 %}
+     {% if i == 6 %}
          </div>
          <div class="row afflesfilms">
          {% set i = 0 %}
      {% endif %}
     
     <div class="span2fs" >
-        <a href='{{ path('f_film', { 'id': entity.id }) }}'><img class="img-polaroid" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" id="{{ loop.index0 }}" {% if i >= 4 %}t="-1"{% else %}t="1"{% endif %}alt=""/></a> 
+        <a href='{{ path('f_film', { 'id': entity.id }) }}'><img class="img" src="{{asset('medias/Film/totems/brut/')}}{{entity.totem }}" id="{{ loop.index0 }}" {% if i >= 4 %}t="-1"{% else %}t="1"{% endif %}alt=""/></a> 
     </div>
     {% set i = i+1 %}         
     {% endfor %}
@@ -23,19 +23,23 @@
 <script> 
     var resumefilm=[];
     var couleurfilm=[];
+    var couleurtexte=[];
     {% for entity in entities %}
-         resumefilm[{{ loop.index0 }}] = "{% if entity.titreFilm|length >20 %}<h4>{{ entity.titreFilm|raw }}</h4> {% else %} <h3>{{ entity.titreFilm|raw }}</h3>{% endif %}<h4>De {{ entity.realisateur }}</h4><h5>{{ pays[entity.provenance] }} - {{ entity.anneeProd }} - {{ entity.duree|date('H:i') }}<br/>A partir de {{ entity.ageConseille }} ans</h5>";
+         resumefilm[{{ loop.index0 }}] = "<h3>{{ entity.titreFilm|raw }}</h3><div class='ligne'></div><h4>De {{ entity.realisateur }}</h4><h5>{{ pays[entity.provenance] }} - {{ entity.anneeProd }} - {{ entity.duree|date('H:i') }}<br/>A partir de {{ entity.ageConseille }} ans</h5>";
          couleurfilm[{{ loop.index0 }}]= "#{{ entity.couleurFondFilm }}";
+         couleurtexte[{{ loop.index0 }}]= "#{{ entity.couleurTexte }}";
          $("#{{ loop.index0 }}").fadeTo('fast',0.5);
     {% endfor %}
-    $(".img-polaroid").hover(function() {
+    $(".img").hover(function() {
         $(this).fadeTo('fast',1);
         var gauche=$(this).offset();
-        if ($(this).attr("t") == "1") gauche.left += 140;
-        else gauche.left -= 280;
+        if ($(this).attr("t") == "1") gauche.left += 162;
+        else gauche.left -= 324;
         $("#pop").offset(gauche);
-        $("#pop").css("background-color", couleurfilm[$(this).attr("id")])
-        $("#pop").css({ "z-index":2, "top" : "168px" });
+        $("#pop").css("background-color", couleurfilm[$(this).attr("id")]);
+        $(".ligne").css("background-color", couleurfilm[$(this).attr("id")]);
+        $("#pop").css("color", couleurtexte[$(this).attr("id")])
+        $("#pop").css({ "z-index":2, "top" : "180px" });
         $("#pop").html(resumefilm[$(this).attr("id")]);
      },function(){
         $(this).fadeTo('fast',0.5);

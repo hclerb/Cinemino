@@ -65,6 +65,8 @@ class FilmType extends AbstractType
                     10 => 'rotoscopie'),'required' => false) )
             ->add('affiche','text', array('label' => '','read_only' => true))
             ->add('file', 'file', array('label' => 'Affiche (format jpeg, Taille 2Mo Maxi)', 'required' => false))
+            ->add('totem','text', array('label' => '','read_only' => true))
+            ->add('filet', 'file', array('label' => 'Affiche (format jpeg, Taille 2Mo Maxi)', 'required' => false))                
             ->add('couleurTexte', null, array('label' => 'Couleur du texte'))
             ->add('couleurFondFilm', null, array('label' => 'Couleur de fond'))
             ->add('type', 'choice', array('label' => 'Type',   

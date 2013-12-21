@@ -120,6 +120,13 @@ class Film
      */
     protected $affiche;
 
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="TOTEM", type="string", length=150, nullable=true)
+     */
+    protected $totem;
+    
     /**
      * @var string
      *
@@ -187,6 +194,16 @@ class Film
      */
     private $file;              //permet de stocker temporairement le fichier affiche
 
+     /**
+     *
+     * @var file
+     * 
+     * @Assert\File(
+     *     maxSize = "100k"
+     *     )
+     */
+    private $filet;              //permet de stocker temporairement le fichier totem
+    
     /**
      * Constructor
      */
@@ -194,6 +211,7 @@ class Film
     {
         $this->idMedias = new \Doctrine\Common\Collections\ArrayCollection();
         $this->affiche="";
+        $this->totem="";
     }
     
     /**
@@ -471,6 +489,29 @@ class Film
     {
         return $this->affiche;
     }
+    
+    /**
+     * Set totem
+     *
+     * @param string $affiche
+     * @return Film
+     */
+    public function setTotem($totem)
+    {
+        $this->totem = $totem;
+    
+        return $this;
+    }
+
+    /**
+     * Get totem
+     *
+     * @return string 
+     */
+    public function getTotem()
+    {
+        return $this->totem;
+    }
 
     /**
      * Set couleurTexte
@@ -612,7 +653,7 @@ class Film
         return $this->titreFilm . ' - ' . $this->realisateur;
     }
     
-// gestion fichier    
+// gestion fichier affiche    
     public function setFile($file)
     {
         $this->file = $file;
@@ -623,6 +664,17 @@ class Film
         return $this->file;
     }    
 
+// gestion fichier totem    
+    public function setFilet($file)
+    {
+        $this->filet = $file;
+    }
+
+    public function getFilet()
+    {
+        return $this->filet;
+    } 
+    
     /**
      * Set stock
      *

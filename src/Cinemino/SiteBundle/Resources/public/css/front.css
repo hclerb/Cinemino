@@ -18,6 +18,10 @@ body {
     src: local("SsPro2"), url("../fonts/SSPro2.ttf");
 }
 @font-face {
+    font-family: "Ssemibold";
+    src: local("Ssemibold"), url("../fonts/SourceSansPro600.ttf");
+}
+@font-face {
     font-family: "Megrim";
     src: local("Megrim"), url("../fonts/Megrimregular.ttf");
 }
@@ -31,8 +35,17 @@ header {
 .nav {
     background-image: url("../images/menu.png");
     background-repeat: no-repeat;
+    font-family: "BenchNine";
+    font-size: 14px;
+    font-weight: bold;
     text-align: center;
     width: 1024px;
+}
+.navbar .nav > li > a:focus, .navbar .nav > li > a:hover {
+    font-size: 12px;
+}
+.navbar-inverse .brand, .navbar-inverse .nav > li > a {
+    color: #FFFFFF;
 }
 #idhome {
     margin-left: 0;
@@ -105,9 +118,11 @@ header {
     font-family: "SsPro2";
     font-size: 15px;
 }
+#blocindex {
+    height: 743px;
+}
 #bloccentral {
     background-color: #FFFFFF;
-    height: 743px;
     margin-bottom: 0;
     margin-left: 0;
     margin-top: 0;
@@ -231,12 +246,12 @@ header {
     cursor: pointer;
 }
 #jour1 {
-    color: #000000;
+    color: #FFFFFF;
     font-family: "Megrim";
     font-size: 21px;
-    left: 67px;
+    left: 32px;
     position: relative;
-    top: -1009px;
+    top: -1017px;
     z-index: 3;
 }
 #fondhome {
@@ -252,37 +267,26 @@ header {
     top: -464px;
     z-index: 2;
 }
-#infoseance:before{
-    content: url("../images/index/halolumh.png"); 
+#infoseance:before {
+    content: url("../images/index/halolumh.png");
     margin-left: -16px;
 }
-
-#infoseance:after{
-    content: url("../images/index/halolumbb.png"); 
+#infoseance:after {
+    content: url("../images/index/halolumbb.png");
     margin-left: -12px;
 }
-
 #infoseance {
-
     padding: 15px;
     position: relative;
     visibility: hidden;
     width: 322px;
     z-index: 3;
 }
-
 .iseance {
-background: -moz-linear-gradient(top,  rgba(252,248,173,1) 0%, rgba(250,242,140,0.05) 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,248,173,1)), color-stop(100%,rgba(250,242,140,0.05)));
-background: -webkit-linear-gradient(top,  rgba(252,248,173,1) 0%,rgba(250,242,140,0.05) 100%);
-background: -o-linear-gradient(top,  rgba(252,248,173,1) 0%,rgba(250,242,140,0.05) 100%);
-background: -ms-linear-gradient(top,  rgba(252,248,173,1) 0%,rgba(250,242,140,0.05) 100%);
-background: linear-gradient(to bottom,  rgba(252,248,173,1) 0%,rgba(250,242,140,0.05) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcf8ad', endColorstr='#0dfaf28c',GradientType=0 );
-margin: -14px -14px 0px -16px;
-padding: inherit;
+    background: linear-gradient(to bottom, #FCF8AD 0%, rgba(250, 242, 140, 0.05) 100%) repeat scroll 0 0 #FFFFFF;
+    margin: -14px -14px 0 -16px;
+    padding: inherit;
 }
-
 #infoseance h1 {
     color: #2B306D;
     font-family: "BenchNine";
@@ -297,35 +301,44 @@ padding: inherit;
     margin-top: 2px;
 }
 #infoseance p {
+    font-family: "Ssemibold";
+    font-size: 14px;
+    font-style: italic;
     margin-bottom: 0;
     margin-left: 119px;
 }
 #infoseance .pfilm {
+    color: #000000;
+    font-family: "Megrim";
+    font-size: 14px;
     padding-top: 19px;
 }
 #infoseance .pcine {
     clear: both;
 }
 .afflesfilms {
-    margin: 10px;
+    left: 49px;
     position: relative;
 }
 #pop {
-    height: 163px;
+    height: 295px;
     margin-right: -10px;
     padding: 0 0 5px 10px;
     position: absolute;
-    width: 257px;
+    width: 285px;
 }
 #pop h1 {
-    font-family: cursive;
     padding-top: 10px;
     text-align: center;
 }
 #pop h4 {
-    font-family: fantasy;
+    font-family: "Ssemibold";
+    font-size: 14px;
+    font-style: italic;
 }
 #pop h3 {
+    font-family: "Megrim";
+    font-size: 22px;
 }
 #ligneVerte {
     background-color: #38A962;
@@ -340,6 +353,11 @@ padding: inherit;
     background-color: #E94149;
     height: 3px;
     margin-left: 54px;
+}
+#ligneBleu {
+    background-color: #2B306D;
+    height: 2px;
+    margin: 5px 44px 3px 36px;
 }
 #fanseances {
     margin-left: -1px;
@@ -368,7 +386,9 @@ padding: inherit;
     width: 86px;
 }
 .span2fs {
-    width: 119px;
+    height: 134px;
+    margin: 13px 14px 20px;
+    width: 134px;
 }
 .span6f {
     width: 508px;
@@ -398,11 +418,10 @@ padding: inherit;
     background-image: url("../images/index/ligneHor.jpg");
     clear: both;
     height: 2px;
-    left: 21px;
+    left: 20px;
     position: relative;
     top: -535px;
     width: 1024px;
-    left: 20px;
     z-index: 3;
 }
 .lv {
@@ -459,13 +478,6 @@ padding: inherit;
     padding: 2px 5px;
     width: 305px;
 }
-.nav {
-    font-family: menu;
-    font-size: 14px;
-}
-.navbar-inverse .brand, .navbar-inverse .nav > li > a {
-    color: #000000;
-}
 .dropdown-menu {
     text-align: left;
 }
@@ -521,4 +533,22 @@ padding: inherit;
 }
 li {
     line-height: 13px;
+}
+#ballons {
+    left: 86px;
+    position: relative;
+    top: 24px;
+    z-index: 3;
+}
+#persoS {
+    left: -104px;
+    position: relative;
+    top: -505px;
+    z-index: 3;
+}
+#fondvillej {
+    left: 4px;
+    position: relative;
+    top: -3100px;
+    z-index: 2;
 }

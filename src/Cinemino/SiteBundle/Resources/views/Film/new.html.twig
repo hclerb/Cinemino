@@ -9,18 +9,22 @@
 {{ form_errors(form) }}
  
 <div class="row">
-  <div class="span8">    
+  <div class="span7">    
     {{ form_label(form.titreFilm) }}  
     {{ form_errors(form.titreFilm) }}
     {{ form_widget(form.titreFilm, { 'attr': {'style': 'width:700px;'} }) }}
   
   </div> 
-  <div class="span3">
+  <div class="span2">
      {{ form_label(form.file) }}
      {{ form_errors(form.file) }}
      {{ form_widget(form.file, { 'attr': {'style': 'padding-left:40px;'} }) }}
   </div>
-   
+    <div class="span2">
+     {{ form_label(form.filet) }}
+     {{ form_errors(form.filet) }}
+     {{ form_widget(form.filet, { 'attr': {'style': 'padding-left:40px;'} }) }}
+  </div> 
 </div>
     
 <div class="row">    

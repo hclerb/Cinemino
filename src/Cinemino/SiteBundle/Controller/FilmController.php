@@ -22,13 +22,6 @@ class FilmController extends Controller
      *
      */
     
-    public function __construct()
-    {
-    }
-    
-    
-    
-    
     public function indexAction()
     {
         
@@ -100,6 +93,11 @@ class FilmController extends Controller
                 $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
                 $url->move("medias/Film/affiches/brut",$url->getClientOriginalName());
             } 
+           if($entity->getFilet()!=NULL){   
+                $url = $entity->getFilet();     
+                $url->move("medias/Film/totems/brut",$url->getClientOriginalName());
+                $entity->setTotem($url->getClientOriginalName());
+            }             
             
             foreach($entity->getIdMedias() as $media)  
             {
@@ -183,7 +181,11 @@ class FilmController extends Controller
               $resize->UploadPhoto($url,"Film/affiches/small",LgAfficheFSmall,HtAfficheFSmall);
               $url->move("medias/Film/affiches/brut",$url->getClientOriginalName());
             }
-  
+           if($entity->getFilet()!=NULL){   
+                $url = $entity->getFilet();     
+                $url->move("medias/Film/totems/brut",$url->getClientOriginalName());
+                $entity->setTotem($url->getClientOriginalName());
+            } 
             
             foreach($entity->getIdMedias() as $media)  
             {

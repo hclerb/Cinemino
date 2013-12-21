@@ -7,12 +7,13 @@
 <table class="table table-bordered table-striped table-hover">
     <thead>
            <tr bgcolor="#EAE8FF">
-            <th width=305>Titre du film</th>
+            <th width=295>Titre du film</th>
             <th width=45>Durée</th>
-            <th width=200>Realisateur</th>
+            <th width=190>Realisateur</th>
             <th width=88>Affiche</th>
-            <th width=250>Type ou Programme</th>
-            <th width=160>Actions</th>
+            <th width=88>Totem</th>            
+            <th width=200>Type ou Programme</th>
+            <th width=142>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
             <td>{{ entity.duree|date('H:i') }}</td>
             <td>{{ entity.realisateur }}</td>
             <td><img class="img-polaroid" style="width:75px;" src="{{asset('medias/Film/affiches/small/')}}{{entity.affiche }}" alt=""/></td>
+            <td><img class="img-polaroid" style="width:75px;" src="{{asset('medias/Film/totems/brut/')}}{{entity.totem }}" alt=""/></td>            
             <!-- big/ ou small/ selon si on veut recuperer l'affiche redimensionnée ou non -->
             <td>{% if entity.type == 'n' %}Long Métrage
                 {% else %}

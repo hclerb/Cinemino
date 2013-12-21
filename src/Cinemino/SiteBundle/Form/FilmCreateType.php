@@ -12,6 +12,7 @@ class FilmCreateType extends FilmType
     {
         parent::buildForm($builder, $options);
         $builder->remove('affiche');
+        $builder->remove('totem');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

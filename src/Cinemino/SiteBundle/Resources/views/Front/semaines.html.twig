@@ -3,6 +3,9 @@
 {% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
 
 {% block contentcentral %}
+  <img id="ballons" src="{{ asset('bundles/cineminosite/images/seances/ballons.png') }}"/>
+  <img id="persoS" src="{{ asset('bundles/cineminosite/images/seances/personnages8.png') }}"/>
+  <img id="fondvillej" src="{{ asset('bundles/cineminosite/images/seances/villejaune.jpg') }}"/>
 <br/><br/>
  {% for laseance in entities %}
    <p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>
