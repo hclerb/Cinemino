@@ -62,11 +62,16 @@ class ResizeImg{
             list($width_orig, $height_orig) = getimagesize($filename);
 
 
-            $ratio_orig = $width_orig/$height_orig;
+            //$ratio_orig = $width_orig/$height_orig;
             //calcul de la hauteur voulue
-            $height = $width/$ratio_orig;
+            $height = ($width * $height_orig)/$width_orig;
 
             if ($heightf > $height) $heightf = $height; 
+              else
+              {
+                  $width = ($heightf * $width_orig)/$height_orig;
+                  $height = $heightf;
+              }
 
             // Redimensionnement
             $image_p = imagecreatetruecolor($width, $height);

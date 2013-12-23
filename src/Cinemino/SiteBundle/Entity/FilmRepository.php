@@ -29,5 +29,12 @@ class FilmRepository extends EntityRepository
         return $qb->getQuery()
                   ->getResult();
     }
+  public function getFilmsActif()
+  {
+         $qb = $this->createQueryBuilder('f')
+              ->where("f.stocke = 'false'")
+              ->orderBy('f.titreFilm','ASC');
+        return $qb;    
+  }
     
 }

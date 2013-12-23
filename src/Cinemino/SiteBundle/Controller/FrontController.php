@@ -15,7 +15,7 @@ use Cinemino\SiteBundle\Entity\SeanceRepository;
 use Cinemino\SiteBundle\Entity\Film;
 use Cinemino\SiteBundle\Entity\donnees;
 use Cinemino\SiteBundle\Entity\MediaIn;
-
+use Cinemino\SiteBundle\Entity\Sponsor;
 use Cinemino\SiteBundle\Entity\ProgrammeCourts;
 
 
@@ -53,15 +53,17 @@ class FrontController extends Controller
         if (count($photos)>1) $photo = $photos[count($photos)-1];
             else $photo=null;
         return $this->render('CineminoSiteBundle:Front:index.html.twig', array(
-            'semaines' => $stsemaines,
+           'semaines' => $stsemaines,
            'entities' => $entities,
            'cinemino' => $cineminoinfo,
            'photo' => $photo,
+            'lessponsors' => $this->lesSponsors($em),
         ));
     }
 
    public function festivalAction()
     {
+       $em = $this->getDoctrine()->getManager();
        $semaines = $this->init_menu_seances();
        if (isset($semaines[0])) 
        {   
@@ -69,6 +71,7 @@ class FrontController extends Controller
        } else $stsemaines[0] = null;
        return $this->render('CineminoSiteBundle:Front:festival.html.twig', array(
             'semaines' => $stsemaines,
+            'lessponsors' => $this->lesSponsors($em),
         ));
     }
     
@@ -101,7 +104,8 @@ class FrontController extends Controller
            'progcourt' => $progcourt,
            'entitiesC' => $entitiesC,
            'pays' => donnees::$pays,
-//            'entities' => $entities,
+            'lessponsors' => $this->lesSponsors($em),
+
         ));
     }
 
@@ -120,6 +124,7 @@ class FrontController extends Controller
             'semaines' => $stsemaines,
             'entities' => $entities,
             'pays' => donnees::$pays, 
+            'lessponsors' => $this->lesSponsors($em),           
         ));
     }
 
@@ -134,6 +139,7 @@ public function sallesAction()
        $entities = $em->getRepository('CineminoSiteBundle:Cinema')->findAll();
        return $this->render('CineminoSiteBundle:Front:salles.html.twig', array(
             'semaines' => $stsemaines,
+            'lessponsors' => $this->lesSponsors($em),
             'entities' => $entities,
         ));
     }
@@ -150,18 +156,21 @@ public function salleAction($id)
        $entities[0] = $entitie;
        return $this->render('CineminoSiteBundle:Front:salles.html.twig', array(
             'semaines' => $stsemaines,
+            'lessponsors' => $this->lesSponsors($em),
             'entities' => $entities,
         ));
     }    
  
    public function animsAction()
     {
+       $em = $this->getDoctrine()->getManager();
        $semaines = $this->init_menu_seances();
        if (isset($semaines[0])) 
        {   
            foreach ($semaines as $semaine) $stsemaines[] = $semaine->__toString();  
        } else $stsemaines[0] = null;
        return $this->render('CineminoSiteBundle:Front:animations.html.twig', array(
+            'lessponsors' => $this->lesSponsors($em),
             'semaines' => $stsemaines,
         ));
     }
@@ -178,42 +187,49 @@ public function salleAction($id)
        $entity = $em->getRepository('CineminoSiteBundle:Seance')->find($id);
        return $this->render('CineminoSiteBundle:Front:animation.html.twig', array(
             'semaines' => $stsemaines,
+            'lessponsors' => $this->lesSponsors($em),
             'entity' => $entity
         ));
     }
     
   public function pfolioAction()
     {
+      $em = $this->getDoctrine()->getManager();
        $semaines = $this->init_menu_seances();
        if (isset($semaines[0])) 
        {   
            foreach ($semaines as $semaine) $stsemaines[] = $semaine->__toString();  
        } else $stsemaines[0] = null;
        return $this->render('CineminoSiteBundle:Front:pfolio.html.twig', array(
+            'lessponsors' => $this->lesSponsors($em),
             'semaines' => $stsemaines,
         ));
     }
 
   public function docsAction()
     {
+      $em = $this->getDoctrine()->getManager();
        $semaines = $this->init_menu_seances();
        if (isset($semaines[0])) 
        {   
            foreach ($semaines as $semaine) $stsemaines[] = $semaine->__toString();  
        } else $stsemaines[0] = null;
        return $this->render('CineminoSiteBundle:Front:docs.html.twig', array(
+            'lessponsors' => $this->lesSponsors($em),
             'semaines' => $stsemaines,
         ));
     }
     
   public function infosAction()
     {
+      $em = $this->getDoctrine()->getManager();
        $semaines = $this->init_menu_seances();
        if (isset($semaines[0])) 
        {   
            foreach ($semaines as $semaine) $stsemaines[] = $semaine->__toString();  
        } else $stsemaines[0] = null;
        return $this->render('CineminoSiteBundle:Front:infos.html.twig', array(
+            'lessponsors' => $this->lesSponsors($em),
             'semaines' => $stsemaines,
         ));
     }
@@ -228,13 +244,12 @@ public function salleAction($id)
                
        $em = $this->getDoctrine()->getManager();
        $entities = $em->getRepository('CineminoSiteBundle:Seance')->findentredate($semaines[$id-1]->getDatedebut(),$semaines[$id-1]->getDatefin());
-       
-       
-       
-       
+ 
        return $this->render('CineminoSiteBundle:Front:semaines.html.twig', array(
             'semaines' => $stsemaines,
+            'lessponsors' => $this->lesSponsors($em),
             'entities' => $entities,
+           'lasemaine' => $semaines[$id-1],
         ));
     }
  
@@ -277,16 +292,18 @@ public function salleAction($id)
      }
      
      public function init_menu_seances() {
-        
+         $semaines = array();
          $entity = new Cinemino();
          $em = $this->getDoctrine()->getManager();
          $entities = $em->getRepository('CineminoSiteBundle:Cinemino')->findAll();
          $datejour = new \DateTime();
          $datefin = new \DateTime($entities[0]->getDateDebut()->format('d F Y'));
+         $derniersemaine = false;   // indique si la dernier semaine est tronquée
          if($datejour < $entities[0]->getDateDebut())
          {
              // affichage de toute les semaines            
             $i=0;
+            // Création première semaine si pas début un mercredi
             if (($entities[0]->getDateDebut()->format('w'))!=3)
             {
                 if (($entities[0]->getDateDebut()->format('w'))>3)
@@ -297,27 +314,52 @@ public function salleAction($id)
                    $i=2 - $entities[0]->getDateDebut()->format('w');
                 }
                 $inter = "P".$i."D";
-                $datefin = $datefin->add(new \DateInterval($inter));
+                $datefin->add(new \DateInterval($inter));
                 $semaines[0]= new Semaine($entities[0]->getDateDebut(),$datefin);
             }
             
+            // création des autres semaines
             $unjourdeplus = new \DateInterval("P1D");
-            $datefin = $datefin->add($unjourdeplus);
+            $datefini = new \DateTime($datefin->format('d F Y'));
+            if (($entities[0]->getDateDebut()->format('w'))!=3) $datefini->add($unjourdeplus);
             $interval = new \DateInterval('P7D');
-            $period = new \DatePeriod($datefin, $interval, $entities[0]->getDateFin());
+            $datefincinemino = new \DateTime($entities[0]->getDateFin()->format('d F Y'));
+            // vérification si dernier jour est un mardi
+            if (($datefincinemino->format('w'))!=2)
+             { 
+              // évidemment c'est pas un mardi
+              $derniersemaine = true;  
+              if (($datefincinemino->format('w'))<2)
+                 {
+                    $i=5;
+                 }
+                elseif (($datefincinemino->format('w'))>2) {
+                   $i=$datefincinemino->format('w')-3;
+                } 
+                $inter = "P".$i."D";
+                $datefincinemino->sub(new \DateInterval($inter));
+             }             
+            $period = new \DatePeriod($datefini, $interval, $datefincinemino);
             
-            $intersem = new \DateInterval('P6D');
+           $intersem = new \DateInterval('P6D');
             foreach ($period as $dt)
             {
              $datefin = new \DateTime($dt->format('d F Y')); 
-             $datefin = $datefin->add($intersem);   
+             $datefin->add($intersem);   
              $semaines[]=new Semaine($dt,$datefin);
+            }
+            if ($derniersemaine)
+            {
+                // création dernière semaine
+                $datefini = new \DateTime($datefin->format('d F Y'));
+                $semaines[]= new Semaine($datefini->add($unjourdeplus),$entities[0]->getDateFin());
             }
          }
          elseif ($datejour<$entities[0]->getDateFin()) {
            // affichage du reste des semaines
             $datefin = new \DateTime();
             $i=0;
+            // Création première semaine si pas début un mercredi
             if (($datejour->format('w'))!=3)
             {
                 if (($datejour->format('w'))>3)
@@ -328,21 +370,46 @@ public function salleAction($id)
                    $i=2 - $datejour->format('w');
                 }
                 $inter = "P".$i."D";
-                $datefin = $datefin->add(new \DateInterval($inter));
+                $datefin->add(new \DateInterval($inter));
                 $semaines[0]=new Semaine($datejour,$datefin);
             }
-            
+           
+            // création des autres semaines
             $unjourdeplus = new \DateInterval("P1D");
-            $datefin = $datefin->add($unjourdeplus);
+            $datefini = new \DateTime($datefin->format('d F Y'));
+            if (($entities[0]->getDateDebut()->format('w'))!=3) $datefini->add($unjourdeplus);
             $interval = new \DateInterval('P7D');
-            $period = new \DatePeriod($datefin, $interval, $entities[0]->getDateFin());
+            $datefincinemino = new \DateTime($entities[0]->getDateFin()->format('d F Y'));
+            // vérification si dernier jour est un mardi
+            if (($datefincinemino->format('w'))!=2)
+             { 
+              // évidemment c'est pas un mardi
+              $derniersemaine = true;  
+              if (($datefincinemino->format('w'))<2)
+                 {
+                    $i=5;
+                 }
+                elseif (($datefincinemino->format('w'))>2) {
+                   $i=$datefincinemino->format('w')-3;
+                } 
+                $inter = "P".$i."D";
+                $datefincinemino->sub(new \DateInterval($inter));
+             }             
             
-            $intersem = new \DateInterval('P6D');
+           $period = new \DatePeriod($datefini, $interval, $datefincinemino);
+            
+           $intersem = new \DateInterval('P6D');
             foreach ($period as $dt)
             {
              $datefin = new \DateTime($dt->format('d F Y')); 
-             $datefin = $datefin->add($intersem);   
+             $datefin->add($intersem);   
              $semaines[]=new Semaine($dt,$datefin);
+            }
+            if ($derniersemaine)
+            {
+                // création dernière semaine
+                $datefini = new \DateTime($datefin->format('d F Y'));
+                $semaines[]= new Semaine($datefini->add($unjourdeplus),$entities[0]->getDateFin());
             }
           }
            else {
@@ -350,5 +417,10 @@ public function salleAction($id)
                $semaines[0]=NULL;
            }
          return $semaines;
+     }
+     
+     public function lesSponsors($em)
+     {
+       return $em->getRepository('CineminoSiteBundle:Sponsor')->findAll();    
      }
 }

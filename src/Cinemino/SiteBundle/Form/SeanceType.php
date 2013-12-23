@@ -52,7 +52,13 @@ class SeanceType extends AbstractType
                                     return $r->getCineAutorise($iduser);
                                   }  
                 ))
-            ->add('idFilm', null, array('label' => 'Choisir le film pour cette séance', 'required' => true))
+            ->add('idFilm', 'entity', array(
+                'label' => 'Choisir le film pour cette séance',
+                'class' => 'CineminoSiteBundle:Film',
+                'query_builder' => function (\Cinemino\SiteBundle\Entity\FilmRepository $r) {
+                                    return $r->getFilmsActif();
+                                  }  
+                ))
         ;
     }
 

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 define("LgLogoSBig", 500);
 define("HtLogoSBig",282);
-define("LgLogoSSmall", 100);
+define("LgLogoSSmall", 60);
 define("HtLogoSSmall",60);
 
 /**

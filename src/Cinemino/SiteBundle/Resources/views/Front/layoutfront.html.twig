@@ -81,13 +81,14 @@ this.scroll(1,h);
 </section>
      <!-- Footer
       ================================================== -->
-      <hr>
 
 <footer id="footer">
-        <p class="pull-right"><a href="#">Revenir en haut</a></p>
-        <div class="links">
-          <a href="{{ path('front') }}">Cinemino</a>
-        </div>
+    <div class="row" id="lhf"></div>
+    {% for entity in lessponsors %}
+      <div class="span1">
+          <a href="{{ entity.siteWeb }}" target=_blank><img class="img logo" src="{{asset('medias/Sponsor/small/')}}{{ entity.logo }}"/></a>
+      </div>
+    {% endfor %}
 </footer>
 
 

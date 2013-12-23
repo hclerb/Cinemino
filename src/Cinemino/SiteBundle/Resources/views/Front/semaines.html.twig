@@ -6,7 +6,35 @@
   <img id="ballons" src="{{ asset('bundles/cineminosite/images/seances/ballons.png') }}"/>
   <img id="persoS" src="{{ asset('bundles/cineminosite/images/seances/personnages8.png') }}"/>
   <img id="fondvillej" src="{{ asset('bundles/cineminosite/images/seances/villejaune.jpg') }}"/>
-<br/><br/>
+  {% set thedate = lasemaine.datedebut %}
+  {% set go = true %}
+  {% for i in (0..6) if go %}
+    <div id="baljour{{ i }}" class="bjour">
+       <p id="bjour{{ i }}">{{ lejour[thedate|date('w')] }}</p>
+       <div class="bseparateur"></div>
+       <p id="bnum{{ i }}">{{ thedate|date('d') }}</p>
+       <div class="bseparateur"></div>
+       <p id="bmois{{ i }}">{{ mois[thedate|date('n')] }}</p>
+    </div>
+    {% set thedate = thedate|date_modify("+1 day") %}
+    {% if thedate|date('d') > lasemaine.datefin|date('d') %} {% set go = false %} {% endif %}
+  
+{% endfor %}
+
+  <div class="row">
+      <div class="offet6 span5">
+          <div id="brascouleur"></div>
+          <div id="fanionjour" class="span1">
+              <p id="fjour"></p>
+              <div class="separateur"></div>
+              <p id="fnum"></p>
+              <div class="separateur"></div>
+              <p id="fmois"></p>
+          </div>
+          <div id="lesseancesjour" class="span3">
+          </div>
+      </div>
+ </div>
  {% for laseance in entities %}
    <p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>
     {{ lejour[laseance.dateSeance|date('w')] }}
