@@ -253,6 +253,36 @@ public function salleAction($id)
         ));
     }
  
+    public function theseanceAction(){
+       
+        $request = $this->getRequest();
+        $datejour = $request->query->get('datejour');
+        $datevoulu = new \DateTime($datejour);
+        
+       $em = $this->getDoctrine()->getManager();
+       $entities = $em->getRepository('CineminoSiteBundle:Seance')->findFromTheday($datevoulu);       
+       
+       $lesseances="";
+       $horaire="";
+       $i=0;
+       // mise en forme réponse
+       foreach ($entities as $laseance) {
+           if ($horaire == $laseance->getDateSeance()->format('H:i')) $lesseances = $lesseances . "<p class='sfilm'><a href='" . $this->generateUrl('f_film', array('id' => $laseance->getIdFilm()->getId())). "'>" . $laseance->getIdFilm()->getTitreFilm() . "</a></p><p class='sc'><a style='color:#" . $laseance->getIdCinema()->getCouleurFondCinema() . "' href='" . $this->generateUrl('f_cinema', array('id' => $laseance->getIdCinema()->getId())) . "'>" . $laseance->getIdCinema()->getNomCinema() . "</a></p>";
+            else {
+              if($i==0) $i++;
+               else ($lesseances = $lesseances . "</td></tr>");
+              $lesseances = $lesseances . "<tr><td class='hs'>" . $laseance->getDateSeance()->format('H:i') . "</td>" . "<td><p class='sfilm' ><a href='" . $this->generateUrl('f_film', array('id' => $laseance->getIdFilm()->getId())). "'>" . $laseance->getIdFilm()->getTitreFilm() . "</a></p><p class='sc'><a style='color:#" . $laseance->getIdCinema()->getCouleurFondCinema() . "' href='" . $this->generateUrl('f_cinema', array('id' => $laseance->getIdCinema()->getId())) . "'>" . $laseance->getIdCinema()->getNomCinema() . "</a></p>";
+              $horaire= $laseance->getDateSeance()->format('H:i');
+            }
+
+           }
+       
+
+       $response = new \Symfony\Component\HttpFoundation\Response();
+       $response->setContent($lesseances);
+       return $response; 
+    }
+
     public function createnewsletterAction(Request $request)
     {
         $pasderreur="";

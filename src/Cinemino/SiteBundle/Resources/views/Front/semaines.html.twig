@@ -1,51 +1,80 @@
 {% extends "CineminoSiteBundle:Front:layoutfront.html.twig" %}
 {% set mois = [' ','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'] %}
-{% set lejour = ['Dimanche','Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
+{% set lejour = ['DIMANCHE','LUNDI', 'MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI'] %}
 
 {% block contentcentral %}
-  <img id="ballons" src="{{ asset('bundles/cineminosite/images/seances/ballons.png') }}"/>
-  <img id="persoS" src="{{ asset('bundles/cineminosite/images/seances/personnages8.png') }}"/>
-  <img id="fondvillej" src="{{ asset('bundles/cineminosite/images/seances/villejaune.jpg') }}"/>
-  {% set thedate = lasemaine.datedebut %}
-  {% set go = true %}
-  {% for i in (0..6) if go %}
-    <div id="baljour{{ i }}" class="bjour">
-       <p id="bjour{{ i }}">{{ lejour[thedate|date('w')] }}</p>
-       <div class="bseparateur"></div>
-       <p id="bnum{{ i }}">{{ thedate|date('d') }}</p>
-       <div class="bseparateur"></div>
-       <p id="bmois{{ i }}">{{ mois[thedate|date('n')] }}</p>
-    </div>
-    {% set thedate = thedate|date_modify("+1 day") %}
-    {% if thedate|date('d') > lasemaine.datefin|date('d') %} {% set go = false %} {% endif %}
-  
-{% endfor %}
-
-  <div class="row">
-      <div class="offet6 span5">
-          <div id="brascouleur"></div>
-          <div id="fanionjour" class="span1">
-              <p id="fjour"></p>
-              <div class="separateur"></div>
-              <p id="fnum"></p>
-              <div class="separateur"></div>
-              <p id="fmois"></p>
-          </div>
-          <div id="lesseancesjour" class="span3">
-          </div>
-      </div>
+<div id="enseigne" >
+ <div id="brascouleur"></div>
+ <div id="fanionjour" >
+    <p id="fjour"></p>
+    <div class="separateur"></div>
+    <p id="fnum"></p>
+    <div class="separateur"></div>
+    <p id="fmois"></p>
  </div>
- {% for laseance in entities %}
-   <p style='color:#{{ laseance.idCinema.couleurFondCinema }}'>
-    {{ lejour[laseance.dateSeance|date('w')] }}
-    {{ laseance.dateSeance|date(' d ') }}
-    {{ mois[laseance.dateSeance|date('n')] }}
-    {{ laseance.dateSeance|date('H:i') }}
-    {{ laseance.idFilm.titreFilm|raw }}
-    {{ laseance.idCinema.nomCinema }}  
-   </p>
- {% endfor %}
-<script>
+    <div id="lesseancesjour">
+    </div>
+ </div>
+  <img id="fondvillej" src="{{ asset('bundles/cineminosite/images/seances/fondseance.jpg') }}"/>
+  {% set thedate = lasemaine.datedebut %}
+  {% for i in (0..6) %}
+    {% if thedate <= lasemaine.datefin %}
+        <div id="baljour{{ i }}" class="bjour">
+           <p id="bjour{{ i }}" class="bj">{{ lejour[thedate|date('w')] }}</p>
+           <div class="bseparateur"></div>
+           <p id="bnum{{ i }}" class="bn">{{ thedate|date('d') }}</p>
+           <div class="bseparateur"></div>
+           <p id="bmois{{ i }}" class="bm">{{ mois[thedate|date('n')] }}</p>
+        </div>
+    {% endif %}
+    {% set thedate = thedate|date_modify("+1 day") %}
+
+  {% endfor %}
+
+ <script>
+
+     
+    var heureseance=[];
+    var seance=[];
+    var fondcouleur=[];
+    var thedate=[];
+    heureseance[0]="";
+    seance[0]="";
+    fondcouleur[0]="#747863";
+    fondcouleur[1]="#2b306d";
+    fondcouleur[2]="#eec74e";
+    fondcouleur[3]="#c74449";
+    fondcouleur[4]="#c0d3c0";
+    fondcouleur[5]="#9fc4dd";
+    fondcouleur[6]="#c36c90";
+    {% set thedate = lasemaine.datedebut %}
+    {% set go = true %}
+    {% for i in (0..6) if go %}
+        thedate[{{ i }}] = "datejour={{ thedate|date("Y/m/d") }}";
+    {% set thedate = thedate|date_modify("+1 day") %}
+    {% if thedate|date('d') > lasemaine.datefin|date('d') %} {% set go = false %} {% endif %} 
+  {% endfor %}
+       
+   $(".bjour").click(function(){
+      var num = parseInt($(this).attr("id").substring(7));
+
+      $.ajax({
+              url : "{{ path('f_seancedujour') }}",
+              type:"GET",
+              datatype:"text",
+              data : thedate[num],
+              success: function(reponse) {
+                       $("#lesseancesjour").html("<table class='table'>" + reponse + "</table>");
+                       $("td").css("border-color",fondcouleur[num]);
+                       $("#enseigne").css("visibility","visible");                      
+                    } 
+
+       });
+      $("#brascouleur").css("background-color",fondcouleur[num]);
+      $("#fjour").text($("#bjour"+num).text());
+      $("#fnum").text($("#bnum"+num).text());
+      $("#fmois").text($("#bmois"+num).text());
+    });
     $("#idemaines").addClass("active");       
 </script>
 {% endblock contentcentral %}

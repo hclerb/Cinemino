@@ -55,3 +55,8 @@ f_semaine:
     pattern:  /{id}/semaine
     defaults: { _controller: CineminoSiteBundle:Front:semaines }  
     requirements: { _method: get }
+    
+f_seancedujour:
+    pattern:  /seancedujour
+    defaults: { _controller: CineminoSiteBundle:Front:theseance }
+    requirements: { _method: get }
