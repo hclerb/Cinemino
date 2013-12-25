@@ -58,7 +58,7 @@ this.scroll(1,h);
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">LES SEANCES<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 {% for semaine in semaines %}
-                  <li><a href="{{ path('f_semaine', { 'id': loop.index }) }}">{{ semaine }}</a></li>
+                  <li class="ssmenu"><a href="{{ path('f_semaine', { 'id': loop.index }) }}">{{ semaine }}</a></li>
                    {% if not loop.last %}<li class="divider"></li> {% endif %} 
                 {% endfor %}
               </ul>
