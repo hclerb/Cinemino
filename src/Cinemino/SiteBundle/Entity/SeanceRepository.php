@@ -25,17 +25,32 @@ class SeanceRepository extends EntityRepository
                            ->getResult();
    }
       
-   public function findFromTheday($theday)
+   public function findFromTheday($datedebut)
+   {
+       $datedebut->setTime(0, 0, 0);
+       $datefin= new \DateTime($datedebut->format('d F Y'));
+       $datefin->setTime(23, 59, 0);
+       $queryBuilder = $this->createQueryBuilder('s');
+       $queryBuilder->where('s.dateSeance >= :date1 ')
+                    ->setParameter('date1', $datedebut->format('Y-m-d H:i:s')); 
+       $queryBuilder->andWhere('s.dateSeance <= :date2 ')
+                    ->setParameter('date2', $datefin->format('Y-m-d H:i:s'))
+                     ->orderBy('s.dateSeance','ASC');
+              
+       return $queryBuilder->getQuery()
+                           ->getResult();
+   }      
+ /*  public function findFromTheday($theday)
    {
       
       $queryBuilder = $this->createQueryBuilder('s') 
                ->where('s.dateSeance >= :date1')
-               ->setParameter('date1', $theday->format('Y-m-d'))
+               ->setParameter('date1', $theday->format('Y-m-d H:i:s'))
                ->orderBy('s.dateSeance','ASC');
       
       return $queryBuilder->getQuery()
                            ->getResult();
-   }
+   }*/
    
    public function findFromTodayForFilm($idfilm)
    {

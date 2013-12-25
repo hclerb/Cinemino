@@ -46,7 +46,7 @@
     fondcouleur[3]="#c74449";
     fondcouleur[4]="#c0d3c0";
     fondcouleur[5]="#9fc4dd";
-    fondcouleur[6]="#c36c90";
+    fondcouleur[6]="#dc6d93";
     {% set thedate = lasemaine.datedebut %}
     {% set go = true %}
     {% for i in (0..6) if go %}
@@ -71,6 +71,9 @@
 
        });
       $("#brascouleur").css("background-color",fondcouleur[num]);
+      $("#fanionjour").css("background-color",fondcouleur[num]);
+      $("#fanionjour").removeClass();
+      $("#fanionjour").addClass('f'+num);
       $("#fjour").text($("#bjour"+num).text());
       $("#fnum").text($("#bnum"+num).text());
       $("#fmois").text($("#bmois"+num).text());
